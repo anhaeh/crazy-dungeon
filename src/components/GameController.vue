@@ -38,7 +38,6 @@ export default {
   },
   methods: {
     nextRoom: function () {
-
       let json = require(`@/gamedata/Rooms/${this.$store.getters.getRoom + 1}.json`)
       this.$store.dispatch('setRoom', json)
     }
