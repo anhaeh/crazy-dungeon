@@ -37,6 +37,15 @@ export default {
 </script>
 
 <style lang="sass">
-.row
-  display: flex
+  .fadeNav-enter-active, .fadeNav-leave-active
+    transition: opacity .2s, transform .2s
+  .fadeNav-enter, .fadeNav-leave-to
+    opacity: 0
+    transform: translateX(5vh)
+  .fade-enter-active, .fade-leave-active
+    transition: opacity .2s !important
+  .fade-enter, .fade-leave-to
+    opacity: 0 !important
+  .row
+    display: flex
 </style>

@@ -2,13 +2,17 @@
   <div :class="['cell', {'can-move': canMove }, {'is-in-range': isInRange }]"
        @click="move">
     <img :src="image">
-    <Monster v-if="hasMonster"
-             :name="hasMonster"
-             :key="hasMonster + '-' + id"
-             :cell-id="id"
-    >
-    </Monster>
-    <Player v-if="hasPlayer"></Player>
+    <transition name="fade" mode="out-in">
+      <Monster v-if="hasMonster"
+               :name="hasMonster"
+               :key="hasMonster + '-' + id"
+               :cell-id="id"
+      >
+      </Monster>
+    </transition>
+    <transition name="fade" mode="out-in">
+      <Player v-if="hasPlayer"></Player>
+    </transition>
   </div>
 </template>
 
@@ -80,6 +84,9 @@ export default {
       cursor: pointer
     &.is-in-range
       filter: brightness(1)
+      transition: all .3s
+      -moz-transition: all .3s ease-in-out
+      -webkit-transition: all .3s
     img
       position: absolute
 </style>
