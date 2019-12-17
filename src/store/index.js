@@ -5,12 +5,12 @@ Vue.use(Vuex)
 
 const store = new Vuex.Store({
   state: {
-    playerPosition: '1.A',
+    playerPosition: '1A',
+    portalPosition: null,
     playerHealth: 50,
     playerAttack: 5,
     map: null,
-    monsters: {
-    },
+    monsters: null,
     playerRange: []
   },
   getters: {
@@ -31,7 +31,10 @@ const store = new Vuex.Store({
     },
     getMap: state => {
       return state.map
-    }
+    },
+    getPortalPosition: state => {
+      return state.portalPosition
+    },
   },
   mutations: {
     setPlayerPosition(state, playerPosition) {
@@ -52,6 +55,7 @@ const store = new Vuex.Store({
       context.state.map = Object.assign({}, data.map)
       context.state.playerPosition = data.player_init
       context.state.monsters = data.monsters
+      context.state.portalPosition = data.portal
     }
   }
 })

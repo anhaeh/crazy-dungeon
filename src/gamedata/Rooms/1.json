@@ -1,7 +1,9 @@
 {
   "player_init": "1A",
+  "portal": "5E",
   "monsters": {
     "1C": "lizardman",
+    "2C": "skeleton",
     "3E": "goblin",
     "7F": "lizardman",
     "7B": "skeleton"
@@ -43,8 +45,8 @@
       "A": "grass",
       "B": "grass",
       "C": "wall",
-      "D": "grass",
-      "E": "grass",
+      "D": "wall",
+      "E": "portal",
       "F": "grass"
     },
     "6": {

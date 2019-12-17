@@ -16,30 +16,26 @@ export default {
     getPlayerPosition: {
       immediate: true,
       handler() {
-        // eslint-disable-next-line no-useless-escape
-        let player = this.getPlayerPosition.match(/[\d\.]+|\D+/g)
-        let cells = []
-        for (let i = -1; i < 2; i++) {
-          for (let j = -1; j < 2; j++) {
-            let row = parseInt(player[0]) + i
-            let letter = String.fromCharCode(player[1].charCodeAt() + j)
-            cells.push(`${row}${letter}`)
-          }
-        }
-        this.$store.commit('setPlayerRange', cells)
-      }
-    },
-    getMonsters: {
-      immediate: true,
-      handler () {
-        if (!Object.keys(this.getMonsters).length) {
+        if (this.getPlayerPosition === this.getPortalPosition) {
           this.nextRoom()
+        } else {
+          // eslint-disable-next-line no-useless-escape
+          let player = this.getPlayerPosition.match(/[\d\.]+|\D+/g)
+          let cells = []
+          for (let i = -1; i < 2; i++) {
+            for (let j = -1; j < 2; j++) {
+              let row = parseInt(player[0]) + i
+              let letter = String.fromCharCode(player[1].charCodeAt() + j)
+              cells.push(`${row}${letter}`)
+            }
+          }
+          this.$store.commit('setPlayerRange', cells)
         }
       }
     }
   },
   computed: {
-    ...mapGetters(['getPlayerPosition', "getMonsters"])
+    ...mapGetters(['getPlayerPosition', "getPortalPosition"])
   },
   methods: {
     nextRoom: function () {
@@ -47,6 +43,9 @@ export default {
       let json = require(`@/gamedata/Rooms/${this.actualRoom}.json`)
       this.$store.dispatch('setRoom', json)
     }
+  },
+  created() {
+    this.nextRoom()
   }
 }
 </script>

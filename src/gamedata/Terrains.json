@@ -10,5 +10,9 @@
   "water": {
     "image": "water.png",
     "available": false
+  },
+  "portal": {
+    "image": "portal.png",
+    "available": true
   }
 }
