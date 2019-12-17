@@ -9,7 +9,6 @@ export default {
   name: "GameController",
   data () {
     return {
-      actualRoom: 0
     }
   },
   watch: {
@@ -39,8 +38,8 @@ export default {
   },
   methods: {
     nextRoom: function () {
-      this.actualRoom += 1
-      let json = require(`@/gamedata/Rooms/${this.actualRoom}.json`)
+
+      let json = require(`@/gamedata/Rooms/${this.$store.getters.getRoom + 1}.json`)
       this.$store.dispatch('setRoom', json)
     }
   },

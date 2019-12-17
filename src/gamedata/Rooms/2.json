@@ -8,8 +8,8 @@
   },
   "map": {
     "1": {
-      "A": "dirt",
-      "B": "dirt",
+      "A": "wall",
+      "B": "wall",
       "C": "dirt",
       "D": "dirt",
       "E": "dirt",

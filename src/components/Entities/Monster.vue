@@ -17,9 +17,19 @@ export default {
     cellId: { required: true },
     name: { required: true }
   },
+  watch: {
+    actualRoom: {
+      immediate: true,
+      handler () {
+        this.monster = MonstersData[this.name]
+        this.health = this.monster.health
+        this.initialHealth = this.monster.health
+      }
+    }
+  },
   data () {
     return {
-      monster: MonstersData[this.name],
+      monster: null,
       health: 0,
       initialHealth: 0
     }
@@ -47,12 +57,11 @@ export default {
     },
     life: function() {
       let percent = (this.health * 100) / this.initialHealth
-      return `width: ${percent}%`;
+      return `width: ${percent}%`
+    },
+    actualRoom: function () {
+      return this.$store.getters.getRoom
     }
-  },
-  created() {
-      this.health = this.monster.health
-      this.initialHealth = this.monster.health
   }
 }
 </script>
