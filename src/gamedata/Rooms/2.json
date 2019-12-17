@@ -1,0 +1,64 @@
+{
+  "player_init": "3B",
+  "monsters": {
+    "1C": "lizardman"
+  },
+  "map": {
+    "1": {
+      "A": "water",
+      "B": "water",
+      "C": "grass",
+      "D": "water",
+      "E": "water",
+      "F": "water"
+    },
+    "2": {
+      "A": "grass",
+      "B": "grass",
+      "C": "grass",
+      "D": "wall",
+      "E": "grass",
+      "F": "grass"
+    },
+    "3": {
+      "A": "water",
+      "B": "grass",
+      "C": "grass",
+      "D": "water",
+      "E": "water",
+      "F": "water"
+    },
+    "4": {
+      "A": "grass",
+      "B": "grass",
+      "C": "grass",
+      "D": "water",
+      "E": "water",
+      "F": "grass"
+    },
+    "5": {
+      "A": "grass",
+      "B": "grass",
+      "C": "wall",
+      "D": "grass",
+      "E": "grass",
+      "F": "grass"
+    },
+    "6": {
+      "A": "grass",
+      "B": "grass",
+      "C": "grass",
+      "D": "wall",
+      "E": "water",
+      "F": "water"
+    },
+    "7": {
+      "A": "wall",
+      "B": "grass",
+      "C": "grass",
+      "D": "grass",
+      "E": "grass",
+      "F": "grass"
+    }
+  }
+}

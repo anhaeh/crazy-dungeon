@@ -1,0 +1,14 @@
+{
+  "grass": {
+    "image": "grass.jpg",
+    "available": true
+  },
+  "wall": {
+    "image": "wall.jpg",
+    "available": false
+  },
+  "water": {
+    "image": "water.png",
+    "available": false
+  }
+}

@@ -1,0 +1,20 @@
+{
+  "lizardman": {
+    "name": "Lizard Man",
+    "image": "lizardman.png",
+    "health": 25,
+    "damage": 3
+  },
+  "skeleton": {
+    "name": "skeleton",
+    "image": "skeleton.png",
+    "health": 20,
+    "damage": 2
+  },
+  "goblin": {
+    "name": "Goblin",
+    "image": "goblin.png",
+    "health": 15,
+    "damage": 2
+  }
+}
