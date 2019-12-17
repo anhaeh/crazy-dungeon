@@ -30,6 +30,7 @@ export default {
       }
     },
     getMonsters: {
+      immediate: true,
       handler () {
         if (!Object.keys(this.getMonsters).length) {
           this.nextRoom()
@@ -46,9 +47,6 @@ export default {
       let json = require(`@/gamedata/Rooms/${this.actualRoom}.json`)
       this.$store.dispatch('setRoom', json)
     }
-  },
-  created() {
-    this.nextRoom()
   }
 }
 </script>

@@ -18,7 +18,7 @@ export default {
 <style scoped lang="sass">
   .player
     position: relative
-    padding-top: 10px
+    padding: 2px
   .player img
     width: 100%
     height: 100%

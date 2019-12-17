@@ -1,5 +1,6 @@
 <template>
-  <div :class="['cell', {'can-move': canMove }]" @click="move">
+  <div :class="['cell', {'can-move': canMove }, {'is-in-range': isInRange }]"
+       @click="move">
     <img :src="image">
     <Monster v-if="hasMonster"
              :name="hasMonster"
@@ -73,8 +74,12 @@ export default {
     width: 64px
     height: 64px
     position: relative
+    cursor: not-allowed
+    filter: brightness(0)
     &.can-move
       cursor: pointer
-  img
-    position: absolute
+    &.is-in-range
+      filter: brightness(1)
+    img
+      position: absolute
 </style>
