@@ -47,7 +47,8 @@ export default {
   },
   computed: {
     image: function () {
-      return require('@/assets/terrains/' + this.tile.image)
+      let image = this.tile.theme ? `${this.tile.image}_${this.$store.getters.getTheme}.png` : `${this.tile.image}.png`
+      return require('@/assets/terrains/' + image)
     },
     hasMonster: function () {
       let monsters = this.$store.getters.getMonsters
@@ -75,8 +76,8 @@ export default {
 
 <style scoped lang="sass">
   .cell
-    width: 64px
-    height: 64px
+    width: 50px
+    height: 50px
     position: relative
     cursor: not-allowed
     filter: brightness(0)
@@ -89,4 +90,7 @@ export default {
       -webkit-transition: all .3s
     img
       position: absolute
+      width: 100%
+      height: 100%
+      object-fit: contain
 </style>

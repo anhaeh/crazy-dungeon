@@ -1,66 +1,68 @@
 {
   "player_init": "3B",
-  "portal": "4F",
+  "portal": "5E",
+  "theme": "forest",
   "monsters": {
-    "1C": "lizardman",
-    "6C": "lizardman"
+    "1C": "gorgon",
+    "6C": "goblin"
   },
   "map": {
     "1": {
-      "A": "water",
-      "B": "water",
-      "C": "grass",
-      "D": "water",
-      "E": "water",
-      "F": "water"
+      "A": "dirt",
+      "B": "dirt",
+      "C": "dirt",
+      "D": "dirt",
+      "E": "dirt",
+      "F": "dirt"
     },
     "2": {
-      "A": "grass",
-      "B": "grass",
-      "C": "grass",
+      "A": "dirt",
+      "B": "dirt",
+      "C": "dirt",
       "D": "wall",
-      "E": "grass",
-      "F": "grass"
+      "E": "dirt",
+      "F": "dirt"
     },
     "3": {
-      "A": "water",
-      "B": "grass",
-      "C": "grass",
-      "D": "water",
-      "E": "water",
-      "F": "water"
+      "A": "dirt",
+      "B": "dirt",
+      "C": "dirt",
+      "D": "wall",
+      "E": "dirt",
+      "F": "dirt"
     },
     "4": {
-      "A": "grass",
-      "B": "grass",
-      "C": "grass",
-      "D": "water",
-      "E": "water",
-      "F": "portal"
+      "A": "dirt",
+      "B": "dirt",
+      "C": "dirt",
+      "D": "wall",
+      "E": "wall",
+      "F": "dirt"
     },
     "5": {
-      "A": "grass",
-      "B": "grass",
+      "A": "dirt",
+      "B": "dirt",
       "C": "wall",
-      "D": "grass",
-      "E": "grass",
-      "F": "grass"
+      "D": "wall",
+      "E": "portal",
+      "F": "dirt"
     },
     "6": {
-      "A": "grass",
-      "B": "grass",
-      "C": "grass",
+      "A": "dirt",
+      "B": "dirt",
+      "C": "dirt",
       "D": "wall",
-      "E": "water",
-      "F": "water"
+      "E": "wall",
+      "F": "wall"
     },
     "7": {
       "A": "wall",
-      "B": "grass",
-      "C": "grass",
-      "D": "grass",
-      "E": "grass",
-      "F": "grass"
+      "B": "dirt",
+      "C": "dirt",
+      "D": "dirt",
+      "E": "dirt",
+      "F": "dirt"
     }
   }
 }
+

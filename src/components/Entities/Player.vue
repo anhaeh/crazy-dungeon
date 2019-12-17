@@ -9,7 +9,7 @@ export default {
   name: "Player",
   computed: {
     image: function () {
-      return require('@/assets/warrior.png')
+      return require('@/assets/HeroBase.png')
     }
   }
 }

@@ -10,6 +10,7 @@ const store = new Vuex.Store({
     playerHealth: 50,
     playerAttack: 5,
     map: null,
+    theme: 'default',
     monsters: null,
     playerRange: []
   },
@@ -35,6 +36,9 @@ const store = new Vuex.Store({
     getPortalPosition: state => {
       return state.portalPosition
     },
+    getTheme: state => {
+      return state.theme
+    },
   },
   mutations: {
     setPlayerPosition(state, playerPosition) {
@@ -56,6 +60,7 @@ const store = new Vuex.Store({
       context.state.playerPosition = data.player_init
       context.state.monsters = data.monsters
       context.state.portalPosition = data.portal
+      context.state.theme = data.theme
     }
   }
 })

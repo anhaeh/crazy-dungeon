@@ -1,7 +1,7 @@
 <template>
   <div class="monster" @click.stop="attack" :class="{'can-attack': canAttack}">
     <img :src="image" alt="">
-    <div v-if="canAttack">
+    <div>
       <div class="life" :style="life"></div>
       <div class="life-background"></div>
     </div>

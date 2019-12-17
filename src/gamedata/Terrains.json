@@ -1,18 +1,16 @@
 {
-  "grass": {
-    "image": "grass.jpg",
-    "available": true
+  "dirt": {
+    "image": "Dirt",
+    "available": true,
+    "theme": true
   },
   "wall": {
-    "image": "wall.jpg",
-    "available": false
-  },
-  "water": {
-    "image": "water.png",
-    "available": false
+    "image": "Wall",
+    "available": false,
+    "theme": true
   },
   "portal": {
-    "image": "portal.png",
+    "image": "Portal",
     "available": true
   }
 }

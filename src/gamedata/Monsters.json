@@ -1,19 +1,19 @@
 {
-  "lizardman": {
-    "name": "Lizard Man",
-    "image": "lizardman.png",
+  "gorgon": {
+    "name": "Gorgon",
+    "image": "Gorgon.png",
     "health": 25,
     "damage": 3
   },
-  "skeleton": {
-    "name": "skeleton",
-    "image": "skeleton.png",
+  "golem": {
+    "name": "Golem",
+    "image": "Golem.png",
     "health": 20,
     "damage": 2
   },
   "goblin": {
     "name": "Goblin",
-    "image": "goblin.png",
+    "image": "Goblin.png",
     "health": 15,
     "damage": 2
   }
