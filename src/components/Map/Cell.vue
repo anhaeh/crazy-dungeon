@@ -1,5 +1,5 @@
 <template>
-  <div :class="['cell', {'can-move': canMove }, {'is-in-range': isInRange }]"
+  <div :class="['cell', {'can-move': canMove }, {'visited': visited }]" :id="'cell-' + id"
        @click="move">
     <img :src="image">
     <transition name="fade" mode="out-in">
@@ -38,11 +38,23 @@ export default {
       handler () {
         this.tile = Terrains[this.type]
       }
+    },
+    adjacentToPlayer: {
+      immediate: true,
+      handler () {
+        if (this.adjacentToPlayer) { this.visited = true }
+      }
+    },
+    actualRoom: {
+      handler () {
+        if (!this.adjacentToPlayer) { this.visited = false }
+      }
     }
   },
   data () {
     return {
-      tile: null
+      tile: null,
+      visited: false
     }
   },
   computed: {
@@ -57,11 +69,14 @@ export default {
     hasPlayer: function () {
       return this.id === this.$store.getters.getPlayerPosition
     },
-    isInRange: function () {
-      return this.$store.getters.getPlayerRange.includes(this.id)
+    adjacentToPlayer: function () {
+      return this.$store.getters.getPlayerViewport.includes(this.id)
     },
     canMove: function () {
-      return !this.hasMonster && this.tile.available && this.isInRange
+      return !this.hasMonster && this.tile.available && this.adjacentToPlayer
+    },
+    actualRoom: function () {
+      return this.$store.getters.getRoom
     }
   },
   methods: {
@@ -77,13 +92,13 @@ export default {
 <style scoped lang="sass">
   .cell
     width: 50px
-    height: 50px
+    height: auto
     position: relative
     cursor: not-allowed
     filter: brightness(0)
     &.can-move
       cursor: pointer
-    &.is-in-range
+    &.visited
       filter: brightness(1)
       transition: all .3s
       -moz-transition: all .3s ease-in-out
@@ -92,5 +107,4 @@ export default {
       position: absolute
       width: 100%
       height: 100%
-      object-fit: contain
 </style>

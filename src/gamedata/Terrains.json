@@ -1,15 +1,15 @@
 {
-  "dirt": {
+  "0": {
     "image": "Dirt",
     "available": true,
     "theme": true
   },
-  "wall": {
+  "1": {
     "image": "Wall",
     "available": false,
     "theme": true
   },
-  "portal": {
+  "P": {
     "image": "Portal",
     "available": true
   }

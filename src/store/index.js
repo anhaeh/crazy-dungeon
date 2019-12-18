@@ -5,10 +5,11 @@ Vue.use(Vuex)
 
 const store = new Vuex.Store({
   state: {
-    playerPosition: '1A',
+    playerPosition: null,
     playerHealth: 50,
     playerAttack: 5,
     playerRange: [],
+    playerViewport: [],
     room: 0,
     portalPosition: null,
     map: null,
@@ -27,6 +28,9 @@ const store = new Vuex.Store({
     },
     getPlayerRange: state => {
       return state.playerRange
+    },
+    getPlayerViewport: state => {
+      return state.playerViewport
     },
     getPlayerAttack: state => {
       return state.playerAttack
@@ -53,6 +57,9 @@ const store = new Vuex.Store({
     },
     setPlayerRange(state, playerRange) {
       state.playerRange = playerRange
+    },
+    setPlayerViewport(state, playerViewport) {
+      state.playerViewport = playerViewport
     },
     setPlayerDamage(state, damage) {
       state.playerHealth -= damage
