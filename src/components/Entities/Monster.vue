@@ -52,7 +52,7 @@ export default {
       return require('@/assets/monsters/' + this.monster.image)
     },
     canAttack: function () {
-      return this.$store.getters.getPlayerRange.indexOf(this.cellId) !== -1
+      return this.$store.getters.getPlayerViewport.indexOf(this.cellId) !== -1
     },
     life: function() {
       let percent = (this.health * 100) / this.initialHealth
@@ -75,6 +75,7 @@ export default {
     object-fit: contain
   .level
     top: 0
+    left: 0
     float: left
     height: 17px
     width: 17px
@@ -99,13 +100,14 @@ export default {
     background: #3e9933
     z-index: 2
     position: fixed
-  .life-background
     width: 100%
+  .life-background
     bottom: 0
     height: 4px
     background: red
     z-index: 1
     position: fixed
+    width: 100%
   .can-attack
     cursor: cell
 </style>
