@@ -3,18 +3,28 @@
     "name": "Gorgon",
     "image": "Gorgon.png",
     "health": 25,
-    "damage": 3
+    "damage": 3,
+    "level": 3
   },
   "golem": {
     "name": "Golem",
     "image": "Golem.png",
     "health": 20,
-    "damage": 2
+    "damage": 2,
+    "level": 2
+  },
+  "imp": {
+    "name": "Imp",
+    "image": "Imp.png",
+    "health": 12,
+    "damage": 3,
+    "level": 1
   },
   "goblin": {
     "name": "Goblin",
     "image": "Goblin.png",
     "health": 15,
-    "damage": 2
+    "damage": 2,
+    "level": 1
   }
 }

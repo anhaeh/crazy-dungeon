@@ -1,6 +1,7 @@
 <template>
   <div class="monster" @click.stop="attack" :class="{'can-attack': canAttack}">
     <img :src="image" alt="">
+    <div class="level">{{ monster.level }}</div>
     <div class="life" :style="life"></div>
     <div class="life-background"></div>
   </div>
@@ -72,21 +73,39 @@ export default {
     width: 100%
     height: 100%
     object-fit: contain
+  .level
+    top: 0
+    float: left
+    height: 17px
+    width: 17px
+    background: #00000087
+    z-index: 3
+    position: fixed
+    color: white
+    border-radius: 32px
+    font-size: 13px
+    display: -webkit-box
+    display: -ms-flexbox
+    display: flex
+    -webkit-box-pack: center
+    -ms-flex-pack: center
+    justify-content: center
+    font-weight: bold
+    align-items: center
   .life
-    top: -10px
-    left: 2px
-    height: 6px
+    bottom: 0
+    left: 0
+    height: 4px
     background: #3e9933
     z-index: 2
-    position: relative
+    position: fixed
   .life-background
     width: 100%
-    top: -16px
-    left: 2px
-    height: 6px
+    bottom: 0
+    height: 4px
     background: red
     z-index: 1
-    position: relative
+    position: fixed
   .can-attack
     cursor: cell
 </style>

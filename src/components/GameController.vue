@@ -166,7 +166,7 @@
       }
 
       /* Set monsters */
-      let monstersList = ['goblin', 'golem', 'gorgon']
+      let monstersList = ['goblin', 'golem', 'gorgon', 'imp']
       for (let i = 0; i < height + width; i++) {
         let position = free[Math.floor(Math.random() * free.length)]
         /* remove the free */

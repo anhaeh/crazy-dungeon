@@ -1,5 +1,5 @@
 <template>
-  <div id="app">
+  <div id="app" class="unselectable">
     <GameController></GameController>
     <div>Health: {{ playerHealth }}</div>
     <div class="map" v-if="map">
@@ -37,6 +37,10 @@ export default {
 </script>
 
 <style lang="sass">
+  .unselectable
+    -webkit-user-select: none
+    -ms-user-select: none
+    user-select: none
   .fadeNav-enter-active, .fadeNav-leave-active
     transition: opacity .2s, transform .2s
   .fadeNav-enter, .fadeNav-leave-to
