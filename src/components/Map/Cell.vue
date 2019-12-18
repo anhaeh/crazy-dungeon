@@ -39,15 +39,15 @@ export default {
         this.tile = Terrains[this.type]
       }
     },
-    adjacentToPlayer: {
+    inPlayerViewPort: {
       immediate: true,
       handler () {
-        if (this.adjacentToPlayer) { this.visited = true }
+        if (this.inPlayerViewPort) { this.visited = true }
       }
     },
     actualRoom: {
       handler () {
-        if (!this.adjacentToPlayer) { this.visited = false }
+        if (!this.inPlayerViewPort) { this.visited = false }
       }
     }
   },
@@ -69,11 +69,14 @@ export default {
     hasPlayer: function () {
       return this.id === this.$store.getters.getPlayerPosition
     },
-    adjacentToPlayer: function () {
+    inPlayerViewPort: function () {
+      return this.$store.getters.getPlayerViewport.includes(this.id)
+    },
+    inPlayerRange: function () {
       return this.$store.getters.getPlayerRange.includes(this.id)
     },
     canMove: function () {
-      return !this.hasMonster && this.tile.available && this.visited
+      return !this.hasMonster && this.tile.available && this.visited && this.inPlayerRange
     },
     actualRoom: function () {
       return this.$store.getters.getRoom
@@ -94,8 +97,7 @@ export default {
     width: 50px
     height: 50px
     position: relative
-    cursor: not-allowed
-    // filter: brightness(0)
+    filter: brightness(0)
     &.can-move
       cursor: pointer
     &.visited

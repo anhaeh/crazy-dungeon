@@ -88,5 +88,5 @@ export default {
     z-index: 1
     position: relative
   .can-attack
-    cursor: pointer
+    cursor: cell
 </style>
