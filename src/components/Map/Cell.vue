@@ -92,10 +92,10 @@ export default {
 <style scoped lang="sass">
   .cell
     width: 50px
-    height: auto
+    height: 50px
     position: relative
     cursor: not-allowed
-    filter: brightness(0)
+    // filter: brightness(0)
     &.can-move
       cursor: pointer
     &.visited

@@ -1,6 +1,8 @@
 <template>
   <div class="monster" @click.stop="attack" :class="{'can-attack': canAttack}">
     <img :src="image" alt="">
+    <div class="life" :style="life"></div>
+    <div class="life-background"></div>
   </div>
 </template>
 
@@ -70,6 +72,21 @@ export default {
     width: 100%
     height: 100%
     object-fit: contain
+  .life
+    top: -10px
+    left: 2px
+    height: 6px
+    background: #3e9933
+    z-index: 2
+    position: relative
+  .life-background
+    width: 100%
+    top: -16px
+    left: 2px
+    height: 6px
+    background: red
+    z-index: 1
+    position: relative
   .can-attack
     cursor: pointer
 </style>
