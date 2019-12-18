@@ -81,7 +81,7 @@ export default {
     width: 17px
     background: #00000087
     z-index: 3
-    position: fixed
+    position: absolute
     color: white
     border-radius: 32px
     font-size: 13px
