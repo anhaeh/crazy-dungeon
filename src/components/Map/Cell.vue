@@ -70,10 +70,10 @@ export default {
       return this.id === this.$store.getters.getPlayerPosition
     },
     adjacentToPlayer: function () {
-      return this.$store.getters.getPlayerViewport.includes(this.id)
+      return this.$store.getters.getPlayerRange.includes(this.id)
     },
     canMove: function () {
-      return !this.hasMonster && this.tile.available && this.adjacentToPlayer
+      return !this.hasMonster && this.tile.available && this.visited
     },
     actualRoom: function () {
       return this.$store.getters.getRoom
