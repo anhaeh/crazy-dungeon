@@ -94,15 +94,17 @@ export default {
       }
     },
     preview: function () {
-      if (this.visited && this.hasMonster) {
-        let payload = {
-          entity: 'monsterPreview',
-          monster: this.$refs[this.hasMonster + this.id].monster,
-          actualHealth: this.$refs[this.hasMonster + this.id].health
+      if (this.visited) {
+        if (this.hasMonster) {
+          let payload = {
+            entity: 'monsterPreview',
+            monster: this.$refs[this.hasMonster + this.id].monster,
+            actualHealth: this.$refs[this.hasMonster + this.id].health
+          }
+          this.$store.commit('setPreview', payload)
+        } else {
+          this.$store.commit('setPreview', null)
         }
-        this.$store.commit('setPreview', payload)
-      } else {
-        this.$store.commit('setPreview', null)
       }
     }
   }
