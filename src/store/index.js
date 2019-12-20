@@ -14,12 +14,15 @@ const store = new Vuex.Store({
     portalPosition: null,
     map: null,
     theme: 'default',
-    monsters: null,
+    entities: null,
     preview: null,
   },
   getters: {
     getMonsters: state => {
-      return state.monsters
+      return state.entities.monsters
+    },
+    getItems: state => {
+      return state.entities.items
     },
     getPlayerHealth: state => {
       return state.playerHealth
@@ -57,7 +60,10 @@ const store = new Vuex.Store({
       state.playerPosition = playerPosition
     },
     setMonsters(state, monsters) {
-      state.monsters = monsters
+      state.entities.monsters = monsters
+    },
+    setItems(state, items) {
+      state.entities.items = items
     },
     setPlayerRange(state, playerRange) {
       state.playerRange = playerRange
@@ -70,13 +76,13 @@ const store = new Vuex.Store({
     },
     setPreview(state, preview) {
       state.preview = preview
-    },
+    }
   },
   actions: {
     setRoom(context, data) {
       context.state.map = Object.assign({}, data.map)
       context.state.playerPosition = data.player_init
-      context.state.monsters = data.monsters
+      context.state.entities = data.entities
       context.state.portalPosition = data.portal
       context.state.theme = data.theme
       context.state.room += 1

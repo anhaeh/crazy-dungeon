@@ -1,0 +1,8 @@
+{
+  "sword": {
+    "name": "Sword",
+    "image": "sword.png",
+    "type": "Weapon",
+    "description": "+ 5 attack"
+  }
+}

@@ -116,7 +116,7 @@
       document.addEventListener('DOMContentLoaded', () => {
         'use strict';
 
-        document.addEventListener('keyup', event => {
+        document.addEventListener('keydown', event => {
           let directions = {
             'w': 1,
             'a': 0,
@@ -143,8 +143,11 @@
       /* TODO pasar a un js encargado de generar mapas */
       let free = []
       let json = {
-        "monsters": {},
-        "map": {}
+        entities: {
+          monsters: {},
+          items: {}
+        },
+        map: {}
       }
       let width = 17
       let height = 15
@@ -172,13 +175,20 @@
         /* remove the free */
         let index = free.indexOf(position)
         free.splice(index, 1)
-        json.monsters[position] = monstersList[Math.floor(Math.random() * monstersList.length)]
+        json.entities.monsters[position] = monstersList[Math.floor(Math.random() * monstersList.length)]
       }
 
-      /* Set player */
+      /* Set item random by level */
       let position = free[Math.floor(Math.random() * free.length)]
       /* remove the free */
       let index = free.indexOf(position)
+      free.splice(index, 1)
+      json.entities.items[position] = 'sword'
+
+      /* Set player */
+      position = free[Math.floor(Math.random() * free.length)]
+      /* remove the free */
+      index = free.indexOf(position)
       free.splice(index, 1)
       json.player_init = position
 

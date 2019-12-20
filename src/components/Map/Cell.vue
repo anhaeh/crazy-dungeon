@@ -4,18 +4,21 @@
        @click="click"
        @mouseover="preview">
     <img :src="image">
-    <transition name="fade" mode="out-in">
-      <Monster v-if="hasMonster"
-               :name="hasMonster"
-               :key="hasMonster + '-' + id"
-               :ref="hasMonster + id"
-               :cell-id="id"
-      >
-      </Monster>
-    </transition>
-    <transition name="fade" mode="out-in">
-      <Player v-if="hasPlayer"></Player>
-    </transition>
+    <Monster v-if="hasMonster"
+             :name="hasMonster"
+             :key="'monster-' + id"
+             :ref="hasMonster + id"
+             :cell-id="id"
+    >
+    </Monster>
+    <Player v-if="hasPlayer"></Player>
+    <Item v-if="hasItem"
+             :name="hasItem"
+             :key="'item' + '-' + id"
+             :ref="hasItem + id"
+             :cell-id="id"
+    >
+    </Item>
   </div>
 </template>
 
@@ -23,6 +26,7 @@
 import Terrains from '@/gamedata/Terrains.json'
 import Monster from "../Entities/Monster"
 import Player from "../Entities/Player"
+import Item from "../Entities/Item"
 
 
 export default {
@@ -32,7 +36,8 @@ export default {
   },
   components: {
     Monster,
-    Player
+    Player,
+    Item
   },
   name: "Cell",
   watch: {
@@ -69,6 +74,10 @@ export default {
       let monsters = this.$store.getters.getMonsters
       return monsters[this.id] !== undefined ? monsters[this.id] : null
     },
+    hasItem: function () {
+      let items = this.$store.getters.getItems
+      return items[this.id] !== undefined ? items[this.id] : null
+    },
     hasPlayer: function () {
       return this.id === this.$store.getters.getPlayerPosition
     },
@@ -95,16 +104,20 @@ export default {
     },
     preview: function () {
       if (this.visited) {
+        let payload = null
         if (this.hasMonster) {
-          let payload = {
+          payload = {
             entity: 'monsterPreview',
             monster: this.$refs[this.hasMonster + this.id].monster,
             actualHealth: this.$refs[this.hasMonster + this.id].health
           }
-          this.$store.commit('setPreview', payload)
-        } else {
-          this.$store.commit('setPreview', null)
+        } else if (this.hasItem) {
+          payload = {
+            entity: 'itemPreview',
+            item: this.$refs[this.hasItem + this.id].item
+          }
         }
+        this.$store.commit('setPreview', payload)
       }
     }
   }

@@ -12,11 +12,13 @@
 <script>
 import { mapGetters } from 'vuex'
 import monsterPreview from './MonsterPreview'
+import itemPreview from './ItemPreview'
 
 export default {
   name: "Sidebar",
   components: {
-    monsterPreview
+    monsterPreview,
+    itemPreview
   },
   computed: {
     ...mapGetters(['getPlayerHealth', "getPreview"]),
