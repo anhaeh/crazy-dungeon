@@ -1,9 +1,9 @@
 <template>
   <div>
+    <img :src="image">
     monster: {{ entity.monster.name }}
     attack: {{ entity.monster.damage }}
     health: {{ entity.actualHealth }}
-    <img :src="image">
   </div>
 </template>
 
@@ -20,4 +20,7 @@ export default {
 </script>
 
 <style scoped lang="sass">
+  img
+    width: 50px
+    height: auto
 </style>
