@@ -1,42 +1,32 @@
 <template>
   <div id="app" class="unselectable">
     <GameController></GameController>
-    <div>Health: {{ playerHealth }}</div>
-    <div class="map" v-if="map">
-      <div class="row" v-for="row in Object.keys(map)" :key="'row' + row">
-        <Cell
-          v-for="cellKey in Object.keys(map[row])"
-          :key="row + cellKey"
-          :id="row + cellKey"
-          :type="map[row][cellKey]"
-        ></Cell>
-      </div>
-    </div>
+    <Map></Map>
+    <Sidebar></Sidebar>
   </div>
 </template>
 
 <script>
-import Cell from "./components/Map/Cell"
 import GameController from "./components/GameController"
+import Map from "./components/Map/Map"
+import Sidebar from "./components/Sidebar/Sidebar"
+
 
 export default {
   name: "App",
   components: {
-    Cell,
-    GameController
-  },
-  computed: {
-    playerHealth: function () {
-      return this.$store.getters.getPlayerHealth
-    },
-    map: function () {
-      return this.$store.getters.getMap
-    }
+    GameController,
+    Map,
+    Sidebar
   }
 }
 </script>
 
 <style lang="sass">
+  body
+    margin: 0
+  #app
+    display: flex
   .unselectable
     -webkit-user-select: none
     -ms-user-select: none
@@ -50,6 +40,4 @@ export default {
     transition: opacity .2s !important
   .fade-enter, .fade-leave-to
     opacity: 0 !important
-  .row
-    display: flex
 </style>

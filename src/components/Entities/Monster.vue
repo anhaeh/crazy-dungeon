@@ -1,5 +1,8 @@
 <template>
-  <div class="monster" @click.stop="attack" :class="{'can-attack': canAttack}">
+  <div class="monster"
+       @click="attack"
+       :class="{ 'can-attack': canAttack }"
+  >
     <img :src="image" alt="">
     <div class="level">{{ monster.level }}</div>
     <div class="life" :style="life"></div>

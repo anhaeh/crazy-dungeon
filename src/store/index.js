@@ -14,7 +14,8 @@ const store = new Vuex.Store({
     portalPosition: null,
     map: null,
     theme: 'default',
-    monsters: null
+    monsters: null,
+    preview: null,
   },
   getters: {
     getMonsters: state => {
@@ -47,6 +48,9 @@ const store = new Vuex.Store({
     getRoom: state => {
       return state.room
     },
+    getPreview: state => {
+      return state.preview
+    },
   },
   mutations: {
     setPlayerPosition(state, playerPosition) {
@@ -63,6 +67,9 @@ const store = new Vuex.Store({
     },
     setPlayerDamage(state, damage) {
       state.playerHealth -= damage
+    },
+    setPreview(state, preview) {
+      state.preview = preview
     },
   },
   actions: {

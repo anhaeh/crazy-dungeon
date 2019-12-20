@@ -1,11 +1,14 @@
 <template>
-  <div :class="['cell', {'can-move': canMove }, {'visited': visited }]" :id="'cell-' + id"
-       @click="move">
+  <div :class="['cell', {'can-move': canMove }, {'visited': visited }]"
+       :id="'cell-' + id"
+       @click="click"
+       @mouseover="preview">
     <img :src="image">
     <transition name="fade" mode="out-in">
       <Monster v-if="hasMonster"
                :name="hasMonster"
                :key="hasMonster + '-' + id"
+               :ref="hasMonster + id"
                :cell-id="id"
       >
       </Monster>
@@ -83,9 +86,23 @@ export default {
     }
   },
   methods: {
-    move: function() {
+    click: function() {
       if (this.canMove) {
         this.$store.commit('setPlayerPosition', this.id)
+      } else if (this.hasMonster) {
+        this.preview()
+      }
+    },
+    preview: function () {
+      if (this.visited && this.hasMonster) {
+        let payload = {
+          entity: 'monsterPreview',
+          monster: this.$refs[this.hasMonster + this.id].monster,
+          actualHealth: this.$refs[this.hasMonster + this.id].health
+        }
+        this.$store.commit('setPreview', payload)
+      } else {
+        this.$store.commit('setPreview', null)
       }
     }
   }
