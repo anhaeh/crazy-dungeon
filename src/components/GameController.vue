@@ -208,6 +208,7 @@
   },
   created() {
     this.setKeyListener()
+    this.$store.dispatch('initGame')
     this.buildMap()
   }
 }

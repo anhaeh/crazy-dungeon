@@ -5,17 +5,13 @@ Vue.use(Vuex)
 
 const store = new Vuex.Store({
   state: {
-    playerPosition: null,
-    playerHealth: 50,
-    playerAttack: 5,
-    playerRange: [],
-    playerViewport: [],
+    player: { position: null },
     room: 0,
     portalPosition: null,
     map: null,
     theme: 'default',
     entities: null,
-    preview: null,
+    preview: null
   },
   getters: {
     getMonsters: state => {
@@ -24,20 +20,23 @@ const store = new Vuex.Store({
     getItems: state => {
       return state.entities.items
     },
-    getPlayerHealth: state => {
-      return state.playerHealth
+    getPlayer: state => {
+      return state.player
+    },
+    getPlayerDamage: state => {
+      return state.player.damage
     },
     getPlayerPosition: state => {
-      return state.playerPosition
+      return state.player.position
     },
     getPlayerRange: state => {
-      return state.playerRange
+      return state.player.range
     },
     getPlayerViewport: state => {
-      return state.playerViewport
+      return state.player.viewport
     },
     getPlayerAttack: state => {
-      return state.playerAttack
+      return state.player.attack
     },
     getMap: state => {
       return state.map
@@ -57,7 +56,7 @@ const store = new Vuex.Store({
   },
   mutations: {
     setPlayerPosition(state, playerPosition) {
-      state.playerPosition = playerPosition
+      state.player.position = playerPosition
     },
     setMonsters(state, monsters) {
       state.entities.monsters = monsters
@@ -66,26 +65,63 @@ const store = new Vuex.Store({
       state.entities.items = items
     },
     setPlayerRange(state, playerRange) {
-      state.playerRange = playerRange
+      state.player.range = playerRange
     },
     setPlayerViewport(state, playerViewport) {
-      state.playerViewport = playerViewport
+      state.player.viewport = playerViewport
+    },
+    setPlayerAttack(state, playerAttack) {
+      state.player.attack = playerAttack
     },
     setPlayerDamage(state, damage) {
-      state.playerHealth -= damage
+      state.player.damage += damage
     },
     setPreview(state, preview) {
       state.preview = preview
+    },
+    setDefeatMonster(state, gold) {
+      state.player.defeatMonsters += 1
+      state.player.gold += gold
+    },
+    setPlayerDead(state) {
+      state.player.isDead = true
+    },
+    initializePlayer(state, heroClass) {
+      state.player = {
+        class: heroClass,
+        position: null,
+        gold: 0,
+        damage: 0,
+        attack: 0,
+        range: [],
+        viewport: [],
+        defeatMonsters: 0,
+        nextLevelMonsters: 5,
+        level: 1,
+        isDead: false
+      }
     }
   },
   actions: {
-    setRoom(context, data) {
-      context.state.map = Object.assign({}, data.map)
-      context.state.playerPosition = data.player_init
-      context.state.entities = data.entities
-      context.state.portalPosition = data.portal
-      context.state.theme = data.theme
-      context.state.room += 1
+    setRoom({ state }, data) {
+      state.player.position = data.player_init
+      state.map = Object.assign({}, data.map)
+      state.entities = data.entities
+      state.portalPosition = data.portal
+      state.theme = data.theme
+      state.room += 1
+    },
+    initGame({ commit }) {
+      commit('initializePlayer', 'wizard')
+    },
+    levelUp({ state }) {
+      let newPlayer = Object.assign({}, state.player)
+      newPlayer.level += 1
+      newPlayer.defeatMonsters = 0
+      newPlayer.damage = 0
+      newPlayer.attack += newPlayer.level
+      newPlayer.nextLevelMonsters = 5 * newPlayer.level
+      state.player = newPlayer
     }
   }
 })

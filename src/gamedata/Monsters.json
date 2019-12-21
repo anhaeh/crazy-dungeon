@@ -2,29 +2,33 @@
   "gorgon": {
     "name": "Gorgon",
     "image": "Gorgon.png",
-    "health": 25,
-    "damage": 3,
-    "level": 3
+    "health": 40,
+    "damage": 5,
+    "level": 3,
+    "gold": 20
   },
   "golem": {
     "name": "Golem",
     "image": "Golem.png",
-    "health": 20,
-    "damage": 2,
-    "level": 2
+    "health": 30,
+    "damage": 4,
+    "level": 2,
+    "gold": 15
   },
   "imp": {
     "name": "Imp",
     "image": "Imp.png",
-    "health": 12,
+    "health": 25,
     "damage": 3,
-    "level": 1
+    "level": 1,
+    "gold": 10
   },
   "goblin": {
     "name": "Goblin",
     "image": "Goblin.png",
-    "health": 15,
+    "health": 25,
     "damage": 2,
-    "level": 1
+    "level": 1,
+    "gold": 8
   }
 }

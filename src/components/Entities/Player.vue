@@ -9,7 +9,8 @@ export default {
   name: "Player",
   computed: {
     image: function () {
-      return require('@/assets/HeroBase.png')
+      let heroClass = this.$store.getters.getPlayer.class
+      return require(`@/assets/heroes/${heroClass}.png`)
     }
   }
 }

@@ -6,21 +6,23 @@
     </div>
     <div class="row">
       <img class="attack-image" :src="imageAttack">
-      <div>
+      <div class="damage">
         {{ entity.monster.damage }}
       </div>
     </div>
     <div class="row">
-      <div class="life" :style="life"></div>
-      <div class="life-background"></div>
-      <div class="legend-health">{{ this.entity.actualHealth }}</div>
+      <health-bar :actual-health="entity.actualHealth" :health="entity.monster.health"></health-bar>
     </div>
   </div>
 </template>
 
 <script>
+import healthBar from './HealthBar'
 export default {
   props: ['entity'],
+  components: {
+    healthBar
+  },
   name: "MonsterPreview",
   computed: {
     image: function () {
@@ -28,10 +30,6 @@ export default {
     },
     imageAttack: function () {
       return require('@/assets/items/sword.png')
-    },
-    life: function() {
-      let percent = (this.entity.actualHealth * 100) / this.entity.monster.health
-      return `width: ${percent}%`
     }
   }
 }
@@ -56,23 +54,7 @@ export default {
   .attack-image
     height: 30px
     width: 30px
-  .life
-    top: 150px
-    left: 0
-    height: 15px
-    background: #3e9933
-    z-index: 2
-    width: 100%
-    position: absolute
-  .life-background
-    top: 150px
-    left: 0
-    height: 15px
-    background: red
-    z-index: 1
-    width: 100%
-    position: absolute
-  .legend-health
-    text-align: center
-    z-index: 3
+    padding-right: 5px
+  .damage
+    padding-top: 5px
 </style>

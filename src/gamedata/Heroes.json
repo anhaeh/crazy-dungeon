@@ -1,0 +1,14 @@
+{
+  "warrior": {
+    "name": "Warrior",
+    "initialHealth": 45,
+    "attack": 5,
+    "image": "warrior.png"
+  },
+  "wizard": {
+    "name": "Wizard",
+    "initialHealth": 35,
+    "attack": 6,
+    "image": "wizard.png"
+  }
+}

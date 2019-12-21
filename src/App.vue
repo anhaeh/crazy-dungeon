@@ -1,5 +1,7 @@
 <template>
   <div id="app" class="unselectable">
+    <!-- TODO ARMAR BIEN EL MODAL DE PERDER-->
+    <div v-if="isGameOver" class="game-over">GAME OVER</div>
     <GameController></GameController>
     <Map></Map>
     <Sidebar></Sidebar>
@@ -18,6 +20,11 @@ export default {
     GameController,
     Map,
     Sidebar
+  },
+  computed: {
+    isGameOver: function () {
+      return this.$store.getters.getPlayer.isDead
+    }
   }
 }
 </script>
@@ -25,6 +32,11 @@ export default {
 <style lang="sass">
   body
     margin: 0
+    width: calc(100% - 300px)
+    justify-content: center
+    height: 100%
+    display: grid
+    background: black
   #app
     display: flex
   .unselectable
@@ -40,4 +52,14 @@ export default {
     transition: opacity .2s !important
   .fade-enter, .fade-leave-to
     opacity: 0 !important
+  .game-over
+    position: fixed
+    background: white
+    width: 100vh
+    height: 100vh
+    z-index: 10
+    display: flex
+    align-items: center
+    justify-content: center
+    font-size: 30px
 </style>

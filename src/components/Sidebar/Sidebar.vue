@@ -1,5 +1,6 @@
 <template>
   <div class="sidebar">
+    <player-stats></player-stats>
     <div class="preview">
       <component v-if="getPreview"
                  :is="componentToPreview"
@@ -13,12 +14,15 @@
 import { mapGetters } from 'vuex'
 import monsterPreview from './MonsterPreview'
 import itemPreview from './ItemPreview'
+import playerStats from './PlayerStats'
+
 
 export default {
   name: "Sidebar",
   components: {
     monsterPreview,
-    itemPreview
+    itemPreview,
+    playerStats
   },
   computed: {
     ...mapGetters(['getPlayerHealth', "getPreview"]),
@@ -31,7 +35,7 @@ export default {
 
 <style scoped lang="sass">
   .sidebar
-    background: blue
+    background: lightgrey
     height: 100vh
     width: 300px
     position: fixed
@@ -39,9 +43,9 @@ export default {
     border-left: black
     border-left-style: solid
   .preview
-    height: 300px
+    background: cadetblue
+    height: 250px
     bottom: 0
     width: 100%
-    background: white
     position: absolute
 </style>

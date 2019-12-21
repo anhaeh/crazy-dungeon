@@ -44,6 +44,11 @@ export default {
           let monsters = Object.assign({}, this.$store.getters.getMonsters)
           delete monsters[this.cellId]
           this.$store.commit('setMonsters', monsters)
+          this.$store.commit('setDefeatMonster', this.monster.gold)
+          let player = this.$store.getters.getPlayer
+          if (player.defeatMonsters === player.nextLevelMonsters) {
+            this.$store.dispatch('levelUp')
+          }
         } else {
           this.$store.commit('setPlayerDamage', this.monster.damage)
         }
