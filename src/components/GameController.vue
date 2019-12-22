@@ -3,18 +3,17 @@
 </template>
 
 <script>
-  import { mapGetters } from 'vuex'
+import { mapGetters } from 'vuex'
 
-  export default {
+export default {
   name: "GameController",
-  data () {
-    return {
-    }
+  data() {
+    return {}
   },
   watch: {
     getPlayerPosition: {
       immediate: true,
-      handler() {
+      handler: function () {
         if (this.getPlayerPosition === this.getPortalPosition) {
           this.buildMap()
           //this.nextRoom()
@@ -45,16 +44,16 @@
     ...mapGetters(['getPlayerPosition', "getPortalPosition"])
   },
   methods: {
-    createMaze: function(width, height, iterations) {
+    createMaze: function (width, height, iterations) {
       var maze = [];
       var mazeWidth = width;
       var mazeHeight = height;
       if (!iterations) iterations = width * height;
 
       var moves = [];
-      for(var i = 0; i < mazeHeight; i ++){
+      for (var i = 0; i < mazeHeight; i++) {
         maze[i] = [];
-        for(var j = 0; j < mazeWidth; j ++){
+        for (var j = 0; j < mazeWidth; j++) {
           maze[i][j] = 1;
         }
       }
@@ -63,23 +62,23 @@
       maze[posX][posY] = 0;
       moves.push(posY + posY * mazeWidth);
       for (var itr = 0; itr < iterations; ++itr) {
-        if(moves.length){
+        if (moves.length) {
           var possibleDirections = "";
-          if(posX+2 > 0 && posX + 2 < mazeHeight - 1 && maze[posX + 2][posY] == 1){
+          if (posX + 2 > 0 && posX + 2 < mazeHeight - 1 && maze[posX + 2][posY] == 1) {
             possibleDirections += "S";
           }
-          if(posX-2 > 0 && posX - 2 < mazeHeight - 1 && maze[posX - 2][posY] == 1){
+          if (posX - 2 > 0 && posX - 2 < mazeHeight - 1 && maze[posX - 2][posY] == 1) {
             possibleDirections += "N";
           }
-          if(posY-2 > 0 && posY - 2 < mazeWidth - 1 && maze[posX][posY - 2] == 1){
+          if (posY - 2 > 0 && posY - 2 < mazeWidth - 1 && maze[posX][posY - 2] == 1) {
             possibleDirections += "W";
           }
-          if(posY+2 > 0 && posY + 2 < mazeWidth - 1 && maze[posX][posY + 2] == 1){
+          if (posY + 2 > 0 && posY + 2 < mazeWidth - 1 && maze[posX][posY + 2] == 1) {
             possibleDirections += "E";
           }
-          if(possibleDirections){
-            var move = Math.floor(Math.random() * (possibleDirections.length+1));
-            switch (possibleDirections[move]){
+          if (possibleDirections) {
+            var move = Math.floor(Math.random() * (possibleDirections.length + 1));
+            switch (possibleDirections[move]) {
               case "N":
                 maze[posX - 2][posY] = 0;
                 maze[posX - 1][posY] = 0;
@@ -96,14 +95,13 @@
                 posY -= 2;
                 break;
               case "E":
-                maze[posX][posY + 2]=0;
-                maze[posX][posY + 1]=0;
+                maze[posX][posY + 2] = 0;
+                maze[posX][posY + 1] = 0;
                 posY += 2;
                 break;
             }
             moves.push(posY + posX * mazeWidth);
-          }
-          else{
+          } else {
             var back = moves.pop();
             posX = Math.floor(back / mazeWidth);
             posY = back % mazeWidth;
@@ -113,26 +111,22 @@
       return maze
     },
     setKeyListener: function () {
-      document.addEventListener('DOMContentLoaded', () => {
-        'use strict';
-
-        document.addEventListener('keydown', event => {
-          let directions = {
-            'w': 1,
-            'a': 0,
-            'd': 3,
-            's': 2
-          }
-          const key = event.key.toLowerCase()
-          // we are only interested in alphanumeric keys
-          if (Object.keys(directions).indexOf(key) === -1) return
-          let cellToMove = this.$store.getters.getPlayerRange[directions[key]]
-          try {
-            document.querySelector('#cell-' + cellToMove).click()
-            // eslint-disable-next-line no-empty
-          } catch (e){
-          }
-        })
+      document.addEventListener('keydown', event => {
+        let directions = {
+          'w': 1,
+          'a': 0,
+          'd': 3,
+          's': 2
+        }
+        const key = event.key.toLowerCase()
+        // we are only interested in alphanumeric keys
+        if (Object.keys(directions).indexOf(key) === -1) return
+        let cellToMove = this.$store.getters.getPlayerRange[directions[key]]
+        try {
+          document.querySelector('#cell-' + cellToMove).click()
+          // eslint-disable-next-line no-empty
+        } catch (e) {
+        }
       })
     },
     nextRoom: function () {
@@ -149,12 +143,12 @@
         },
         map: {}
       }
-      let width = 17
-      let height = 15
+      let width = 15
+      let height = 21
       /** hay tema con valores pares*/
       /* generate map */
       let maze = this.createMaze(width, height)
-      let letters = new Array(width).fill( 1 ).map( ( _, i ) => String.fromCharCode( 65 + i ) )
+      let letters = new Array(width).fill(1).map((_, i) => String.fromCharCode(65 + i))
       for (let i = 0; i < height; i++) {
         json.map[i + 1] = {}
         letters.forEach((letter, index) => {
@@ -164,13 +158,15 @@
             terrain = '0'
           }
           json.map[i + 1][letter] = terrain
-          if (terrain === '0') { free.push(`${i + 1}${letter}`) }
+          if (terrain === '0') {
+            free.push(`${i + 1}${letter}`)
+          }
         })
       }
 
       /* Set monsters */
       let monstersList = ['goblin', 'golem', 'gorgon', 'imp']
-      for (let i = 0; i < height + width; i++) {
+      for (let i = 0; i < height; i++) {
         let position = free[Math.floor(Math.random() * free.length)]
         /* remove the free */
         let index = free.indexOf(position)

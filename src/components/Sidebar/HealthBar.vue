@@ -28,19 +28,19 @@ export default {
     z-index: 2
     width: 100%
     position: absolute
-    border-radius: 25px
+    -webkit-transition: width 250ms
+    transition: width 250ms
   .life-background
     top: 160px
     left: 0
     height: 20px
-    background: red
+    background: #a40000
     z-index: 1
     width: 100%
     position: absolute
-    border-radius: 15px
   .legend-health
     margin: 11px 0
-    position: absolute
+    position: relative
     text-align: center
     z-index: 3
 </style>

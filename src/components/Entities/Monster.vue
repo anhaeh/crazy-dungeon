@@ -109,6 +109,8 @@ export default {
     z-index: 2
     position: fixed
     width: 100%
+    -webkit-transition: width 250ms
+    transition: width 250ms
   .life-background
     bottom: 0
     height: 4px

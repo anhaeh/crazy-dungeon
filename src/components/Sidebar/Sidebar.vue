@@ -35,15 +35,17 @@ export default {
 
 <style scoped lang="sass">
   .sidebar
-    background: lightgrey
+    background: #5d340c
+    color: white
     height: 100vh
     width: 300px
-    position: fixed
     right: 0
-    border-left: black
+    position: fixed
+    border-left: white
     border-left-style: solid
+    border-width: 1px
   .preview
-    background: cadetblue
+    background: #1b3b48
     height: 250px
     bottom: 0
     width: 100%
