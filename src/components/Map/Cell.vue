@@ -1,5 +1,5 @@
 <template>
-  <div :class="['cell', {'can-move': canMove }, {'visited': visited }]"
+  <div :class="['cell', {'can-move': canMove }]"
        :id="'cell-' + id"
        @click="click"
        @mouseover="preview">
@@ -46,23 +46,11 @@ export default {
       handler () {
         this.tile = Terrains[this.type]
       }
-    },
-    inPlayerViewPort: {
-      immediate: true,
-      handler () {
-        if (this.inPlayerViewPort) { this.visited = true }
-      }
-    },
-    actualRoom: {
-      handler () {
-        if (!this.inPlayerViewPort) { this.visited = false }
-      }
     }
   },
   data () {
     return {
-      tile: null,
-      visited: false
+      tile: null
     }
   },
   computed: {
@@ -81,14 +69,11 @@ export default {
     hasPlayer: function () {
       return this.id === this.$store.getters.getPlayerPosition
     },
-    inPlayerViewPort: function () {
-      return this.$store.getters.getPlayerViewport.includes(this.id)
-    },
     inPlayerRange: function () {
       return this.$store.getters.getPlayerRange.includes(this.id)
     },
     canMove: function () {
-      return !this.hasMonster && this.tile.available && this.visited && this.inPlayerRange
+      return !this.hasMonster && this.tile.available && this.inPlayerRange
     },
     actualRoom: function () {
       return this.$store.getters.getRoom
@@ -129,14 +114,8 @@ export default {
     width: 50px
     height: 50px
     position: relative
-    filter: brightness(0)
     &.can-move
       cursor: pointer
-    &.visited
-      filter: brightness(1)
-      transition: all .3s
-      -moz-transition: all .3s ease-in-out
-      -webkit-transition: all .3s
     img
       position: absolute
       width: 100%

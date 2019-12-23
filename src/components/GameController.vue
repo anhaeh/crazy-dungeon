@@ -27,15 +27,16 @@ export default {
             let letter = String.fromCharCode(player[1].charCodeAt() + x[1])
             cells.push(`${row}${letter}`)
           })
-          let cellNewPort = cells.slice()
           this.$store.commit('setPlayerRange', cells)
-          let cellDiagonals = [[-1, -1], [-1, 1], [0, 0], [1, 0], [1, -1], [1, 1]]
-          cellDiagonals.forEach(x => {
-            let row = parseInt(player[0]) + x[0]
-            let letter = String.fromCharCode(player[1].charCodeAt() + x[1])
-            cellNewPort.push(`${row}${letter}`)
-          })
-          this.$store.commit('setPlayerViewport', cellNewPort)
+          let cellsViewport = []
+          for (let i = -3; i < 4; i++) {
+            for (let j = -3; j < 4; j++) {
+              let row = parseInt(player[0]) + i
+              let letter = String.fromCharCode(player[1].charCodeAt() + j)
+              cellsViewport.push(`${row}${letter}`)
+            }
+          }
+          this.$store.commit('setPlayerViewport', cellsViewport)
         }
       }
     }

@@ -12,21 +12,6 @@ export default {
       let heroClass = this.$store.getters.getPlayer.class
       return require(`@/assets/heroes/${heroClass}.png`)
     }
-  },
-  methods: {
-    scrollToPlayer: function () {
-      const element = document.querySelector('.player')
-      const elementRect = element.getBoundingClientRect()
-      const absoluteElementTop = elementRect.top + window.pageYOffset
-      const middle = absoluteElementTop - (window.innerHeight / 2)
-      window.scrollTo(0, middle)
-    }
-  },
-  mounted() {
-    this.$nextTick(() => {
-      // The whole view is rendered, so I can safely access or query
-      this.scrollToPlayer()
-    })
   }
 }
 </script>

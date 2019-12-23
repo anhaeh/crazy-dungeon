@@ -36,7 +36,7 @@ export default {
     justify-content: center
     height: 100%
     display: grid
-    background: black
+    //background: black
   #app
     display: flex
   .unselectable

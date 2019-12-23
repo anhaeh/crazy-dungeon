@@ -60,7 +60,7 @@ export default {
       return require('@/assets/monsters/' + this.monster.image)
     },
     canAttack: function () {
-      return this.$store.getters.getPlayerViewport.indexOf(this.cellId) !== -1
+      return this.$store.getters.getPlayerRange.indexOf(this.cellId) !== -1
     },
     life: function() {
       let percent = (this.health * 100) / this.initialHealth

@@ -33,7 +33,7 @@ const store = new Vuex.Store({
       return state.player.range
     },
     getPlayerViewport: state => {
-      return state.player.viewport
+      return state.player.viewport.sort()
     },
     getPlayerAttack: state => {
       return state.player.attack
