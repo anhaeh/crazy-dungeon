@@ -39,6 +39,7 @@ export default {
         monstersDamage[this.cellId] += this.$store.getters.getPlayerAttack
         this.$store.commit('setMonstersDamage', monstersDamage)
         if (this.damage >= this.monster.health) {
+          event.stopPropagation()
           let monsters = Object.assign({}, this.$store.getters.getMonsters)
           delete monsters[this.cellId]
           this.$store.commit('setMonsters', monsters)
