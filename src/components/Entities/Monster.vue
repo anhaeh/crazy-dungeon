@@ -74,6 +74,8 @@ export default {
 </script>
 
 <style scoped lang="sass">
+  img
+    image-rendering: pixelated;
   .monster
     position: relative
     padding: 4px

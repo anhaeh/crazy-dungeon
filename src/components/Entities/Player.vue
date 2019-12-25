@@ -32,11 +32,11 @@ export default {
 </script>
 
 <style scoped lang="sass">
-  .player
-    position: relative
-    padding: 2px
-  .player img
-    width: 100%
-    height: auto
-    object-fit: contain
+.player
+  position: relative
+  padding: 2px
+.player img
+  width: 100%
+  height: auto
+  object-fit: contain
 </style>

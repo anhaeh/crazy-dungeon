@@ -143,8 +143,8 @@ export default {
         },
         map: {}
       }
-      let width = 15
-      let height = 21
+      let width = 7
+      let height = 45
       /** hay tema con valores pares*/
       /* generate map */
       let maze = this.createMaze(width, height)

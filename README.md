@@ -9,3 +9,7 @@ npm install
 ```
 npm run serve
 ```
+### Images Resolution Specs
+
+Worldmap: 32x32 px > scaled x10
+Dungeon: 16x16 px > scaled x10

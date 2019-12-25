@@ -112,7 +112,7 @@ const store = new Vuex.Store({
       state.room += 1
     },
     initGame({ commit }) {
-      commit('initializePlayer', 'wizard')
+      commit('initializePlayer', 'necromancer')
     },
     levelUp({ state }) {
       let newPlayer = Object.assign({}, state.player)

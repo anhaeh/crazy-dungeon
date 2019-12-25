@@ -35,6 +35,7 @@ export default {
 
 <style scoped lang="sass">
   .sidebar
+    display: none
     background: #5d340c
     color: white
     height: 100vh

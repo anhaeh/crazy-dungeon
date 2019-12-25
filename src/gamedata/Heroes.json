@@ -10,5 +10,11 @@
     "initialHealth": 35,
     "attack": 6,
     "image": "wizard.png"
+  },
+  "necromancer": {
+    "name": "Necromancer",
+    "initialHealth": 35,
+    "attack": 9,
+    "image": "necromancer.png"
   }
 }

@@ -20,6 +20,8 @@ export default {
 </script>
 
 <style scoped lang="sass">
+  .health-bar
+    
   .life
     top: 160px
     left: 0
