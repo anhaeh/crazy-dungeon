@@ -36,12 +36,9 @@ export default {
 <style scoped lang="sass">
   .sidebar
     background: #5d340c
-    color: white
     width: 100%
     height: 50%
     position: fixed
     bottom: 0
-    border-left: white
-    border-left-style: solid
-    border-width: 1px
+    color: white
 </style>

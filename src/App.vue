@@ -35,9 +35,11 @@ export default {
     width: 100%
     justify-content: center
     height: 100%
-    //background: black
+    background: black
   #app
     display: flex
+    align-items: center
+    justify-content: center
   .unselectable
     -webkit-user-select: none
     -ms-user-select: none

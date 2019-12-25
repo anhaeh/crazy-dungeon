@@ -21,7 +21,6 @@ export default {
 
 <style scoped lang="sass">
   .life
-    top: 160px
     left: 0
     height: 20px
     background: #3e9933
@@ -31,7 +30,6 @@ export default {
     -webkit-transition: width 250ms
     transition: width 250ms
   .life-background
-    top: 160px
     left: 0
     height: 20px
     background: #a40000
@@ -39,7 +37,6 @@ export default {
     width: 100%
     position: absolute
   .legend-health
-    margin: 11px 0
     position: relative
     text-align: center
     z-index: 3
