@@ -97,7 +97,7 @@ export default {
         payload = {
           entity: 'monsterPreview',
           monster: this.$refs[this.hasMonster + this.id].monster,
-          actualHealth: this.$refs[this.hasMonster + this.id].health
+          damage: this.$refs[this.hasMonster + this.id].damage
         }
       } else if (this.hasItem) {
         payload = {

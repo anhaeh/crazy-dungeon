@@ -17,6 +17,9 @@ const store = new Vuex.Store({
     getMonsters: state => {
       return state.entities.monsters
     },
+    getMonstersDamage: state => {
+      return state.entities.monstersDamage
+    },
     getItems: state => {
       return state.entities.items
     },
@@ -60,6 +63,9 @@ const store = new Vuex.Store({
     },
     setMonsters(state, monsters) {
       state.entities.monsters = monsters
+    },
+    setMonstersDamage(state, monstersDamage) {
+      state.entities.monstersDamage = monstersDamage
     },
     setItems(state, items) {
       state.entities.items = items

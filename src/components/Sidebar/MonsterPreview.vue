@@ -11,7 +11,7 @@
       </div>
     </div>
     <div class="row">
-      <health-bar :actual-health="entity.actualHealth" :health="entity.monster.health"></health-bar>
+      <health-bar :actual-health="entity.monster.health - entity.damage" :health="entity.monster.health"></health-bar>
     </div>
   </div>
 </template>
