@@ -32,10 +32,9 @@ export default {
 <style lang="sass">
   body
     margin: 0
-    width: calc(100% - 300px)
+    width: 100%
     justify-content: center
     height: 100%
-    display: grid
     //background: black
   #app
     display: flex

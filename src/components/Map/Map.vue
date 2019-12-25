@@ -1,11 +1,11 @@
 <template>
   <div class="map" v-if="map">
-    <div class="row" v-for="row in getRows" :key="'row' + row">
+    <div class="row" v-for="(row, index) in getRows" :key="'row' + row">
       <Cell
-          v-for="cellKey in getCell(row)"
-          :key="row + cellKey"
+          v-for="cellKey in getCells(row)"
+          :key="index + row + cellKey"
           :id="row + cellKey"
-          :type="map[row][cellKey]"
+          :type="getCell(row, cellKey)"
       ></Cell>
     </div>
   </div>
@@ -31,15 +31,21 @@ export default {
         let cell = x.match(/[\d\.]+|\D+/g)
         if (rows.indexOf(cell[0]) === -1) { rows.push(cell[0])}
       })
-      return rows.sort()
+      return rows.sort((a, b) => a - b)
     },
   },
   methods: {
-    getCell: function (row) {
+    getCells: function (row) {
       // eslint-disable-next-line no-useless-escape
       let cells = this.$store.getters.getPlayerViewport.filter((x) => x.match(/[\d\.]+|\D+/g)[0] === row)
       // eslint-disable-next-line no-useless-escape
-      return cells.map(x => x.match(/[\d\.]+|\D+/g)[1]).sort()
+      return cells.map(x => x.match(/[\d\.-]+|\D+/g)[1]).sort()
+    },
+    getCell: function (row, cellKey) {
+      if (this.map[row] === undefined || this.map[row][cellKey] === undefined) {
+        return undefined
+      }
+      return this.map[row][cellKey]
     }
   }
 }

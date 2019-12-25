@@ -102,21 +102,22 @@ export default {
     font-weight: bold
     align-items: center
   .life
-    bottom: 0
+    bottom: 4px
     left: 0
     height: 4px
     background: #3e9933
     z-index: 2
-    position: fixed
+    position: absolute
     width: 100%
     -webkit-transition: width 250ms
     transition: width 250ms
   .life-background
-    bottom: 0
+    bottom: 4px
+    left: 0
     height: 4px
     background: red
     z-index: 1
-    position: fixed
+    position: absolute
     width: 100%
   .can-attack
     cursor: cell

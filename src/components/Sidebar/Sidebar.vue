@@ -37,17 +37,11 @@ export default {
   .sidebar
     background: #5d340c
     color: white
-    height: 100vh
-    width: 300px
-    right: 0
+    width: 100%
+    height: 50%
     position: fixed
+    bottom: 0
     border-left: white
     border-left-style: solid
     border-width: 1px
-  .preview
-    background: #1b3b48
-    height: 250px
-    bottom: 0
-    width: 100%
-    position: absolute
 </style>

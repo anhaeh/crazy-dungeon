@@ -32,7 +32,7 @@ import Item from "../Entities/Item"
 export default {
   props: {
     id: { required: true, type: String },
-    type: { required: true, type: String }
+    type: { required: true }
   },
   components: {
     Monster,
@@ -44,7 +44,11 @@ export default {
     type: {
       immediate: true,
       handler () {
-        this.tile = Terrains[this.type]
+        let type = this.type
+        if (this.type === undefined) {
+          type = '1'
+        }
+        this.tile = Terrains[type]
       }
     }
   },
@@ -88,22 +92,20 @@ export default {
       }
     },
     preview: function () {
-      if (this.visited) {
-        let payload = null
-        if (this.hasMonster) {
-          payload = {
-            entity: 'monsterPreview',
-            monster: this.$refs[this.hasMonster + this.id].monster,
-            actualHealth: this.$refs[this.hasMonster + this.id].health
-          }
-        } else if (this.hasItem) {
-          payload = {
-            entity: 'itemPreview',
-            item: this.$refs[this.hasItem + this.id].item
-          }
+      let payload = null
+      if (this.hasMonster) {
+        payload = {
+          entity: 'monsterPreview',
+          monster: this.$refs[this.hasMonster + this.id].monster,
+          actualHealth: this.$refs[this.hasMonster + this.id].health
         }
-        this.$store.commit('setPreview', payload)
+      } else if (this.hasItem) {
+        payload = {
+          entity: 'itemPreview',
+          item: this.$refs[this.hasItem + this.id].item
+        }
       }
+      this.$store.commit('setPreview', payload)
     }
   }
 }
