@@ -1,8 +1,8 @@
 <template>
   <div>
     <img :src="image">
-    Item: {{ entity.item.name }}
-    Description: {{ entity.item.description }}
+    {{ entity.item.name }}
+    {{ entity.item.description }}
   </div>
 </template>
 

@@ -199,7 +199,7 @@ export default {
       json.map[cell[0]][cell[1]] = 'P'
 
       /* Set theme */
-      let themes = ['crypt', 'default', 'forest', 'industrial', 'library', 'snakepit']
+      let themes = ['default', 'forest', 'industrial', 'library', 'snakepit']
       json['theme'] = themes[Math.floor(Math.random() * themes.length)]
       this.$store.dispatch('setRoom', json)
     }
