@@ -4,7 +4,7 @@
     <div v-if="isGameOver" class="game-over">GAME OVER</div>
     <GameController></GameController>
     <Map></Map>
-    <Sidebar></Sidebar>
+    <TopBar></TopBar>
     <DungeonUI></DungeonUI>
   </div>
 </template>
@@ -12,16 +12,16 @@
 <script>
 import GameController from "./components/GameController"
 import Map from "./components/Map/Map"
-import Sidebar from "./components/Sidebar/Sidebar"
 import DungeonUI from "./components/UI/DungeonUI"
+import TopBar from "./components/UI/TopBar"
 
 export default {
   name: "App",
   components: {
+    TopBar,
     GameController,
     Map,
-    DungeonUI,
-    Sidebar
+    DungeonUI
   },
   computed: {
     isGameOver: function () {

@@ -1,5 +1,5 @@
 <template>
-  <div class="sidebar">
+  <div class="topBar">
     <player-stats></player-stats>
     <div class="preview">
       <component v-if="getPreview"
@@ -18,14 +18,14 @@ import playerStats from './PlayerStats'
 
 
 export default {
-  name: "Sidebar",
+  name: "TopBar",
   components: {
     monsterPreview,
     itemPreview,
     playerStats
   },
   computed: {
-    ...mapGetters(['getPlayerHealth', "getPreview"]),
+    ...mapGetters(["getPreview"]),
     componentToPreview: function () {
       return this.getPreview ? this.getPreview.entity : null
     }
@@ -34,7 +34,7 @@ export default {
 </script>
 
 <style scoped lang="sass">
-.sidebar
+.topBar
   background: transparent
   width: 100%
   height: calc(1.5 * var(--tile-cell))
@@ -45,6 +45,4 @@ export default {
   align-items: flex-start
   justify-content: flex-start
   z-index: 100
-.playerStats
-
 </style>
