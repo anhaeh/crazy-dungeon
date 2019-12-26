@@ -1,6 +1,6 @@
 <template>
   <div class="dungeonUI">
-    <div class="dungeonUI__content">    
+    <div class="dungeonUI__content">
       <div class="feed">
         Sandro attacks. <br>
         10 damage, +5 electric<br>
@@ -14,8 +14,8 @@
         <div class="skill__slot --2"></div>
         <div class="skill__slot --3"></div>
         <div class="skill__slot --4"></div>
-        <div class="skill__slot --5"></div>  
-        <div class="skill__slot --6"></div>  
+        <div class="skill__slot --5"></div>
+        <div class="skill__slot --6"></div>
       </div>
       <div class="control">
         <div class="top" @click="move('top')"></div>
@@ -23,7 +23,7 @@
         <div class="right" @click="move('right')"></div>
         <div class="left" @click="move('left')"></div>
       </div>
-    </div>  
+    </div>
   </div>
 </template>
 
@@ -41,6 +41,7 @@ export default {
       let cellToMove = this.$store.getters.getPlayerRange[directions[key]]
       try {
         document.querySelector('#cell-' + cellToMove).click()
+        document.querySelector('#cell-' + cellToMove + ' .monster').click()
         // eslint-disable-next-line no-empty
       } catch (e) {
       }

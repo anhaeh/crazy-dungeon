@@ -1,7 +1,7 @@
 <template>
   <div class="monster"
-       @click="attack"
-       :class="{ 'can-attack': canAttack }"
+       @click="click"
+       :class="[{ 'can-target': canTarget }, { 'is-target': isTarget }]"
   >
     <img :src="image" alt="">
     <div class="level">{{ monster.level }}</div>
@@ -11,6 +11,7 @@
 </template>
 
 <script>
+import { mapGetters } from 'vuex'
 import MonstersData from '@/gamedata/Monsters.json'
 
 export default {
@@ -20,7 +21,7 @@ export default {
     name: { required: true }
   },
   watch: {
-    actualRoom: {
+    getRoom: {
       immediate: true,
       handler () {
         this.monster = MonstersData[this.name]
@@ -33,45 +34,43 @@ export default {
     }
   },
   methods: {
-    attack: function() {
-      if (this.canAttack) {
-        let monstersDamage = Object.assign({}, this.$store.getters.getMonstersDamage)
-        monstersDamage[this.cellId] += this.$store.getters.getPlayerAttack
-        this.$store.commit('setMonstersDamage', monstersDamage)
-        if (this.damage >= this.monster.health) {
-          /* if kill monster*/
-          this.$store.commit('setPreview', null)
-          event.stopPropagation()
-          let monsters = Object.assign({}, this.$store.getters.getMonsters)
-          delete monsters[this.cellId]
-          this.$store.commit('setMonsters', monsters)
-          this.$store.commit('setDefeatMonster', this.monster.gold)
-          let player = this.$store.getters.getPlayer
-          if (player.defeatMonsters === player.nextLevelMonsters) {
-            this.$store.dispatch('levelUp')
-          }
+    click: function() {
+      if (this.canTarget) {
+        if (this.isTarget) {
+          this.$store.dispatch('attack')
         } else {
-          this.$store.commit('setPlayerDamage', this.monster.damage)
+          this.$store.commit('setMonsterSelected', {
+            cellId: this.cellId,
+            monster: this.monster
+          })
         }
+      } else {
+        this.$store.commit('setMonsterSelected', null)
       }
     }
   },
   computed: {
+    ...mapGetters([
+      'getMonsterSelected',
+      'getPlayerRange',
+      'getRoom',
+      'getMonstersDamage'
+    ]),
     image: function () {
       return require('@/assets/monsters/' + this.monster.image)
     },
-    canAttack: function () {
-      return this.$store.getters.getPlayerRange.indexOf(this.cellId) !== -1
+    canTarget: function () {
+      return this.getPlayerRange.indexOf(this.cellId) !== -1
+    },
+    isTarget: function () {
+      return this.getMonsterSelected && this.getMonsterSelected.cellId === this.cellId
     },
     damage: function () {
-      return this.$store.getters.getMonstersDamage[this.cellId]
+      return this.getMonstersDamage[this.cellId]
     },
     life: function() {
       let percent = ((this.monster.health - this.damage) * 100) / this.monster.health
       return `width: ${percent}%`
-    },
-    actualRoom: function () {
-      return this.$store.getters.getRoom
     }
   }
 };
@@ -116,6 +115,8 @@ export default {
     z-index: 1
     position: absolute
     width: 100%
-  .can-attack
+  .can-target
     cursor: cell
+  .is-target
+    filter: drop-shadow(2px 7px 7px red)
 </style>

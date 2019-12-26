@@ -124,6 +124,7 @@ export default {
         let cellToMove = this.$store.getters.getPlayerRange[directions[key]]
         try {
           document.querySelector('#cell-' + cellToMove).click()
+          document.querySelector('#cell-' + cellToMove + ' .monster').click()
           // eslint-disable-next-line no-empty
         } catch (e) {
         }

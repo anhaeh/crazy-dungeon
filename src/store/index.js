@@ -11,11 +11,15 @@ const store = new Vuex.Store({
     map: null,
     theme: 'default',
     entities: null,
-    preview: null
+    preview: null,
+    monsterSelected: null
   },
   getters: {
     getMonsters: state => {
       return state.entities.monsters
+    },
+    getMonsterSelected: state => {
+      return state.monsterSelected
     },
     getMonstersDamage: state => {
       return state.entities.monstersDamage
@@ -58,6 +62,9 @@ const store = new Vuex.Store({
     },
   },
   mutations: {
+    setMonsterSelected(state, monsterSelected) {
+      state.monsterSelected = monsterSelected
+    },
     setPlayerPosition(state, playerPosition) {
       state.player.position = playerPosition
     },
@@ -106,6 +113,15 @@ const store = new Vuex.Store({
         level: 1,
         isDead: false
       }
+    },
+    levelUp(state) {
+      let newPlayer = Object.assign({}, state.player)
+      newPlayer.level += 1
+      newPlayer.defeatMonsters = 0
+      newPlayer.damage = 0
+      newPlayer.attack += newPlayer.level
+      newPlayer.nextLevelMonsters = 5 * newPlayer.level
+      state.player = newPlayer
     }
   },
   actions: {
@@ -128,6 +144,26 @@ const store = new Vuex.Store({
       newPlayer.attack += newPlayer.level
       newPlayer.nextLevelMonsters = 5 * newPlayer.level
       state.player = newPlayer
+    },
+    attack({state, commit}) {
+      let monstersDamage = Object.assign({}, state.entities.monstersDamage)
+      monstersDamage[state.monsterSelected.cellId] += state.player.attack
+      commit('setMonstersDamage', monstersDamage)
+      if (monstersDamage[state.monsterSelected.cellId] >= state.monsterSelected.monster.health) {
+        /* if kill monster*/
+        event.stopPropagation()
+        commit('setPreview', null)
+        let monsters = Object.assign({}, state.entities.monsters)
+        delete monsters[state.monsterSelected.cellId]
+        commit('setMonsters', monsters)
+        commit('setDefeatMonster', state.monsterSelected.monster.gold)
+        if (state.player.defeatMonsters === state.player.nextLevelMonsters) {
+          commit('levelUp')
+        }
+      } else {
+        commit('setPlayerDamage', state.monsterSelected.monster.damage)
+      }
+
     }
   }
 })

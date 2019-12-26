@@ -12,6 +12,10 @@ export default {
       let heroClass = this.$store.getters.getPlayer.class
       return require(`@/assets/heroes/${heroClass}.png`)
     }
+  },
+  created () {
+    this.$store.commit('setMonsterSelected', null)
+    this.$store.commit('setPreview', null)
   }
 }
 </script>
