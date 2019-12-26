@@ -21,7 +21,7 @@ export default {
     GameController,
     Map,
     DungeonUI,
-    Sidebar    
+    Sidebar
   },
   computed: {
     isGameOver: function () {
@@ -34,17 +34,13 @@ export default {
 <style lang="sass">
 \:root
   --tile-cell: 14.2857vw // based on 7 tiles in viewport width
-  --pixel-unit: 0.8928vw // based on 16 pixels inside 1 tile-cell 
+  --pixel-unit: 0.8928vw // based on 16 pixels inside 1 tile-cell
 
 @font-face
-  font-family: 'OpenSansPXBold';
+  font-family: 'OpenSansPXBold'
   src: url('assets/font/OpenSansPXBold.ttf') format('truetype')
   font-weight: normal
   font-style: normal
-
-#app
-  font-family: 'OpenSansPXBold', sans-serif
-
 body
   margin: 0
   width: 100%
@@ -52,6 +48,7 @@ body
   height: 100%
   background: black
 #app
+  font-family: 'OpenSansPXBold', sans-serif
   display: flex
   align-items: center
   justify-content: center

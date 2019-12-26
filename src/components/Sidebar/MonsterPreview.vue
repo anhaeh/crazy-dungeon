@@ -3,7 +3,11 @@
     <div class="monsterPreview__portrait">
       <img :src="image">
     </div>
-    <health-bar :actual-health="entity.monster.health - entity.damage" :health="entity.monster.health" modifier="--monster"></health-bar>
+    <status-bar :actual="entity.monster.health - entity.damage"
+                :total="entity.monster.health"
+                modifier="--monster"
+    >
+    </status-bar>
     <div class="name">{{ entity.monster.name }}</div>
 <!--     <img class="attack-image" :src="imageAttack">
     <div class="damage">
@@ -13,11 +17,11 @@
 </template>
 
 <script>
-import healthBar from './HealthBar'
+import statusBar from './StatusBar'
 export default {
   props: ['entity'],
   components: {
-    healthBar
+    statusBar
   },
   name: "MonsterPreview",
   computed: {
@@ -25,10 +29,10 @@ export default {
       return require('@/assets/monsters/portraits/' + this.entity.monster.image)
     },
     imageAttack: function () {
-      return require('@/assets/items/sword.png')
+      return require('@/assets/ui/Attack.png')
     }
   }
-};
+}
 </script>
 
 <style scoped lang="sass">
@@ -44,10 +48,10 @@ export default {
   box-sizing: border-box
   position: absolute
   right: 0
-  img 
+  img
     width: 100%
     height: 100%
-.healthBar
+.statusBar
   position: absolute
   right: calc(1.5 * var(--tile-cell))
   top: 0
@@ -57,7 +61,7 @@ export default {
   right: calc(2 * var(--pixel-unit))
   font-size: 20px
   font-weight: bold
-  text-shadow: 1px 2px 0px black
+  text-shadow: 1px 2px 0 black
 .attack-image
   height: 30px
   width: 30px

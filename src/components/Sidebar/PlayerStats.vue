@@ -2,9 +2,11 @@
   <div class="playerStats">
     <img class="player-image" :src="imageHero">
     <div class="playerStats__lvl">{{ this.$store.getters.getPlayer.level }}</div>
-    <health-bar :actual-health="actualHealth" :health="player.initialHealth + levelDiff"></health-bar>
+    <status-bar :actual="actualHealth"
+                :total="player.initialHealth + levelDiff"
+    ></status-bar>
     <div class="name">
-      {{ player.name }} 
+      {{ player.name }}
     </div>
     <div class="row base-stats">
       <img :src="imgAttack" title="Attack">
@@ -28,12 +30,12 @@
 </template>
 
 <script>
-import healthBar from './HealthBar'
+import statusBar from './StatusBar'
 import heroes from '@/gamedata/Heroes.json'
 
 export default {
   components: {
-    healthBar
+    statusBar
   },
   watch: {
     actualHealth: {
@@ -64,16 +66,16 @@ export default {
       return require(`@/assets/ui/Level.png`)
     },
     actualHealth: function () {
-      return (this.player.initialHealth) - this.$store.getters.getPlayer.damage + this.levelDiff
+      return (this.player.initialHealth  + this.levelDiff) - this.$store.getters.getPlayer.damage
     },
     levelDiff: function () {
-      return (this.$store.getters.getPlayer.level * 15)
+      return this.$store.getters.getPlayer.level * 15
     }
   },
   mounted() {
     this.$store.commit('setPlayerAttack', this.player.attack)
   }
-};
+}
 </script>
 
 <style scoped lang="sass">
@@ -98,7 +100,7 @@ export default {
   justify-content: center
   font-size: 18px
   color: #805a29
-.healthBar
+.statusBar
   left: calc(1.5 * var(--tile-cell))
   top: calc(1 * var(--tile-cell))
 .name
@@ -108,7 +110,7 @@ export default {
   font-size: 20px
   font-weight: bold
   text-shadow: 1px 2px 0px black
-.base-stats 
+.base-stats
   display: none
   img
     height: 30px
