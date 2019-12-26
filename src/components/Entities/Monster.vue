@@ -39,6 +39,9 @@ export default {
         monstersDamage[this.cellId] += this.$store.getters.getPlayerAttack
         this.$store.commit('setMonstersDamage', monstersDamage)
         if (this.damage >= this.monster.health) {
+          /* if kill monster*/
+          this.$store.commit('setPreview', null)
+          event.stopPropagation()
           let monsters = Object.assign({}, this.$store.getters.getMonsters)
           delete monsters[this.cellId]
           this.$store.commit('setMonsters', monsters)
@@ -97,7 +100,6 @@ export default {
     font-weight: bold
     align-items: center
     box-shadow: inset 0 0 0 calc(0.5 * var(--pixel-unit)) #1c140c
-    color: 
   .life
     bottom: 4px
     left: 0

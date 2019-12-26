@@ -12,7 +12,6 @@ export default {
   },
   watch: {
     getPlayerPosition: {
-      immediate: true,
       handler: function () {
         if (this.getPlayerPosition === this.getPortalPosition) {
           this.buildMap()
