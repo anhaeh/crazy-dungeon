@@ -66,8 +66,6 @@ export default {
   image-rendering: pixelated
   z-index: 2
   width: 100%
-  -webkit-transition: width 200ms
-  transition: width 200ms
 .legend
   position: absolute
   left: calc(4 * var(--pixel-unit))
