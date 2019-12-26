@@ -71,7 +71,7 @@ export default {
       return this.$store.getters.getRoom
     }
   }
-}
+};
 </script>
 
 <style scoped lang="sass">
@@ -85,38 +85,32 @@ export default {
   .level
     top: 0
     left: 0
-    float: left
-    height: 17px
-    width: 17px
-    background: #00000087
+    height: calc(4 * var(--pixel-unit))
+    width: calc(5 * var(--pixel-unit))
+    background: #000000eb
     z-index: 3
     position: absolute
-    color: white
-    border-radius: 32px
-    font-size: 13px
-    display: -webkit-box
-    display: -ms-flexbox
+    color: #bfa561
+    font-size: 16px
     display: flex
-    -webkit-box-pack: center
-    -ms-flex-pack: center
     justify-content: center
     font-weight: bold
     align-items: center
+    box-shadow: inset 0 0 0 calc(0.5 * var(--pixel-unit)) #1c140c
+    color: 
   .life
     bottom: 4px
     left: 0
-    height: 4px
-    background: #3e9933
+    height: 3px
+    background: rgb(204, 0, 0)
     z-index: 2
     position: absolute
     width: 100%
-    -webkit-transition: width 250ms
-    transition: width 250ms
   .life-background
     bottom: 4px
     left: 0
-    height: 4px
-    background: red
+    height: 3px
+    background: rgba(0,0,0,0.8)
     z-index: 1
     position: absolute
     width: 100%

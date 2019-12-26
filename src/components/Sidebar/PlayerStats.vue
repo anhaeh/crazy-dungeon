@@ -1,11 +1,10 @@
 <template>
-  <div class="player-stats">
-    <div class="row">
-      <img class="player-image" :src="imageHero">
-      <div class="name">
-        {{ player.name }}
-        Level {{ this.$store.getters.getPlayer.level }}
-      </div>
+  <div class="playerStats">
+    <img class="player-image" :src="imageHero">
+    <div class="playerStats__lvl">{{ this.$store.getters.getPlayer.level }}</div>
+    <health-bar :actual-health="actualHealth" :health="player.initialHealth + levelDiff"></health-bar>
+    <div class="name">
+      {{ player.name }} 
     </div>
     <div class="row base-stats">
       <img :src="imgAttack" title="Attack">
@@ -23,7 +22,7 @@
 
     </div>
     <div class="row">
-      <health-bar :actual-health="actualHealth" :health="player.initialHealth + levelDiff"></health-bar>
+
     </div>
   </div>
 </template>
@@ -53,7 +52,7 @@ export default {
   name: "PlayerStats",
   computed: {
     imageHero: function () {
-      return require(`@/assets/heroes/${this.player.image}`)
+      return require(`@/assets/heroes/portraits/${this.player.image}`)
     },
     imgAttack: function () {
       return require(`@/assets/ui/Attack.png`)
@@ -74,26 +73,47 @@ export default {
   mounted() {
     this.$store.commit('setPlayerAttack', this.player.attack)
   }
-}
+};
 </script>
 
 <style scoped lang="sass">
-  .row
-    margin: 15px
-    display: flex
-    justify-content: center
-  .player-stats img
+.playerStats
+  position: relative
+  height: calc(1.5 * var(--tile-cell))
+  img
+    position: absolute
+    height: calc(1.5 * var(--tile-cell))
+    width: calc(1.5 * var(--tile-cell))
     display: block
-    width: 60px
-    height: 60px
-  .name
-    padding: 25px
-    font-size: 20px
-    font-weight: bold
-  .base-stats img
+.playerStats__lvl
+  position: absolute
+  bottom: 0
+  left: 0
+  height: calc(0.5 * var(--tile-cell))
+  width: calc(0.5 * var(--tile-cell))
+  box-shadow: inset 0 0 0 calc(1 * var(--pixel-unit)) #0e0c05
+  background: #1f1913
+  display: flex
+  align-items: center
+  justify-content: center
+  font-size: 18px
+  color: #805a29
+.healthBar
+  left: calc(1.5 * var(--tile-cell))
+  top: calc(1 * var(--tile-cell))
+.name
+  position: absolute
+  top: calc(1.5 * var(--tile-cell))
+  left: calc(2 * var(--pixel-unit))
+  font-size: 20px
+  font-weight: bold
+  text-shadow: 1px 2px 0px black
+.base-stats 
+  display: none
+  img
     height: 30px
     width: 30px
     padding-right: 5px
-  .text
-    padding: 5px 5px 0 0
+.text
+  padding: 5px 5px 0 0
 </style>

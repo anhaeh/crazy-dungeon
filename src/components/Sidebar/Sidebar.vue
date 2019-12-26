@@ -30,15 +30,21 @@ export default {
       return this.getPreview ? this.getPreview.entity : null
     }
   }
-}
+};
 </script>
 
 <style scoped lang="sass">
-  .sidebar
-    background: #5d340c
-    width: 100%
-    height: 50%
-    position: fixed
-    bottom: 0
-    color: white
+.sidebar
+  background: transparent
+  width: 100%
+  height: calc(1.5 * var(--tile-cell))
+  position: fixed
+  top: 0
+  color: white
+  display: flex
+  align-items: flex-start
+  justify-content: flex-start
+  z-index: 100
+.playerStats
+
 </style>

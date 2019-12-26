@@ -113,8 +113,8 @@ export default {
 
 <style scoped lang="sass">
   .cell
-    width: 50px
-    height: 50px
+    width: var(--tile-cell)
+    height: var(--tile-cell)
     position: relative
     &.can-move
       cursor: pointer

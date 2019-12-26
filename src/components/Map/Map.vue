@@ -52,6 +52,8 @@ export default {
 </script>
 
 <style scoped lang="sass">
-  .row
-    display: flex
+.map
+  margin-top: calc(1.5 * var(--tile-cell))
+.row
+  display: flex
 </style>
