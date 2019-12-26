@@ -17,6 +17,12 @@
         <div class="skill__slot --5"></div>  
         <div class="skill__slot --6"></div>  
       </div>
+      <div class="control">
+        <div class="top" @click="move('top')"></div>
+        <div class="bottom" @click="move('bottom')"></div>
+        <div class="right" @click="move('right')"></div>
+        <div class="left" @click="move('left')"></div>
+      </div>
     </div>  
   </div>
 </template>
@@ -24,6 +30,22 @@
 <script>
 export default {
   name: "DungeonUI",
+  methods: {
+    move: function (key) {
+      let directions = {
+        'top': 1,
+        'left': 0,
+        'right': 3,
+        'bottom': 2
+      }
+      let cellToMove = this.$store.getters.getPlayerRange[directions[key]]
+      try {
+        document.querySelector('#cell-' + cellToMove).click()
+        // eslint-disable-next-line no-empty
+      } catch (e) {
+      }
+    }
+  }
 };
 </script>
 
@@ -53,4 +75,29 @@ export default {
   box-sizing: border-box
   left: calc(28 * var(--pixel-unit))
   top: calc(6 * var(--pixel-unit))
+.control
+  .bottom
+    position: fixed
+    height: 30px
+    bottom: 0
+    width: 95px
+    right: 30px
+  .top
+    position: fixed
+    height: 30px
+    bottom: 82px
+    width: 95px
+    right: 30px
+  .right
+    position: fixed
+    height: 114px
+    bottom: 0
+    width: 30px
+    right: 0
+  .left
+    position: fixed
+    height: 114px
+    bottom: 0
+    width: 30px
+    right: 124px
 </style>
