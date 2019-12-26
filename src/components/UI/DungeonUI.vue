@@ -78,26 +78,26 @@ export default {
 .control
   .bottom
     position: fixed
-    height: 30px
-    bottom: 0
-    width: 95px
-    right: 30px
+    height: 28px
+    bottom: calc(var(--tile-cell) * 0.1)
+    width: calc(var(--tile-cell) * 1.5)
+    right: calc(var(--tile-cell) / 1.5)
   .top
     position: fixed
-    height: 30px
-    bottom: 82px
-    width: 95px
-    right: 30px
+    height: 28px
+    bottom: calc(var(--tile-cell) * 1.6)
+    width: calc(var(--tile-cell) * 1.5)
+    right: calc(var(--tile-cell) / 1.5)
   .right
     position: fixed
-    height: 114px
-    bottom: 0
-    width: 30px
-    right: 0
+    height: calc(var(--tile-cell) * 1.5)
+    bottom: calc(var(--tile-cell) / 2.5)
+    width: 28px
+    right: calc(var(--tile-cell) * 0.2)
   .left
     position: fixed
-    height: 114px
-    bottom: 0
-    width: 30px
-    right: 124px
+    height: calc(var(--tile-cell) * 1.5)
+    bottom: calc(var(--tile-cell) / 2.5)
+    width: 28px
+    right: calc(var(--tile-cell) * 2.2)
 </style>
