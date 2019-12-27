@@ -178,16 +178,19 @@ export default {
       }
 
       /* Set item random by level */
+      let items = ['sword', 'potion']
+      items.forEach(item => {
+        let position = free[Math.floor(Math.random() * free.length)]
+        /* remove the free */
+        let index = free.indexOf(position)
+        free.splice(index, 1)
+        json.entities.items[position] = item
+      })
+
+      /* Set player */
       let position = free[Math.floor(Math.random() * free.length)]
       /* remove the free */
       let index = free.indexOf(position)
-      free.splice(index, 1)
-      json.entities.items[position] = 'sword'
-
-      /* Set player */
-      position = free[Math.floor(Math.random() * free.length)]
-      /* remove the free */
-      index = free.indexOf(position)
       free.splice(index, 1)
       json.player_init = position
 

@@ -1,5 +1,5 @@
 <template>
-  <div class="item" :class="{ 'can-pick': canPick }">
+  <div class="item">
     <img :src="image" alt="">
   </div>
 </template>
@@ -19,6 +19,14 @@ export default {
       handler () {
         this.item = ItemsData[this.name]
       }
+    },
+    isPlayerInCell: {
+      handler () {
+        console.log('pick item')
+        let items = Object.assign({}, this.$store.getters.getItems)
+        delete items[this.cellId]
+        this.$store.commit('setItems', items)
+      }
     }
   },
   data () {
@@ -35,8 +43,8 @@ export default {
     actualRoom: function () {
       return this.$store.getters.getRoom
     },
-    canPick: function () {
-      return this.$store.getters.getPlayerViewport.indexOf(this.cellId) !== -1
+    isPlayerInCell: function () {
+      return this.$store.getters.getPlayerPosition === this.cellId
     },
   }
 }
@@ -50,6 +58,4 @@ export default {
     width: 100%
     height: 100%
     object-fit: contain
-  .can-pick
-    cursor: pointer
 </style>

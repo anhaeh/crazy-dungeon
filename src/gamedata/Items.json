@@ -1,8 +1,14 @@
 {
   "sword": {
     "name": "Sword",
-    "image": "sword.png",
-    "type": "Weapon",
+    "image": "Item__00.png",
+    "type": "attack",
     "description": "+ 5 attack"
+  },
+  "potion": {
+    "name": "Potion",
+    "image": "Item__29.png",
+    "type": "potion",
+    "description": "+ 30 health"
   }
 }
