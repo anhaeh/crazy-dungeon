@@ -20,7 +20,7 @@
   "ring1": {
     "name": "Gold ring",
     "image": "Item__43.png",
-    "type": "drop",
+    "type": "drop_gold",
     "description": "+ 30% gold"
   }
 }

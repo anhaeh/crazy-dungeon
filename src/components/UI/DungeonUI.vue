@@ -24,12 +24,18 @@
         <div class="left" @click="move('left')"></div>
       </div>
     </div>
+    <inventory></inventory>
   </div>
 </template>
 
 <script>
+import Inventory from './Inventory'
+
 export default {
   name: "DungeonUI",
+  components: {
+    Inventory
+  },
   methods: {
     move: function (key) {
       let directions = {

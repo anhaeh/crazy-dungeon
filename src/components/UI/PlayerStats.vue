@@ -1,6 +1,6 @@
 <template>
   <div class="playerStats">
-    <img class="player-image" :src="imageHero">
+    <img class="player-image" :src="imageHero" @click="showInventory">
     <div class="playerStats__lvl">{{ this.$store.getters.getPlayer.level }}</div>
     <status-bar :actual="actualHealth"
                 :total="player.initialHealth + levelDiff"
@@ -70,6 +70,11 @@ export default {
     },
     levelDiff: function () {
       return this.$store.getters.getPlayer.level * 15
+    }
+  },
+  methods: {
+    showInventory: function () {
+      this.$store.commit('setShowInventory')
     }
   },
   mounted() {

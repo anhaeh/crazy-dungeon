@@ -18,10 +18,10 @@ export default {
       immediate: true,
       handler (value) {
         if (value) {
-          console.log('pick item')
           let items = Object.assign({}, this.$store.getters.getItems)
           delete items[this.cellId]
           this.$store.commit('setItems', items)
+          this.$store.commit('addItemToInventory', this.item)
         }
       }
     }

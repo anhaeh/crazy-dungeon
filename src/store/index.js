@@ -12,7 +12,8 @@ const store = new Vuex.Store({
     theme: 'default',
     entities: null,
     preview: null,
-    monsterSelected: null
+    monsterSelected: null,
+    showInventory: false
   },
   getters: {
     getMonsters: state => {
@@ -45,6 +46,9 @@ const store = new Vuex.Store({
     getPlayerAttack: state => {
       return state.player.attack
     },
+    getInventory: state => {
+      return state.player.inventory
+    },
     getMap: state => {
       return state.map
     },
@@ -60,6 +64,9 @@ const store = new Vuex.Store({
     getPreview: state => {
       return state.preview
     },
+    getShowInventory: state => {
+      return state.showInventory
+    }
   },
   mutations: {
     setMonsterSelected(state, monsterSelected) {
@@ -99,6 +106,12 @@ const store = new Vuex.Store({
     setPlayerDead(state) {
       state.player.isDead = true
     },
+    addItemToInventory(state, item) {
+      state.player.inventory.push(item)
+    },
+    setShowInventory(state) {
+      state.showInventory = !state.showInventory
+    },
     initializePlayer(state, heroClass) {
       state.player = {
         class: heroClass,
@@ -111,7 +124,8 @@ const store = new Vuex.Store({
         defeatMonsters: 0,
         nextLevelMonsters: 5,
         level: 1,
-        isDead: false
+        isDead: false,
+        inventory: []
       }
     },
     levelUp(state) {
