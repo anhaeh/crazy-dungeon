@@ -178,7 +178,7 @@ export default {
       }
 
       /* Set item random by level */
-      let items = ['sword', 'potion']
+      let items = ['sword1', 'potion', 'potion', 'armor1', 'ring1']
       items.forEach(item => {
         let position = free[Math.floor(Math.random() * free.length)]
         /* remove the free */

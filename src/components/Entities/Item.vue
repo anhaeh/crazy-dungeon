@@ -14,24 +14,21 @@ export default {
     name: { required: true }
   },
   watch: {
-    actualRoom: {
-      immediate: true,
-      handler () {
-        this.item = ItemsData[this.name]
-      }
-    },
     isPlayerInCell: {
-      handler () {
-        console.log('pick item')
-        let items = Object.assign({}, this.$store.getters.getItems)
-        delete items[this.cellId]
-        this.$store.commit('setItems', items)
+      immediate: true,
+      handler (value) {
+        if (value) {
+          console.log('pick item')
+          let items = Object.assign({}, this.$store.getters.getItems)
+          delete items[this.cellId]
+          this.$store.commit('setItems', items)
+        }
       }
     }
   },
   data () {
     return {
-      item: null
+      item: ItemsData[this.name]
     }
   },
   methods: {
@@ -40,12 +37,9 @@ export default {
     image: function () {
       return require('@/assets/items/' + this.item.image)
     },
-    actualRoom: function () {
-      return this.$store.getters.getRoom
-    },
     isPlayerInCell: function () {
       return this.$store.getters.getPlayerPosition === this.cellId
-    },
+    }
   }
 }
 </script>
