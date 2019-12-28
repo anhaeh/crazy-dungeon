@@ -57,7 +57,7 @@ export default {
       'getMonstersDamage'
     ]),
     image: function () {
-      return require('@/assets/monsters/' + this.monster.image)
+      return require('@/assets/monsters/' + this.monster.image + '.gif')
     },
     canTarget: function () {
       return this.getPlayerRange.indexOf(this.cellId) !== -1

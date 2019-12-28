@@ -4,7 +4,6 @@
     <div class="playerStats__lvl">{{ this.$store.getters.getPlayer.level }}</div>
     <status-bar :actual="actualHealth"
                 :total="player.initialHealth + levelDiff"
-                color="blue"
     ></status-bar>
     <div class="name">
       {{ player.name }}

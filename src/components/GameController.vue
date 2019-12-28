@@ -167,7 +167,7 @@ export default {
       }
 
       /* Set monsters */
-      let monstersList = ['goblin', 'golem', 'gorgon', 'imp']
+      let monstersList = ['goblin', 'golem', 'gorgon', 'imp', 'dummy']
       for (let i = 0; i < height; i++) {
         let position = free[Math.floor(Math.random() * free.length)]
         /* remove the free */

@@ -26,7 +26,7 @@ export default {
   name: "MonsterPreview",
   computed: {
     image: function () {
-      return require('@/assets/monsters/portraits/' + this.entity.monster.image)
+      return require('@/assets/monsters/portraits/' + this.entity.monster.image + '.png')
     },
     imageAttack: function () {
       return require('@/assets/ui/Attack.png')
