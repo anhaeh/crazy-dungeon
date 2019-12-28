@@ -1,13 +1,15 @@
 <template>
   <div class="monster"
        @click="click"
-       :class="[{ 'can-target': canTarget }, { 'is-target': isTarget }]"
+       :class="[{ 'can-target': canTarget }, { 'is-target': isTarget && isLive}]"
   >
     <img v-if="isLive" :src="image" alt="">
     <img v-else :src="imageDeath" alt="">
-    <div class="level">{{ monster.level }}</div>
-    <div class="life" :style="life"></div>
-    <div class="life-background"></div>
+    <div v-if="isLive">
+      <div class="level">{{ monster.level }}</div>
+      <div class="life" :style="life"></div>
+      <div class="life-background"></div>
+    </div>
   </div>
 </template>
 
@@ -30,19 +32,19 @@ export default {
     },
     isLive: {
       handler () {
-        this.timeout = setTimeout(() => {
+        let audio = new Audio(require('@/sounds/kill_monster.wav'))
+        audio.play()
+        setTimeout(() => {
           let monsters = Object.assign({}, this.$store.getters.getMonsters)
           delete monsters[this.cellId]
           this.$store.commit('setMonsters', monsters)
         }, 1000)
-
       }
     }
   },
   data () {
     return {
-      monster: null,
-      timeout: null
+      monster: null
     }
   },
   methods: {
@@ -93,9 +95,6 @@ export default {
     isLive: function () {
       return this.monster.health > this.damage
     }
-  },
-  beforeDestroy() {
-    clearTimeout(this.timeout)
   }
 }
 </script>

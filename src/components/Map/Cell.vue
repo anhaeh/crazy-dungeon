@@ -78,16 +78,13 @@ export default {
     },
     canMove: function () {
       return !this.hasMonster && this.tile.available && this.inPlayerRange
-    },
-    actualRoom: function () {
-      return this.$store.getters.getRoom
     }
   },
   methods: {
     click: function() {
       if (this.canMove) {
         this.$store.commit('setPlayerPosition', this.id)
-      } else if (this.hasMonster) {
+      } else {
         this.preview()
       }
     },

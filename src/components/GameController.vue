@@ -15,6 +15,8 @@ export default {
       handler: function () {
         if (this.getPlayerPosition === this.getPortalPosition) {
           this.buildMap()
+          let audio = new Audio(require('@/sounds/portal.wav'))
+          audio.play()
           //this.nextRoom()
         } else {
           // eslint-disable-next-line no-useless-escape

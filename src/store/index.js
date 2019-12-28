@@ -168,6 +168,8 @@ const store = new Vuex.Store({
       state.player = newPlayer
     },
     attack({state, commit}) {
+      let audio = new Audio(require('@/sounds/attack.wav'))
+      audio.play()
       let monstersDamage = Object.assign({}, state.entities.monstersDamage)
       monstersDamage[state.monsterSelected.cellId] += state.player.attack
       state.questLog.push(`Player deals ${state.player.attack} to ${state.monsterSelected.monster.name}`)
@@ -182,6 +184,8 @@ const store = new Vuex.Store({
         if (state.player.defeatMonsters === state.player.nextLevelMonsters) {
           commit('levelUp')
           state.questLog.push(`Player level up`)
+          let audio = new Audio(require('@/sounds/level_up.wav'))
+          audio.play()
         }
       } else {
         state.questLog.push(`${state.monsterSelected.monster.name} deals ${state.monsterSelected.monster.damage} damage`)
