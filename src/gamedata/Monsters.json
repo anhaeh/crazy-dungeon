@@ -1,7 +1,7 @@
 {
   "gorgon": {
     "name": "Gorgon",
-    "image": "Gorgon.png",
+    "image": "Gorgon",
     "health": 40,
     "damage": 5,
     "level": 3,
@@ -9,15 +9,23 @@
   },
   "golem": {
     "name": "Golem",
-    "image": "Golem.png",
+    "image": "Golem",
     "health": 30,
     "damage": 4,
     "level": 2,
     "gold": 15
   },
+  "dummy": {
+    "name": "GolemDeath",
+    "image": "Golem_deathLoop",
+    "health": 1,
+    "damage": 1,
+    "level": 1,
+    "gold": 15
+  },
   "imp": {
     "name": "Imp",
-    "image": "Imp.png",
+    "image": "Imp",
     "health": 25,
     "damage": 3,
     "level": 1,
@@ -25,7 +33,7 @@
   },
   "goblin": {
     "name": "Goblin",
-    "image": "Goblin.png",
+    "image": "Goblin",
     "health": 25,
     "damage": 2,
     "level": 1,

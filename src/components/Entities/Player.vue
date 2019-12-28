@@ -10,7 +10,7 @@ export default {
   computed: {
     image: function () {
       let heroClass = this.$store.getters.getPlayer.class
-      return require(`@/assets/heroes/${heroClass}.png`)
+      return require(`@/assets/heroes/${heroClass}.gif`)
     }
   },
   created () {
