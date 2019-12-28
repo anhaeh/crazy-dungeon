@@ -13,7 +13,8 @@ const store = new Vuex.Store({
     entities: null,
     preview: null,
     monsterSelected: null,
-    showInventory: false
+    showInventory: false,
+    questLog: []
   },
   getters: {
     getMonsters: state => {
@@ -66,6 +67,9 @@ const store = new Vuex.Store({
     },
     getShowInventory: state => {
       return state.showInventory
+    },
+    getQuestLog: state => {
+      return state.questLog
     }
   },
   mutations: {
@@ -112,6 +116,9 @@ const store = new Vuex.Store({
     setShowInventory(state) {
       state.showInventory = !state.showInventory
     },
+    pushLog(state, msg) {
+      state.questLog.push(msg)
+    },
     initializePlayer(state, heroClass) {
       state.player = {
         class: heroClass,
@@ -146,6 +153,7 @@ const store = new Vuex.Store({
       state.portalPosition = data.portal
       state.theme = data.theme
       state.room += 1
+      state.questLog = ['Begin room']
     },
     initGame({ commit }) {
       commit('initializePlayer', 'necromancer')
@@ -162,6 +170,7 @@ const store = new Vuex.Store({
     attack({state, commit}) {
       let monstersDamage = Object.assign({}, state.entities.monstersDamage)
       monstersDamage[state.monsterSelected.cellId] += state.player.attack
+      state.questLog.push(`Player deals ${state.player.attack} to ${state.monsterSelected.monster.name}`)
       commit('setMonstersDamage', monstersDamage)
       if (monstersDamage[state.monsterSelected.cellId] >= state.monsterSelected.monster.health) {
         /* if kill monster*/
@@ -171,10 +180,13 @@ const store = new Vuex.Store({
         delete monsters[state.monsterSelected.cellId]
         commit('setMonsters', monsters)
         commit('setDefeatMonster', state.monsterSelected.monster.gold)
+        state.questLog.push(`${state.monsterSelected.monster.name} destroyed`)
         if (state.player.defeatMonsters === state.player.nextLevelMonsters) {
           commit('levelUp')
+          state.questLog.push(`Player level up`)
         }
       } else {
+        state.questLog.push(`${state.monsterSelected.monster.name} deals ${state.monsterSelected.monster.damage} damage`)
         commit('setPlayerDamage', state.monsterSelected.monster.damage)
       }
 

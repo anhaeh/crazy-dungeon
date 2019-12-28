@@ -1,14 +1,7 @@
 <template>
   <div class="dungeonUI">
     <div class="dungeonUI__content">
-      <div class="feed">
-        Sandro attacks. <br>
-        10 damage, +5 electric<br>
-        Chief Gobblin counter. <br>
-        5 damage, burning<br>
-        Sandro cast death touch<br>
-        50 damage, +5 dark, +10 poison
-      </div>
+      <log-quest></log-quest>
       <div class="skills">
         <div class="skill__slot --1"></div>
         <div class="skill__slot --2"></div>
@@ -30,11 +23,14 @@
 
 <script>
 import Inventory from './Inventory'
+import LogQuest from './LogQuest'
+
 
 export default {
   name: "DungeonUI",
   components: {
-    Inventory
+    Inventory,
+    LogQuest
   },
   methods: {
     move: function (key) {
@@ -71,17 +67,6 @@ export default {
   background-repeat: no-repeat
 .dungeonUIContent
   position: relative
-.feed
-  color: white
-  font-size: 14px
-  width: calc(65 * var(--pixel-unit))
-  height: calc(19 * var(--pixel-unit))
-  position: absolute
-  line-height: 11.5px
-  padding-left: 25px
-  box-sizing: border-box
-  left: calc(28 * var(--pixel-unit))
-  top: calc(6 * var(--pixel-unit))
 .control
   .bottom
     position: fixed

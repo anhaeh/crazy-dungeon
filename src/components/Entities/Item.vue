@@ -22,6 +22,7 @@ export default {
           delete items[this.cellId]
           this.$store.commit('setItems', items)
           this.$store.commit('addItemToInventory', this.item)
+          this.$store.commit('pushLog', 'Player picked ' + this.item.name)
         }
       }
     }
