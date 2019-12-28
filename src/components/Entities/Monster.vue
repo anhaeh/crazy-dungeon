@@ -32,8 +32,6 @@ export default {
     },
     isLive: {
       handler () {
-        let audio = new Audio(require('@/sounds/kill_monster.wav'))
-        audio.play()
         setTimeout(() => {
           let monsters = Object.assign({}, this.$store.getters.getMonsters)
           delete monsters[this.cellId]

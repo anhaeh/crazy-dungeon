@@ -18,8 +18,6 @@ export default {
       immediate: true,
       handler (value) {
         if (value) {
-          let audio = new Audio(require('@/sounds/get_item.wav'))
-          audio.play()
           let items = Object.assign({}, this.$store.getters.getItems)
           delete items[this.cellId]
           this.$store.commit('setItems', items)
