@@ -93,7 +93,7 @@ export default {
     },
     preview: function () {
       let payload = null
-      if (this.hasMonster) {
+      if (this.hasMonster && this.$refs[this.hasMonster + this.id].isLive) {
         payload = {
           entity: 'monsterPreview',
           monster: this.$refs[this.hasMonster + this.id].monster,

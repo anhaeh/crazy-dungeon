@@ -3,7 +3,8 @@
        @click="click"
        :class="[{ 'can-target': canTarget }, { 'is-target': isTarget }]"
   >
-    <img :src="image" alt="">
+    <img v-if="isLive" :src="image" alt="">
+    <img v-else :src="imageDeath" alt="">
     <div class="level">{{ monster.level }}</div>
     <div class="life" :style="life"></div>
     <div class="life-background"></div>
@@ -26,16 +27,27 @@ export default {
       handler () {
         this.monster = MonstersData[this.name]
       }
+    },
+    isLive: {
+      handler () {
+        this.timeout = setTimeout(() => {
+          let monsters = Object.assign({}, this.$store.getters.getMonsters)
+          delete monsters[this.cellId]
+          this.$store.commit('setMonsters', monsters)
+        }, 1000)
+
+      }
     }
   },
   data () {
     return {
       monster: null,
+      timeout: null
     }
   },
   methods: {
     click: function() {
-      if (this.canTarget) {
+      if (this.canTarget && this.isLive) {
         if (this.isTarget) {
           this.$store.dispatch('attack')
         } else {
@@ -59,6 +71,9 @@ export default {
     image: function () {
       return require('@/assets/monsters/' + this.monster.image + '.gif')
     },
+    imageDeath: function () {
+      return require('@/assets/monsters/' + this.monster.image + '_death.gif')
+    },
     canTarget: function () {
       return this.getPlayerRange.indexOf(this.cellId) !== -1
     },
@@ -70,10 +85,19 @@ export default {
     },
     life: function() {
       let percent = ((this.monster.health - this.damage) * 100) / this.monster.health
+      if (percent < 0) {
+        percent = 0
+      }
       return `width: ${percent}%`
+    },
+    isLive: function () {
+      return this.monster.health > this.damage
     }
+  },
+  beforeDestroy() {
+    clearTimeout(this.timeout)
   }
-};
+}
 </script>
 
 <style scoped lang="sass">

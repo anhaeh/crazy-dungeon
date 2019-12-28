@@ -176,11 +176,9 @@ const store = new Vuex.Store({
         /* if kill monster*/
         event.stopPropagation()
         commit('setPreview', null)
-        let monsters = Object.assign({}, state.entities.monsters)
-        delete monsters[state.monsterSelected.cellId]
-        commit('setMonsters', monsters)
         commit('setDefeatMonster', state.monsterSelected.monster.gold)
         state.questLog.push(`${state.monsterSelected.monster.name} destroyed`)
+        state.questLog.push(`Monster drop ${state.monsterSelected.monster.gold} gold`)
         if (state.player.defeatMonsters === state.player.nextLevelMonsters) {
           commit('levelUp')
           state.questLog.push(`Player level up`)
