@@ -114,8 +114,6 @@ export default {
     width: var(--tile-cell)
     height: var(--tile-cell)
     position: relative
-    &.can-move
-      cursor: pointer
     img
       position: absolute
       width: 100%
