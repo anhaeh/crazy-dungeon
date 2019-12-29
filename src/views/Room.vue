@@ -28,7 +28,7 @@ export default {
       return this.$store.getters.getPlayer.isDead
     }
   }
-};
+}
 </script>
 
 <style scoped lang="sass">
