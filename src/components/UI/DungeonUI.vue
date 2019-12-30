@@ -1,6 +1,12 @@
 <template>
   <div class="dungeonUI">
     <div class="dungeonUI__content">
+      <div class="player__gold">
+        <img :src="imgGold" title="Gold">
+        <div class="text">
+          {{ $store.getters.getPlayer.gold }}
+        </div>
+      </div>
       <log-quest></log-quest>
       <div class="skills">
         <div class="skill__slot --slot1"></div>
@@ -31,6 +37,11 @@ export default {
   components: {
     Inventory,
     LogQuest
+  },
+  computed: {
+    imgGold: function () {
+      return require(`@/assets/ui/Gold.png`)
+    }
   },
   methods: {
     move: function (key) {
@@ -89,6 +100,19 @@ export default {
       left: calc(43 * var(--pixel-unit))
     &.--slot4, &.--slot5, &.--slot6
       bottom: calc(19 * var(--pixel-unit))
+.player__gold
+  position: absolute
+  bottom: calc(3.48 * var(--tile-cell))
+  left: calc(1.5 * var(--tile-cell))
+  display: flex
+  align-items: center
+  z-index: 0
+  img
+    margin: 0 2rem 0 1rem
+  .text
+    color: gold
+    font-size: 1.25rem
+    line-height: 1rem
 .control
   .bottom
     position: fixed

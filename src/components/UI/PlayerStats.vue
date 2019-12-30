@@ -2,19 +2,14 @@
   <div class="playerStats">
     <img class="player-image" :src="imageHero" @click="showInventory">
     <div class="playerStats__lvl">{{ this.$store.getters.getPlayer.level }}</div>
-    <status-bar 
+    <status-bar
       :actual="actualHealth"
       :total="player.initialHealth + levelDiff"
     ></status-bar>
     <div class="name">
       {{ player.name }}
     </div>
-    <div class="playerStats__gold">    
-      <img :src="imgGold" title="Gold">
-      <div class="text">
-        {{ $store.getters.getPlayer.gold }}
-      </div>
-    </div>
+
     <div class="row base-stats">
       <img :src="imgAttack" title="Attack">
       <div class="text">
@@ -60,9 +55,6 @@ export default {
     },
     imgAttack: function () {
       return require(`@/assets/ui/Attack.png`)
-    },
-    imgGold: function () {
-      return require(`@/assets/ui/Gold.png`)
     },
     imgLevel: function () {
       return require(`@/assets/ui/Level.png`)
@@ -125,17 +117,4 @@ export default {
     padding-right: 5px
 .text
   padding: 5px 5px 0 0
-.playerStats__gold
-  position: fixed
-  bottom: calc(3.5 * var(--tile-cell))
-  z-index: 1
-  left: calc(1.5 * var(--tile-cell))
-  display: flex
-  align-items: center
-  img
-    margin: 0 2rem 0 1rem
-  .text
-    color: gold
-    font-size: 1.35rem
-    line-height: 1rem
 </style>

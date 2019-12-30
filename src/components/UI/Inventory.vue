@@ -29,6 +29,7 @@ export default {
 
 <style scoped lang="sass">
 .inventory
+  z-index: 1
   position: fixed
   height: 100vh
   width: 100vh
