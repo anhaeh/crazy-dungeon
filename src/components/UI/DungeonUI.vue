@@ -119,23 +119,23 @@ export default {
     height: 28px
     bottom: calc(var(--tile-cell) * 0.1)
     width: calc(var(--tile-cell) * 1.5)
-    right: calc(var(--tile-cell) / 1.5)
+    right: calc(var(--tile-cell) / 1.1)
   .top
     position: fixed
     height: 28px
     bottom: calc(var(--tile-cell) * 1.6)
     width: calc(var(--tile-cell) * 1.5)
-    right: calc(var(--tile-cell) / 1.5)
+    right: calc(var(--tile-cell) / 1.1)
   .right
     position: fixed
     height: calc(var(--tile-cell) * 1.5)
     bottom: calc(var(--tile-cell) / 2.5)
     width: 28px
-    right: calc(var(--tile-cell) * 0.2)
+    right: calc(var(--tile-cell) * 0.3)
   .left
     position: fixed
     height: calc(var(--tile-cell) * 1.5)
     bottom: calc(var(--tile-cell) / 2.5)
     width: 28px
-    right: calc(var(--tile-cell) * 2.2)
+    right: calc(var(--tile-cell) * 2.4)
 </style>
