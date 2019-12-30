@@ -3,12 +3,12 @@
     <div class="dungeonUI__content">
       <log-quest></log-quest>
       <div class="skills">
-        <div class="skill__slot --1"></div>
-        <div class="skill__slot --2"></div>
-        <div class="skill__slot --3"></div>
-        <div class="skill__slot --4"></div>
-        <div class="skill__slot --5"></div>
-        <div class="skill__slot --6"></div>
+        <div class="skill__slot --slot1"></div>
+        <div class="skill__slot --slot2"></div>
+        <div class="skill__slot --slot3"></div>
+        <div class="skill__slot --slot4"></div>
+        <div class="skill__slot --slot5"></div>
+        <div class="skill__slot --slot6"></div>
       </div>
       <div class="control">
         <div class="top" @click="move('top')"></div>
@@ -67,6 +67,28 @@ export default {
   background-repeat: no-repeat
 .dungeonUIContent
   position: relative
+.skills
+  position: fixed
+  opacity: 0.4
+  // background-color: red
+  height: calc(2 * var(--tile-cell))
+  width: calc(3.5 * var(--tile-cell))
+  bottom: calc(1 * var(--pixel-unit))
+  left: calc(3 * var(--pixel-unit))
+  .skill__slot
+    position: fixed
+    opacity: 0.4
+    background-color: blue
+    height: calc(0.875 * var(--tile-cell))
+    width: calc(0.875 * var(--tile-cell))
+    bottom: calc(3 * var(--pixel-unit))
+    left: calc(5 * var(--pixel-unit))
+    &.--slot2, &.--slot5
+      left: calc(24 * var(--pixel-unit))
+    &.--slot3, &.--slot6
+      left: calc(43 * var(--pixel-unit))
+    &.--slot4, &.--slot5, &.--slot6
+      bottom: calc(19 * var(--pixel-unit))
 .control
   .bottom
     position: fixed

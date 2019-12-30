@@ -2,20 +2,23 @@
   <div class="playerStats">
     <img class="player-image" :src="imageHero" @click="showInventory">
     <div class="playerStats__lvl">{{ this.$store.getters.getPlayer.level }}</div>
-    <status-bar :actual="actualHealth"
-                :total="player.initialHealth + levelDiff"
+    <status-bar 
+      :actual="actualHealth"
+      :total="player.initialHealth + levelDiff"
     ></status-bar>
     <div class="name">
       {{ player.name }}
+    </div>
+    <div class="playerStats__gold">    
+      <img :src="imgGold" title="Gold">
+      <div class="text">
+        {{ $store.getters.getPlayer.gold }}
+      </div>
     </div>
     <div class="row base-stats">
       <img :src="imgAttack" title="Attack">
       <div class="text">
         {{ $store.getters.getPlayer.attack }}
-      </div>
-      <img :src="imgGold" title="Gold">
-      <div class="text">
-        {{ $store.getters.getPlayer.gold }}
       </div>
       <img :src="imgLevel" title="Monsters defeat">
       <div class="text">
@@ -79,14 +82,14 @@ export default {
   mounted() {
     this.$store.commit('setPlayerAttack', this.player.attack)
   }
-}
+};
 </script>
 
 <style scoped lang="sass">
 .playerStats
   position: relative
   height: calc(1.5 * var(--tile-cell))
-  img
+  .player-image
     position: absolute
     height: calc(1.5 * var(--tile-cell))
     width: calc(1.5 * var(--tile-cell))
@@ -122,4 +125,17 @@ export default {
     padding-right: 5px
 .text
   padding: 5px 5px 0 0
+.playerStats__gold
+  position: fixed
+  bottom: calc(3.5 * var(--tile-cell))
+  z-index: 1
+  left: calc(1.5 * var(--tile-cell))
+  display: flex
+  align-items: center
+  img
+    margin: 0 2rem 0 1rem
+  .text
+    color: gold
+    font-size: 1.35rem
+    line-height: 1rem
 </style>

@@ -124,7 +124,7 @@ export default {
     bottom: 4px
     left: 0
     height: 3px
-    background: rgb(204, 0, 0)
+    background: rgb(150, 0, 0)
     z-index: 2
     position: absolute
     width: 100%

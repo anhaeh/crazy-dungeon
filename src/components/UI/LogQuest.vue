@@ -30,10 +30,10 @@ export default {
   },
   computed: {
     messages: function () {
-      return this.cursor === 0 ? this.questLog.slice(-5) : this.questLog.slice(-(5 + this.cursor), -(this.cursor))
+      return this.cursor === 0 ? this.questLog.slice(-4) : this.questLog.slice(-(4 + this.cursor), -(this.cursor))
     },
     maxCursor: function () {
-      let index = this.cursor === 0 ? 5 : 5 + (this.cursor)
+      let index = this.cursor === 0 ? 4 : 4 + (this.cursor)
       return this.questLog[index] === undefined
     },
     questLog: function () {
@@ -52,12 +52,13 @@ export default {
       }
     }
   }
-}
+};
 </script>
 
 <style scoped lang="sass">
 .feed
   color: white
+  opacity: 0.5
   font-size: 14px
   width: calc(65 * var(--pixel-unit))
   height: calc(19 * var(--pixel-unit))
@@ -65,8 +66,8 @@ export default {
   line-height: 11.5px
   padding-left: 15px
   box-sizing: border-box
-  left: calc(28 * var(--pixel-unit))
-  top: calc(6 * var(--pixel-unit))
+  left: calc(24 * var(--pixel-unit))
+  top: calc(12 * var(--pixel-unit))
 .message
   display: flex
 .scroll-up
