@@ -64,11 +64,8 @@ export default {
   line-height: calc(3.2 * var(--pixel-unit))
   padding: var(--pixel-unit) calc(4 * var(--pixel-unit))
   box-sizing: border-box
-  position: fixed
   width: calc(4.5 * var(--tile-cell))
   height: var(--tile-cell)
-  left: calc(1.5 * var(--tile-cell))
-  bottom: calc(2.5 * var(--tile-cell))
 .message
   display: flex
 .scroll-up
