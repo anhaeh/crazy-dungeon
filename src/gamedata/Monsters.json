@@ -3,32 +3,28 @@
     "name": "Gorgon",
     "image": "Gorgon",
     "health": 40,
-    "damage": 5,
-    "level": 3,
-    "gold": 20
+    "attack": 5,
+    "gold": 5
   },
   "golem": {
     "name": "Golem",
     "image": "Golem",
     "health": 30,
-    "damage": 4,
-    "level": 2,
-    "gold": 15
+    "attack": 4,
+    "gold": 4
   },
   "imp": {
     "name": "Imp",
     "image": "Imp",
     "health": 25,
-    "damage": 3,
-    "level": 1,
-    "gold": 10
+    "attack": 3,
+    "gold": 3
   },
   "goblin": {
     "name": "Goblin",
     "image": "Goblin",
     "health": 25,
-    "damage": 2,
-    "level": 1,
-    "gold": 8
+    "attack": 2,
+    "gold": 2
   }
 }

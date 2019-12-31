@@ -3,8 +3,8 @@
     <div class="monsterPreview__portrait">
       <img :src="image">
     </div>
-    <status-bar :actual="entity.monster.health - entity.damage"
-                :total="entity.monster.health"
+    <status-bar :actual="entity.totalLife - entity.monster.damage"
+                :total="entity.totalLife"
                 modifier="--monster"
     >
     </status-bar>
@@ -26,7 +26,7 @@ export default {
   name: "MonsterPreview",
   computed: {
     image: function () {
-      return require('@/assets/monsters/portraits/' + this.entity.monster.image + '.png')
+      return require('@/assets/monsters/portraits/' + this.entity.image + '.png')
     },
     imageAttack: function () {
       return require('@/assets/ui/Attack.png')

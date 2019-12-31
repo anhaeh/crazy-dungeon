@@ -41,7 +41,11 @@ export default {
     }
   },
   computed: {
-    ...mapGetters(['getPlayerPosition', "getPortalPosition"])
+    ...mapGetters([
+        'getPlayerPosition',
+        'getPortalPosition',
+        'getPlayer'
+    ])
   },
   methods: {
     createMaze: function (width, height, iterations) {
@@ -167,6 +171,10 @@ export default {
 
       /* Set monsters */
       let monstersList = ['goblin', 'golem', 'gorgon', 'imp']
+      let possibleLevels = []
+      for (let i = this.getPlayer.level; i <= this.getPlayer.level+2; i++) {
+        possibleLevels.push(i)
+      }
       for (let i = 0; i < height; i++) {
         let position = free[Math.floor(Math.random() * free.length)]
         /* remove the free */
@@ -174,8 +182,9 @@ export default {
         free.splice(index, 1)
         json.entities.monsters.push({
           cellId: position,
-          monster: monstersList[Math.floor(Math.random() * monstersList.length)],
+          name: monstersList[Math.floor(Math.random() * monstersList.length)],
           isLive: true,
+          level: possibleLevels[Math.floor(Math.random() * possibleLevels.length)],
           damage: 0
         })
       }

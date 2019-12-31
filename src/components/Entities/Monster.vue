@@ -5,7 +5,7 @@
   >
     <img :src="image" alt="">
     <div v-if="isLive">
-      <div class="level">{{ monster.level }}</div>
+      <div class="level">{{ getMonster.level }}</div>
       <div class="life" :style="life"></div>
       <div class="life-background"></div>
     </div>
@@ -51,7 +51,9 @@ export default {
         } else {
           this.$store.commit('setMonsterSelected', {
             cellId: this.cellId,
-            monster: this.monster
+            monster: this.monster,
+            totalLife: this.totalLife,
+            level: this.getMonster.level
           })
         }
       } else if (!this.isLive) {
@@ -82,8 +84,11 @@ export default {
     isTarget: function () {
       return this.getMonsterSelected && this.getMonsterSelected.cellId === this.cellId
     },
+    totalLife: function () {
+      return this.monster.health + (10 * + this.getMonster.level)
+    },
     life: function() {
-      let percent = ((this.monster.health - this.getMonster.damage) * 100) / this.monster.health
+      let percent = ((this.totalLife - this.getMonster.damage) * 100) / this.totalLife
       if (percent < 0) {
         percent = 0
       }
@@ -93,7 +98,7 @@ export default {
       return this.getMonsters.find(x => x.cellId === this.cellId)
     },
     isLive: function () {
-      return this.monster.health > this.getMonster.damage
+      return this.totalLife > this.getMonster.damage
     }
   }
 }

@@ -113,8 +113,11 @@ const store = new Vuex.Store({
       state.preview = preview
     },
     setDefeatMonster(state) {
+      let amountGold = state.monsterSelected.monster.gold + state.monsterSelected.level
       state.player.defeatMonsters += 1
-      state.player.gold += state.monsterSelected.monster.gold
+      state.player.gold += amountGold
+      state.questLog.push(`Monster drop ${amountGold} gold`)
+
     },
     setPlayerDead(state) {
       state.player.isDead = true
@@ -193,20 +196,20 @@ const store = new Vuex.Store({
       let monsterDefender = state.entities.monsters.find(x => x.cellId === state.monsterSelected.cellId)
       monsterDefender.damage += getters.getPlayerAttack
       state.questLog.push(`Player deals ${getters.getPlayerAttack} to ${state.monsterSelected.monster.name}`)
-      if (monsterDefender.damage >= state.monsterSelected.monster.health) {
+      if (monsterDefender.damage >= state.monsterSelected.totalLife) {
         /* if kill monster*/
         event.stopPropagation()
         commit('setPreview', null)
         commit('setDefeatMonster')
         state.questLog.push(`${state.monsterSelected.monster.name} destroyed`)
-        state.questLog.push(`Monster drop ${state.monsterSelected.monster.gold} gold`)
         if (state.player.defeatMonsters === state.player.nextLevelMonsters) {
           commit('levelUp')
           state.questLog.push(`Player level up`)
         }
       } else {
-        state.questLog.push(`${state.monsterSelected.monster.name} deals ${state.monsterSelected.monster.damage} damage`)
-        commit('setPlayerDamage', state.monsterSelected.monster.damage)
+        let monsterAttack = state.monsterSelected.monster.attack + monsterDefender.level
+        state.questLog.push(`${state.monsterSelected.monster.name} deals ${monsterAttack} damage`)
+        commit('setPlayerDamage', monsterAttack)
       }
 
     }

@@ -5,9 +5,9 @@
        @mouseover="preview">
     <img :src="image">
     <Monster v-if="hasMonster"
-             :name="getMonster.monster"
+             :name="getMonster.name"
              :key="'monster-' + id"
-             :ref="getMonster.monster + id"
+             :ref="getMonster.name + id"
              :cell-id="id"
     >
     </Monster>
@@ -102,8 +102,9 @@ export default {
       if (this.hasMonster) {
         payload = {
           entity: 'monsterPreview',
-          monster: this.$refs[this.getMonster.monster + this.id].monster,
-          damage: this.$refs[this.getMonster.monster + this.id].damage,
+          monster: this.getMonster,
+          image: this.$refs[this.getMonster.name + this.id].monster.image,
+          totalLife: this.$refs[this.getMonster.name + this.id].totalLife,
           cellId: this.id
         }
       } else if (this.hasItem) {
