@@ -23,7 +23,7 @@ export default {
     map: function () {
       return this.$store.getters.getMap
     },
-    getRows: function () {
+    orderedRows: function () {
       let cells = this.$store.getters.getPlayerViewport
       let rows = []
       cells.forEach((x) => {
@@ -34,7 +34,7 @@ export default {
       return rows.sort((a, b) => a - b)
     },
     orderedMap: function () {
-      return this.getRows.map(x =>  {
+      return this.orderedRows.map(x =>  {
         return {
           id: x,
           cells: this.getCells(x)

@@ -36,6 +36,14 @@ const store = new Vuex.Store({
     getPlayer: state => {
       return state.player
     },
+    getPlayerAttack: state => {
+      let itemsBuffAttack = state.inventory.items.filter(x => x.type === 'attack')
+      let total = state.player.attack
+      itemsBuffAttack.forEach(item => {
+        total += item.counter
+      })
+      return total
+    },
     getPlayerDamage: state => {
       return state.player.damage
     },
@@ -48,7 +56,7 @@ const store = new Vuex.Store({
     getPlayerViewport: state => {
       return state.player.viewport.sort()
     },
-    getPlayerAttack: state => {
+    getPlayerBaseAttack: state => {
       return state.player.attack
     },
     getInventory: state => {
@@ -95,7 +103,7 @@ const store = new Vuex.Store({
     setPlayerViewport(state, playerViewport) {
       state.player.viewport = playerViewport
     },
-    setPlayerAttack(state, playerAttack) {
+    setPlayerBaseAttack(state, playerAttack) {
       state.player.attack = playerAttack
     },
     setPlayerDamage(state, damage) {
@@ -167,10 +175,10 @@ const store = new Vuex.Store({
       newPlayer.nextLevelMonsters = 5 * newPlayer.level
       state.player = newPlayer
     },
-    attack({state, commit}) {
+    attack({state, commit, getters}) {
       let monstersDamage = Object.assign({}, state.entities.monstersDamage)
-      monstersDamage[state.monsterSelected.cellId] += state.player.attack
-      state.questLog.push(`Player deals ${state.player.attack} to ${state.monsterSelected.monster.name}`)
+      monstersDamage[state.monsterSelected.cellId] += getters.getPlayerAttack
+      state.questLog.push(`Player deals ${getters.getPlayerAttack} to ${state.monsterSelected.monster.name}`)
       commit('setMonstersDamage', monstersDamage)
       if (monstersDamage[state.monsterSelected.cellId] >= state.monsterSelected.monster.health) {
         /* if kill monster*/

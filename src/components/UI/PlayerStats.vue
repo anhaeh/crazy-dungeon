@@ -1,7 +1,7 @@
 <template>
   <div class="playerStats">
     <img class="player-image" :src="imageHero" @click="showInventory">
-    <div class="playerStats__lvl">{{ this.$store.getters.getPlayer.level }}</div>
+    <div class="playerStats__lvl">{{ getPlayer.level }}</div>
     <status-bar
       :actual="actualHealth"
       :total="player.initialHealth + levelDiff"
@@ -9,24 +9,11 @@
     <div class="name">
       {{ player.name }}
     </div>
-
-    <div class="row base-stats">
-      <img :src="imgAttack" title="Attack">
-      <div class="text">
-        {{ $store.getters.getPlayer.attack }}
-      </div>
-      <img :src="imgLevel" title="Monsters defeat">
-      <div class="text">
-        {{ $store.getters.getPlayer.defeatMonsters }}/{{ $store.getters.getPlayer.nextLevelMonsters }}
-      </div>
-
-    </div>
-    <div class="row">
-    </div>
   </div>
 </template>
 
 <script>
+import { mapGetters } from 'vuex'
 import statusBar from './StatusBar'
 import heroes from '@/gamedata/Heroes.json'
 
@@ -45,25 +32,26 @@ export default {
   },
   data () {
     return {
-      player: heroes[this.$store.getters.getPlayer.class]
+      player: {}
     }
   },
   name: "PlayerStats",
   computed: {
+    ...mapGetters([
+      'getPlayer',
+      'getPlayerAttack'
+    ]),
     imageHero: function () {
       return require(`@/assets/heroes/portraits/${this.player.image}`)
     },
     imgAttack: function () {
       return require(`@/assets/ui/Attack.png`)
     },
-    imgLevel: function () {
-      return require(`@/assets/ui/Level.png`)
-    },
     actualHealth: function () {
-      return (this.player.initialHealth  + this.levelDiff) - this.$store.getters.getPlayer.damage
+      return (this.player.initialHealth  + this.levelDiff) - this.getPlayer.damage
     },
     levelDiff: function () {
-      return this.$store.getters.getPlayer.level * 15
+      return this.getPlayer.level * 15
     }
   },
   methods: {
@@ -71,8 +59,9 @@ export default {
       this.$store.commit('setShowInventory')
     }
   },
-  mounted() {
-    this.$store.commit('setPlayerAttack', this.player.attack)
+  created() {
+    this.player = heroes[this.getPlayer.class]
+    this.$store.commit('setPlayerBaseAttack', this.player.attack)
   }
 };
 </script>
@@ -109,12 +98,4 @@ export default {
   font-size: 20px
   font-weight: bold
   text-shadow: 1px 2px 0px black
-.base-stats
-  display: none
-  img
-    height: 30px
-    width: 30px
-    padding-right: 5px
-.text
-  padding: 5px 5px 0 0
 </style>
