@@ -1,5 +1,5 @@
 <template>
-  <div id="quest-log">
+  <div id="quest-log" class="questLog">
     <div class="feed">
       <span v-for="(log, index) in messages"
             :key="'log' + index"
@@ -52,22 +52,23 @@ export default {
       }
     }
   }
-}
+};
 </script>
 
 <style scoped lang="sass">
 .feed
   color: white
   opacity: 0.5
-  font-size: 14px
-  width: calc(65 * var(--pixel-unit))
-  height: calc(19 * var(--pixel-unit))
-  position: absolute
-  line-height: 11.5px
-  padding-left: 15px
+  font-size: calc(4 * var(--pixel-unit))
+  background-color: rgba(255, 0, 255, 0.3)
+  line-height: calc(3.2 * var(--pixel-unit))
+  padding: var(--pixel-unit) calc(4 * var(--pixel-unit))
   box-sizing: border-box
-  left: calc(24 * var(--pixel-unit))
-  top: calc(12 * var(--pixel-unit))
+  position: fixed
+  width: calc(4.5 * var(--tile-cell))
+  height: var(--tile-cell)
+  left: calc(1.5 * var(--tile-cell))
+  bottom: calc(2.5 * var(--tile-cell))
 .message
   display: flex
 .scroll-up
