@@ -117,7 +117,6 @@ const store = new Vuex.Store({
       state.player.defeatMonsters += 1
       state.player.gold += amountGold
       state.questLog.push(`Monster drop ${amountGold} gold`)
-
     },
     setPlayerDead(state) {
       state.player.isDead = true

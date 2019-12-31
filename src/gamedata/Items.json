@@ -4,7 +4,7 @@
     "image": "Item__00.png",
     "type": "attack",
     "counter": 1,
-    "description": "+ 1 attack"
+    "description": "This old sword give you + 1 attack"
   },
   "potion": {
     "name": "Potion",
@@ -18,13 +18,13 @@
     "image": "Item__57.png",
     "type": "life",
     "counter": 10,
-    "description": "+ 10 health"
+    "description": "This basic armor give you + 10 health"
   },
   "ring1": {
     "name": "Gold ring",
     "image": "Item__43.png",
     "type": "gold",
-    "description": "+ 30% gold",
-    "counter": 1.3
+    "description": "This ring give you + 10% of gold from monsters",
+    "counter": 1.1
   }
 }
