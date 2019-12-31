@@ -1,11 +1,11 @@
 <template>
   <div class="map" v-if="map">
-    <div class="row" v-for="(row, index) in getRows" :key="'row' + row">
+    <div class="row" v-for="row in orderedMap" :key="'row' + row.id">
       <Cell
-          v-for="cellKey in getCells(row)"
-          :key="index + row + cellKey"
-          :id="row + cellKey"
-          :type="getCell(row, cellKey)"
+          v-for="cellKey in row.cells"
+          :key="row.id + cellKey"
+          :id="row.id + cellKey"
+          :type="getCell(row.id, cellKey)"
       ></Cell>
     </div>
   </div>
@@ -15,7 +15,7 @@
 import Cell from "./Cell"
 
 export default {
-  name: "App",
+  name: "Map",
   components: {
     Cell
   },
@@ -33,6 +33,14 @@ export default {
       })
       return rows.sort((a, b) => a - b)
     },
+    orderedMap: function () {
+      return this.getRows.map(x =>  {
+        return {
+          id: x,
+          cells: this.getCells(x)
+        }
+      })
+    }
   },
   methods: {
     getCells: function (row) {
