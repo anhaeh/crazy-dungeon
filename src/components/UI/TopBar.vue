@@ -35,7 +35,10 @@ export default {
 
 <style scoped lang="sass">
 .topBar
-  background: transparent
+  image-rendering: pixelated
+  background-image: url("../../assets/ui/dungeonUI__background.png")
+  background-size: cover
+  background-position: top left
   width: 100%
   height: calc(1.5 * var(--tile-cell))
   position: fixed

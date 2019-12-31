@@ -217,6 +217,4 @@ export default {
   bottom: calc(var(--tile-cell) / 2.5)
   width: 28px
   right: calc(var(--tile-cell) * 2.4)
-.dungeonUI__contentBottom
-  background: black
 </style>

@@ -71,7 +71,10 @@ export default {
   position: fixed
   height: calc(4px * var(--tile-cell))
   width: 100%
-  background-color: black
+  image-rendering: pixelated
+  background-image: url("../../assets/ui/dungeonUI__background.png")
+  background-size: 100% 100%
+  background-position: bottom left 
   top: 0
   padding: calc(2 * var(--tile-cell)) calc(.5 * var(--tile-cell)) calc(.5 * var(--tile-cell))
   box-sizing: border-box
@@ -80,7 +83,7 @@ export default {
   width: var(--tile-cell)
   background-size: cover
   image-rendering: pixelated
-  background-image: url("../../assets/ui/slot.jpg")
+  background-image: url("../../assets/ui/dungeonUI__skillSlot.png")
   &.--selected
     box-shadow: inset 0 0 0 var(--pixel-unit) yellow
   img
