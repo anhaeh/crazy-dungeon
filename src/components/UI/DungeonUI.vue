@@ -7,7 +7,6 @@
       </div>
       <div class="dungeonUI__current">
         <div class="dungeonUI__currentGold">
-          <img :src="imgGold" title="Gold">
           <div class="text">
             {{ $store.getters.getPlayer.gold }}
           </div>
@@ -102,39 +101,52 @@ export default {
   width: 100%
   height: 100%
 .dungeonUI__more
-  background-color: red
-  width: calc(1.5 * var(--tile-cell))
-  height: calc(1.5 * var(--tile-cell))
+  div
+    width: calc(1.5 * var(--tile-cell))
+    height: calc(.75 * var(--tile-cell))
+    background-image: url("../../assets/ui/dungeonUI__more.png")
+    background-size: contain
+    image-rendering: pixelated
+    &:active, &:focus
+      opacity: 0.5
+      transform: translateY(2px)
 .dungeonUI__current
   width: calc(4.5 * var(--tile-cell))
   height: calc(1.5 * var(--tile-cell))
-  background-color: yellow
 .dungeonUI__currentGold
   display: flex
   align-items: center
   z-index: 0
   height: calc(.5 * var(--tile-cell))
-  img
-    margin: 0 2rem 0 1rem
+  background-image: url("../../assets/ui/dungeonUI__currentGold.png")
+  background-size: contain
+  image-rendering: pixelated
+  background-repeat: no-repeat
   .text
-    color: gold
+    color: #c0a23b
+    padding-left: calc(1.15 * var(--tile-cell))
     font-size: 1.25rem
     line-height: 1rem
 .dungeonUI__logQuestScroll
   height: calc(1.5 * var(--tile-cell))
   width: var(--tile-cell)
-  background-color: green
+  *:active, *:focus
+    opacity: 0.5
+    transform: translateY(2px)
 .dungeonUI__logQuestScrollUp
   height: calc(.75 * var(--tile-cell))
   width: 100%
-  background-color: rgba(0,0,0,0.5)
+  background-image: url("../../assets/ui/dungeonUI__logQuestScroll.png")
+  background-size: contain
+  image-rendering: pixelated
 .dungeonUI__logQuestScrollDown
   height: calc(.75 * var(--tile-cell))
   width: 100%
-  background-color: rgba(0,0,0,0.75)
+  background-image: url("../../assets/ui/dungeonUI__logQuestScroll.png")
+  background-size: contain
+  image-rendering: pixelated
 .dungeonUI__skills
   opacity: 0.4
-  background-color: green
   height: calc(2.5 * var(--tile-cell))
   width: calc(4 * var(--tile-cell))
   display: flex
@@ -147,15 +159,19 @@ export default {
   height: var(--tile-cell)
   width: var(--tile-cell)
   opacity: 1
-  background-color: blue
+  background-image: url("../../assets/ui/slot.jpg")
+  background-size: contain
+  image-rendering: pixelated
 .dungeonUI__controls
-  background-color: red
-  opacity: 0.5
+  opacity: 1
   position: absolute
   bottom: 0
   right: 0
   height: calc(var(--tile-cell) * 2.5)
   width: calc(var(--tile-cell) * 3)
+  background-image: url("../../assets/ui/dungeonUI__controls.png")
+  background-size: contain
+  image-rendering: pixelated
 .dungeonUI__controlsBottom
   position: fixed
   height: 28px

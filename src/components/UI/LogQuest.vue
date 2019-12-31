@@ -64,11 +64,15 @@ export default {
 </script>
 
 <style scoped lang="sass">
+.questLog
+  background-image: url("../../assets/ui/questLog.png")
+  background-size: 100%
+  image-rendering: pixelated
+  background-repeat: no-repeat
 .feed
   color: white
   opacity: 0.5
   font-size: calc(4 * var(--pixel-unit))
-  background-color: rgba(255, 0, 255, 0.3)
   line-height: calc(3.2 * var(--pixel-unit))
   padding: var(--pixel-unit) calc(4 * var(--pixel-unit))
   box-sizing: border-box
