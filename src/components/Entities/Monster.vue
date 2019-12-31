@@ -3,8 +3,7 @@
        @click="click"
        :class="[{ 'can-target': canTarget }, { 'is-target': isTarget && isLive}]"
   >
-    <img v-if="isLive" :src="image" alt="">
-    <img v-else :src="imageDeath" alt="">
+    <img :src="image" alt="">
     <div v-if="isLive">
       <div class="level">{{ monster.level }}</div>
       <div class="life" :style="life"></div>
@@ -32,17 +31,16 @@ export default {
     },
     isLive: {
       handler () {
-        setTimeout(() => {
-          let monsters = Object.assign({}, this.$store.getters.getMonsters)
-          delete monsters[this.cellId]
-          this.$store.commit('setMonsters', monsters)
+        this.timeout = setTimeout(() => {
+          this.destroy()
         }, 1000)
       }
     }
   },
   data () {
     return {
-      monster: null
+      monster: null,
+      timeout: null
     }
   },
   methods: {
@@ -56,23 +54,30 @@ export default {
             monster: this.monster
           })
         }
+      } else if (!this.isLive) {
+        clearTimeout(this.timeout)
+        this.destroy()
       } else {
         this.$store.commit('setMonsterSelected', null)
       }
+    },
+    destroy: function () {
+      let monsters = Object.assign({}, this.getMonsters)
+      delete monsters[this.cellId]
+      this.$store.commit('setMonsters', monsters)
     }
   },
   computed: {
     ...mapGetters([
+      'getMonsters',
       'getMonsterSelected',
       'getPlayerRange',
       'getRoom',
       'getMonstersDamage'
     ]),
     image: function () {
-      return require('@/assets/monsters/' + this.monster.image + '.gif')
-    },
-    imageDeath: function () {
-      return require('@/assets/monsters/' + this.monster.image + '_death.gif')
+      let imageExtension = this.isLive ? '.gif' :'_death.gif'
+      return require('@/assets/monsters/' + this.monster.image + imageExtension)
     },
     canTarget: function () {
       return this.getPlayerRange.indexOf(this.cellId) !== -1

@@ -34,6 +34,7 @@ export default {
     justify-content: center
     font-size: 30px
   .btn-new-game
+    cursor: pointer
     position: relative
     display: flex
     justify-content: center
