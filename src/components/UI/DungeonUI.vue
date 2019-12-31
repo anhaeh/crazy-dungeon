@@ -2,7 +2,7 @@
   <div class="dungeonUI">
     <div class="dungeonUI__contentTop">
       <div class="dungeonUI__current">
-        <div class="dungeonUI__currentBars">        
+        <div class="dungeonUI__currentBars">
           <div class="dungeonUI__currentGold">
             <div class="text">
               {{ $store.getters.getPlayer.gold }}
@@ -101,7 +101,7 @@ export default {
   image-rendering: pixelated
   background-image: url("../../assets/ui/dungeonUI__background.png")
   background-size: 100% 100%
-  background-position: bottom left 
+  background-position: bottom left
   height: calc(4 * var(--tile-cell))
   min-height: calc(4 * var(--tile-cell))
   z-index: 5
@@ -198,13 +198,13 @@ export default {
   height: 28px
   bottom: calc(var(--tile-cell) * 0.1)
   width: calc(var(--tile-cell) * 1.5)
-  right: calc(var(--tile-cell) / 1.1)
+  right: calc(var(--tile-cell) / 1.4)
 .dungeonUI__controlsTop
   position: fixed
   height: 28px
-  bottom: calc(var(--tile-cell) * 1.6)
+  bottom: calc(var(--tile-cell) * 1.9)
   width: calc(var(--tile-cell) * 1.5)
-  right: calc(var(--tile-cell) / 1.1)
+  right: calc(var(--tile-cell) / 1.4)
 .dungeonUI__controlsRight
   position: fixed
   height: calc(var(--tile-cell) * 1.5)
@@ -216,5 +216,5 @@ export default {
   height: calc(var(--tile-cell) * 1.5)
   bottom: calc(var(--tile-cell) / 2.5)
   width: 28px
-  right: calc(var(--tile-cell) * 2.4)
+  right: calc(var(--tile-cell) * 2.1)
 </style>
