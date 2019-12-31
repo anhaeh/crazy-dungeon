@@ -139,8 +139,7 @@ export default {
       let free = []
       let json = {
         entities: {
-          monsters: {},
-          monstersDamage: {},
+          monsters: [],
           items: {},
         },
         map: {}
@@ -173,8 +172,12 @@ export default {
         /* remove the free */
         let index = free.indexOf(position)
         free.splice(index, 1)
-        json.entities.monsters[position] = monstersList[Math.floor(Math.random() * monstersList.length)]
-        json.entities.monstersDamage[position] = 0
+        json.entities.monsters.push({
+          cellId: position,
+          monster: monstersList[Math.floor(Math.random() * monstersList.length)],
+          isLive: true,
+          damage: 0
+        })
       }
 
       /* Set item random by level */

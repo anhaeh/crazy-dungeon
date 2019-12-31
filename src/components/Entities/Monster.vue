@@ -62,9 +62,7 @@ export default {
       }
     },
     destroy: function () {
-      let monsters = Object.assign({}, this.getMonsters)
-      delete monsters[this.cellId]
-      this.$store.commit('setMonsters', monsters)
+      this.getMonster.isLive = false
     }
   },
   computed: {
@@ -73,7 +71,6 @@ export default {
       'getMonsterSelected',
       'getPlayerRange',
       'getRoom',
-      'getMonstersDamage'
     ]),
     image: function () {
       let imageExtension = this.isLive ? '.gif' :'_death.gif'
@@ -85,18 +82,18 @@ export default {
     isTarget: function () {
       return this.getMonsterSelected && this.getMonsterSelected.cellId === this.cellId
     },
-    damage: function () {
-      return this.getMonstersDamage[this.cellId]
-    },
     life: function() {
-      let percent = ((this.monster.health - this.damage) * 100) / this.monster.health
+      let percent = ((this.monster.health - this.getMonster.damage) * 100) / this.monster.health
       if (percent < 0) {
         percent = 0
       }
       return `width: ${percent}%`
     },
+    getMonster: function () {
+      return this.getMonsters.find(x => x.cellId === this.cellId)
+    },
     isLive: function () {
-      return this.monster.health > this.damage
+      return this.monster.health > this.getMonster.damage
     }
   }
 }

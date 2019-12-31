@@ -28,9 +28,6 @@ const store = new Vuex.Store({
     getMonsterSelected: state => {
       return state.monsterSelected
     },
-    getMonstersDamage: state => {
-      return state.entities.monstersDamage
-    },
     getItems: state => {
       return state.entities.items
     },
@@ -100,9 +97,6 @@ const store = new Vuex.Store({
     setMonsters(state, monsters) {
       state.entities.monsters = monsters
     },
-    setMonstersDamage(state, monstersDamage) {
-      state.entities.monstersDamage = monstersDamage
-    },
     setItems(state, items) {
       state.entities.items = items
     },
@@ -118,9 +112,9 @@ const store = new Vuex.Store({
     setPreview(state, preview) {
       state.preview = preview
     },
-    setDefeatMonster(state, gold) {
+    setDefeatMonster(state) {
       state.player.defeatMonsters += 1
-      state.player.gold += gold
+      state.player.gold += state.monsterSelected.monster.gold
     },
     setPlayerDead(state) {
       state.player.isDead = true
@@ -196,15 +190,14 @@ const store = new Vuex.Store({
       state.player = newPlayer
     },
     attack({state, commit, getters}) {
-      let monstersDamage = Object.assign({}, state.entities.monstersDamage)
-      monstersDamage[state.monsterSelected.cellId] += getters.getPlayerAttack
+      let monsterDefender = state.entities.monsters.find(x => x.cellId === state.monsterSelected.cellId)
+      monsterDefender.damage += getters.getPlayerAttack
       state.questLog.push(`Player deals ${getters.getPlayerAttack} to ${state.monsterSelected.monster.name}`)
-      commit('setMonstersDamage', monstersDamage)
-      if (monstersDamage[state.monsterSelected.cellId] >= state.monsterSelected.monster.health) {
+      if (monsterDefender.damage >= state.monsterSelected.monster.health) {
         /* if kill monster*/
         event.stopPropagation()
         commit('setPreview', null)
-        commit('setDefeatMonster', state.monsterSelected.monster.gold)
+        commit('setDefeatMonster')
         state.questLog.push(`${state.monsterSelected.monster.name} destroyed`)
         state.questLog.push(`Monster drop ${state.monsterSelected.monster.gold} gold`)
         if (state.player.defeatMonsters === state.player.nextLevelMonsters) {

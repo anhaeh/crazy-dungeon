@@ -5,9 +5,9 @@
        @mouseover="preview">
     <img :src="image">
     <Monster v-if="hasMonster"
-             :name="hasMonster"
+             :name="getMonster.monster"
              :key="'monster-' + id"
-             :ref="hasMonster + id"
+             :ref="getMonster.monster + id"
              :cell-id="id"
     >
     </Monster>
@@ -27,6 +27,7 @@ import Terrains from '@/gamedata/Terrains.json'
 import Monster from "../Entities/Monster"
 import Player from "../Entities/Player"
 import Item from "../Entities/Item"
+import { mapGetters } from 'vuex'
 
 
 export default {
@@ -58,23 +59,31 @@ export default {
     }
   },
   computed: {
+    ...mapGetters([
+      'getMonsters',
+      'getPlayerPosition',
+      'getPlayerRange',
+      'getTheme'
+    ]),
     image: function () {
-      let image = this.tile.theme ? `${this.tile.image}_${this.$store.getters.getTheme}.png` : `${this.tile.image}.png`
+      let image = this.tile.theme ? `${this.tile.image}_${this.getTheme}.png` : `${this.tile.image}.png`
       return require('@/assets/terrains/' + image)
     },
     hasMonster: function () {
-      let monsters = this.$store.getters.getMonsters
-      return monsters[this.id] !== undefined ? monsters[this.id] : null
+      return this.getMonster !== undefined && this.getMonster.isLive
+    },
+    getMonster: function () {
+      return this.getMonsters.find(x => x.cellId === this.id)
     },
     hasItem: function () {
       let items = this.$store.getters.getItems
       return items[this.id] !== undefined ? items[this.id] : null
     },
     hasPlayer: function () {
-      return this.id === this.$store.getters.getPlayerPosition
+      return this.id === this.getPlayerPosition
     },
     inPlayerRange: function () {
-      return this.$store.getters.getPlayerRange.includes(this.id)
+      return this.getPlayerRange.includes(this.id)
     },
     canMove: function () {
       return !this.hasMonster && this.tile.available && this.inPlayerRange
@@ -90,11 +99,11 @@ export default {
     },
     preview: function () {
       let payload = null
-      if (this.hasMonster && this.$refs[this.hasMonster + this.id].isLive) {
+      if (this.hasMonster) {
         payload = {
           entity: 'monsterPreview',
-          monster: this.$refs[this.hasMonster + this.id].monster,
-          damage: this.$refs[this.hasMonster + this.id].damage,
+          monster: this.$refs[this.getMonster.monster + this.id].monster,
+          damage: this.$refs[this.getMonster.monster + this.id].damage,
           cellId: this.id
         }
       } else if (this.hasItem) {
