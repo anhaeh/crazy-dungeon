@@ -1,7 +1,7 @@
 <template>
-  <div v-if="getShowInventory" class="inventory">
+  <div v-if="getInventory.show" class="inventory">
     <div  class="item-preview"
-          v-for="(item, index) in getInventory"
+          v-for="(item, index) in getInventory.items"
          :key="'item' + index">
       <img :src="image(item)">
     </div>
@@ -15,8 +15,7 @@ export default {
   name: "Inventory",
   computed: {
     ...mapGetters([
-        'getInventory',
-        'getShowInventory'
+        'getInventory'
     ]),
   },
   methods: {

@@ -44,5 +44,5 @@ export default {
   display: flex
   align-items: flex-start
   justify-content: flex-start
-  z-index: 100
+  z-index: 5
 </style>

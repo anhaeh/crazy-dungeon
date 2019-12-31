@@ -13,7 +13,10 @@ const store = new Vuex.Store({
     entities: null,
     preview: null,
     monsterSelected: null,
-    showInventory: false,
+    inventory: {
+      show: false,
+      items: []
+    },
     questLog: []
   },
   getters: {
@@ -48,7 +51,7 @@ const store = new Vuex.Store({
       return state.player.attack
     },
     getInventory: state => {
-      return state.player.inventory
+      return state.inventory
     },
     getMap: state => {
       return state.map
@@ -64,9 +67,6 @@ const store = new Vuex.Store({
     },
     getPreview: state => {
       return state.preview
-    },
-    getShowInventory: state => {
-      return state.showInventory
     },
     getQuestLog: state => {
       return state.questLog
@@ -111,10 +111,10 @@ const store = new Vuex.Store({
       state.player.isDead = true
     },
     addItemToInventory(state, item) {
-      state.player.inventory.push(item)
+      state.inventory.items.push(item)
     },
     setShowInventory(state) {
-      state.showInventory = !state.showInventory
+      state.inventory.show = !state.inventory.show
     },
     pushLog(state, msg) {
       state.questLog.push(msg)
@@ -131,8 +131,7 @@ const store = new Vuex.Store({
         defeatMonsters: 0,
         nextLevelMonsters: 5,
         level: 1,
-        isDead: false,
-        inventory: []
+        isDead: false
       }
     },
     levelUp(state) {
