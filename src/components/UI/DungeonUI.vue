@@ -9,12 +9,12 @@
       </div>
       <log-quest></log-quest>
       <div class="skills">
-        <div class="skill__slot --slot1"></div>
-        <div class="skill__slot --slot2"></div>
-        <div class="skill__slot --slot3"></div>
-        <div class="skill__slot --slot4"></div>
-        <div class="skill__slot --slot5"></div>
-        <div class="skill__slot --slot6"></div>
+        <div class="skill__slot"></div>
+        <div class="skill__slot"></div>
+        <div class="skill__slot"></div>
+        <div class="skill__slot"></div>
+        <div class="skill__slot"></div>
+        <div class="skill__slot"></div>
       </div>
       <div class="control">
         <div class="top" @click="move('top')"></div>
@@ -79,27 +79,24 @@ export default {
 .dungeonUIContent
   position: relative
 .skills
-  position: fixed
+  position: absolute
   opacity: 0.4
-  // background-color: red
-  height: calc(2 * var(--tile-cell))
-  width: calc(3.5 * var(--tile-cell))
-  bottom: calc(1 * var(--pixel-unit))
-  left: calc(3 * var(--pixel-unit))
+  background-color: green
+  height: calc(2.5 * var(--tile-cell))
+  width: calc(4 * var(--tile-cell))
+  bottom: 0
+  left: 0
+  display: flex
+  flex-wrap: wrap
+  padding: calc(3 * var(--pixel-unit)) calc(5 * var(--pixel-unit))
+  box-sizing: border-box
+  align-items: space-between
+  justify-content: space-between
   .skill__slot
-    position: fixed
-    opacity: 0.4
+    height: var(--tile-cell)
+    width: var(--tile-cell)
+    opacity: 1
     background-color: blue
-    height: calc(0.875 * var(--tile-cell))
-    width: calc(0.875 * var(--tile-cell))
-    bottom: calc(3 * var(--pixel-unit))
-    left: calc(5 * var(--pixel-unit))
-    &.--slot2, &.--slot5
-      left: calc(24 * var(--pixel-unit))
-    &.--slot3, &.--slot6
-      left: calc(43 * var(--pixel-unit))
-    &.--slot4, &.--slot5, &.--slot6
-      bottom: calc(19 * var(--pixel-unit))
 .player__gold
   position: absolute
   bottom: calc(3.48 * var(--tile-cell))
@@ -114,6 +111,13 @@ export default {
     font-size: 1.25rem
     line-height: 1rem
 .control
+  background-color: red
+  opacity: 0.5
+  position: absolute
+  bottom: 0
+  right: 0
+  height: calc(var(--tile-cell) * 2.5)
+  width: calc(var(--tile-cell) * 3)
   .bottom
     position: fixed
     height: 28px

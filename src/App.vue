@@ -7,13 +7,16 @@
 <script>
 export default {
   name: "App"
-}
+};
 </script>
 
 <style lang="sass">
 \:root
   --tile-cell: 14.2857vw // based on 7 tiles in viewport width
   --pixel-unit: 0.8928vw // based on 16 pixels inside 1 tile-cell
+
+$tile: 14.2857vw // based on 7 tiles in viewport width
+$pixel: 0.8928vw // based on 16 pixels inside 1 tile-cell
 
 @font-face
   font-family: 'OpenSansPXBold'
