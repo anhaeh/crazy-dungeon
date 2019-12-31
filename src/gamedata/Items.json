@@ -3,24 +3,28 @@
     "name": "Iron Sword",
     "image": "Item__00.png",
     "type": "attack",
+    "counter": 5,
     "description": "+ 5 attack"
   },
   "potion": {
     "name": "Potion",
     "image": "Item__29.png",
     "type": "potion",
-    "description": "restore 30 health"
+    "counter": 30,
+    "description": "This potion restore 30 points of life"
   },
   "armor1": {
     "name": "Iron Armor",
     "image": "Item__57.png",
-    "type": "health",
+    "type": "life",
+    "counter": 30,
     "description": "+ 30 health"
   },
   "ring1": {
     "name": "Gold ring",
     "image": "Item__43.png",
-    "type": "drop_gold",
-    "description": "+ 30% gold"
+    "type": "gold",
+    "description": "+ 30% gold",
+    "counter": 1.3
   }
 }

@@ -15,7 +15,8 @@ const store = new Vuex.Store({
     monsterSelected: null,
     inventory: {
       show: false,
-      items: []
+      items: [],
+      maxSize: 6
     },
     questLog: []
   },

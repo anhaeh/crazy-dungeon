@@ -2,7 +2,6 @@
   <div class="itemPreview">
     <div class="legend">
       {{ entity.item.name }}
-      {{ entity.item.description }}
     </div>
     <div class="itemImage">
       <img :src="image">

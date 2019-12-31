@@ -5,6 +5,7 @@
 </template>
 
 <script>
+import { mapGetters } from 'vuex'
 import ItemsData from '@/gamedata/Items.json'
 
 export default {
@@ -18,11 +19,15 @@ export default {
       immediate: true,
       handler (value) {
         if (value) {
-          let items = Object.assign({}, this.$store.getters.getItems)
-          delete items[this.cellId]
-          this.$store.commit('setItems', items)
-          this.$store.commit('addItemToInventory', this.item)
-          this.$store.commit('pushLog', 'Player picked ' + this.item.name)
+          if(this.inventoryIsFull) {
+            this.$store.commit('pushLog', 'Inventory is full')
+          } else {
+            let items = Object.assign({}, this.$store.getters.getItems)
+            delete items[this.cellId]
+            this.$store.commit('setItems', items)
+            this.$store.commit('addItemToInventory', this.item)
+            this.$store.commit('pushLog', 'Player picked ' + this.item.name)
+          }
         }
       }
     }
@@ -32,9 +37,13 @@ export default {
       item: ItemsData[this.name]
     }
   },
-  methods: {
-  },
   computed: {
+    ...mapGetters([
+      'getInventory'
+    ]),
+    inventoryIsFull: function() {
+      return this.getInventory.maxSize === this.getInventory.items.length
+    },
     image: function () {
       return require('@/assets/items/' + this.item.image)
     },

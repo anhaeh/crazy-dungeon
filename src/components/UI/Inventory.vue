@@ -49,7 +49,7 @@ export default {
     },
     getSlots: function () {
       let list = [];
-      for (let i = 0; i <= 5; i++) {
+      for (let i = 0; i < this.getInventory.maxSize; i++) {
         list.push(i)
       }
       return list
