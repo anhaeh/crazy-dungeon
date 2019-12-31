@@ -1,21 +1,31 @@
 <template>
   <div class="dungeonUI">
     <div class="dungeonUI__contentTop">
+      <div class="dungeonUI__current">
+        <div class="dungeonUI__currentBars">        
+          <div class="dungeonUI__currentGold">
+            <div class="text">
+              {{ $store.getters.getPlayer.gold }}
+            </div>
+          </div>
+          <div class="dungeonUI__currentUnnused">
+            <div class="text">
+              {{ $store.getters.getPlayer.gold }}
+            </div>
+          </div>
+        </div>
+        <div class="dungeonCurrentLog">
+          <div class="dungeonUI__logQuestScroll">
+            <div class="dungeonUI__logQuestScrollUp" @click="scrollLog(1)"></div>
+            <div class="dungeonUI__logQuestScrollDown" @click="scrollLog(-1)"></div>
+          </div>
+          <log-quest :counter="cursorCounter"></log-quest>
+        </div>
+      </div>
+
       <div class="dungeonUI__more">
         <div class="dungeonUI__moreBack"></div>
         <div class="dungeonUI__moreMenu"></div>
-      </div>
-      <div class="dungeonUI__current">
-        <div class="dungeonUI__currentGold">
-          <div class="text">
-            {{ $store.getters.getPlayer.gold }}
-          </div>
-        </div>
-        <log-quest :counter="cursorCounter"></log-quest>
-      </div>
-      <div class="dungeonUI__logQuestScroll">
-        <div class="dungeonUI__logQuestScrollUp" @click="scrollLog(1)"></div>
-        <div class="dungeonUI__logQuestScrollDown" @click="scrollLog(-1)"></div>
       </div>
     </div>
     <div class="dungeonUI__contentBottom">
@@ -89,7 +99,9 @@ export default {
   left: 0
   width: 100%
   image-rendering: pixelated
-  // background-image: url("../../assets/ui/DungeonUI.png")
+  background-image: url("../../assets/ui/dungeonUI__background.png")
+  background-size: 100% 100%
+  background-position: bottom left 
   height: calc(4 * var(--tile-cell))
   min-height: calc(4 * var(--tile-cell))
   z-index: 5
@@ -110,16 +122,22 @@ export default {
     &:active, &:focus
       opacity: 0.5
       transform: translateY(2px)
+    &.dungeonUI__moreMenu
+      background-image: url("../../assets/ui/dungeonUI__moreDown.png")
 .dungeonUI__current
-  width: calc(4.5 * var(--tile-cell))
+  width: calc(5.5 * var(--tile-cell))
   height: calc(1.5 * var(--tile-cell))
-.dungeonUI__currentGold
+.dungeonUI__currentBars
+  display: flex
+  width: 100%
+.dungeonUI__currentGold, .dungeonUI__currentUnnused
   display: flex
   align-items: center
   z-index: 0
   height: calc(.5 * var(--tile-cell))
+  min-width: calc(3 * var(--tile-cell))
   background-image: url("../../assets/ui/dungeonUI__currentGold.png")
-  background-size: contain
+  background-size: 100% 100%
   image-rendering: pixelated
   background-repeat: no-repeat
   .text
@@ -127,24 +145,27 @@ export default {
     padding-left: calc(1.15 * var(--tile-cell))
     font-size: 1.25rem
     line-height: 1rem
+.dungeonUI__currentUnnused
+  min-width: calc(2.5 * var(--tile-cell))
+  background-image: url("../../assets/ui/dungeonUI__currentUn.png")
+.dungeonCurrentLog
+  display: flex
+  width: calc(5.5 * var(--tile-cell))
 .dungeonUI__logQuestScroll
-  height: calc(1.5 * var(--tile-cell))
+  height: var(--tile-cell)
   width: var(--tile-cell)
   *:active, *:focus
     opacity: 0.5
     transform: translateY(2px)
-.dungeonUI__logQuestScrollUp
-  height: calc(.75 * var(--tile-cell))
-  width: 100%
-  background-image: url("../../assets/ui/dungeonUI__logQuestScroll.png")
-  background-size: contain
+.dungeonUI__logQuestScrollUp, .dungeonUI__logQuestScrollDown
+  height: calc(.5 * var(--tile-cell))
+  width: var(--tile-cell)
+  background-image: url("../../assets/ui/dungeonUI__logQuestScrollUp.png")
+  background-size: 100% 100%
   image-rendering: pixelated
 .dungeonUI__logQuestScrollDown
-  height: calc(.75 * var(--tile-cell))
-  width: 100%
-  background-image: url("../../assets/ui/dungeonUI__logQuestScroll.png")
-  background-size: contain
-  image-rendering: pixelated
+  background-image: url("../../assets/ui/dungeonUI__logQuestScrollDown.png")
+
 .dungeonUI__skills
   opacity: 0.4
   height: calc(2.5 * var(--tile-cell))
