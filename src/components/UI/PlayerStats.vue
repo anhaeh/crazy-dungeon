@@ -4,10 +4,10 @@
     <div class="playerStats__lvl">{{ getPlayer.level }}</div>
     <status-bar
       :actual="actualHealth"
-      :total="player.initialHealth + levelDiff"
+      :total="getPlayerLife"
     ></status-bar>
     <div class="name">
-      {{ player.name }}
+      {{ getPlayer.name }}
     </div>
   </div>
 </template>
@@ -15,7 +15,6 @@
 <script>
 import { mapGetters } from 'vuex'
 import statusBar from './StatusBar'
-import heroes from '@/gamedata/Heroes.json'
 
 export default {
   components: {
@@ -30,40 +29,26 @@ export default {
       }
     }
   },
-  data () {
-    return {
-      player: {}
-    }
-  },
   name: "PlayerStats",
   computed: {
     ...mapGetters([
       'getPlayer',
-      'getPlayerAttack'
+      'getPlayerAttack',
+      'getPlayerLife'
     ]),
     imageHero: function () {
-      return require(`@/assets/heroes/portraits/${this.player.image}`)
-    },
-    imgAttack: function () {
-      return require(`@/assets/ui/Attack.png`)
+      return require(`@/assets/heroes/portraits/${this.getPlayer.image}`)
     },
     actualHealth: function () {
-      return (this.player.initialHealth  + this.levelDiff) - this.getPlayer.damage
-    },
-    levelDiff: function () {
-      return this.getPlayer.level * 15
+      return this.getPlayerLife - this.getPlayer.damage
     }
   },
   methods: {
     showInventory: function () {
       this.$store.commit('setShowInventory')
     }
-  },
-  created() {
-    this.player = heroes[this.getPlayer.class]
-    this.$store.commit('setPlayerBaseAttack', this.player.attack)
   }
-};
+}
 </script>
 
 <style scoped lang="sass">

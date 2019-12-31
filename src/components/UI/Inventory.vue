@@ -1,13 +1,13 @@
 <template>
   <div v-if="show" class="inventory">
-    <div v-for="index in getSlots()"
-         :key="'slot' + index"
-         :id="'slot' + index"
+    <div v-for="(item, index) in getItems"
+         :key="'item' + index"
+         :id="'item' + index"
          class="inventory__slot"
          :class="{'--selected': index === selected}"
-         @click="getItem(index) ? selected = index : false"
+         @click="item !== undefined ? selected = index : false"
     >
-      <img v-if="getItem(index)" :src="image(index)">
+      <img v-if="item !== undefined" :src="image(item)" @click="consume(item, index)">
     </div>
   </div>
 </template>
@@ -17,14 +17,6 @@ import { mapGetters } from 'vuex'
 
 export default {
   name: "Inventory",
-  computed: {
-    ...mapGetters([
-        'getInventory'
-    ]),
-    show: function () {
-      return this.getInventory.show
-    }
-  },
   watch: {
     show: {
       handler(newVal) {
@@ -36,23 +28,34 @@ export default {
   },
   data () {
     return {
-      selected: null
+      selected: null,
+      items: []
+    }
+  },
+  computed: {
+    ...mapGetters([
+        'getInventory'
+    ]),
+    show: function () {
+      return this.getInventory.show
+    },
+    getItems: function () {
+      let list = []
+      for (let i = 0; i < this.getInventory.maxSize; i++) {
+        list.push(this.getInventory.items[i])
+      }
+      return list
     }
   },
   methods: {
-    image: function (index) {
-      let item = this.getItem(index)
-      return require('@/assets/items/' + item.image)
-    },
-    getItem: function (index) {
-      return this.getInventory.items[index]
-    },
-    getSlots: function () {
-      let list = [];
-      for (let i = 0; i < this.getInventory.maxSize; i++) {
-        list.push(i)
+    consume: function (item, index) {
+      /* TODO solo para test */
+      if (item.type === 'potion') {
+        this.$store.commit('restoreLife', { itemId: index, counter: item.counter })
       }
-      return list
+    },
+    image: function (item) {
+      return require('@/assets/items/' + item.image)
     }
   }
 };

@@ -1,5 +1,6 @@
 import Vue from "vue"
 import Vuex from "vuex"
+import heroes from '@/gamedata/Heroes.json'
 
 Vue.use(Vuex)
 
@@ -40,6 +41,14 @@ const store = new Vuex.Store({
       let itemsBuffAttack = state.inventory.items.filter(x => x.type === 'attack')
       let total = state.player.attack
       itemsBuffAttack.forEach(item => {
+        total += item.counter
+      })
+      return total
+    },
+    getPlayerLife: state => {
+      let itemsBuffHealth = state.inventory.items.filter(x => x.type === 'life')
+      let total = state.player.initialHealth + (state.player.level * 15)
+      itemsBuffHealth.forEach(item => {
         total += item.counter
       })
       return total
@@ -103,9 +112,6 @@ const store = new Vuex.Store({
     setPlayerViewport(state, playerViewport) {
       state.player.viewport = playerViewport
     },
-    setPlayerBaseAttack(state, playerAttack) {
-      state.player.attack = playerAttack
-    },
     setPlayerDamage(state, damage) {
       state.player.damage += damage
     },
@@ -128,6 +134,16 @@ const store = new Vuex.Store({
     pushLog(state, msg) {
       state.questLog.push(msg)
     },
+    restoreLife(state, data) {
+      if (state.player.damage > 0) {
+        state.inventory.items.splice(data.itemId)
+        state.player.damage -= data.counter
+        if (state.player.damage < 0) {
+          state.player.damage = 0
+        }
+        state.questLog.push(`Player use potion`)
+      }
+    },
     initializePlayer(state, heroClass) {
       state.player = {
         class: heroClass,
@@ -142,6 +158,8 @@ const store = new Vuex.Store({
         level: 1,
         isDead: false
       }
+      let heroeData = heroes[heroClass]
+      Object.assign(state.player, heroeData)
     },
     levelUp(state) {
       let newPlayer = Object.assign({}, state.player)
