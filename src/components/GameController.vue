@@ -28,7 +28,7 @@ export default {
           })
           this.$store.commit('setPlayerRange', cells)
           let cellsViewport = []
-          for (let i = -3; i < 4; i++) {
+          for (let i = -3; i < 6; i++) {
             for (let j = -3; j < 4; j++) {
               let row = parseInt(player[0]) + i
               let letter = String.fromCharCode(player[1].charCodeAt() + j)

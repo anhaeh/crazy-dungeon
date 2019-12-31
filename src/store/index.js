@@ -136,12 +136,14 @@ const store = new Vuex.Store({
     },
     restoreLife(state, data) {
       if (state.player.damage > 0) {
-        state.inventory.items.splice(data.itemId)
+        state.inventory.items.splice(data.itemId, 1)
         state.player.damage -= data.counter
         if (state.player.damage < 0) {
           state.player.damage = 0
         }
-        state.questLog.push(`Player use potion`)
+        state.questLog.push(`Player used potion`)
+      } else {
+        state.questLog.push(`Player has full health`)
       }
     },
     initializePlayer(state, heroClass) {
