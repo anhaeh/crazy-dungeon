@@ -3,20 +3,20 @@
     <div class="dungeonUI__contentTop">
       <div class="dungeonUI__more">
         <div class="dungeonUI__moreBack"></div>
-        <div class="dungeonUI__moreMenu"></div>        
+        <div class="dungeonUI__moreMenu"></div>
       </div>
-      <div class="dungeonUI__current">      
+      <div class="dungeonUI__current">
         <div class="dungeonUI__currentGold">
           <img :src="imgGold" title="Gold">
           <div class="text">
             {{ $store.getters.getPlayer.gold }}
           </div>
         </div>
-        <log-quest></log-quest>
+        <log-quest :counter="cursorCounter"></log-quest>
       </div>
       <div class="dungeonUI__logQuestScroll">
-        <div class="dungeonUI__logQuestScrollUp"></div>
-        <div class="dungeonUI__logQuestScrollDown"></div>
+        <div class="dungeonUI__logQuestScrollUp" @click="scrollLog(1)"></div>
+        <div class="dungeonUI__logQuestScrollDown" @click="scrollLog(-1)"></div>
       </div>
     </div>
     <div class="dungeonUI__contentBottom">
@@ -50,6 +50,11 @@ export default {
     Inventory,
     LogQuest
   },
+  data () {
+    return {
+      cursorCounter: 0
+    }
+  },
   computed: {
     imgGold: function () {
       return require(`@/assets/ui/Gold.png`)
@@ -70,6 +75,9 @@ export default {
         // eslint-disable-next-line no-empty
       } catch (e) {
       }
+    },
+    scrollLog: function (counter) {
+      this.cursorCounter += counter
     }
   }
 };

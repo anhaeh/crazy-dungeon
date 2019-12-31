@@ -8,14 +8,13 @@
         {{ log }}
       </span>
     </div>
-    <div class="scroll-up" @click="increaseCursor()"></div>
-    <div class="scroll-down" @click="decreaseCursor()"></div>
   </div>
 </template>
 
 <script>
 export default {
   name: "LogQuest",
+  props: ['counter'],
   data() {
     return {
       cursor: 0
@@ -25,6 +24,15 @@ export default {
     questLog: {
       handler() {
         this.cursor = 0
+      }
+    },
+    counter: {
+      handler(newVal, oldVal) {
+        if (newVal > oldVal) {
+          this.increaseCursor()
+        } else {
+          this.decreaseCursor()
+        }
       }
     }
   },
