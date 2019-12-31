@@ -58,27 +58,28 @@ export default {
   background-size: 100% 100%
   background-image: url("../../../assets/ui/bottomDialog__message.png")
   color: #FFF
-  padding: calc(3 * var(--pixel-unit)) 0 calc(2 * var(--pixel-unit)) calc(5 * var(--pixel-unit))
   box-sizing: border-box
+  padding: calc(1 * var(--pixel-unit)) 0
 .bottomDialog__messageContent
   height: 100%
   width: 100%
   overflow-y: auto
   overflow-x: hidden
+  box-sizing: border-box
+  padding: calc(4 * var(--pixel-unit))
   &::-webkit-scrollbar
-    background-color: red
-    width: 1rem
+    background-image: url("../../../assets/ui/bottomDialog__scrollbar.png")
+    width: calc(.5 * var(--tile-cell))
+    background-size: 100% 100%
+    image-rendering: pixelated
   &::-webkit-scrollbar
     -webkit-appearance: none
-  &::-webkit-scrollbar:vertical
-    width: 12px
   &::-webkit-scrollbar-thumb
-    background-color: rgba(0, 0, 0, .5)
-    border-radius: 10px
-    border: 2px solid #ffffff
+    background-image: url("../../../assets/ui/bottomDialog__scrollbarThumb.png")
+    background-size: 100% 100%
+    image-rendering: pixelated
   &::-webkit-scrollbar-track
     border-radius: 10px
-    background-color: #ffffff
 .bottomDialog__actions
   height: calc(.75 * var(--tile-cell))
   width: 100%
@@ -99,8 +100,9 @@ export default {
   background-image: url("../../../assets/ui/bottomDialog__actionsBtn.png")
   color: #FFF
   text-align: center
-  // &:first-child
-  //   margin-right: auto
+  &:focus, &:active
+   opacity: 0.5
+   transform: translateY(3px)
 .bottomDialog__itemImg
   height: calc(.75 * var(--tile-cell))
   float: left
@@ -109,6 +111,5 @@ export default {
   font-size: 22px
 .bottomDialog__itemAttr
   color: green
-.bottomDialog__text
-  margin-bottom: 10px
 </style>
+
