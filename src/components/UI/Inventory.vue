@@ -1,13 +1,13 @@
 <template>
-  <div v-if="getInventory.show" class="inventory">
+  <div v-if="show" class="inventory">
     <div v-for="index in getSlots()"
          :key="'slot' + index"
          :id="'slot' + index"
          class="inventory__slot"
          :class="{'--selected': index === selected}"
-         @click="existItem(index) ? selected = index : ''"
+         @click="getItem(index) ? selected = index : false"
     >
-      <img v-if="existItem(index)" :src="image(index)">
+      <img v-if="getItem(index)" :src="image(index)">
     </div>
   </div>
 </template>
@@ -20,7 +20,19 @@ export default {
   computed: {
     ...mapGetters([
         'getInventory'
-    ])
+    ]),
+    show: function () {
+      return this.getInventory.show
+    }
+  },
+  watch: {
+    show: {
+      handler(newVal) {
+        if (!newVal) {
+          this.selected = null
+        }
+      }
+    }
   },
   data () {
     return {
@@ -29,10 +41,10 @@ export default {
   },
   methods: {
     image: function (index) {
-      let item = this.getInventory.items[index]
+      let item = this.getItem(index)
       return require('@/assets/items/' + item.image)
     },
-    existItem: function (index) {
+    getItem: function (index) {
       return this.getInventory.items[index]
     },
     getSlots: function () {
