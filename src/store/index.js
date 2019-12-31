@@ -221,6 +221,7 @@ const store = new Vuex.Store({
         commit('setPreview', null)
         commit('setDefeatMonster')
         state.questLog.push(`${state.monsterSelected.monster.name} destroyed`)
+        state.monsterSelected = null
         if (state.player.defeatMonsters === state.player.nextLevelMonsters) {
           commit('levelUp')
           state.questLog.push(`Player level up`)

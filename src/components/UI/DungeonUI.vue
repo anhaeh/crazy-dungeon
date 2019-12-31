@@ -44,7 +44,10 @@
         <div class="dungeonUI__skillSlot"></div>
         <div class="dungeonUI__skillSlot"></div>
       </div>
-      <div class="dungeonUI__controlsActiveSkill" @click="move('top')"></div>
+      <div v-if="isMonsterTarget"
+           class="dungeonUI__controlsActiveSkill"
+           @click="attack">
+      </div>
       <div class="dungeonUI__controls">
       <div v-for="direction in arrows"
            :key="'arrow' + direction"
@@ -76,6 +79,9 @@ export default {
   computed: {
     arrows: function () {
       return ['top', 'bottom', 'left', 'right']
+    },
+    isMonsterTarget: function() {
+      return this.$store.getters.getMonsterSelected
     }
   },
   methods: {
@@ -89,10 +95,16 @@ export default {
       let cellToMove = this.$store.getters.getPlayerRange[directions[key]]
       try {
         document.querySelector('#cell-' + cellToMove).click()
-        document.querySelector('#cell-' + cellToMove + ' .monster').click()
+        if (!this.isMonsterTarget || (this.isMonsterTarget && this.isMonsterTarget.cellId !== cellToMove)) {
+          document.querySelector('#cell-' + cellToMove + ' .monster').click()
+        }
         // eslint-disable-next-line no-empty
       } catch (e) {
       }
+    },
+    attack: function() {
+      event.preventDefault()
+      this.$store.dispatch('attack')
     },
     scrollLog: function (counter) {
       this.cursorCounter += counter
@@ -240,4 +252,5 @@ export default {
   width: var(--tile-cell)
   bottom: calc(var(--tile-cell) * .75)
   right: var(--tile-cell)
+  z-index: 1
 </style>
