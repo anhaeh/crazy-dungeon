@@ -19,7 +19,10 @@
             <div class="dungeonUI__logQuestScrollUp" @click="scrollLog(1)"></div>
             <div class="dungeonUI__logQuestScrollDown" @click="scrollLog(-1)"></div>
           </div>
-          <log-quest :counter="cursorCounter"></log-quest>
+          <log-quest
+              :counter="cursorCounter"
+          >
+          </log-quest>
         </div>
       </div>
 
@@ -38,10 +41,12 @@
         <div class="dungeonUI__skillSlot"></div>
       </div>
       <div class="dungeonUI__controls">
-        <div class="dungeonUI__controlsTop" @click="move('top')"></div>
-        <div class="dungeonUI__controlsBottom" @click="move('bottom')"></div>
-        <div class="dungeonUI__controlsRight" @click="move('right')"></div>
-        <div class="dungeonUI__controlsLeft" @click="move('left')"></div>
+        <div v-for="direction in arrows"
+             :key="'arrow' + direction"
+             :class="'dungeonUI__controls-' + direction"
+             @click="move(direction)"
+        >
+        </div>
       </div>
     </div>
     <inventory></inventory>
@@ -65,8 +70,8 @@ export default {
     }
   },
   computed: {
-    imgGold: function () {
-      return require(`@/assets/ui/Gold.png`)
+    arrows: function () {
+      return ['top', 'bottom', 'left', 'right']
     }
   },
   methods: {
@@ -193,25 +198,25 @@ export default {
   background-image: url("../../assets/ui/dungeonUI__controls.png")
   background-size: contain
   image-rendering: pixelated
-.dungeonUI__controlsBottom
+.dungeonUI__controls-bottom
   position: fixed
   height: 28px
   bottom: calc(var(--tile-cell) * 0.1)
   width: calc(var(--tile-cell) * 1.5)
   right: calc(var(--tile-cell) / 1.4)
-.dungeonUI__controlsTop
+.dungeonUI__controls-top
   position: fixed
   height: 28px
   bottom: calc(var(--tile-cell) * 1.9)
   width: calc(var(--tile-cell) * 1.5)
   right: calc(var(--tile-cell) / 1.4)
-.dungeonUI__controlsRight
+.dungeonUI__controls-right
   position: fixed
   height: calc(var(--tile-cell) * 1.5)
   bottom: calc(var(--tile-cell) / 2.5)
   width: 28px
   right: calc(var(--tile-cell) * 0.3)
-.dungeonUI__controlsLeft
+.dungeonUI__controls-left
   position: fixed
   height: calc(var(--tile-cell) * 1.5)
   bottom: calc(var(--tile-cell) / 2.5)

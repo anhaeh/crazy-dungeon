@@ -27,8 +27,6 @@ import Terrains from '@/gamedata/Terrains.json'
 import Monster from "../Entities/Monster"
 import Player from "../Entities/Player"
 import Item from "../Entities/Item"
-import { mapGetters } from 'vuex'
-
 
 export default {
   props: {
@@ -59,31 +57,25 @@ export default {
     }
   },
   computed: {
-    ...mapGetters([
-      'getMonsters',
-      'getPlayerPosition',
-      'getPlayerRange',
-      'getTheme'
-    ]),
     image: function () {
-      let image = this.tile.theme ? `${this.tile.image}_${this.getTheme}.png` : `${this.tile.image}.png`
+      let image = this.tile.theme ? `${this.tile.image}_${this.$store.getters.getTheme}.png` : `${this.tile.image}.png`
       return require('@/assets/terrains/' + image)
     },
     hasMonster: function () {
       return this.getMonster !== undefined && this.getMonster.isLive
     },
     getMonster: function () {
-      return this.getMonsters.find(x => x.cellId === this.id)
+      return this.$store.getters.getMonsters.find(x => x.cellId === this.id)
     },
     hasItem: function () {
       let items = this.$store.getters.getItems
       return items[this.id] !== undefined ? items[this.id] : null
     },
     hasPlayer: function () {
-      return this.id === this.getPlayerPosition
+      return this.id === this.$store.getters.getPlayerPosition
     },
     inPlayerRange: function () {
-      return this.getPlayerRange.includes(this.id)
+      return this.$store.getters.getPlayerRange.includes(this.id)
     },
     canMove: function () {
       return !this.hasMonster && this.tile.available && this.inPlayerRange
