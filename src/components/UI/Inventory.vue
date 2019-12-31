@@ -85,7 +85,7 @@ export default {
   image-rendering: pixelated
   background-image: url("../../assets/ui/dungeonUI__skillSlot.png")
   &.--selected
-    box-shadow: inset 0 0 0 var(--pixel-unit) yellow
+    box-shadow: inset 0 0 0 var(--pixel-unit) #c89c01
   img
     width: 100%
     height: 100%
