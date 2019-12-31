@@ -53,7 +53,6 @@
       >
       </div>
       </div>
-      <bottomDialog></bottomDialog>
     </div>
     <inventory></inventory>
   </div>
@@ -62,14 +61,12 @@
 <script>
 import Inventory from './Inventory'
 import LogQuest from './LogQuest'
-import bottomDialog from './bottomDialog'
 
 export default {
   name: "DungeonUI",
   components: {
     Inventory,
-    LogQuest,
-    bottomDialog
+    LogQuest
   },
   data () {
     return {

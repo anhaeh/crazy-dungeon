@@ -2,19 +2,29 @@
   <div class="bottomDialog">
     <div class="bottomDialog__message">
       <div class="bottomDialog__messageContent">
-        <img src="../../assets/items/Item__29.png" alt="" class="bottomDialog__itemImg">
-        <div class="bottomDialog__itemTitle">Health Potion</div>
-        <div class="bottomDialog__itemAttr">+15 HP</div>
+        <slot name="image">
+        </slot>
+        <div class="bottomDialog__itemTitle">
+          <slot name="title">
+            Health Potion
+          </slot>
+        </div>
+        <div class="bottomDialog__itemAttr">
+          <slot name="legend">
+            +15 HP
+          </slot>
+        </div>
         <br>
-        <div class="bottomDialog__text">         
-          Lorem ipsum dolor sit amet, consectetur adipisicing elit. Perspiciatis numquam, odit eligendi unde. Animi optio cumque voluptates eos nihil exercitationem, dolores corporis a maiores quo ut, sint excepturi hic quisquam.Lorem ipsum dolor sit amet, consectetur adipisicing elit. Perspiciatis numquam, odit eligendi unde. Animi optio cumque voluptates eos nihil exercitationem, dolores corporis a maiores quo ut, sint excepturi hic quisquam.Lorem ipsum dolor sit amet, consectetur adipisicing elit. Perspiciatis numquam, odit eligendi unde. Animi optio cumque voluptates eos nihil exercitationem, dolores corporis a maiores quo ut, sint excepturi hic quisquam.Lorem ipsum dolor sit amet, consectetur adipisicing elit. Perspiciatis numquam, odit eligendi unde. Animi optio cumque voluptates eos nihil exercitationem, dolores corporis a maiores quo ut, sint excepturi hic quisquam.
+        <div class="bottomDialog__text">
+          <slot name="text">
+          </slot>
         </div>
       </div>
     </div>
     <div class="bottomDialog__actions">
-      <div class="bottomDialog__actionsBtn">Discard</div>
-      <div class="bottomDialog__actionsBtn">Equip</div>
-      <div class="bottomDialog__actionsBtn">Close</div>
+      <div class="bottomDialog__actionsBtn" @click="close">Close</div>
+      <slot name="actions">
+      </slot>
     </div>
   </div>
 </template>
@@ -22,7 +32,13 @@
 <script>
 export default {
   name: "Dialog",
-};
+  methods: {
+    close: function () {
+      this.$store.commit('clickDialog')
+      this.$emit('close')
+    }
+  }
+}
 </script>
 
 <style scoped lang="sass">
@@ -40,7 +56,7 @@ export default {
   width: 100%
   image-rendering: pixelated
   background-size: 100% 100%
-  background-image: url("../../assets/ui/bottomDialog__message.png")
+  background-image: url("../../../assets/ui/bottomDialog__message.png")
   color: #FFF
   padding: calc(3 * var(--pixel-unit)) 0 calc(2 * var(--pixel-unit)) calc(5 * var(--pixel-unit))
   box-sizing: border-box
@@ -56,7 +72,7 @@ export default {
     -webkit-appearance: none
   &::-webkit-scrollbar:vertical
     width: 12px
-  &::-webkit-scrollbar-thumb 
+  &::-webkit-scrollbar-thumb
     background-color: rgba(0, 0, 0, .5)
     border-radius: 10px
     border: 2px solid #ffffff
@@ -68,7 +84,7 @@ export default {
   width: 100%
   image-rendering: pixelated
   background-size: 100% 100%
-  background-image: url("../../assets/ui/bottomDialog__actions.png")
+  background-image: url("../../../assets/ui/bottomDialog__actions.png")
   display: flex
   justify-content: space-between
   padding: calc(2 * var(--pixel-unit))
@@ -80,7 +96,7 @@ export default {
   height: calc(.5 * var(--tile-cell))
   image-rendering: pixelated
   background-size: 100% 100%
-  background-image: url("../../assets/ui/bottomDialog__actionsBtn.png")
+  background-image: url("../../../assets/ui/bottomDialog__actionsBtn.png")
   color: #FFF
   text-align: center
   // &:first-child

@@ -2,13 +2,15 @@
   "sword1": {
     "name": "Iron Sword",
     "image": "Item__00.png",
-    "type": "attack",
+    "legend": "+1 Attack",
     "counter": 1,
+    "type": "attack",
     "description": "This old sword give you + 1 attack"
   },
   "potion": {
-    "name": "Potion",
+    "name": "Health Potion",
     "image": "Item__29.png",
+    "legend": "+30 HP",
     "type": "potion",
     "counter": 30,
     "description": "This potion restore 30 points of life"
@@ -16,15 +18,17 @@
   "armor1": {
     "name": "Iron Armor",
     "image": "Item__57.png",
-    "type": "life",
+    "legend": "+10 HP",
     "counter": 10,
+    "type": "life",
     "description": "This basic armor give you + 10 health"
   },
   "ring1": {
     "name": "Gold ring",
     "image": "Item__43.png",
-    "type": "gold",
+    "legend": "+10% gold",
     "description": "This ring give you + 10% of gold from monsters",
-    "counter": 1.1
+    "counter": 1.1,
+    "type": "gold"
   }
 }

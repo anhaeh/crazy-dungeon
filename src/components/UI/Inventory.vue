@@ -5,18 +5,25 @@
          :id="'item' + index"
          class="inventory__slot"
          :class="{'--selected': index === selected}"
-         @click="item !== undefined ? selected = index : false"
     >
-      <img v-if="item !== undefined" :src="image(item)" @click="consume(item, index)">
+      <img v-if="item !== undefined" :src="image(item)" @click="click(item, index)">
     </div>
+    <item-dialog
+        @discard="selected = null"
+        @close="selected = null"
+    ></item-dialog>
   </div>
 </template>
 
 <script>
 import { mapGetters } from 'vuex'
+import ItemDialog from './Dialogs/ItemDialog'
 
 export default {
   name: "Inventory",
+  components: {
+    ItemDialog
+  },
   watch: {
     show: {
       handler(newVal) {
@@ -48,17 +55,25 @@ export default {
     }
   },
   methods: {
-    consume: function (item, index) {
-      /* TODO solo para test */
-      if (item.type === 'potion') {
-        this.$store.commit('restoreLife', { itemId: index, counter: item.counter })
+    click: function (item, index) {
+      if (this.selected === index) {
+        this.selected = null
+        this.$store.commit('setDialogShow', false)
+      } else {
+        this.selected = index
+        this.$store.commit('setDialog', {
+          type: 'item',
+          item: item,
+          index: index
+        })
       }
+
     },
     image: function (item) {
       return require('@/assets/items/' + item.image)
     }
   }
-};
+}
 </script>
 
 <style scoped lang="sass">
@@ -74,7 +89,7 @@ export default {
   image-rendering: pixelated
   background-image: url("../../assets/ui/dungeonUI__background.png")
   background-size: 100% 100%
-  background-position: bottom left 
+  background-position: bottom left
   top: 0
   padding: calc(2 * var(--tile-cell)) calc(.5 * var(--tile-cell)) calc(.5 * var(--tile-cell))
   box-sizing: border-box

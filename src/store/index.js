@@ -19,6 +19,10 @@ const store = new Vuex.Store({
       items: [],
       maxSize: 6
     },
+    dialog: {
+      entity: null,
+      show: false
+    },
     questLog: []
   },
   getters: {
@@ -85,7 +89,10 @@ const store = new Vuex.Store({
     },
     getQuestLog: state => {
       return state.questLog
-    }
+    },
+    getDialog: state => {
+      return state.dialog
+    },
   },
   mutations: {
     setMonsterSelected(state, monsterSelected) {
@@ -124,11 +131,24 @@ const store = new Vuex.Store({
     addItemToInventory(state, item) {
       state.inventory.items.push(item)
     },
-    setShowInventory(state) {
+    deleteItemInventory(state, index) {
+      state.inventory.items.splice(index, 1)
+    },
+    clickInventory(state) {
       state.inventory.show = !state.inventory.show
     },
     pushLog(state, msg) {
       state.questLog.push(msg)
+    },
+    setDialog(state, entity) {
+      state.dialog.entity = entity
+      state.dialog.show = true
+    },
+    setDialogShow(state, show) {
+      state.dialog.show = show
+    },
+    clickDialog(state) {
+      state.dialog.show = !state.dialog.show
     },
     restoreLife(state, data) {
       if (state.player.damage > 0) {
@@ -137,7 +157,7 @@ const store = new Vuex.Store({
         if (state.player.damage < 0) {
           state.player.damage = 0
         }
-        state.questLog.push(`Player used potion`)
+        state.questLog.push(`Player restored 30 HP`)
       } else {
         state.questLog.push(`Player has full health`)
       }

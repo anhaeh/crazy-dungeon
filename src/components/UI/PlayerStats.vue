@@ -45,7 +45,7 @@ export default {
   },
   methods: {
     showInventory: function () {
-      this.$store.commit('setShowInventory')
+      this.$store.commit('clickInventory')
     }
   }
 }
