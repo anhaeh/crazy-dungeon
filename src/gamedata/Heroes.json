@@ -15,6 +15,10 @@
     "name": "Necromancer",
     "initialHealth": 40,
     "attack": 9,
-    "image": "necromancer.png"
+    "image": "necromancer.png",
+    "skills": [
+      "black_fire",
+      "heal"
+    ]
   }
 }

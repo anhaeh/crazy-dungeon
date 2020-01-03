@@ -152,12 +152,14 @@ const store = new Vuex.Store({
     },
     restoreLife(state, data) {
       if (state.player.damage > 0) {
-        state.inventory.items.splice(data.itemId, 1)
+        if (data.itemId) {
+          state.inventory.items.splice(data.itemId, 1)
+        }
         state.player.damage -= data.counter
         if (state.player.damage < 0) {
           state.player.damage = 0
         }
-        state.questLog.push(`Player restored 30 HP`)
+        state.questLog.push(`Player restored ${data.counter} HP`)
       } else {
         state.questLog.push(`Player has full health`)
       }
@@ -211,10 +213,11 @@ const store = new Vuex.Store({
       newPlayer.nextLevelMonsters = 5 * newPlayer.level
       state.player = newPlayer
     },
-    attack({state, commit, getters}) {
+    attack({state, commit, getters}, damageSkill=1) {
+      let playerDamage = getters.getPlayerAttack * damageSkill
       let monsterDefender = state.entities.monsters.find(x => x.cellId === state.monsterSelected.cellId)
-      monsterDefender.damage += getters.getPlayerAttack
-      state.questLog.push(`Player deals ${getters.getPlayerAttack} to ${state.monsterSelected.monster.name}`)
+      monsterDefender.damage += playerDamage
+      state.questLog.push(`Player deals ${playerDamage} to ${state.monsterSelected.monster.name}`)
       if (monsterDefender.damage >= state.monsterSelected.totalLife) {
         /* if kill monster*/
         event.stopPropagation()

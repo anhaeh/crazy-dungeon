@@ -10,7 +10,7 @@
           </div>
           <div class="dungeonUI__currentUnnused">
             <div class="text">
-              {{ $store.getters.getPlayer.gold }}
+              Lvl {{ $store.getters.getRoom }}
             </div>
           </div>
         </div>
@@ -32,18 +32,7 @@
       </div>
     </div>
     <div class="dungeonUI__contentBottom">
-      <div class="dungeonUI__skills">
-        <div class="dungeonUI__skillSlot --active">
-          <img src="../../assets/skills/blackFire.png" alt="">
-        </div>
-        <div class="dungeonUI__skillSlot">
-          <img src="../../assets/skills/mindBlast.png" alt="">
-        </div>
-        <div class="dungeonUI__skillSlot"></div>
-        <div class="dungeonUI__skillSlot"></div>
-        <div class="dungeonUI__skillSlot"></div>
-        <div class="dungeonUI__skillSlot"></div>
-      </div>
+      <skills-list></skills-list>
       <div v-if="isMonsterTarget"
            class="dungeonUI__controlsActiveSkill"
            @click="attack">
@@ -64,12 +53,15 @@
 <script>
 import Inventory from './Inventory'
 import LogQuest from './LogQuest'
+import SkillsList from './Skills/SkillList'
+
 
 export default {
   name: "DungeonUI",
   components: {
     Inventory,
-    LogQuest
+    LogQuest,
+    SkillsList
   },
   data () {
     return {
@@ -186,30 +178,6 @@ export default {
   image-rendering: pixelated
 .dungeonUI__logQuestScrollDown
   background-image: url("../../assets/ui/dungeonUI__logQuestScrollDown.png")
-
-.dungeonUI__skills
-  height: calc(2.5 * var(--tile-cell))
-  width: calc(4 * var(--tile-cell))
-  display: flex
-  flex-wrap: wrap
-  padding: calc(3 * var(--pixel-unit)) calc(5 * var(--pixel-unit))
-  box-sizing: border-box
-  align-items: space-between
-  justify-content: space-between
-.dungeonUI__skillSlot
-  height: var(--tile-cell)
-  width: var(--tile-cell)
-  opacity: 1
-  background-image: url("../../assets/ui/dungeonUI__skillSlot.png")
-  background-size: contain
-  image-rendering: pixelated
-  padding: var(--pixel-unit)
-  box-sizing: border-box
-  &.--active
-    box-shadow: inset 0 0 0 var(--pixel-unit) #c89c01
-  img
-    width: 100%
-    height: 100%
 .dungeonUI__controls
   opacity: 1
   position: absolute

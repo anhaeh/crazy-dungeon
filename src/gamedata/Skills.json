@@ -1,0 +1,18 @@
+{
+  "heal": {
+    "name": "Divine healing",
+    "type": "life",
+    "counter": 0.2,
+    "description": "Heal 20% points of life",
+    "points": 5,
+    "image": "mindBlast.png"
+  },
+  "black_fire": {
+    "name": "Black fire",
+    "type": "attack",
+    "counter": 2,
+    "description": "Does the basic attack x 2",
+    "points": 3,
+    "image": "blackFire.png"
+  }
+}
