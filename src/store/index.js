@@ -152,7 +152,7 @@ const store = new Vuex.Store({
     },
     restoreLife(state, data) {
       if (state.player.damage > 0) {
-        if (data.itemId) {
+        if (data.itemId !== undefined) {
           state.inventory.items.splice(data.itemId, 1)
         }
         state.player.damage -= data.counter

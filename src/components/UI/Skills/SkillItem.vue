@@ -3,7 +3,7 @@
     <template v-if="skill">
       <span class="skillPoints">{{ usages }}/{{ skill.points }}</span>
       <img :src="image">
-      <div v-show="disabled" class="disabled"></div>
+      <div v-show="isDisabled" class="isDisabled"></div>
     </template>
   </div>
 </template>
@@ -24,6 +24,14 @@ export default {
       usages: 0
     }
   },
+  watch: {
+    playerLevel: {
+      immediate: true,
+      handler() {
+        this.usages = this.skillName ? this.skill.points : 0
+      }
+    }
+  },
   computed: {
     skill: function () {
       return this.skillName ? skillData[this.skillName] : null
@@ -31,44 +39,37 @@ export default {
     image: function () {
       return require(`@/assets/skills/${this.skill.image}`)
     },
-    disabled: function () {
-      return this.usages === 0 || (this.skill.type === 'attack' && !this.isMonsterTarget)
+    isDisabled: function () {
+      return this.usages === 0 ||
+        (this.skill.type === 'attack' && !this.isMonsterTarget) ||
+        (this.skill.type === 'life' && this.$store.getters.getPlayer.damage === 0)
     },
     isMonsterTarget: function() {
       return this.$store.getters.getMonsterSelected
+    },
+    playerLevel: function () {
+      return this.$store.getters.getPlayer.level
     }
   },
   methods: {
     use: function () {
-      if (this.usages !== 0) {
+      if (this.usages !== 0 && !this.isDisabled) {
         this.$store.commit('pushLog', 'Player use ' + this.skill.name)
-        let result = true
+        this.usages -= 1
         if (this.skill.type === 'attack') {
-          result = this.attack()
+          this.attack()
         } else {
-          result = this.heal()
-        }
-        if (result) {
-          this.usages -= 1
+          this.heal()
         }
       }
     },
     heal: function () {
-      if (this.$store.getters.getPlayer.damage !== 0) {
-        let counterToHeal = this.$store.getters.getPlayerLife * this.skill.counter
-        this.$store.commit('restoreLife', { counter: counterToHeal })
-        return true
-      }
-      this.$store.commit('pushLog', `Player has full health`)
-      return false
+      let counterToHeal = this.$store.getters.getPlayerLife * this.skill.counter
+      this.$store.commit('restoreLife', { counter: counterToHeal })
     },
     attack: function () {
       this.$store.dispatch('attack', this.skill.counter)
-      return true
     }
-  },
-  mounted() {
-    this.usages = this.skillName ? this.skill.points : 0
   }
 }
 </script>
@@ -98,7 +99,7 @@ export default {
   background: #0000008c
   margin-bottom: 2px
   margin-right: 2px
-.disabled
+.isDisabled
   position: absolute
   height: 100%
   width: 100%
