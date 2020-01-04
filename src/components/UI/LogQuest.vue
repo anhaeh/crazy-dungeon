@@ -92,4 +92,14 @@ export default {
   height: calc(10 * var(--pixel-unit))
   right: 10px
   top: calc(17 * var(--pixel-unit))
+
+@media screen and (min-width: 800px)
+  .questLog
+    height: 340px
+    background-size: 100% 100%
+  .feed
+    height: 100%
+    padding: 5px 15px
+    font-size: 15px
+    line-height: 17px
 </style>

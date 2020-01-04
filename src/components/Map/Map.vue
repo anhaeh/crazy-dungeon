@@ -64,4 +64,10 @@ export default {
   margin-top: calc(1.5 * var(--tile-cell))
 .row
   display: flex
+@media screen and (min-width: 800px)
+  .map
+    overflow: hidden
+    --tile-cell: 10vh
+    --pixel-unit: 5px
+    margin-right: 336px;
 </style>

@@ -34,6 +34,7 @@ body
   display: flex
   align-items: center
   justify-content: center
+  image-rendering: pixelated !important
   img
     image-rendering: pixelated !important
 .unselectable
@@ -51,5 +52,5 @@ body
   opacity: 0 !important
 @media (min-width: 900px)
   \:root
-    --tile-cell: 5vw
+    --tile-cell: 50px
 </style>

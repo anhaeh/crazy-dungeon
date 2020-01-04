@@ -48,4 +48,10 @@ export default {
   align-items: flex-start
   justify-content: flex-start
   z-index: 9
+@media screen and (min-width: 800px)
+  .topBar
+    width: 336px
+    as: 0
+    left: initial
+    right: 0
 </style>

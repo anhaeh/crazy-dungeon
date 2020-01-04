@@ -31,6 +31,18 @@
         <div class="dungeonUI__moreMenu"></div>
       </div>
     </div>
+    <div class="dungeonUI__menuBottom">
+      <div class="dungeonUI__menuBottomLeft">
+        <div class="dungeonUI__retreatBtn"></div>
+        <div class="dungeonUI__settingBtn"></div>
+      </div>
+      <div class="dungeonUI__menuBottomRight">
+        <div class="dungeonUI__menuBottomBtn"><span>Stats</span></div>
+        <div class="dungeonUI__menuBottomBtn"><span>Inventory</span></div>
+        <div class="dungeonUI__menuBottomBtn"><span>Quest</span></div>
+        <div class="dungeonUI__menuBottomBtn"><span>Skills</span></div>
+      </div>
+    </div> 
     <div class="dungeonUI__contentBottom">
       <skills-list></skills-list>
       <div v-if="isMonsterTarget"
@@ -38,15 +50,16 @@
            @click="attack">
       </div>
       <div class="dungeonUI__controls">
-      <div v-for="direction in arrows"
-           :key="'arrow' + direction"
-           :class="'dungeonUI__controls-' + direction"
-           @click="move(direction)"
-      >
-      </div>
+        <div v-for="direction in arrows"
+             :key="'arrow' + direction"
+             :class="'dungeonUI__controls-' + direction"
+             @click="move(direction)"
+        >
+        </div>
       </div>
     </div>
     <inventory></inventory>
+    <DungeonSkillsMenu></DungeonSkillsMenu> 
   </div>
 </template>
 
@@ -54,6 +67,7 @@
 import Inventory from './Inventory'
 import LogQuest from './LogQuest'
 import SkillsList from './Skills/SkillList'
+import DungeonSkillsMenu from './DungeonSkillsMenu/DungeonSkillsMenu'
 
 
 export default {
@@ -61,7 +75,8 @@ export default {
   components: {
     Inventory,
     LogQuest,
-    SkillsList
+    SkillsList,
+    DungeonSkillsMenu
   },
   data () {
     return {
@@ -132,11 +147,10 @@ export default {
     background-image: url("../../assets/ui/dungeonUI__more.png")
     background-size: contain
     image-rendering: pixelated
-    &:active, &:focus
-      opacity: 0.5
-      transform: translateY(2px)
     &.dungeonUI__moreMenu
       background-image: url("../../assets/ui/dungeonUI__moreDown.png")
+      &:active, &:focus, .--active
+        background-image: url("../../assets/ui/dungeonUI__moreDownActive.png")
 .dungeonUI__current
   width: calc(5.5 * var(--tile-cell))
   height: calc(1.5 * var(--tile-cell))
@@ -221,4 +235,54 @@ export default {
   bottom: calc(var(--tile-cell) * .75)
   right: var(--tile-cell)
   z-index: 1
+.dungeonUI__menuBottom
+  position: fixed
+  display: flex
+  bottom: 0
+  left: 0
+  height: calc(var(--tile-cell) * 2.5)
+  background-image: url("../../assets/ui/dungeonUI__menuBg.png")
+  background-size: 100% 100%
+  width: 100%
+  z-index: 10
+.dungeonUI__menuBottomLeft
+  display: flex
+  height: 100%
+  flex-direction: column
+  width: calc(var(--tile-cell) * 2)
+.dungeonUI__retreatBtn, .dungeonUI__settingBtn
+  width: 100%
+  background-image: url("../../assets/ui/dungeonUI__retreat.png")
+  height: calc(var(--tile-cell) * 1.25)
+  background-size: 100% 100%
+.dungeonUI__settingBtn
+  background-image: url("../../assets/ui/dungeonUI__settings.png")
+.dungeonUI__menuBottomRight
+  display: flex
+  height: 100%
+  width: calc(var(--tile-cell) * 5)
+  flex-wrap: wrap
+.dungeonUI__menuBottomBtn
+  flex-basis: 50%
+  width: 100%
+  background-image: url("../../assets/ui/dungeonUI__menuOption.png")
+  height: calc(var(--tile-cell) * 1.25)
+  background-size: 100% 100% 
+  display: flex
+  align-items: center
+  justify-content: center
+  span
+    color: white
+    margin-top: -6px
+    font-size: 17px
+    text-shadow: 0 2px 0px black
+@media screen and (min-width: 800px)
+  .dungeonUI
+    right: 0
+    flex-direction: column
+    width: 336px
+    height: calc(100% - 72px)
+    padding-top: 25px
+    left: initial
+    box-sizing: border-box
 </style>
