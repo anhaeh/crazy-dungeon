@@ -28,21 +28,27 @@
 
       <div class="dungeonUI__more">
         <div class="dungeonUI__moreBack"></div>
-        <div class="dungeonUI__moreMenu"></div>
+        <div class="dungeonUI__moreMenu" @click="openMenu"></div>
       </div>
     </div>
-    <div class="dungeonUI__menuBottom">
+    <div v-if="showMenu" class="dungeonUI__menuBottom">
       <div class="dungeonUI__menuBottomLeft">
         <div class="dungeonUI__retreatBtn"></div>
         <div class="dungeonUI__settingBtn"></div>
       </div>
       <div class="dungeonUI__menuBottomRight">
         <div class="dungeonUI__menuBottomBtn"><span>Stats</span></div>
-        <div class="dungeonUI__menuBottomBtn"><span>Inventory</span></div>
+        <div class="dungeonUI__menuBottomBtn"
+             @click="setInventory">
+          <span>Inventory</span>
+        </div>
         <div class="dungeonUI__menuBottomBtn"><span>Quest</span></div>
-        <div class="dungeonUI__menuBottomBtn"><span>Skills</span></div>
+        <div class="dungeonUI__menuBottomBtn"
+             @click="setShowSkills">
+          <span>Skills</span>
+        </div>
       </div>
-    </div> 
+    </div>
     <div class="dungeonUI__contentBottom">
       <skills-list></skills-list>
       <div v-if="isMonsterTarget"
@@ -59,7 +65,7 @@
       </div>
     </div>
     <inventory></inventory>
-    <DungeonSkillsMenu></DungeonSkillsMenu> 
+    <display-skills-menu v-if="showSkills"></display-skills-menu>
   </div>
 </template>
 
@@ -67,7 +73,7 @@
 import Inventory from './Inventory'
 import LogQuest from './LogQuest'
 import SkillsList from './Skills/SkillList'
-import DungeonSkillsMenu from './DungeonSkillsMenu/DungeonSkillsMenu'
+import DisplaySkillsMenu from './Skills/DisplaySkillsMenu'
 
 
 export default {
@@ -76,11 +82,13 @@ export default {
     Inventory,
     LogQuest,
     SkillsList,
-    DungeonSkillsMenu
+    DisplaySkillsMenu
   },
   data () {
     return {
-      cursorCounter: 0
+      cursorCounter: 0,
+      showMenu: false,
+      showSkills: false
     }
   },
   computed: {
@@ -92,6 +100,19 @@ export default {
     }
   },
   methods: {
+    openMenu: function () {
+      this.showMenu = !this.showMenu
+      this.showSkills = false
+      this.$store.commit('setShowInventory', false)
+    },
+    setShowSkills: function () {
+      this.showSkills = !this.showSkills
+      this.$store.commit('setShowInventory', false)
+    },
+    setInventory: function () {
+      this.$store.commit('clickInventory')
+      this.showSkills = false
+    },
     move: function (key) {
       let directions = {
         'top': 1,
@@ -244,7 +265,7 @@ export default {
   background-image: url("../../assets/ui/dungeonUI__menuBg.png")
   background-size: 100% 100%
   width: 100%
-  z-index: 10
+  z-index: 2
 .dungeonUI__menuBottomLeft
   display: flex
   height: 100%
@@ -267,7 +288,7 @@ export default {
   width: 100%
   background-image: url("../../assets/ui/dungeonUI__menuOption.png")
   height: calc(var(--tile-cell) * 1.25)
-  background-size: 100% 100% 
+  background-size: 100% 100%
   display: flex
   align-items: center
   justify-content: center

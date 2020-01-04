@@ -1,5 +1,6 @@
 <template>
   <bottom-dialog
+      class="item-dialog"
       v-if="show"
       @close="$emit('close')"
   >
@@ -63,5 +64,7 @@ export default {
 }
 </script>
 
-<style scoped lang="sass">
+<style lang="sass">
+.item-dialog
+  position: relative !important
 </style>

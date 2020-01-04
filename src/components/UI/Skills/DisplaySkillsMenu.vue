@@ -111,7 +111,7 @@
 
 <script>
 export default {
-  name: "dungeonUI__skillsMenu",
+  name: "DisplaySkillsMenu",
 };
 </script>
 
@@ -187,7 +187,7 @@ export default {
   box-sizing: border-box
 .aff
   margin-left: 10px
-  &:before 
+  &:before
     content: ''
     display: inline-block
     width: 10px
@@ -195,6 +195,6 @@ export default {
     margin-right: 10px
     background-color: #363433
   &.fire
-    &:before 
+    &:before
       background-color: #FB3C00
 </style>

@@ -137,6 +137,9 @@ const store = new Vuex.Store({
     clickInventory(state) {
       state.inventory.show = !state.inventory.show
     },
+    setShowInventory(state, show) {
+      state.inventory.show = show
+    },
     pushLog(state, msg) {
       state.questLog.push(msg)
     },
