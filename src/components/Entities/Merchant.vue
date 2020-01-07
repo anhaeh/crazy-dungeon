@@ -18,10 +18,6 @@ export default {
   props: {
     cellId: { required: true }
   },
-  data () {
-    return {
-    }
-  },
   methods: {
     click: function() {
       if (this.playerInRange) {

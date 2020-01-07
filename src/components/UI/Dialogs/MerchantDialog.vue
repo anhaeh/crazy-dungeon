@@ -26,7 +26,10 @@ export default {
           this.$store.getters.getDialog.entity.type === 'merchant'
     },
   },
-  methods: {
+  beforeDestroy() {
+    if (this.show) {
+      this.$store.commit('setDialogShow', false)
+    }
   }
 }
 </script>

@@ -104,6 +104,7 @@ export default {
       this.showMenu = !this.showMenu
       this.showSkills = false
       this.$store.commit('setShowInventory', false)
+      this.$store.commit('setDialogShow', false)
     },
     setShowSkills: function () {
       this.showSkills = !this.showSkills
