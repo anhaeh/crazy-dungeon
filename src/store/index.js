@@ -60,6 +60,9 @@ const store = new Vuex.Store({
     getPlayerPosition: state => {
       return state.player.position
     },
+    getMerchant: state => {
+      return state.entities.merchant
+    },
     getPlayerRange: state => {
       return state.player.range
     },

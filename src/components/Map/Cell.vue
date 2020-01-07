@@ -12,6 +12,10 @@
     >
     </Monster>
     <Player v-if="hasPlayer"></Player>
+    <Merchant
+        v-if="hasMerchant"
+        :cell-id="id"
+    ></Merchant>
     <Item v-if="hasItem"
              :name="hasItem"
              :key="'item' + '-' + id"
@@ -26,6 +30,7 @@
 import Terrains from '@/gamedata/Terrains.json'
 import Monster from "../Entities/Monster"
 import Player from "../Entities/Player"
+import Merchant from "../Entities/Merchant"
 import Item from "../Entities/Item"
 
 export default {
@@ -36,7 +41,8 @@ export default {
   components: {
     Monster,
     Player,
-    Item
+    Item,
+    Merchant
   },
   name: "Cell",
   watch: {
@@ -74,11 +80,14 @@ export default {
     hasPlayer: function () {
       return this.id === this.$store.getters.getPlayerPosition
     },
+    hasMerchant: function () {
+      return this.$store.getters.getMerchant.cellId === this.id
+    },
     inPlayerRange: function () {
       return this.$store.getters.getPlayerRange.includes(this.id)
     },
     canMove: function () {
-      return !this.hasMonster && this.tile.available && this.inPlayerRange
+      return !this.hasMonster && this.tile.available && this.inPlayerRange && !this.hasMerchant
     }
   },
   methods: {
@@ -103,6 +112,10 @@ export default {
         payload = {
           entity: 'itemPreview',
           item: this.$refs[this.hasItem + this.id].item
+        }
+      } else if (this.hasMerchant) {
+        payload = {
+          entity: 'merchantPreview'
         }
       }
       this.$store.commit('setPreview', payload)

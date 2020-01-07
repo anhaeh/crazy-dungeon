@@ -1,7 +1,7 @@
 <template>
   <div class="itemPreview">
     <div class="legend">
-      {{ entity.item.name }}
+      Merchant
     </div>
     <div class="itemImage">
       <img :src="image">
@@ -15,7 +15,7 @@ export default {
   name: "ItemPreview",
   computed: {
     image: function () {
-      return require('@/assets/items/' + this.entity.item.image)
+      return require('@/assets/npcs/portraits/merchant_01.png')
     }
   }
 }
@@ -25,7 +25,7 @@ export default {
   .itemImage
     width: calc(1.5 * var(--tile-cell))
     height: calc(1.5 * var(--tile-cell))
-    background: url("../../assets/ui/portraitFrame.png")
+    background: url("../../../assets/ui/portraitFrame.png")
     padding: calc(2.5 * var(--pixel-unit))
     image-rendering: pixelated
     background-size: contain

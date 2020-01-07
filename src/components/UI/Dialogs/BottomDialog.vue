@@ -51,7 +51,7 @@ export default {
   left: 0
   height: calc(2.5 * var(--tile-cell))
   width: 100%
-  z-index: 3
+  z-index: 10
 .bottomDialog__message
   height: calc(1.75 * var(--tile-cell))
   width: 100%

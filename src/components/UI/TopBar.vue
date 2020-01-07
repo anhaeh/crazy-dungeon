@@ -12,8 +12,9 @@
 
 <script>
 import { mapGetters } from 'vuex'
-import monsterPreview from './MonsterPreview'
-import itemPreview from './ItemPreview'
+import monsterPreview from './Previews/MonsterPreview'
+import itemPreview from './Previews/ItemPreview'
+import merchantPreview from './Previews/MerchantPreview'
 import playerStats from './PlayerStats'
 
 
@@ -22,7 +23,8 @@ export default {
   components: {
     monsterPreview,
     itemPreview,
-    playerStats
+    playerStats,
+    merchantPreview
   },
   computed: {
     ...mapGetters(["getPreview"]),

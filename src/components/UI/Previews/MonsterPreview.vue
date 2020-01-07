@@ -17,7 +17,7 @@
 </template>
 
 <script>
-import statusBar from './StatusBar'
+import statusBar from '../StatusBar'
 export default {
   props: ['entity'],
   components: {
@@ -41,7 +41,7 @@ export default {
 .monsterPreview__portrait
   width: calc(1.5 * var(--tile-cell))
   height: calc(1.5 * var(--tile-cell))
-  background: url("../../assets/ui/portraitFrame.png")
+  background: url("../../../assets/ui/portraitFrame.png")
   padding: calc(2.5 * var(--pixel-unit))
   image-rendering: pixelated
   background-size: contain

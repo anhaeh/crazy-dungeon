@@ -145,6 +145,7 @@ export default {
         entities: {
           monsters: [],
           items: {},
+          merchant: {}
         },
         map: {}
       }
@@ -209,10 +210,17 @@ export default {
       /* Set portal */
       position = free[Math.floor(Math.random() * free.length)]
       /* remove the free */
+      index = free.indexOf(position)
+      free.splice(index, 1)
       json.portal = position
       // eslint-disable-next-line no-useless-escape
       let cell = position.match(/[\d\.]+|\D+/g)
       json.map[cell[0]][cell[1]] = 'P'
+
+      /* Set merchant */
+      position = free[Math.floor(Math.random() * free.length)]
+      /* remove the free */
+      json.entities.merchant.cellId = position
 
       /* Set theme */
       let themes = ['default', 'forest', 'industrial', 'library', 'snakepit']
