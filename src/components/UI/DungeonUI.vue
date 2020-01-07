@@ -55,6 +55,10 @@
            class="dungeonUI__controlsActiveSkill"
            @click="attack">
       </div>
+      <div v-if="isMerchantInRange"
+           class="dungeonUI__controlsActiveSkill talk"
+           @click="talk">
+      </div>
       <div class="dungeonUI__controls">
         <div v-for="direction in arrows"
              :key="'arrow' + direction"
@@ -97,6 +101,10 @@ export default {
     },
     isMonsterTarget: function() {
       return this.$store.getters.getMonsterSelected
+    },
+    isMerchantInRange: function() {
+      return this.$store.getters.getPlayerRange.includes(this.$store.getters.getMerchant.cellId) &&
+          !this.isMonsterTarget
     }
   },
   methods: {
@@ -134,6 +142,10 @@ export default {
     attack: function() {
       event.preventDefault()
       this.$store.dispatch('attack')
+    },
+    talk: function() {
+      event.preventDefault()
+      document.querySelector('.merchant img').click()
     },
     scrollLog: function (counter) {
       this.cursorCounter += counter
@@ -257,6 +269,8 @@ export default {
   bottom: calc(var(--tile-cell) * .75)
   right: var(--tile-cell)
   z-index: 1
+  &.talk
+    background-image: url("../../assets/ui/dungeonUI__controlsTalk.png")
 .dungeonUI__menuBottom
   position: fixed
   display: flex

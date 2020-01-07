@@ -29,7 +29,7 @@ export default {
       return require('@/assets/monsters/portraits/' + this.entity.image + '.png')
     },
     imageAttack: function () {
-      return require('@/assets/ui/Attack.png')
+      return require('@/assets/ui/dungeonUI__controlsTalk.png')
     }
   }
 }
