@@ -2,6 +2,7 @@
   <div class="monsterPreview">
     <div class="monsterPreview__portrait">
       <img :src="image">
+      <div class="monsterPreview__lvl">{{ entity.monster.level }}</div>
     </div>
     <status-bar :actual="entity.totalLife - entity.monster.damage"
                 :total="entity.totalLife"
@@ -48,6 +49,19 @@ export default {
   box-sizing: border-box
   position: absolute
   right: 0
+  .monsterPreview__lvl
+    position: absolute
+    bottom: 0
+    right: 0
+    height: calc(0.5 * var(--tile-cell))
+    width: calc(0.5 * var(--tile-cell))
+    box-shadow: inset 0 0 0 calc(1 * var(--pixel-unit)) #0e0c05
+    background: #1f1913
+    display: flex
+    align-items: center
+    justify-content: center
+    font-size: 18px
+    color: #805a29
   img
     width: 100%
     height: 100%

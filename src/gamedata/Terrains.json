@@ -9,6 +9,10 @@
     "available": false,
     "theme": true
   },
+  "-1": {
+    "image": "None",
+    "available": false
+  },
   "P": {
     "image": "Portal",
     "available": true

@@ -1,28 +1,31 @@
 <template>
-  <div :class="['cell', {'can-move': canMove }]"
+  <div :class="['cell', {'can-move': canMove }, {'has-fog': hasFog }]"
        :id="'cell-' + id"
-       @click="click"
-       @mouseover="preview">
+       @click="click">
     <img :src="image">
-    <Monster v-if="hasMonster"
-             :name="getMonster.name"
-             :key="'monster-' + id"
-             :ref="getMonster.name + id"
-             :cell-id="id"
-    >
-    </Monster>
-    <Player v-if="hasPlayer"></Player>
-    <Merchant
+    <template v-if="!hasFog">
+      <Monster
+         v-if="hasMonster"
+         :name="getMonster.name"
+         :key="'monster-' + id"
+         :ref="getMonster.name + id"
+         :cell-id="id"
+      >
+      </Monster>
+      <Player v-if="hasPlayer"></Player>
+      <Merchant
         v-if="hasMerchant"
         :cell-id="id"
-    ></Merchant>
-    <Item v-if="hasItem"
-             :name="hasItem"
-             :key="'item' + '-' + id"
-             :ref="hasItem + id"
-             :cell-id="id"
-    >
-    </Item>
+      ></Merchant>
+      <Item
+        v-if="hasItem"
+        :name="hasItem"
+        :key="'item' + '-' + id"
+        :ref="hasItem + id"
+        :cell-id="id"
+      >
+      </Item>
+    </template>
   </div>
 </template>
 
@@ -45,18 +48,6 @@ export default {
     Merchant
   },
   name: "Cell",
-  watch: {
-    type: {
-      immediate: true,
-      handler () {
-        let type = this.type
-        if (this.type === undefined) {
-          type = '1'
-        }
-        this.tile = Terrains[type]
-      }
-    }
-  },
   data () {
     return {
       tile: null
@@ -87,14 +78,17 @@ export default {
       return this.$store.getters.getPlayerRange.includes(this.id)
     },
     canMove: function () {
-      return !this.hasMonster && this.tile.available && this.inPlayerRange && !this.hasMerchant
+      return this.inPlayerRange && !this.hasMonster && this.tile.available && !this.hasMerchant
+    },
+    hasFog: function () {
+      return !this.$store.getters.getMapDiscover.includes(this.id) && !this.hasPlayer && this.type !== '1'
     }
   },
   methods: {
     click: function() {
       if (this.canMove) {
         this.$store.commit('setPlayerPosition', this.id)
-      } else {
+      } else if (!this.hasFog) {
         this.preview()
       }
     },
@@ -120,6 +114,13 @@ export default {
       }
       this.$store.commit('setPreview', payload)
     }
+  },
+  created () {
+    let type = this.type
+    if (this.type === undefined) {
+      type = '-1'
+    }
+    this.tile = Terrains[type]
   }
 }
 </script>
@@ -133,4 +134,6 @@ export default {
       position: absolute
       width: 100%
       height: 100%
+  .has-fog
+    filter: opacity(0.5)
 </style>

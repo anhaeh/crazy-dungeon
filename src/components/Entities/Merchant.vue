@@ -21,6 +21,7 @@ export default {
   methods: {
     click: function() {
       if (this.playerInRange) {
+        this.$store.commit('setMonsterSelected', null)
         this.$store.commit('setDialog', {
           type: 'merchant',
         })

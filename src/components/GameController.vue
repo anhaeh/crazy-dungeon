@@ -4,6 +4,7 @@
 
 <script>
 import { mapGetters } from 'vuex'
+import { movePlayer } from "@/modules/player"
 
 export default {
   name: "GameController",
@@ -24,7 +25,9 @@ export default {
           cellCanMove.forEach(x => {
             let row = parseInt(player[0]) + x[0]
             let letter = String.fromCharCode(player[1].charCodeAt() + x[1])
-            cells.push(`${row}${letter}`)
+            let cellId = `${row}${letter}`
+            cells.push(cellId)
+            this.$store.commit('setMapDiscover', cellId)
           })
           this.$store.commit('setPlayerRange', cells)
           let cellsViewport = []
@@ -122,15 +125,14 @@ export default {
           'd': 3,
           's': 2
         }
-        const key = event.key.toLowerCase()
-        // we are only interested in alphanumeric keys
-        if (Object.keys(directions).indexOf(key) === -1) return
-        let cellToMove = this.$store.getters.getPlayerRange[directions[key]]
-        try {
-          document.querySelector('#cell-' + cellToMove).click()
-          document.querySelector('#cell-' + cellToMove + ' .monster').click()
-          // eslint-disable-next-line no-empty
-        } catch (e) {
+        if (event.code === 'Space' && this.$store.getters.getMonsterSelected) {
+          this.$store.dispatch('attack')
+        } else {
+          const key = event.key.toLowerCase()
+          // we are only interested in alphanumeric keys
+          if (Object.keys(directions).indexOf(key) === -1) return
+          let cellToMove = this.$store.getters.getPlayerRange[directions[key]]
+          movePlayer(cellToMove)
         }
       })
     },
@@ -170,6 +172,33 @@ export default {
         })
       }
 
+      /* Set player */
+      let playerPosition = free[Math.floor(Math.random() * free.length)]
+      /* remove the free */
+      let index = free.indexOf(playerPosition)
+      free.splice(index, 1)
+      json.player_init = playerPosition
+
+      /* Set portal */
+      // eslint-disable-next-line no-useless-escape
+      let playerCell = playerPosition.match(/[\d\.]+|\D+/g)
+      let farFromPlayer = free.filter(x => {
+        // eslint-disable-next-line no-useless-escape
+        let cellPortal = x.match(/[\d\.]+|\D+/g)
+        if (Math.abs(cellPortal[0] - playerCell[0]) > 7) {
+          return x
+        }
+      })
+      let portalPosition = farFromPlayer[Math.floor(Math.random() * farFromPlayer.length)]
+      /* remove the free */
+      index = free.indexOf(portalPosition)
+      free.splice(index, 1)
+      json.portal = portalPosition
+      // eslint-disable-next-line no-useless-escape
+      let cell = portalPosition.match(/[\d\.]+|\D+/g)
+      json.map[cell[0]][cell[1]] = 'P'
+
+
       /* Set monsters */
       let monstersList = ['goblin', 'golem', 'gorgon', 'imp']
       let possibleLevels = []
@@ -200,27 +229,12 @@ export default {
         json.entities.items[position] = item
       })
 
-      /* Set player */
-      let position = free[Math.floor(Math.random() * free.length)]
-      /* remove the free */
-      let index = free.indexOf(position)
-      free.splice(index, 1)
-      json.player_init = position
-
-      /* Set portal */
-      position = free[Math.floor(Math.random() * free.length)]
-      /* remove the free */
-      index = free.indexOf(position)
-      free.splice(index, 1)
-      json.portal = position
-      // eslint-disable-next-line no-useless-escape
-      let cell = position.match(/[\d\.]+|\D+/g)
-      json.map[cell[0]][cell[1]] = 'P'
-
-      /* Set merchant */
-      position = free[Math.floor(Math.random() * free.length)]
-      /* remove the free */
-      json.entities.merchant.cellId = position
+      if (this.$store.getters.getRoom % 2) {
+        /* Set merchant */
+        let positionMerchant = farFromPlayer[Math.floor(Math.random() * farFromPlayer.length)]
+        /* remove the free */
+        json.entities.merchant.cellId = positionMerchant
+      }
 
       /* Set theme */
       let themes = ['default', 'forest', 'industrial', 'library', 'snakepit']

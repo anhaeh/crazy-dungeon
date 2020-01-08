@@ -3,7 +3,7 @@
     <div class="row" v-for="row in orderedMap" :key="'row' + row.id">
       <Cell
           v-for="cellKey in row.cells"
-          :key="row.id + cellKey"
+          :key="row.id + cellKey + getRoom"
           :id="row.id + cellKey"
           :type="getCell(row.id, cellKey)"
       ></Cell>
@@ -40,6 +40,9 @@ export default {
           cells: this.getCells(x)
         }
       })
+    },
+    getRoom: function () {
+      return this.$store.getters.getRoom
     }
   },
   methods: {

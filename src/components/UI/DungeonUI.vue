@@ -78,7 +78,7 @@ import Inventory from './Inventory'
 import LogQuest from './LogQuest'
 import SkillsList from './Skills/SkillList'
 import DisplaySkillsMenu from './Skills/DisplaySkillsMenu'
-
+import { movePlayer} from "@/modules/player"
 
 export default {
   name: "DungeonUI",
@@ -130,14 +130,7 @@ export default {
         'bottom': 2
       }
       let cellToMove = this.$store.getters.getPlayerRange[directions[key]]
-      try {
-        document.querySelector('#cell-' + cellToMove).click()
-        if (!this.isMonsterTarget || (this.isMonsterTarget && this.isMonsterTarget.cellId !== cellToMove)) {
-          document.querySelector('#cell-' + cellToMove + ' .monster').click()
-        }
-        // eslint-disable-next-line no-empty
-      } catch (e) {
-      }
+      movePlayer(cellToMove)
     },
     attack: function() {
       event.preventDefault()

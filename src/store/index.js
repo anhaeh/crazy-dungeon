@@ -10,6 +10,7 @@ const store = new Vuex.Store({
     room: 0,
     portalPosition: null,
     map: null,
+    mapDiscover: [],
     theme: 'default',
     entities: null,
     preview: null,
@@ -78,6 +79,9 @@ const store = new Vuex.Store({
     getMap: state => {
       return state.map
     },
+    getMapDiscover: state => {
+      return state.mapDiscover
+    },
     getPortalPosition: state => {
       return state.portalPosition
     },
@@ -112,6 +116,9 @@ const store = new Vuex.Store({
     },
     setPlayerRange(state, playerRange) {
       state.player.range = playerRange
+    },
+    setMapDiscover(state, cellId) {
+      state.mapDiscover.push(cellId)
     },
     setPlayerViewport(state, playerViewport) {
       state.player.viewport = playerViewport
@@ -205,6 +212,7 @@ const store = new Vuex.Store({
       state.portalPosition = data.portal
       state.theme = data.theme
       state.room += 1
+      state.mapDiscover = []
       state.questLog = ['Begin room']
     },
     initGame({ commit }) {
