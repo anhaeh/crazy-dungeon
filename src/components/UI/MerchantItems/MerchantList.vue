@@ -1,16 +1,16 @@
 <template>
-  <div class="dungeonUI__skillsMenuList" v-if="merchant.show">
-    <div class="dungeonUI__skillsMenuTabs">
-      <div class="dungeonUI__skillsMenuTabOption">
+  <div class="dungeonUI__skillsMenuList" v-if="$store.getters.getMerchant.show">
+    <div class="dungeonUI__skillsMenuTabs" :class="{'--right': isPotion}">
+      <div class="dungeonUI__skillsMenuTabOption" @click="isPotion = false">
         <span>Items</span>
       </div>
-      <div class="dungeonUI__skillsMenuTabOption">
+      <div class="dungeonUI__skillsMenuTabOption" @click="isPotion = true">
         <span>Potions</span>
       </div>
     </div>
     <div class="dungeonUI__skillsMenuBody">
       <item
-        v-for="itemName in merchant.items"
+        v-for="itemName in items"
         :key="'merch-item-' + itemName"
         :name="itemName"
       ></item>
@@ -20,6 +20,7 @@
 </template>
 
 <script>
+import ItemsData from '@/gamedata/Items.json'
 import merchantDialog from '../Dialogs/MerchantDialog'
 import item from './MerchantItem'
 
@@ -29,9 +30,19 @@ export default {
     merchantDialog,
     item
   },
+  data () {
+    return {
+      isPotion: false
+    }
+  },
   computed: {
-    merchant : function () {
-      return this.$store.getters.getMerchant
+    items : function () {
+      return this.$store.getters.getMerchant.items.filter(x => {
+        if (this.isPotion) {
+          return ItemsData[x].type === 'potion'
+        }
+        return ItemsData[x].type !== 'potion'
+      })
     }
   }
 };
