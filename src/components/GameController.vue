@@ -5,6 +5,7 @@
 <script>
 import { mapGetters } from 'vuex'
 import { movePlayer } from "@/modules/player"
+import itemsData from '@/gamedata/Items.json'
 
 export default {
   name: "GameController",
@@ -179,26 +180,6 @@ export default {
       free.splice(index, 1)
       json.player_init = playerPosition
 
-      /* Set portal */
-      // eslint-disable-next-line no-useless-escape
-      let playerCell = playerPosition.match(/[\d\.]+|\D+/g)
-      let farFromPlayer = free.filter(x => {
-        // eslint-disable-next-line no-useless-escape
-        let cellPortal = x.match(/[\d\.]+|\D+/g)
-        if (Math.abs(cellPortal[0] - playerCell[0]) > 7) {
-          return x
-        }
-      })
-      let portalPosition = farFromPlayer[Math.floor(Math.random() * farFromPlayer.length)]
-      /* remove the free */
-      index = free.indexOf(portalPosition)
-      free.splice(index, 1)
-      json.portal = portalPosition
-      // eslint-disable-next-line no-useless-escape
-      let cell = portalPosition.match(/[\d\.]+|\D+/g)
-      json.map[cell[0]][cell[1]] = 'P'
-
-
       /* Set monsters */
       let monstersList = ['goblin', 'golem', 'gorgon', 'imp']
       let possibleLevels = []
@@ -219,21 +200,51 @@ export default {
         })
       }
 
-      /* Set item random by level */
-      let items = ['sword1', 'potion', 'potion', 'armor1', 'ring1']
-      items.forEach(item => {
-        let position = free[Math.floor(Math.random() * free.length)]
-        /* remove the free */
-        let index = free.indexOf(position)
-        free.splice(index, 1)
-        json.entities.items[position] = item
+      /* Get cells far from player */
+      // eslint-disable-next-line no-useless-escape
+      let playerCell = playerPosition.match(/[\d\.]+|\D+/g)
+      let farFromPlayer = free.filter(x => {
+        // eslint-disable-next-line no-useless-escape
+        let cellPortal = x.match(/[\d\.]+|\D+/g)
+        if (Math.abs(cellPortal[0] - playerCell[0]) > 7) {
+          return x
+        }
       })
+      /* Set portal */
+      let portalPosition = farFromPlayer[Math.floor(Math.random() * farFromPlayer.length)]
+      /* remove the free */
+      index = farFromPlayer.indexOf(portalPosition)
+      farFromPlayer.splice(index, 1)
+      json.portal = portalPosition
+      // eslint-disable-next-line no-useless-escape
+      let cell = portalPosition.match(/[\d\.]+|\D+/g)
+      json.map[cell[0]][cell[1]] = 'P'
 
+      /* Set merchant */
       if (this.$store.getters.getRoom % 2) {
-        /* Set merchant */
         let positionMerchant = farFromPlayer[Math.floor(Math.random() * farFromPlayer.length)]
         /* remove the free */
+        index = farFromPlayer.indexOf(portalPosition)
+        farFromPlayer.splice(index, 1)
         json.entities.merchant.cellId = positionMerchant
+        json.entities.merchant.items = ['potion', 'bigPotion']
+        json.entities.merchant.show = false
+        let items = Object.keys(itemsData).filter(x => itemsData[x].type !== 'potion')
+        for (let i = 0; i < 3; i++) {
+          let itemToAdd = items[Math.floor(Math.random() * items.length)]
+          index = items.indexOf(itemToAdd)
+          items.splice(index, 1)
+          json.entities.merchant.items.push(itemToAdd)
+        }
+      }
+
+      /* Set random potions */
+      if (!(this.$store.getters.getRoom % 2)) {
+        let position = farFromPlayer[Math.floor(Math.random() * farFromPlayer.length)]
+        /* remove the free */
+        index = farFromPlayer.indexOf(portalPosition)
+        farFromPlayer.splice(index, 1)
+        json.entities.items[position] = 'potion'
       }
 
       /* Set theme */

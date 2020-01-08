@@ -1,12 +1,11 @@
 <template>
   <bottom-dialog
-      v-if="show"
+    @close="close"
   >
     <div slot="title">Merchant</div>
     <div slot="legend"></div>
     <div slot="text">Hello friend. Do you need something?</div>
     <div slot="actions">
-      <div class="bottomDialog__actionsBtn">Buy</div>
     </div>
   </bottom-dialog>
 </template>}
@@ -19,16 +18,9 @@ export default {
   components: {
     BottomDialog
   },
-  computed: {
-    show: function () {
-      return this.$store.getters.getDialog.show &&
-          this.$store.getters.getDialog.entity &&
-          this.$store.getters.getDialog.entity.type === 'merchant'
-    },
-  },
-  beforeDestroy() {
-    if (this.show) {
-      this.$store.commit('setDialogShow', false)
+  methods: {
+    close: function () {
+      this.$store.commit('setDialogMerchant', false)
     }
   }
 }

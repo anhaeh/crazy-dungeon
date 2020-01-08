@@ -51,8 +51,7 @@ export default {
   image-rendering: pixelated
   &.--monster
     .statusCurrent
-      margin: auto
-      margin-right: 0
+      margin: auto 0 auto auto
       background-position: right center
     .legend
       text-align: right

@@ -5,15 +5,35 @@
     "legend": "+1 Attack",
     "counter": 1,
     "type": "attack",
-    "description": "This old sword give you + 1 attack"
+    "description": "This old sword give you + 1 attack",
+    "price": 100
+  },
+  "sword2": {
+    "name": "Big Sword",
+    "image": "Item__01.png",
+    "legend": "+3 Attack",
+    "counter": 3,
+    "type": "attack",
+    "description": "This big sword give you + 3 attack",
+    "price": 200
   },
   "potion": {
-    "name": "Health Potion",
-    "image": "Item__29.png",
+    "name": "Potion",
+    "image": "Item__28.png",
     "legend": "+30 HP",
     "type": "potion",
     "counter": 30,
-    "description": "This potion restore 30 points of life"
+    "description": "This potion restore 30 points of life",
+    "price": 60
+  },
+  "bigPotion": {
+    "name": "Big Potion",
+    "image": "Item__29.png",
+    "legend": "+100 HP",
+    "type": "potion",
+    "counter": 100,
+    "description": "This potion restore 100 points of life",
+    "price": 200
   },
   "armor1": {
     "name": "Iron Armor",
@@ -21,7 +41,26 @@
     "legend": "+10 HP",
     "counter": 10,
     "type": "life",
-    "description": "This basic armor give you + 10 health"
+    "description": "This basic armor give you + 10 health",
+    "price": 150
+  },
+  "armor2": {
+    "name": "Medium Armor",
+    "image": "Item__58.png",
+    "legend": "+35 HP",
+    "counter": 35,
+    "type": "life",
+    "description": "This medium armor give you + 35 health",
+    "price": 300
+  },
+  "armor3": {
+    "name": "Magic Armor",
+    "image": "Item__59.png",
+    "legend": "+75 HP",
+    "counter": 75,
+    "type": "life",
+    "description": "This magic armor give you + 35 health",
+    "price": 500
   },
   "ring1": {
     "name": "Gold ring",
@@ -29,6 +68,7 @@
     "legend": "+10% gold",
     "description": "This ring give you + 10% of gold from monsters",
     "counter": 1.1,
-    "type": "gold"
+    "type": "gold",
+    "price": 150
   }
 }

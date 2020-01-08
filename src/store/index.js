@@ -163,6 +163,9 @@ const store = new Vuex.Store({
     clickDialog(state) {
       state.dialog.show = !state.dialog.show
     },
+    setDialogMerchant(state, show) {
+      state.entities.merchant.show = show
+    },
     restoreLife(state, data) {
       if (state.player.damage > 0) {
         if (data.itemId !== undefined) {
@@ -227,6 +230,13 @@ const store = new Vuex.Store({
       newPlayer.nextLevelMonsters = 5 * newPlayer.level
       state.player = newPlayer
     },
+    buyItem({state, commit}, item) {
+      let index = state.entities.merchant.items.indexOf(item.name)
+      state.entities.merchant.items.splice(index, 1)
+      state.player.gold -= item.obj.price
+      commit('addItemToInventory', item.obj)
+      commit('pushLog', 'Player bought ' + item.obj.name)
+    },
     attack({state, commit, getters}, damageSkill=1) {
       let playerDamage = getters.getPlayerAttack * damageSkill
       let monsterDefender = state.entities.monsters.find(x => x.cellId === state.monsterSelected.cellId)
@@ -248,7 +258,6 @@ const store = new Vuex.Store({
         state.questLog.push(`${state.monsterSelected.monster.name} deals ${monsterAttack} damage`)
         commit('setPlayerDamage', monsterAttack)
       }
-
     }
   }
 })

@@ -2,19 +2,14 @@
   <div class="merchant"
   >
     <img :src="image" alt="" @click="click">
-    <merchant-dialog></merchant-dialog>
   </div>
 </template>
 
 <script>
 import { mapGetters } from 'vuex'
-import merchantDialog from '@/components/UI/Dialogs/MerchantDialog'
 
 export default {
   name: "Merchant",
-  components: {
-    merchantDialog
-  },
   props: {
     cellId: { required: true }
   },
@@ -22,9 +17,7 @@ export default {
     click: function() {
       if (this.playerInRange) {
         this.$store.commit('setMonsterSelected', null)
-        this.$store.commit('setDialog', {
-          type: 'merchant',
-        })
+        this.$store.commit('setDialogMerchant', true)
       }
     }
   },
