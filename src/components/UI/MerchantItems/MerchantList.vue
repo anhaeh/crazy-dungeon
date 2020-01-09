@@ -15,7 +15,9 @@
         :name="itemName"
       ></item>
     </div>
-    <merchant-dialog></merchant-dialog>
+    <merchant-dialog
+        @close="isPotion = false"
+    ></merchant-dialog>
   </div>
 </template>
 

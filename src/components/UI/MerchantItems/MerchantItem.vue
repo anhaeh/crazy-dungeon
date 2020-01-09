@@ -89,4 +89,10 @@ export default {
     margin-right: 10px
     background-color: #ffe91a
     border-radius: 25px
+.buy button
+  font-family: 'OpenSansPXBold'
+  font-size: 1.1rem
+  background-color: #672806
+  border-color: #533a18
+  color: white
 </style>

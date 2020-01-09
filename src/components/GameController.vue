@@ -239,13 +239,11 @@ export default {
       }
 
       /* Set random potions */
-      if (!(this.$store.getters.getRoom % 2)) {
-        let position = farFromPlayer[Math.floor(Math.random() * farFromPlayer.length)]
-        /* remove the free */
-        index = farFromPlayer.indexOf(portalPosition)
-        farFromPlayer.splice(index, 1)
-        json.entities.items[position] = 'potion'
-      }
+      let position = farFromPlayer[Math.floor(Math.random() * farFromPlayer.length)]
+      /* remove the free */
+      index = farFromPlayer.indexOf(portalPosition)
+      farFromPlayer.splice(index, 1)
+      json.entities.items[position] = this.$store.getters.getPlayer.level < 4 ? 'potion' : 'bigPotion'
 
       /* Set theme */
       let themes = ['default', 'forest', 'industrial', 'library', 'snakepit']

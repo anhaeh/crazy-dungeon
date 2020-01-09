@@ -21,6 +21,7 @@ export default {
   methods: {
     close: function () {
       this.$store.commit('setDialogMerchant', false)
+      this.$emit('close')
     }
   }
 }

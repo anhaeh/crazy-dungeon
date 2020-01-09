@@ -16,7 +16,7 @@ import DungeonUI from "@/components/UI/DungeonUI"
 import TopBar from "@/components/UI/TopBar"
 
 export default {
-  name: "Room",
+  name: "Dungeon",
   components: {
     TopBar,
     GameController,

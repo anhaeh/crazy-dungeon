@@ -81,7 +81,7 @@ export default {
       return this.inPlayerRange && !this.hasMonster && this.tile.available && !this.hasMerchant
     },
     hasFog: function () {
-      return !this.$store.getters.getMapDiscover.includes(this.id) && !this.hasPlayer && this.type !== '1'
+      return !this.$store.getters.getMapDiscover.includes(this.id) && !this.hasPlayer
     }
   },
   methods: {

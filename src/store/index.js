@@ -130,10 +130,16 @@ const store = new Vuex.Store({
       state.preview = preview
     },
     setDefeatMonster(state) {
-      let amountGold = state.monsterSelected.monster.gold + state.monsterSelected.level
+      let itemsBuffGold = state.inventory.items.filter(x => x.type === 'gold')
+      let multiplier = 1
+      itemsBuffGold.forEach(item => {
+        multiplier += item.counter
+      })
+      let amountGold = state.monsterSelected.monster.gold + (state.monsterSelected.level * 10)
       state.player.defeatMonsters += 1
-      state.player.gold += amountGold
-      state.questLog.push(`Monster drop ${amountGold} gold`)
+      let gold = Math.ceil(amountGold * multiplier)
+      state.player.gold += gold
+      state.questLog.push(`Monster drop ${gold} gold`)
     },
     setPlayerDead(state) {
       state.player.isDead = true
@@ -194,6 +200,7 @@ const store = new Vuex.Store({
         level: 1,
         isDead: false
       }
+      state.inventory.items = []
       let heroeData = heroes[heroClass]
       Object.assign(state.player, heroeData)
     },
@@ -231,6 +238,10 @@ const store = new Vuex.Store({
       state.player = newPlayer
     },
     buyItem({state, commit}, item) {
+      if (state.inventory.maxSize === state.inventory.items.length) {
+        commit('pushLog', 'Inventory is full')
+        return false
+      }
       let index = state.entities.merchant.items.indexOf(item.name)
       state.entities.merchant.items.splice(index, 1)
       state.player.gold -= item.obj.price
