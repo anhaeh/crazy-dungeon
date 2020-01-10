@@ -26,9 +26,9 @@
   "drain_life": {
     "name": "Drain Life",
     "type": "Drain",
-    "counter": 1.5,
-    "drain": 0.20,
-    "description": "Make the basic attack x 1.5 and you recover 20% of the damage done",
+    "counter": 2,
+    "drain": 0.3,
+    "description": "Make the basic attack x 2 and you recover 30% of the damage done",
     "points": 5,
     "image": "drain.jpg"
   },
