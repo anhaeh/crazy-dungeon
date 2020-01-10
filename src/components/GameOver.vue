@@ -10,7 +10,7 @@ export default {
   name: "GameOver",
   methods: {
     reload: function () {
-      this.$router.push({name: 'menu'})
+      this.$router.push({name: 'main-menu'})
     }
   },
   computed: {

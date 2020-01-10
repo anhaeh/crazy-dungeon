@@ -23,6 +23,9 @@ export default {
     Map,
     DungeonUI,
     GameOver
+  },
+  created() {
+    this.$store.commit('setClassSelected', this.$route.params.class)
   }
 }
 </script>

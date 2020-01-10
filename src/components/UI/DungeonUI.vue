@@ -8,7 +8,10 @@
               {{ $store.getters.getPlayer.gold }}
             </div>
           </div>
-          <div class="dungeonUI__currentUnnused">
+          <div class="dungeonUI__currentExp">
+            <div class="title">
+              Exp
+            </div>
             <div class="text">
               {{ $store.getters.getPlayer.defeatMonsters }} / {{ $store.getters.getPlayer.nextLevelMonsters }}
             </div>
@@ -35,7 +38,7 @@
     </div>
     <div v-if="showMenu" class="dungeonUI__menuBottom">
       <div class="dungeonUI__menuBottomLeft">
-        <div class="dungeonUI__retreatBtn" @click="$router.push({name: 'menu'})"></div>
+        <div class="dungeonUI__retreatBtn" @click="$router.push({name: 'main-menu'})"></div>
         <div class="dungeonUI__settingBtn"></div>
       </div>
       <div class="dungeonUI__menuBottomRight">
@@ -194,7 +197,7 @@ export default {
 .dungeonUI__currentBars
   display: flex
   width: 100%
-.dungeonUI__currentGold, .dungeonUI__currentUnnused
+.dungeonUI__currentGold, .dungeonUI__currentExp
   display: flex
   align-items: center
   z-index: 0
@@ -207,11 +210,17 @@ export default {
   .text
     color: #c0a23b
     padding-left: calc(1.15 * var(--tile-cell))
-    font-size: 1.25rem
+    font-size: 1rem
     line-height: 1rem
-.dungeonUI__currentUnnused
+.dungeonUI__currentExp
   min-width: calc(2.5 * var(--tile-cell))
   background-image: url("../../assets/ui/dungeonUI__currentUn.png")
+  .text
+    padding-left: calc(0.75 * var(--tile-cell) - 23px)
+  .title
+    margin-left: 15px
+    color: #c0a23b
+    text-shadow: 0 2px 0 black
 .dungeonCurrentLog
   display: flex
   width: calc(5.5 * var(--tile-cell))

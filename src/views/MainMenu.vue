@@ -18,7 +18,7 @@
 
 <script>
 export default {
-  name: "ClassSelect",
+  name: "MainMenu",
   data() {
     return {
       selected: ''
@@ -26,8 +26,7 @@ export default {
   },
   methods: {
     begin: function () {
-      this.$store.commit('setClassSelected', this.selected.toLowerCase())
-      this.$router.push({name: 'dungeon'})
+      this.$router.push({ name: 'dungeon', params: { class: this.selected.toLowerCase() }})
     }
   }
 }
