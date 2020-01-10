@@ -6,6 +6,7 @@ Vue.use(Vuex)
 
 const store = new Vuex.Store({
   state: {
+    classSelected: '',
     player: { position: null },
     room: 0,
     portalPosition: null,
@@ -102,6 +103,9 @@ const store = new Vuex.Store({
     },
   },
   mutations: {
+    setClassSelected(state, classSelected) {
+      state.classSelected = classSelected
+    },
     setMonsterSelected(state, monsterSelected) {
       state.monsterSelected = monsterSelected
     },
@@ -186,9 +190,9 @@ const store = new Vuex.Store({
         state.questLog.push(`Player has full health`)
       }
     },
-    initializePlayer(state, heroClass) {
+    initializePlayer(state) {
       state.player = {
-        class: heroClass,
+        class: state.classSelected,
         position: null,
         gold: 0,
         damage: 0,
@@ -201,7 +205,7 @@ const store = new Vuex.Store({
         isDead: false
       }
       state.inventory.items = []
-      let heroeData = heroes[heroClass]
+      let heroeData = heroes[state.classSelected]
       Object.assign(state.player, heroeData)
     },
     levelUp(state) {
@@ -226,7 +230,7 @@ const store = new Vuex.Store({
       state.questLog = ['Begin room']
     },
     initGame({ commit }) {
-      commit('initializePlayer', 'necromancer')
+      commit('initializePlayer')
     },
     levelUp({ state }) {
       let newPlayer = Object.assign({}, state.player)
@@ -248,8 +252,8 @@ const store = new Vuex.Store({
       commit('addItemToInventory', item.obj)
       commit('pushLog', 'Player bought ' + item.obj.name)
     },
-    attack({state, commit, getters}, damageSkill=1) {
-      let playerDamage = getters.getPlayerAttack * damageSkill
+    attack({state, commit, getters}, payload = { damageSkill: 1 }) {
+      let playerDamage = Math.ceil(getters.getPlayerAttack * payload.damageSkill)
       let monsterDefender = state.entities.monsters.find(x => x.cellId === state.monsterSelected.cellId)
       monsterDefender.damage += playerDamage
       state.questLog.push(`Player deals ${playerDamage} to ${state.monsterSelected.monster.name}`)
@@ -265,9 +269,11 @@ const store = new Vuex.Store({
           state.questLog.push(`Player level up`)
         }
       } else {
-        let monsterAttack = state.monsterSelected.monster.attack + monsterDefender.level
-        state.questLog.push(`${state.monsterSelected.monster.name} deals ${monsterAttack} damage`)
-        commit('setPlayerDamage', monsterAttack)
+        if (payload.range !== true) {
+          let monsterAttack = state.monsterSelected.monster.attack + monsterDefender.level
+          state.questLog.push(`${state.monsterSelected.monster.name} deals ${monsterAttack} damage`)
+          commit('setPlayerDamage', monsterAttack)
+        }
       }
     }
   }

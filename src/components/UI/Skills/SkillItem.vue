@@ -41,8 +41,8 @@ export default {
     },
     isDisabled: function () {
       return this.usages === 0 ||
-        (this.skill.type === 'attack' && !this.isMonsterTarget) ||
-        (this.skill.type === 'life' && this.$store.getters.getPlayer.damage === 0)
+        (this.skill.type !== 'Healing' && !this.isMonsterTarget) ||
+        (this.skill.type === 'Healing' && this.$store.getters.getPlayer.damage === 0)
     },
     isMonsterTarget: function() {
       return this.$store.getters.getMonsterSelected
@@ -56,19 +56,28 @@ export default {
       if (this.usages !== 0 && !this.isDisabled) {
         this.$store.commit('pushLog', 'Player use ' + this.skill.name)
         this.usages -= 1
-        if (this.skill.type === 'attack') {
+        if (this.skill.type === 'Melee') {
           this.attack()
+        } else if (this.skill.type === 'Drain') {
+          this.drain()
+        } else if (this.skill.type === 'Range') {
+          this.attack(true)
         } else {
           this.heal()
         }
       }
     },
     heal: function () {
-      let counterToHeal = this.$store.getters.getPlayerLife * this.skill.counter
+      let counterToHeal = Math.ceil(this.$store.getters.getPlayerLife * this.skill.counter)
       this.$store.commit('restoreLife', { counter: counterToHeal })
     },
-    attack: function () {
-      this.$store.dispatch('attack', this.skill.counter)
+    attack: function (range=false) {
+      this.$store.dispatch('attack', { damageSkill: this.skill.counter, range: range })
+    },
+    drain: function () {
+      this.attack()
+      let damage = Math.ceil(this.$store.getters.getPlayerAttack * this.skill.drain)
+      this.$store.commit('restoreLife', { counter: damage })
     }
   }
 }

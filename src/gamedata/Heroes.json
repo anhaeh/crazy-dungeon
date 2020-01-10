@@ -1,24 +1,32 @@
 {
-  "warrior": {
-    "name": "Warrior",
-    "initialHealth": 45,
-    "attack": 5,
-    "image": "warrior.png"
+  "paladin": {
+    "name": "Paladin",
+    "initialHealth": 55,
+    "attack": 10,
+    "image": "paladin.png",
+    "skills": [
+      "fury_attack",
+      "heal"
+    ]
   },
   "wizard": {
     "name": "Wizard",
-    "initialHealth": 35,
-    "attack": 6,
-    "image": "wizard.png"
+    "initialHealth": 50,
+    "attack": 8,
+    "image": "wizard.png",
+    "skills": [
+      "explosion",
+      "storm"
+    ]
   },
   "necromancer": {
     "name": "Necromancer",
-    "initialHealth": 40,
+    "initialHealth": 45,
     "attack": 9,
     "image": "necromancer.png",
     "skills": [
-      "black_fire",
-      "heal"
+      "bones_breaker",
+      "drain_life"
     ]
   }
 }
