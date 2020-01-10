@@ -10,7 +10,7 @@
           </div>
           <div class="dungeonUI__currentUnnused">
             <div class="text">
-              Lvl {{ $store.getters.getRoom }}
+              {{ $store.getters.getPlayer.defeatMonsters }} / {{ $store.getters.getPlayer.nextLevelMonsters }}
             </div>
           </div>
         </div>
