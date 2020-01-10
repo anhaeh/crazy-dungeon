@@ -1,9 +1,7 @@
 <template>
   <div class="container">
-    <h2>Crazy dungeons</h2>
-    <h3>
-      Choose your class
-    </h3>
+    <h1>Crazy dungeons</h1>
+    <h2>Choose your class</h2>
     <select class="style" v-model="selected">
       <option class=""
           v-for="heroClass in ['Paladin', 'Wizard', 'Necromancer']"
@@ -13,7 +11,7 @@
       </option>
     </select>
     <div class="new style">
-      <button @click="begin">Start Game</button>
+      <button @click="begin" :disabled="!selected">Start Game</button>
     </div>
   </div>
 </template>
@@ -23,7 +21,7 @@ export default {
   name: "ClassSelect",
   data() {
     return {
-      selected: 'Paladin'
+      selected: ''
     }
   },
   methods: {
@@ -49,7 +47,10 @@ button, select
   font-family: 'OpenSansPXBold'
   color: white
   text-transform: capitalize
-  font-size: 1.1rem
+  font-size: 1.5rem
   background-color: #672806
   border-color: #533a18
+button:disabled
+  background-color: black
+  color: #888888
 </style>

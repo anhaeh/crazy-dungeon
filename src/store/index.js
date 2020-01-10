@@ -105,6 +105,7 @@ const store = new Vuex.Store({
   mutations: {
     setClassSelected(state, classSelected) {
       state.classSelected = classSelected
+      state.room = 0
     },
     setMonsterSelected(state, monsterSelected) {
       state.monsterSelected = monsterSelected

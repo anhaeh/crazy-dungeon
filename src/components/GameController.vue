@@ -9,9 +9,6 @@ import itemsData from '@/gamedata/Items.json'
 
 export default {
   name: "GameController",
-  data() {
-    return {}
-  },
   watch: {
     getPlayerPosition: {
       handler: function () {
@@ -118,24 +115,22 @@ export default {
       }
       return maze
     },
-    setKeyListener: function () {
-      document.addEventListener('keydown', event => {
-        let directions = {
-          'w': 1,
-          'a': 0,
-          'd': 3,
-          's': 2
-        }
-        if (event.code === 'Space' && this.$store.getters.getMonsterSelected) {
-          this.$store.dispatch('attack')
-        } else {
-          const key = event.key.toLowerCase()
-          // we are only interested in alphanumeric keys
-          if (Object.keys(directions).indexOf(key) === -1) return
-          let cellToMove = this.$store.getters.getPlayerRange[directions[key]]
-          movePlayer(cellToMove)
-        }
-      })
+    keysListener: function () {
+      let directions = {
+        'w': 1,
+        'a': 0,
+        'd': 3,
+        's': 2
+      }
+      if (event.code === 'Space' && this.$store.getters.getMonsterSelected) {
+        this.$store.dispatch('attack')
+      } else {
+        const key = event.key.toLowerCase()
+        // we are only interested in alphanumeric keys
+        if (Object.keys(directions).indexOf(key) === -1) return
+        let cellToMove = this.$store.getters.getPlayerRange[directions[key]]
+        movePlayer(cellToMove)
+      }
     },
     nextRoom: function () {
       let json = require(`@/gamedata/Rooms/${this.$store.getters.getRoom + 1}.json`)
@@ -252,9 +247,12 @@ export default {
     }
   },
   created() {
-    this.setKeyListener()
+    document.addEventListener('keydown', this.keysListener)
     this.$store.dispatch('initGame')
     this.buildMap()
+  },
+  beforeDestroy() {
+    document.removeEventListener('keydown', this.keysListener)
   }
 }
 </script>

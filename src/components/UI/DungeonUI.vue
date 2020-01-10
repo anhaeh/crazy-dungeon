@@ -28,12 +28,14 @@
 
       <div class="dungeonUI__more">
         <div class="dungeonUI__moreBack"></div>
-        <div class="dungeonUI__moreMenu" @click="openMenu"></div>
+        <div class="dungeonUI__moreMenu" @click="openMenu">
+          Menu
+        </div>
       </div>
     </div>
     <div v-if="showMenu" class="dungeonUI__menuBottom">
       <div class="dungeonUI__menuBottomLeft">
-        <div class="dungeonUI__retreatBtn"></div>
+        <div class="dungeonUI__retreatBtn" @click="$router.push({name: 'menu'})"></div>
         <div class="dungeonUI__settingBtn"></div>
       </div>
       <div class="dungeonUI__menuBottomRight">
@@ -178,6 +180,11 @@ export default {
     background-size: contain
     image-rendering: pixelated
     &.dungeonUI__moreMenu
+      color: white
+      display: flex
+      align-items: center
+      justify-content: center
+      text-shadow: 0 2px 0px black
       background-image: url("../../assets/ui/dungeonUI__moreDown.png")
       &:active, &:focus, .--active
         background-image: url("../../assets/ui/dungeonUI__moreDownActive.png")
