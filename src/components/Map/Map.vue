@@ -3,8 +3,8 @@
     <div class="row" v-for="row in orderedMap" :key="'row' + row.id">
       <Cell
           v-for="cellKey in row.cells"
-          :key="row.id + cellKey + getRoom"
-          :id="row.id + cellKey"
+          :key="row.id + '_'  + cellKey + '/' + getRoom"
+          :id="row.id + '_' + cellKey"
           :type="getCell(row.id, cellKey)"
       ></Cell>
     </div>
@@ -28,7 +28,7 @@ export default {
       let rows = []
       cells.forEach((x) => {
         // eslint-disable-next-line no-useless-escape
-        let cell = x.match(/[\d\.]+|\D+/g)
+        let cell = x.split('_')
         if (rows.indexOf(cell[0]) === -1) { rows.push(cell[0])}
       })
       return rows.sort((a, b) => a - b)
@@ -37,7 +37,7 @@ export default {
       return this.orderedRows.map(x =>  {
         return {
           id: x,
-          cells: this.getCells(x)
+          cells: this.getCells(x).sort((a, b) => a - b)
         }
       })
     },
@@ -48,15 +48,15 @@ export default {
   methods: {
     getCells: function (row) {
       // eslint-disable-next-line no-useless-escape
-      let cells = this.$store.getters.getPlayerViewport.filter((x) => x.match(/[\d\.]+|\D+/g)[0] === row)
+      let cells = this.$store.getters.getPlayerViewport.filter((x) => x.split('_')[0] === row)
       // eslint-disable-next-line no-useless-escape
-      return cells.map(x => x.match(/[\d\.-]+|\D+/g)[1]).sort()
+      return cells.map(x => parseInt(x.split('_')[1]))
     },
     getCell: function (row, cellKey) {
-      if (this.map[row] === undefined || this.map[row][cellKey] === undefined) {
+      if (this.map[row[0]] === undefined || this.map[row[0]][cellKey] === undefined) {
         return undefined
       }
-      return this.map[row][cellKey]
+      return this.map[row[0]][cellKey]
     }
   }
 }
@@ -72,5 +72,5 @@ export default {
     overflow: hidden
     --tile-cell: 10vh
     --pixel-unit: 5px
-    margin-right: 336px;
+    margin-right: 336px
 </style>

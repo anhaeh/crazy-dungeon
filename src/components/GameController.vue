@@ -17,13 +17,13 @@ export default {
           //this.nextRoom()
         } else {
           // eslint-disable-next-line no-useless-escape
-          let player = this.getPlayerPosition.match(/[\d\.]+|\D+/g)
+          let player = this.getPlayerPosition.split('_')
           let cells = []
           let cellCanMove = [[0, -1], [-1, 0], [1, 0], [0, 1]] /* LEFT - UP - DOWN - RIGHT */
           cellCanMove.forEach(x => {
             let row = parseInt(player[0]) + x[0]
-            let letter = String.fromCharCode(player[1].charCodeAt() + x[1])
-            let cellId = `${row}${letter}`
+            let column = parseInt(player[1]) + x[1]
+            let cellId = `${row}_${column}`
             cells.push(cellId)
             this.$store.commit('setMapDiscover', cellId)
           })
@@ -32,8 +32,8 @@ export default {
           for (let i = -3; i < 6; i++) {
             for (let j = -3; j < 4; j++) {
               let row = parseInt(player[0]) + i
-              let letter = String.fromCharCode(player[1].charCodeAt() + j)
-              cellsViewport.push(`${row}${letter}`)
+              let column = parseInt(player[1]) + j
+              cellsViewport.push(`${row}_${column}`)
             }
           }
           this.$store.commit('setPlayerViewport', cellsViewport)
@@ -152,20 +152,19 @@ export default {
       /** hay tema con valores pares*/
       /* generate map */
       let maze = this.createMaze(width, height)
-      let letters = new Array(width).fill(1).map((_, i) => String.fromCharCode(65 + i))
       for (let i = 0; i < height; i++) {
-        json.map[i + 1] = {}
-        letters.forEach((letter, index) => {
-          let terrain = maze[i][index].toString()
-          let isBorder = index === 0 || index === width - 1 || i === 0 || i === height - 1
-          if (terrain === '1' && Math.random() < 0.4 && !isBorder) { /* remove random walls */
-            terrain = '0'
-          }
-          json.map[i + 1][letter] = terrain
-          if (terrain === '0') {
-            free.push(`${i + 1}${letter}`)
-          }
-        })
+        json.map[i] = {}
+        for (let j = 0; j < width; j++) {
+            let terrain = maze[i][j]
+            let isBorder = j === 0 || j === width - 1 || i === 0 || i === height - 1
+            if (terrain === 1 && Math.random() < 0.4 && !isBorder) { /* remove random walls */
+              terrain = 0
+            }
+            json.map[i][j] = terrain
+            if (terrain === 0) {
+              free.push(`${i}_${j}`)
+            }
+        }
       }
 
       /* Set player */
@@ -197,10 +196,10 @@ export default {
 
       /* Get cells far from player */
       // eslint-disable-next-line no-useless-escape
-      let playerCell = playerPosition.match(/[\d\.]+|\D+/g)
+      let playerCell = playerPosition.split('_')
       let farFromPlayer = free.filter(x => {
         // eslint-disable-next-line no-useless-escape
-        let cellPortal = x.match(/[\d\.]+|\D+/g)
+        let cellPortal = x.split('_')
         if (Math.abs(cellPortal[0] - playerCell[0]) > 7) {
           return x
         }
@@ -212,7 +211,7 @@ export default {
       farFromPlayer.splice(index, 1)
       json.portal = portalPosition
       // eslint-disable-next-line no-useless-escape
-      let cell = portalPosition.match(/[\d\.]+|\D+/g)
+      let cell = portalPosition.split('_')
       json.map[cell[0]][cell[1]] = 'P'
 
       /* Set merchant */
