@@ -3,7 +3,7 @@
     "name": "Paladin",
     "initialHealth": 55,
     "attack": 10,
-    "image": "paladin.png",
+    "image": "paladin.jpg",
     "skills": [
       "fury_attack",
       "heal"
@@ -13,7 +13,7 @@
     "name": "Wizard",
     "initialHealth": 50,
     "attack": 8,
-    "image": "wizard.png",
+    "image": "wizard.jpg",
     "skills": [
       "explosion",
       "storm"
