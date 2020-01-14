@@ -76,7 +76,7 @@
     <inventory></inventory>
     <merchant-items></merchant-items>
     <display-skills-menu v-if="showSkills"></display-skills-menu>
-    <DisplayStatsMenu></DisplayStatsMenu>
+    <DisplayStatsMenu v-if="false"></DisplayStatsMenu>
   </div>
 </template>
 

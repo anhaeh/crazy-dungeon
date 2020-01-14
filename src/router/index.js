@@ -1,6 +1,7 @@
 import Vue from 'vue'
 import VueRouter from 'vue-router'
 import MainMenu from '../views/MainMenu'
+import ClassSelection from '../views/ClassSelection'
 import Dungeon from '../views/Dungeon'
 
 Vue.use(VueRouter)
@@ -10,6 +11,11 @@ const routes = [
     path: '/',
     name: 'main-menu',
     component: MainMenu
+  },
+  {
+    path: '/class-selection',
+    name: 'class-selection',
+    component: ClassSelection
   },
   {
     path: '/dungeon/:class',

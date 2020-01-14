@@ -5,7 +5,7 @@
     <img src="../assets/ui/intro__fire.gif" class="intro__fire">
     <img src="../assets/ui/intro__hands.gif" class="intro__hands">
     <div class="intro__menu">
-      <div class="intro__btn">Single Player</div>
+      <div class="intro__btn" @click="$router.push({name: 'class-selection'})">Single Player</div>
       <div class="intro__btn --disabled">MultiPlayer</div>
       <div class="intro__btn --disabled">Library</div>
       <div class="intro__btn --disabled">Settings</div>
@@ -84,7 +84,7 @@ export default {
   width: calc(6 * var(--tile-cell))
   height: calc(5 * var(--tile-cell))
   padding: calc(.75 * var(--tile-cell))
-  box-sizing: border-box 
+  box-sizing: border-box
   color: white
   display: flex
   align-items: center
