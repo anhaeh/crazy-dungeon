@@ -64,30 +64,8 @@ export default {
     random: function (items) {
       return items[Math.floor(Math.random() * items.length)]
     },
-    createMaze: function (width, height) {
-      let dungeon = new Dungeon({
-        size: [width, height],
-        seed: 'abcd', //omit for generated seed
-        "rooms": {
-          "initial": {
-            "min_size": [5, 5],
-            "max_size": [8, 8],
-            "max_exits": 2
-          },
-          "any": {
-            "min_size": [2, 2],
-            "max_size": [5, 5],
-            "max_exits": 2
-          }
-        },
-        "max_corridor_length": 4,
-        "min_corridor_length": 2,
-        "corridor_density": 0.5,
-        "symmetric_rooms": false,
-        "interconnects": 1,
-        "max_interconnect_length": 10,
-        "room_count": 15
-      })
+    createMaze: function (config) {
+      let dungeon = new Dungeon(config)
 
       dungeon.generate();
       let matrix = {}
@@ -118,9 +96,126 @@ export default {
       this.$store.dispatch('setRoom', json)
     },
     buildMap: function () {
+      /* Set theme */
+      let theme = this.random(['default', 'forest', 'industrial', 'library', 'snakepit'])
+
+      let config = {
+        default: {
+          "rooms": {
+            "initial": {
+              "min_size": [7, 7],
+              "max_size": [10, 10],
+              "max_exits": 2
+            },
+            "any": {
+              "min_size": [5, 5],
+              "max_size": [10, 10],
+              "max_exits": 2
+            }
+          },
+          "max_corridor_length": 2,
+          "min_corridor_length": 5,
+          "corridor_density": 0.5,
+          "symmetric_rooms": false,
+          "interconnects": 1,
+          "max_interconnect_length": 10,
+          "room_count": 10,
+          "monster_count": 25
+        },
+        forest: {
+          "rooms": {
+            "initial": {
+              "min_size": [10, 10],
+              "max_size": [12, 12],
+              "max_exits": 2
+            },
+            "any": {
+              "min_size": [7, 7],
+              "max_size": [11, 11],
+              "max_exits": 2
+            }
+          },
+          "max_corridor_length": 2,
+          "min_corridor_length": 2,
+          "corridor_density": 0.5,
+          "symmetric_rooms": false,
+          "interconnects": 1,
+          "max_interconnect_length": 10,
+          "room_count": 5,
+          "monster_count": 30
+        },
+        industrial: {
+          "rooms": {
+            "initial": {
+              "min_size": [4, 4],
+              "max_size": [8, 8],
+              "max_exits": 2
+            },
+            "any": {
+              "min_size": [4, 4],
+              "max_size": [7, 7],
+              "max_exits": 2
+            }
+          },
+          "max_corridor_length": 3,
+          "min_corridor_length": 6,
+          "corridor_density": 0.5,
+          "symmetric_rooms": false,
+          "interconnects": 1,
+          "max_interconnect_length": 10,
+          "room_count": 7,
+          "monster_count": 20
+        },
+        snakepit: {
+          "rooms": {
+            "initial": {
+              "min_size": [4, 4],
+              "max_size": [8, 8],
+              "max_exits": 2
+            },
+            "any": {
+              "min_size": [5, 5],
+              "max_size": [12, 12],
+              "max_exits": 2
+            }
+          },
+          "max_corridor_length": 1,
+          "min_corridor_length": 5,
+          "corridor_density": 0.5,
+          "symmetric_rooms": false,
+          "interconnects": 1,
+          "max_interconnect_length": 10,
+          "room_count": 6,
+          "monster_count": 25
+        },
+        library: {
+          "rooms": {
+            "initial": {
+              "min_size": [4, 4],
+              "max_size": [8, 8],
+              "max_exits": 2
+            },
+            "any": {
+              "min_size": [5, 5],
+              "max_size": [12, 12],
+              "max_exits": 2
+            }
+          },
+          "max_corridor_length": 1,
+          "min_corridor_length": 5,
+          "corridor_density": 0.5,
+          "symmetric_rooms": false,
+          "interconnects": 1,
+          "max_interconnect_length": 10,
+          "room_count": 6,
+          "monster_count": 25
+        }
+      }
+
       /* TODO pasar a un js encargado de generar mapas */
       let free = []
       let json = {
+        theme: theme,
         entities: {
           monsters: [],
           items: {},
@@ -128,11 +223,9 @@ export default {
         },
         map: {}
       }
-      let width = 100
-      let height = 100
       /** hay tema con valores pares*/
       /* generate map */
-      let maze = this.createMaze(width, height)
+      let maze = this.createMaze(config[theme])
       json.map = maze
       Object.keys(maze).forEach(row => {
         maze[row].forEach((cell, indexCell) => {
@@ -154,7 +247,7 @@ export default {
       for (let i = this.getPlayer.level; i <= this.getPlayer.level+2; i++) {
         possibleLevels.push(i)
       }
-      for (let i = 0; i < height / 4 ; i++) {
+      for (let i = 0; i < config[theme].monster_count; i++) {
         let position = this.random(free)
         /* remove the free */
         let index = free.indexOf(position)
@@ -213,9 +306,6 @@ export default {
       farFromPlayer.splice(index, 1)
       json.entities.items[position] = this.$store.getters.getPlayer.level < 4 ? 'potion' : 'bigPotion'
 
-      /* Set theme */
-      let themes = ['default', 'forest', 'industrial', 'library', 'snakepit']
-      json['theme'] = this.random(themes)
       this.$store.dispatch('setRoom', json)
     }
   },
