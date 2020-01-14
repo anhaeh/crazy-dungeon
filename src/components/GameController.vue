@@ -25,7 +25,6 @@ export default {
             let column = parseInt(player[1]) + x[1]
             let cellId = `${row}_${column}`
             cells.push(cellId)
-            this.$store.commit('setMapDiscover', cellId)
           })
           this.$store.commit('setPlayerRange', cells)
           let cellsViewport = []
@@ -37,6 +36,18 @@ export default {
             }
           }
           this.$store.commit('setPlayerViewport', cellsViewport)
+
+          let fogViewport = []
+          for (let i = -2; i < 3; i++) {
+            for (let j = -2; j < 3; j++) {
+              if((Math.abs(i) * Math.abs(j)) < 4) {
+                let row = parseInt(player[0]) + i
+                let column = parseInt(player[1]) + j
+                fogViewport.push(`${row}_${column}`)
+              }
+            }
+          }
+          this.$store.commit('setPlayerVision', fogViewport)
         }
       }
     }
@@ -49,6 +60,9 @@ export default {
     ])
   },
   methods: {
+    random: function (items) {
+      return items[Math.floor(Math.random() * items.length)]
+    },
     createMaze: function (width, height, iterations) {
       var maze = [];
       var mazeWidth = width;
@@ -147,8 +161,8 @@ export default {
         },
         map: {}
       }
-      let width = 15
-      let height = 21
+      let width = 16
+      let height = 16
       /** hay tema con valores pares*/
       /* generate map */
       let maze = this.createMaze(width, height)
@@ -168,7 +182,7 @@ export default {
       }
 
       /* Set player */
-      let playerPosition = free[Math.floor(Math.random() * free.length)]
+      let playerPosition = this.random(free)
       /* remove the free */
       let index = free.indexOf(playerPosition)
       free.splice(index, 1)
@@ -181,15 +195,15 @@ export default {
         possibleLevels.push(i)
       }
       for (let i = 0; i < height; i++) {
-        let position = free[Math.floor(Math.random() * free.length)]
+        let position = this.random(free)
         /* remove the free */
         let index = free.indexOf(position)
         free.splice(index, 1)
         json.entities.monsters.push({
           cellId: position,
-          name: monstersList[Math.floor(Math.random() * monstersList.length)],
+          name: this.random(monstersList),
           isLive: true,
-          level: possibleLevels[Math.floor(Math.random() * possibleLevels.length)],
+          level: this.random(possibleLevels),
           damage: 0
         })
       }
@@ -205,7 +219,7 @@ export default {
         }
       })
       /* Set portal */
-      let portalPosition = farFromPlayer[Math.floor(Math.random() * farFromPlayer.length)]
+      let portalPosition = this.random(farFromPlayer)
       /* remove the free */
       index = farFromPlayer.indexOf(portalPosition)
       farFromPlayer.splice(index, 1)
@@ -216,7 +230,7 @@ export default {
 
       /* Set merchant */
       if (this.$store.getters.getRoom % 2) {
-        let positionMerchant = farFromPlayer[Math.floor(Math.random() * farFromPlayer.length)]
+        let positionMerchant = this.random(farFromPlayer)
         /* remove the free */
         index = farFromPlayer.indexOf(portalPosition)
         farFromPlayer.splice(index, 1)
@@ -233,7 +247,7 @@ export default {
       }
 
       /* Set random potions */
-      let position = farFromPlayer[Math.floor(Math.random() * farFromPlayer.length)]
+      let position = this.random(farFromPlayer)
       /* remove the free */
       index = farFromPlayer.indexOf(portalPosition)
       farFromPlayer.splice(index, 1)
@@ -241,7 +255,7 @@ export default {
 
       /* Set theme */
       let themes = ['default', 'forest', 'industrial', 'library', 'snakepit']
-      json['theme'] = themes[Math.floor(Math.random() * themes.length)]
+      json['theme'] = this.random(themes)
       this.$store.dispatch('setRoom', json)
     }
   },

@@ -50,13 +50,13 @@ export default {
       // eslint-disable-next-line no-useless-escape
       let cells = this.$store.getters.getPlayerViewport.filter((x) => x.split('_')[0] === row)
       // eslint-disable-next-line no-useless-escape
-      return cells.map(x => parseInt(x.split('_')[1]))
+      return cells.map(x => x.split('_')[1])
     },
     getCell: function (row, cellKey) {
-      if (this.map[row[0]] === undefined || this.map[row[0]][cellKey] === undefined) {
+      if (this.map[row] === undefined || this.map[row][cellKey] === undefined) {
         return undefined
       }
-      return this.map[row[0]][cellKey]
+      return this.map[row][cellKey]
     }
   }
 }

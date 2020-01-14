@@ -128,6 +128,12 @@ const store = new Vuex.Store({
     setPlayerViewport(state, playerViewport) {
       state.player.viewport = playerViewport
     },
+    setPlayerVision(state, cells) {
+      state.player.vision = cells
+      let c = state.mapDiscover.concat(cells).sort()
+      state.mapDiscover = c.filter((value, pos) => { return c.indexOf(value) === pos } )
+
+    },
     setPlayerDamage(state, damage) {
       state.player.damage += damage
     },
@@ -200,6 +206,7 @@ const store = new Vuex.Store({
         attack: 0,
         range: [],
         viewport: [],
+        vision: [],
         defeatMonsters: 0,
         nextLevelMonsters: 5,
         level: 1,
