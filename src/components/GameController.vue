@@ -6,6 +6,7 @@
 import { mapGetters } from 'vuex'
 import { movePlayer } from "@/modules/player"
 import itemsData from '@/gamedata/Items.json'
+import Dungeon from 'dungeon-generator'
 
 export default {
   name: "GameController",
@@ -63,71 +64,37 @@ export default {
     random: function (items) {
       return items[Math.floor(Math.random() * items.length)]
     },
-    createMaze: function (width, height, iterations) {
-      var maze = [];
-      var mazeWidth = width;
-      var mazeHeight = height;
-      if (!iterations) iterations = width * height;
+    createMaze: function (width, height) {
+      let dungeon = new Dungeon({
+        size: [width, height],
+        seed: 'abcd', //omit for generated seed
+        "rooms": {
+          "initial": {
+            "min_size": [5, 5],
+            "max_size": [8, 8],
+            "max_exits": 2
+          },
+          "any": {
+            "min_size": [2, 2],
+            "max_size": [5, 5],
+            "max_exits": 2
+          }
+        },
+        "max_corridor_length": 4,
+        "min_corridor_length": 2,
+        "corridor_density": 0.5,
+        "symmetric_rooms": false,
+        "interconnects": 1,
+        "max_interconnect_length": 10,
+        "room_count": 15
+      })
 
-      var moves = [];
-      for (var i = 0; i < mazeHeight; i++) {
-        maze[i] = [];
-        for (var j = 0; j < mazeWidth; j++) {
-          maze[i][j] = 1;
-        }
-      }
-      var posX = 1;
-      var posY = 1;
-      maze[posX][posY] = 0;
-      moves.push(posY + posY * mazeWidth);
-      for (var itr = 0; itr < iterations; ++itr) {
-        if (moves.length) {
-          var possibleDirections = "";
-          if (posX + 2 > 0 && posX + 2 < mazeHeight - 1 && maze[posX + 2][posY] == 1) {
-            possibleDirections += "S";
-          }
-          if (posX - 2 > 0 && posX - 2 < mazeHeight - 1 && maze[posX - 2][posY] == 1) {
-            possibleDirections += "N";
-          }
-          if (posY - 2 > 0 && posY - 2 < mazeWidth - 1 && maze[posX][posY - 2] == 1) {
-            possibleDirections += "W";
-          }
-          if (posY + 2 > 0 && posY + 2 < mazeWidth - 1 && maze[posX][posY + 2] == 1) {
-            possibleDirections += "E";
-          }
-          if (possibleDirections) {
-            var move = Math.floor(Math.random() * (possibleDirections.length + 1));
-            switch (possibleDirections[move]) {
-              case "N":
-                maze[posX - 2][posY] = 0;
-                maze[posX - 1][posY] = 0;
-                posX -= 2;
-                break;
-              case "S":
-                maze[posX + 2][posY] = 0;
-                maze[posX + 1][posY] = 0;
-                posX += 2;
-                break;
-              case "W":
-                maze[posX][posY - 2] = 0;
-                maze[posX][posY - 1] = 0;
-                posY -= 2;
-                break;
-              case "E":
-                maze[posX][posY + 2] = 0;
-                maze[posX][posY + 1] = 0;
-                posY += 2;
-                break;
-            }
-            moves.push(posY + posX * mazeWidth);
-          } else {
-            var back = moves.pop();
-            posX = Math.floor(back / mazeWidth);
-            posY = back % mazeWidth;
-          }
-        }
-      }
-      return maze
+      dungeon.generate();
+      let matrix = {}
+      dungeon.walls.rows.forEach((x, index) => {
+        matrix[index] = x.map(x => { return x ? 1 : 0 } )
+      })
+      return matrix
     },
     keysListener: function () {
       let directions = {
@@ -161,26 +128,19 @@ export default {
         },
         map: {}
       }
-      let width = 19
-      let height = 19
+      let width = 100
+      let height = 100
       /** hay tema con valores pares*/
       /* generate map */
       let maze = this.createMaze(width, height)
-      for (let i = 0; i < height; i++) {
-        json.map[i] = {}
-        for (let j = 0; j < width; j++) {
-            let terrain = maze[i][j]
-            let isBorder = j === 0 || j === width - 1 || i === 0 || i === height - 1
-            if (terrain === 1 && Math.random() < 0.4 && !isBorder) { /* remove random walls */
-              terrain = 0
-            }
-            json.map[i][j] = terrain
-            if (terrain === 0) {
-              free.push(`${i}_${j}`)
-            }
-        }
-      }
-
+      json.map = maze
+      Object.keys(maze).forEach(row => {
+        maze[row].forEach((cell, indexCell) => {
+          if (maze[row][indexCell] === 0) {
+            free.push(`${row}_${indexCell}`)
+          }
+        })
+      })
       /* Set player */
       let playerPosition = this.random(free)
       /* remove the free */
@@ -194,7 +154,7 @@ export default {
       for (let i = this.getPlayer.level; i <= this.getPlayer.level+2; i++) {
         possibleLevels.push(i)
       }
-      for (let i = 0; i < height; i++) {
+      for (let i = 0; i < height / 4 ; i++) {
         let position = this.random(free)
         /* remove the free */
         let index = free.indexOf(position)
@@ -213,8 +173,8 @@ export default {
       let playerCell = playerPosition.split('_')
       let farFromPlayer = free.filter(x => {
         // eslint-disable-next-line no-useless-escape
-        let cellPortal = x.split('_')
-        if (Math.abs(cellPortal[0] - playerCell[0]) > 7) {
+        let cell = x.split('_')
+        if (Math.abs(parseInt(cell[0]) - parseInt(playerCell[0])) > 7) {
           return x
         }
       })
