@@ -76,6 +76,7 @@
     <inventory></inventory>
     <merchant-items></merchant-items>
     <display-skills-menu v-if="showSkills"></display-skills-menu>
+    <DisplayStatsMenu></DisplayStatsMenu>
   </div>
 </template>
 
@@ -86,6 +87,7 @@ import SkillsList from './Skills/SkillList'
 import DisplaySkillsMenu from './Skills/DisplaySkillsMenu'
 import { movePlayer} from "@/modules/player"
 import MerchantItems from './MerchantItems/MerchantList'
+import DisplayStatsMenu from './Stats/DisplayStatsMenu'
 
 export default {
   name: "DungeonUI",
@@ -94,7 +96,8 @@ export default {
     LogQuest,
     SkillsList,
     DisplaySkillsMenu,
-    MerchantItems
+    MerchantItems,
+    DisplayStatsMenu
   },
   data () {
     return {
