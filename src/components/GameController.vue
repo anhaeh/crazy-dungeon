@@ -126,10 +126,6 @@ export default {
         movePlayer(cellToMove)
       }
     },
-    nextRoom: function () {
-      let json = require(`@/gamedata/Rooms/${this.$store.getters.getRoom + 1}.json`)
-      this.$store.dispatch('setRoom', json)
-    },
     buildMap: function () {
       /* Set theme */
       let theme = this.random(['default', 'forest', 'industrial', 'snakepit'])
@@ -204,7 +200,7 @@ export default {
       json.map[cell[0]][cell[1]] = 'P'
 
       /* Set merchant */
-      if (this.$store.getters.getRoom % 2) {
+      if (this.$store.getters.getDungeon % 2) {
         let positionMerchant = this.random(freeMiddleCells)
         /* remove the free */
         index = freeMiddleCells.indexOf(positionMerchant)
@@ -250,9 +246,9 @@ export default {
         /* set drop potions random */
         if(Math.random() > 0.85) {
           json.entities.items[position] = this.$store.getters.getPlayer.level < 4 ? 'potion' : 'bigPotion'
-          this.$store.dispatch('setRoom', json)
         }
       }
+      this.$store.dispatch('setDungeon', json)
     }
   },
   created() {

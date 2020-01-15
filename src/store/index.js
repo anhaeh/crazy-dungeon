@@ -8,7 +8,7 @@ const store = new Vuex.Store({
   state: {
     classSelected: '',
     player: { position: null },
-    room: 0,
+    dungeon: 0,
     portalPosition: null,
     map: null,
     mapDiscover: [],
@@ -89,8 +89,8 @@ const store = new Vuex.Store({
     getTheme: state => {
       return state.theme
     },
-    getRoom: state => {
-      return state.room
+    getDungeon: state => {
+      return state.dungeon
     },
     getPreview: state => {
       return state.preview
@@ -105,7 +105,7 @@ const store = new Vuex.Store({
   mutations: {
     setClassSelected(state, classSelected) {
       state.classSelected = classSelected
-      state.room = 0
+      state.dungeon = 0
     },
     setMonsterSelected(state, monsterSelected) {
       state.monsterSelected = monsterSelected
@@ -227,15 +227,15 @@ const store = new Vuex.Store({
     }
   },
   actions: {
-    setRoom({ state }, data) {
+    setDungeon({ state }, data) {
       state.player.position = data.player_init
       state.map = Object.assign({}, data.map)
       state.entities = data.entities
       state.portalPosition = data.portal
       state.theme = data.theme
-      state.room += 1
+      state.dungeon += 1
       state.mapDiscover = []
-      state.questLog = ['Begin dungeon ' + state.room]
+      state.questLog = ['Begin dungeon ' + state.dungeon]
     },
     initGame({ commit }) {
       commit('initializePlayer')

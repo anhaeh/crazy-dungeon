@@ -23,7 +23,7 @@ export default {
     name: { required: true }
   },
   watch: {
-    getRoom: {
+    getDungeon: {
       immediate: true,
       handler () {
         this.monster = MonstersData[this.name]
@@ -72,7 +72,7 @@ export default {
       'getMonsters',
       'getMonsterSelected',
       'getPlayerRange',
-      'getRoom',
+      'getDungeon',
     ]),
     image: function () {
       let imageExtension = this.isLive ? '.gif' :'_death.gif'

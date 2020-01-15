@@ -1,9 +1,9 @@
 <template>
   <div class="map" v-if="map">
-    <div class="row" v-for="row in orderedMap" :key="'row' + row.id">
+    <div class="row" v-for="row in orderedMap" :key="'row' + row.id  + '/' + getDungeon">
       <Cell
           v-for="cellKey in row.cells"
-          :key="row.id + '_'  + cellKey + '/' + getRoom"
+          :key="row.id + '_'  + cellKey"
           :id="row.id + '_' + cellKey"
           :type="getCell(row.id, cellKey)"
       ></Cell>
@@ -41,8 +41,8 @@ export default {
         }
       })
     },
-    getRoom: function () {
-      return this.$store.getters.getRoom
+    getDungeon: function () {
+      return this.$store.getters.getDungeon
     }
   },
   methods: {
