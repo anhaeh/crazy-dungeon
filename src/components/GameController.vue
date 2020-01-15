@@ -17,7 +17,6 @@ export default {
           this.buildMap()
           //this.nextRoom()
         } else {
-          // eslint-disable-next-line no-useless-escape
           let player = this.getPlayerPosition.split('_')
           let cells = []
           let cellCanMove = [[0, -1], [-1, 0], [1, 0], [0, 1]] /* LEFT - UP - DOWN - RIGHT */
@@ -64,7 +63,7 @@ export default {
     random: function (items) {
       return items[Math.floor(Math.random() * items.length)]
     },
-    createMaze: function () {
+    createMaze: function (roomCount) {
       let dungeon = new Dungeon({
         "rooms": {
           "initial": {
@@ -84,7 +83,7 @@ export default {
         "symmetric_rooms": false,
         "interconnects": 1,
         "max_interconnect_length": 10,
-        "room_count": this.random([5, 6, 7, 8])
+        "room_count": roomCount
       })
 
       dungeon.generate()
@@ -132,7 +131,8 @@ export default {
       }
       /** hay tema con valores pares*/
       /* generate map */
-      let maze = this.createMaze()
+      let roomCount = this.random([5, 6, 7, 8])
+      let maze = this.createMaze(roomCount)
       json.map = maze
       Object.keys(maze).forEach(row => {
         maze[row].forEach((cell, indexCell) => {
@@ -149,12 +149,11 @@ export default {
       json.player_init = playerPosition
 
       /* Get cells far from player */
-      // eslint-disable-next-line no-useless-escape
       let playerCell = playerPosition.split('_')
       let farFromPlayer = free.filter(x => {
-        // eslint-disable-next-line no-useless-escape
         let cell = x.split('_')
-        if (Math.abs(parseInt(cell[0]) - parseInt(playerCell[0])) > 7) {
+        if (Math.abs(parseInt(cell[0]) - parseInt(playerCell[0])) > 7 ||
+            Math.abs(parseInt(cell[1]) - parseInt(playerCell[1])) > 7) {
           return x
         }
       })
@@ -171,7 +170,7 @@ export default {
           freeMiddleCells.push(j)
         }
       })
-      if (freeMiddleCells.length === 0) {
+      if (freeMiddleCells.length < 2) {
         freeMiddleCells = farFromPlayer
       }
       /* Set portal */
@@ -181,9 +180,11 @@ export default {
       freeMiddleCells.splice(index, 1)
       index = farFromPlayer.indexOf(portalPosition)
       farFromPlayer.splice(index, 1)
+      index = free.indexOf(portalPosition)
+      free.splice(index, 1)
       json.portal = portalPosition
-      // eslint-disable-next-line no-useless-escape
-      let cell = portalPosition.split('_')
+      let cell
+      cell = portalPosition.split('_')
       json.map[cell[0]][cell[1]] = 'P'
 
       /* Set merchant */
@@ -194,6 +195,8 @@ export default {
         freeMiddleCells.splice(index, 1)
         index = farFromPlayer.indexOf(positionMerchant)
         farFromPlayer.splice(index, 1)
+        index = free.indexOf(positionMerchant)
+        free.splice(index, 1)
         json.entities.merchant.cellId = positionMerchant
         json.entities.merchant.items = ['potion', 'bigPotion']
         json.entities.merchant.show = false
@@ -208,11 +211,15 @@ export default {
 
       /* Set monsters */
       let monstersList = ['goblin', 'golem', 'gorgon', 'imp']
-      let possibleLevels = []
-      for (let i = this.getPlayer.level; i <= this.getPlayer.level+2; i++) {
-        possibleLevels.push(i)
-      }
-      for (let i = 0; i < 25; i++) {
+
+      for (let i = 0; i < roomCount * 3; i++) {
+        let num = Math.random();
+        let level = this.getPlayer.level + 2
+        if(num < 0.5){
+          level = this.getPlayer.level
+        } else if (num < 0.85) {
+          level = this.getPlayer.level + 1
+        }
         let position = this.random(free)
         /* remove the free */
         let index = free.indexOf(position)
@@ -221,7 +228,7 @@ export default {
           cellId: position,
           name: this.random(monstersList),
           isLive: true,
-          level: this.random(possibleLevels),
+          level: level,
           damage: 0
         })
       }
