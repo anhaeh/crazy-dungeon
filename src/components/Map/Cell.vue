@@ -18,7 +18,7 @@
         :cell-id="id"
       ></Merchant>
       <Item
-        v-if="hasItem"
+        v-if="!hasMonster && hasItem"
         :name="hasItem"
         :key="'item' + '-' + id"
         :ref="hasItem + id"

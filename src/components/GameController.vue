@@ -59,6 +59,11 @@ export default {
         'getPlayer'
     ])
   },
+  data() {
+    return {
+      initialPosition: '1_1'
+    }
+  },
   methods: {
     random: function (items) {
       return items[Math.floor(Math.random() * items.length)]
@@ -68,7 +73,7 @@ export default {
         "rooms": {
           "initial": {
             "min_size": [3, 3],
-            "max_size": [7, 7],
+            "max_size": [8, 8],
             "max_exits": 3
           },
           "any": {
@@ -77,12 +82,11 @@ export default {
             "max_exits": 3
           },
         },
-        "max_corridor_length": 5,
+        "max_corridor_length": 4,
         "min_corridor_length": 1,
         "corridor_density": 0.5,
         "symmetric_rooms": false,
         "interconnects": 1,
-        "max_interconnect_length": 10,
         "room_count": roomCount
       })
 
@@ -102,6 +106,7 @@ export default {
           return result
         })
       })
+      this.initialPosition = `${dungeon.start_pos[1]}_${dungeon.start_pos[0]}`
       return matrix
     },
     keysListener: function () {
@@ -153,7 +158,7 @@ export default {
         })
       })
       /* Set player */
-      let playerPosition = this.random(free)
+      let playerPosition = this.initialPosition
       /* remove the free */
       let index = free.indexOf(playerPosition)
       free.splice(index, 1)
@@ -242,16 +247,12 @@ export default {
           level: level,
           damage: 0
         })
+        /* set drop potions random */
+        if(Math.random() > 0.85) {
+          json.entities.items[position] = this.$store.getters.getPlayer.level < 4 ? 'potion' : 'bigPotion'
+          this.$store.dispatch('setRoom', json)
+        }
       }
-
-      /* Set random potions */
-      let position = this.random(farFromPlayer)
-      /* remove the free */
-      index = farFromPlayer.indexOf(portalPosition)
-      farFromPlayer.splice(index, 1)
-      json.entities.items[position] = this.$store.getters.getPlayer.level < 4 ? 'potion' : 'bigPotion'
-
-      this.$store.dispatch('setRoom', json)
     }
   },
   created() {
