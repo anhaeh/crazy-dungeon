@@ -28,5 +28,19 @@
       "bones_breaker",
       "drain_life"
     ]
+  },
+  "human": {
+    "name": "Human",
+    "initialHealth": 55,
+    "attack": 10,
+    "image": "human.png",
+    "skills": [
+      "fury_attack",
+      "heal",
+      "bones_breaker",
+      "drain_life",
+      "explosion",
+      "storm"
+    ]
   }
 }
