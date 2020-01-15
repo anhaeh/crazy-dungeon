@@ -23,8 +23,10 @@ export default {
 
 <style scoped lang="sass">
   .game-over
+    font-family: 'OpenSansPXBold'
     position: fixed
-    background: white
+    background: black
+    color: white
     width: 100%
     height: 100%
     z-index: 10
@@ -41,7 +43,7 @@ export default {
     align-items: center
     width: 200px
     height: 50px
+    background-color: #672806
+    border: #533a18 solid 1px
     color: white
-    background-color: brown
-    border: cornflowerblue solid 1px
 </style>
