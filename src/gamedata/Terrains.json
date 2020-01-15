@@ -9,6 +9,16 @@
     "available": false,
     "theme": true
   },
+  "2": {
+    "image": "Dirt1",
+    "available": true,
+    "theme": true
+  },
+  "3": {
+    "image": "Dirt2",
+    "available": true,
+    "theme": true
+  },
   "-1": {
     "image": "None",
     "available": false

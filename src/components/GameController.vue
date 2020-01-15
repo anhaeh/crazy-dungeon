@@ -89,7 +89,18 @@ export default {
       dungeon.generate()
       let matrix = {}
       dungeon.walls.rows.forEach((x, index) => {
-        matrix[index] = x.map(x => { return x ? 1 : 0 } )
+        matrix[index] = x.map(x => {
+          let result = x ? 1 : 0
+          if (result === 0) {
+            let num = Math.random()
+            if(num < 0.05){
+              result = 2
+            } else if (num < 0.1) {
+              result = 3
+            }
+          }
+          return result
+        })
       })
       return matrix
     },
@@ -116,7 +127,7 @@ export default {
     },
     buildMap: function () {
       /* Set theme */
-      let theme = this.random(['default', 'forest', 'industrial', 'library', 'snakepit'])
+      let theme = this.random(['default', 'forest', 'industrial', 'snakepit'])
 
       /* TODO pasar a un js encargado de generar mapas */
       let free = []
@@ -202,7 +213,7 @@ export default {
         json.entities.merchant.show = false
         let items = Object.keys(itemsData).filter(x => itemsData[x].type !== 'potion')
         for (let i = 0; i < 3; i++) {
-          let itemToAdd = items[Math.floor(Math.random() * items.length)]
+          let itemToAdd = this.random(items)
           index = items.indexOf(itemToAdd)
           items.splice(index, 1)
           json.entities.merchant.items.push(itemToAdd)
