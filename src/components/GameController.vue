@@ -64,10 +64,30 @@ export default {
     random: function (items) {
       return items[Math.floor(Math.random() * items.length)]
     },
-    createMaze: function (config) {
-      let dungeon = new Dungeon(config)
+    createMaze: function () {
+      let dungeon = new Dungeon({
+        "rooms": {
+          "initial": {
+            "min_size": [3, 3],
+            "max_size": [7, 7],
+            "max_exits": 3
+          },
+          "any": {
+            "min_size": [3, 3],
+            "max_size": [7, 7],
+            "max_exits": 3
+          },
+        },
+        "max_corridor_length": 5,
+        "min_corridor_length": 1,
+        "corridor_density": 0.5,
+        "symmetric_rooms": false,
+        "interconnects": 1,
+        "max_interconnect_length": 10,
+        "room_count": this.random([5, 6, 7, 8])
+      })
 
-      dungeon.generate();
+      dungeon.generate()
       let matrix = {}
       dungeon.walls.rows.forEach((x, index) => {
         matrix[index] = x.map(x => { return x ? 1 : 0 } )
@@ -99,119 +119,6 @@ export default {
       /* Set theme */
       let theme = this.random(['default', 'forest', 'industrial', 'library', 'snakepit'])
 
-      let config = {
-        default: {
-          "rooms": {
-            "initial": {
-              "min_size": [7, 7],
-              "max_size": [10, 10],
-              "max_exits": 2
-            },
-            "any": {
-              "min_size": [5, 5],
-              "max_size": [10, 10],
-              "max_exits": 2
-            }
-          },
-          "max_corridor_length": 2,
-          "min_corridor_length": 5,
-          "corridor_density": 0.5,
-          "symmetric_rooms": false,
-          "interconnects": 1,
-          "max_interconnect_length": 10,
-          "room_count": 10,
-          "monster_count": 25
-        },
-        forest: {
-          "rooms": {
-            "initial": {
-              "min_size": [10, 10],
-              "max_size": [12, 12],
-              "max_exits": 2
-            },
-            "any": {
-              "min_size": [7, 7],
-              "max_size": [11, 11],
-              "max_exits": 2
-            }
-          },
-          "max_corridor_length": 2,
-          "min_corridor_length": 2,
-          "corridor_density": 0.5,
-          "symmetric_rooms": false,
-          "interconnects": 1,
-          "max_interconnect_length": 10,
-          "room_count": 5,
-          "monster_count": 30
-        },
-        industrial: {
-          "rooms": {
-            "initial": {
-              "min_size": [4, 4],
-              "max_size": [8, 8],
-              "max_exits": 2
-            },
-            "any": {
-              "min_size": [4, 4],
-              "max_size": [7, 7],
-              "max_exits": 2
-            }
-          },
-          "max_corridor_length": 3,
-          "min_corridor_length": 6,
-          "corridor_density": 0.5,
-          "symmetric_rooms": false,
-          "interconnects": 1,
-          "max_interconnect_length": 10,
-          "room_count": 7,
-          "monster_count": 20
-        },
-        snakepit: {
-          "rooms": {
-            "initial": {
-              "min_size": [4, 4],
-              "max_size": [8, 8],
-              "max_exits": 2
-            },
-            "any": {
-              "min_size": [5, 5],
-              "max_size": [12, 12],
-              "max_exits": 2
-            }
-          },
-          "max_corridor_length": 1,
-          "min_corridor_length": 5,
-          "corridor_density": 0.5,
-          "symmetric_rooms": false,
-          "interconnects": 1,
-          "max_interconnect_length": 10,
-          "room_count": 6,
-          "monster_count": 25
-        },
-        library: {
-          "rooms": {
-            "initial": {
-              "min_size": [4, 4],
-              "max_size": [8, 8],
-              "max_exits": 2
-            },
-            "any": {
-              "min_size": [5, 5],
-              "max_size": [12, 12],
-              "max_exits": 2
-            }
-          },
-          "max_corridor_length": 1,
-          "min_corridor_length": 5,
-          "corridor_density": 0.5,
-          "symmetric_rooms": false,
-          "interconnects": 1,
-          "max_interconnect_length": 10,
-          "room_count": 6,
-          "monster_count": 25
-        }
-      }
-
       /* TODO pasar a un js encargado de generar mapas */
       let free = []
       let json = {
@@ -225,7 +132,7 @@ export default {
       }
       /** hay tema con valores pares*/
       /* generate map */
-      let maze = this.createMaze(config[theme])
+      let maze = this.createMaze()
       json.map = maze
       Object.keys(maze).forEach(row => {
         maze[row].forEach((cell, indexCell) => {
@@ -241,26 +148,6 @@ export default {
       free.splice(index, 1)
       json.player_init = playerPosition
 
-      /* Set monsters */
-      let monstersList = ['goblin', 'golem', 'gorgon', 'imp']
-      let possibleLevels = []
-      for (let i = this.getPlayer.level; i <= this.getPlayer.level+2; i++) {
-        possibleLevels.push(i)
-      }
-      for (let i = 0; i < config[theme].monster_count; i++) {
-        let position = this.random(free)
-        /* remove the free */
-        let index = free.indexOf(position)
-        free.splice(index, 1)
-        json.entities.monsters.push({
-          cellId: position,
-          name: this.random(monstersList),
-          isLive: true,
-          level: this.random(possibleLevels),
-          damage: 0
-        })
-      }
-
       /* Get cells far from player */
       // eslint-disable-next-line no-useless-escape
       let playerCell = playerPosition.split('_')
@@ -271,9 +158,27 @@ export default {
           return x
         }
       })
+      /* Get cells far from player && in middle => not in connectors */
+      let freeMiddleCells = []
+      farFromPlayer.forEach(j => {
+        let cell = j.split('_')
+        let x = parseInt(cell[0])
+        let y = parseInt(cell[1])
+        if (farFromPlayer.includes(`${x-1}_${y}`) && farFromPlayer.includes(`${x+1}_${y}`) &&
+            farFromPlayer.includes(`${x}_${y-1}`) && farFromPlayer.includes(`${x}_${y+1}`) &&
+            farFromPlayer.includes(`${x-1}_${y-1}`) && farFromPlayer.includes(`${x+1}_${y+1}`) &&
+            farFromPlayer.includes(`${x-1}_${y+1}`) && farFromPlayer.includes(`${x+1}_${y-1}`)) {
+          freeMiddleCells.push(j)
+        }
+      })
+      if (freeMiddleCells.length === 0) {
+        freeMiddleCells = farFromPlayer
+      }
       /* Set portal */
-      let portalPosition = this.random(farFromPlayer)
+      let portalPosition = this.random(freeMiddleCells)
       /* remove the free */
+      index = freeMiddleCells.indexOf(portalPosition)
+      freeMiddleCells.splice(index, 1)
       index = farFromPlayer.indexOf(portalPosition)
       farFromPlayer.splice(index, 1)
       json.portal = portalPosition
@@ -283,9 +188,11 @@ export default {
 
       /* Set merchant */
       if (this.$store.getters.getRoom % 2) {
-        let positionMerchant = this.random(farFromPlayer)
+        let positionMerchant = this.random(freeMiddleCells)
         /* remove the free */
-        index = farFromPlayer.indexOf(portalPosition)
+        index = freeMiddleCells.indexOf(positionMerchant)
+        freeMiddleCells.splice(index, 1)
+        index = farFromPlayer.indexOf(positionMerchant)
         farFromPlayer.splice(index, 1)
         json.entities.merchant.cellId = positionMerchant
         json.entities.merchant.items = ['potion', 'bigPotion']
@@ -297,6 +204,26 @@ export default {
           items.splice(index, 1)
           json.entities.merchant.items.push(itemToAdd)
         }
+      }
+
+      /* Set monsters */
+      let monstersList = ['goblin', 'golem', 'gorgon', 'imp']
+      let possibleLevels = []
+      for (let i = this.getPlayer.level; i <= this.getPlayer.level+2; i++) {
+        possibleLevels.push(i)
+      }
+      for (let i = 0; i < 25; i++) {
+        let position = this.random(free)
+        /* remove the free */
+        let index = free.indexOf(position)
+        free.splice(index, 1)
+        json.entities.monsters.push({
+          cellId: position,
+          name: this.random(monstersList),
+          isLive: true,
+          level: this.random(possibleLevels),
+          damage: 0
+        })
       }
 
       /* Set random potions */

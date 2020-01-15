@@ -235,7 +235,7 @@ const store = new Vuex.Store({
       state.theme = data.theme
       state.room += 1
       state.mapDiscover = []
-      state.questLog = ['Begin room ' + state.room]
+      state.questLog = ['Begin dungeon ' + state.room]
     },
     initGame({ commit }) {
       commit('initializePlayer')
