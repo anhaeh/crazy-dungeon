@@ -257,6 +257,10 @@ const store = new Vuex.Store({
         commit('pushLog', 'Inventory is full')
         return false
       }
+      if (state.player.gold < item.obj.price) {
+        commit('pushLog', 'Insufficient gold')
+        return false
+      }
       let index = state.entities.merchant.items.indexOf(item.name)
       state.entities.merchant.items.splice(index, 1)
       state.player.gold -= item.obj.price
@@ -268,8 +272,14 @@ const store = new Vuex.Store({
         commit('pushLog', "You can't learn more skills")
         return false
       }
-      state.player.skills.push(skill.key)
-      commit('pushLog', 'Player bought ' + skill.name)
+      if (state.player.gold < skill.obj.price) {
+        commit('pushLog', 'Insufficient gold')
+        return false
+      }
+      state.player.gold -= skill.obj.price
+      state.player.skills.push(skill.name)
+      commit('pushLog', 'Player bought ' + skill.obj.name)
+
     },
     attack({state, commit, getters}, payload = { damageSkill: 1 }) {
       let playerDamage = Math.ceil(getters.getPlayerAttack * payload.damageSkill)

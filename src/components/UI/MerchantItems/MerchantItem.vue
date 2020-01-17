@@ -38,11 +38,7 @@ export default {
   },
   methods: {
     buy: function () {
-      if (this.$store.getters.getPlayer.gold < this.item.price) {
-        this.$store.commit('pushLog', 'Insufficient gold')
-      } else {
-        this.$store.dispatch('buyItem', { obj: this.item, name: this.name })
-      }
+      this.$store.dispatch('buyItem', { obj: this.item, name: this.name })
     }
   }
 }

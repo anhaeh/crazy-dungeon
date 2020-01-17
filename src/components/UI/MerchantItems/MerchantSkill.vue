@@ -6,6 +6,7 @@
         <span>{{ skill.name }}</span>
       </div>
       <div class="dungeonUI__skillsMenuItemType">
+        <span class="skillType">{{ skill.type }}</span>
         <span class="price">{{ skill.price }} gold</span>
       </div>
       <span class="description">{{ skill.description }}</span>
@@ -39,11 +40,7 @@ export default {
   },
   methods: {
     buy: function () {
-      if (this.$store.getters.getPlayer.gold < this.skill.price) {
-        this.$store.commit('pushLog', 'Insufficient gold')
-      } else {
-        this.$store.dispatch('buySkill', { name: this.skill.name, key: this.name })
-      }
+      this.$store.dispatch('buySkill', { obj: this.skill, name: this.name })
     }
   }
 }
@@ -71,6 +68,9 @@ export default {
   margin-right: calc(var(--tile-cell) * .5)
 .dungeonUI__skillsMenuItemType
   margin: 5px 0
+  .skillType
+    padding-right: 10px
+    color: #6e6e6e
 .dungeonUI__skillsMenuItemDmg
   display: flex
   font-size: 19px
