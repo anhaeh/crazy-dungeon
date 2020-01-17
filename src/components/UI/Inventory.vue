@@ -73,7 +73,6 @@ export default {
     },
     close: function () {
       this.selected = null
-      this.$store.commit('clickDialog')
     }
   }
 }
