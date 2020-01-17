@@ -10,7 +10,7 @@
     </div>
     <item-dialog
         @discard="selected = null"
-        @close="selected = null"
+        @close="close"
     ></item-dialog>
   </div>
 </template>
@@ -67,10 +67,13 @@ export default {
           index: index
         })
       }
-
     },
     image: function (item) {
       return require('@/assets/items/' + item.image)
+    },
+    close: function () {
+      this.selected = null
+      this.$store.commit('clickDialog')
     }
   }
 }

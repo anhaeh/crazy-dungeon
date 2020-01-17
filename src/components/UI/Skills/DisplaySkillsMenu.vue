@@ -10,7 +10,7 @@
     </div>
     <div class="dungeonUI__skillsMenuBody">
       <SkillItem
-          v-for="name in $store.getters.getPlayer.skills"
+          v-for="name in skills"
           :name="name"
           :key="name"
       >
@@ -26,6 +26,11 @@ export default {
   name: "DisplaySkillsMenu",
   components: {
     SkillItem
+  },
+  computed: {
+    skills: function () {
+      return this.$store.getters.getPlayer.skills
+    }
   }
 }
 </script>

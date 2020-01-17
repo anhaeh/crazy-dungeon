@@ -1,11 +1,11 @@
 <template>
   <div class="dungeonUI__skillsMenuList" v-if="$store.getters.getMerchant.show">
-    <div class="dungeonUI__skillsMenuTabs" :class="{'--right': isPotion}">
-      <div class="dungeonUI__skillsMenuTabOption" @click="isPotion = false">
+    <div class="dungeonUI__skillsMenuTabs" :class="{'--right': !isItems}">
+      <div class="dungeonUI__skillsMenuTabOption" @click="isItems = true">
         <span>Items</span>
       </div>
-      <div class="dungeonUI__skillsMenuTabOption" @click="isPotion = true">
-        <span>Potions</span>
+      <div class="dungeonUI__skillsMenuTabOption" @click="isItems = false">
+        <span>Skills</span>
       </div>
     </div>
     <div class="dungeonUI__skillsMenuBody">
@@ -14,37 +14,51 @@
         :key="'merch-item-' + itemName"
         :name="itemName"
       ></item>
+      <skill
+          v-for="skillName in skills"
+          :key="'skill-item-' + skillName"
+          :name="skillName"
+      ></skill>
     </div>
     <merchant-dialog
-        @close="isPotion = false"
+        @close="isItems = true"
     ></merchant-dialog>
   </div>
 </template>
 
 <script>
-import ItemsData from '@/gamedata/Items.json'
+import ItemsData from '@/gamedata/Skills.json'
 import merchantDialog from '../Dialogs/MerchantDialog'
 import item from './MerchantItem'
+import skill from './MerchantSkill'
+
 
 export default {
   name: "MerchantList",
   components: {
     merchantDialog,
-    item
+    item,
+    skill
   },
   data () {
     return {
-      isPotion: false
+      isItems: true
     }
   },
   computed: {
+    skills : function () {
+      let result = []
+      if (!this.isItems) {
+        result = Object.keys(ItemsData).filter(x => !this.$store.getters.getPlayerSkills.includes(x))
+      }
+      return result
+    },
     items : function () {
-      return this.$store.getters.getMerchant.items.filter(x => {
-        if (this.isPotion) {
-          return ItemsData[x].type === 'potion'
-        }
-        return ItemsData[x].type !== 'potion'
-      })
+      let result = []
+      if (this.isItems) {
+        result = this.$store.getters.getMerchant.items
+      }
+      return result
     }
   }
 };

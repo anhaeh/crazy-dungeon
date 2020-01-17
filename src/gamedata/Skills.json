@@ -5,7 +5,8 @@
     "counter": 0.2,
     "description": "Heal 20% points of life",
     "points": 5,
-    "image": "health.jpg"
+    "image": "health.jpg",
+    "price": "700"
   },
   "fury_attack": {
     "name": "Fury Attack",
@@ -13,7 +14,8 @@
     "counter": 3,
     "description": "Does the basic attack x 3",
     "points": 3,
-    "image": "attack.jpg"
+    "image": "attack.jpg",
+    "price": "500"
   },
   "bones_breaker": {
     "name": "Bones breaker",
@@ -21,7 +23,8 @@
     "counter": 2,
     "description": "Make the basic attack x 2",
     "points": 5,
-    "image": "bones.jpg"
+    "image": "bones.jpg",
+    "price": "500"
   },
   "drain_life": {
     "name": "Drain Life",
@@ -30,7 +33,8 @@
     "drain": 0.3,
     "description": "Make the basic attack x 2 and you recover 30% of the damage done",
     "points": 5,
-    "image": "drain.jpg"
+    "image": "drain.jpg",
+    "price": "600"
   },
   "storm": {
     "name": "Storm",
@@ -38,7 +42,8 @@
     "counter": 2.5,
     "description": "Make the basic attack x 2.5",
     "points": 3,
-    "image": "storm.jpg"
+    "image": "storm.jpg",
+    "price": "500"
   },
   "explosion": {
     "name": "Explosion",
@@ -46,6 +51,7 @@
     "counter": 2,
     "description": "Make the basic attack x 2 and you don't receive attack from monsters",
     "points": 5,
-    "image": "explosion.jpg"
+    "image": "explosion.jpg",
+    "price": "500"
   }
 }

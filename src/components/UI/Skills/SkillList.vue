@@ -16,25 +16,17 @@ export default {
   components: {
     SkillItem
   },
-  data() {
-    return {
-      skills: []
-    }
-  },
-  methods: {
-    setSkills: function () {
+  computed: {
+    skills: function () {
       let skillList = []
-      this.$store.getters.getPlayer.skills.forEach(skill => {
+      this.$store.getters.getPlayerSkills.forEach(skill => {
         skillList.push(skill)
       })
       for (let i = skillList.length; i < 6 ; i++ ) {
         skillList.push(null)
       }
-      this.skills = skillList
+      return skillList
     }
-  },
-  mounted() {
-    this.setSkills()
   }
 }
 </script>

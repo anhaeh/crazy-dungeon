@@ -34,7 +34,6 @@ export default {
   name: "Dialog",
   methods: {
     close: function () {
-      this.$store.commit('clickDialog')
       this.$emit('close')
     }
   }

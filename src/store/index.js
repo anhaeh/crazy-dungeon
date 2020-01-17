@@ -40,6 +40,9 @@ const store = new Vuex.Store({
     getPlayer: state => {
       return state.player
     },
+    getPlayerSkills: state => {
+      return state.player.skills
+    },
     getPlayerAttack: state => {
       let itemsBuffAttack = state.inventory.items.filter(x => x.type === 'attack')
       let total = state.player.attack
@@ -259,6 +262,14 @@ const store = new Vuex.Store({
       state.player.gold -= item.obj.price
       commit('addItemToInventory', item.obj)
       commit('pushLog', 'Player bought ' + item.obj.name)
+    },
+    buySkill({state, commit}, skill) {
+      if (state.player.skills.length === 6) {
+        commit('pushLog', "You can't learn more skills")
+        return false
+      }
+      state.player.skills.push(skill.key)
+      commit('pushLog', 'Player bought ' + skill.name)
     },
     attack({state, commit, getters}, payload = { damageSkill: 1 }) {
       let playerDamage = Math.ceil(getters.getPlayerAttack * payload.damageSkill)
