@@ -131,7 +131,6 @@ export default {
       // let theme = this.random(['default', 'forest', 'industrial', 'snakepit'])
       let theme = 'cave'
 
-
       /* TODO pasar a un js encargado de generar mapas */
       let free = []
       let json = {

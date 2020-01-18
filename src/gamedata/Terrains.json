@@ -10,12 +10,12 @@
     "theme": true
   },
   "2": {
-    "image": "base",
+    "image": "base_a",
     "available": true,
     "theme": true
   },
   "3": {
-    "image": "base",
+    "image": "base_b",
     "available": true,
     "theme": true
   },
