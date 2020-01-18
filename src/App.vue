@@ -18,6 +18,11 @@ export default {
 $tile: 14.2857vw // based on 7 tiles in viewport width
 $pixel: 0.8928vw // based on 16 pixels inside 1 tile-cell
 
+$color-att: #ea5b3d
+$color-def: #4CAD55
+$color-mAtt: #045793
+$color-mDef: #911DBA
+
 @font-face
   font-family: 'OpenSansPXBold'
   src: url('assets/font/OpenSansPXBold.ttf') format('truetype')

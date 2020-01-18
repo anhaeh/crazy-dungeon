@@ -9,17 +9,6 @@
       <div class="intro__btn --disabled">MultiPlayer</div>
       <div class="intro__btn --disabled">Library</div>
       <div class="intro__btn --disabled">Settings</div>
-<!--       <select class="style" v-model="selected">
-        <option class=""
-            v-for="heroClass in ['Paladin', 'Wizard', 'Necromancer']"
-            :key="heroClass"
-            :value="heroClass">
-          {{ heroClass }}
-        </option>
-      </select>
-      <div class="new style">
-        <button @click="begin" :disabled="!selected">Start Game</button>
-      </div> -->
     </div>
   </div>
 </template>
