@@ -164,5 +164,5 @@ export default {
       width: 100%
       height: 100%
   .has-fog
-    // filter: opacity(0)
+    filter: opacity(0)
 </style>
