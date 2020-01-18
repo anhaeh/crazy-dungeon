@@ -1,27 +1,23 @@
 {
   "0": {
-    "image": "Dirt",
+    "image": "base",
     "available": true,
     "theme": true
   },
   "1": {
-    "image": "Wall",
+    "image": "solid",
     "available": false,
     "theme": true
   },
   "2": {
-    "image": "Dirt1",
+    "image": "base",
     "available": true,
     "theme": true
   },
   "3": {
-    "image": "Dirt2",
+    "image": "base",
     "available": true,
     "theme": true
-  },
-  "-1": {
-    "image": "None",
-    "available": false
   },
   "P": {
     "image": "Portal",

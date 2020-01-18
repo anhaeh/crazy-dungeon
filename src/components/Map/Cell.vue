@@ -50,13 +50,18 @@ export default {
   name: "Cell",
   data () {
     return {
-      tile: null
+      tile: null,
+      imageWall : null
     }
   },
   computed: {
     image: function () {
-      let image = this.tile.theme ? `${this.tile.image}_${this.$store.getters.getTheme}.png` : `${this.tile.image}.png`
-      return require('@/assets/terrains/' + image)
+      let imageFile = this.tile.image
+      if (this.imageWall) {
+        imageFile += this.imageWall
+      }
+      let theme = this.tile.theme ? this.$store.getters.getTheme + '/' : ''
+      return require(`@/assets/terrains/${theme}${imageFile}.png`)
     },
     hasMonster: function () {
       return this.getMonster !== undefined && this.getMonster.isLive
@@ -118,9 +123,33 @@ export default {
   created () {
     let type = this.type
     if (this.type === undefined) {
-      type = '-1'
+      type = 1
     }
     this.tile = Terrains[type]
+    if (this.type === 1) {
+      let row = parseInt(this.id.split('_')[0])
+      let col = parseInt(this.id.split('_')[1])
+      let e = this.$store.getters.getMap[row][col + 1] === undefined ? false : this.$store.getters.getMap[row][col + 1] !== 1
+      let w = (col - 1) < 0 ? false : this.$store.getters.getMap[row][col - 1] !== 1
+      let n = (row - 1) < 0 ? false : this.$store.getters.getMap[row - 1][col] !== 1
+      let s = this.$store.getters.getMap[row + 1] === undefined ? false : this.$store.getters.getMap[row + 1][col] !== 1
+      let directions = ''
+      if (n) {
+        directions += 'n'
+      }
+      if (e) {
+        directions += 'e'
+      }
+      if (s) {
+        directions += 's'
+      }
+      if (w) {
+        directions += 'w'
+      }
+      if (directions !== '') {
+        this.imageWall = '_' + directions
+      }
+    }
   }
 }
 </script>
@@ -135,5 +164,5 @@ export default {
       width: 100%
       height: 100%
   .has-fog
-    filter: opacity(0)
+    // filter: opacity(0)
 </style>

@@ -128,7 +128,9 @@ export default {
     },
     buildMap: function () {
       /* Set theme */
-      let theme = this.random(['default', 'forest', 'industrial', 'snakepit'])
+      // let theme = this.random(['default', 'forest', 'industrial', 'snakepit'])
+      let theme = 'cave'
+
 
       /* TODO pasar a un js encargado de generar mapas */
       let free = []
