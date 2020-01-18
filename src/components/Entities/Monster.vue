@@ -146,5 +146,6 @@ export default {
   .can-target
     cursor: cell
   .is-target
-    filter: drop-shadow(2px 7px 7px red)
+    img
+      filter: drop-shadow(0px 0px 3px rgba(255,0,0,1))
 </style>
