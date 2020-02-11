@@ -126,13 +126,14 @@ export default {
       type = 1
     }
     this.tile = Terrains[type]
+    let map = this.$store.getters.getMap
     if (this.type === 1) {
       let row = parseInt(this.id.split('_')[0])
       let col = parseInt(this.id.split('_')[1])
-      let e = this.$store.getters.getMap[row][col + 1] === undefined ? false : this.$store.getters.getMap[row][col + 1] !== 1
-      let w = (col - 1) < 0 ? false : this.$store.getters.getMap[row][col - 1] !== 1
-      let n = (row - 1) < 0 ? false : this.$store.getters.getMap[row - 1][col] !== 1
-      let s = this.$store.getters.getMap[row + 1] === undefined ? false : this.$store.getters.getMap[row + 1][col] !== 1
+      let e = map[row][col + 1] === undefined ? false : map[row][col + 1] !== 1
+      let w = (col - 1) < 0 ? false : map[row][col - 1] !== 1
+      let n = (row - 1) < 0 ? false : map[row - 1][col] !== 1
+      let s = map[row + 1] === undefined ? false : map[row + 1][col] !== 1
       let directions = ''
       if (n) {
         directions += 'n'

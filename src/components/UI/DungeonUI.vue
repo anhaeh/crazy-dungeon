@@ -42,7 +42,9 @@
         <div class="dungeonUI__settingBtn"></div>
       </div>
       <div class="dungeonUI__menuBottomRight">
-        <div class="dungeonUI__menuBottomBtn"><span>Stats</span></div>
+        <div class="dungeonUI__menuBottomBtn" @click="setShowStats">
+          <span>Stats</span>
+        </div>
         <div class="dungeonUI__menuBottomBtn"
              @click="setInventory">
           <span>Inventory</span>
@@ -75,8 +77,8 @@
     </div>
     <inventory></inventory>
     <merchant-items></merchant-items>
-    <display-skills-menu v-show="showSkills"></display-skills-menu>
-    <DisplayStatsMenu v-if="false"></DisplayStatsMenu>
+    <display-skills-menu v-if="showSkills"></display-skills-menu>
+    <display-stats-menu v-if="showStats"></display-stats-menu>
   </div>
 </template>
 
@@ -103,7 +105,8 @@ export default {
     return {
       cursorCounter: 0,
       showMenu: false,
-      showSkills: false
+      showSkills: false,
+      showStats: false
     }
   },
   computed: {
@@ -122,11 +125,16 @@ export default {
     openMenu: function () {
       this.showMenu = !this.showMenu
       this.showSkills = false
+      this.showStats = false
       this.$store.commit('setShowInventory', false)
       this.$store.commit('setDialogShow', false)
     },
     setShowSkills: function () {
       this.showSkills = !this.showSkills
+      this.$store.commit('setShowInventory', false)
+    },
+    setShowStats: function () {
+      this.showStats = !this.showStats
       this.$store.commit('setShowInventory', false)
     },
     setInventory: function () {
