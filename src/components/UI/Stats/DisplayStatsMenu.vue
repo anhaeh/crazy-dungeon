@@ -40,6 +40,9 @@
             color="green"
         ></status-bar>
       </div>
+      <div class="dungeonUI__statsExp">
+        <div class="span-title">Gold Multiplier: {{ goldMultiplier }}%</div>
+      </div>
       <div class="dungeonUI__statsBar" v-show="false">
         <div class="dungeonUI__statsLabel --mAtt"></div>
         <div class="dungeonUI__statsBaseValue">12</div>
@@ -62,10 +65,6 @@
         </div>
         <div class="dungeonUI__statsTotalValue">81</div>
       </div>
-<!--       <status-bar
-        :actual="getPlayer.defeatMonsters"
-        :total="getPlayer.nextLevelMonsters"
-      ></status-bar> -->
     </div>
   </div>
 </template>
@@ -77,6 +76,11 @@ export default {
   name: "DisplaySkillsMenu",
   components: {
     statusBar
+  },
+  computed: {
+    goldMultiplier: function () {
+      return Math.trunc(this.$store.getters.getPlayerGoldMultiplier * 100)
+    }
   }
 };
 </script>

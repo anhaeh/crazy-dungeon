@@ -61,6 +61,14 @@ const store = new Vuex.Store({
       })
       return total
     },
+    getPlayerGoldMultiplier: state => {
+      let itemsBuffGold = state.inventory.items.filter(x => x.type === 'gold')
+      let multiplier = 1
+      itemsBuffGold.forEach(item => {
+        multiplier += item.counter
+      })
+      return multiplier
+    },
     getPlayerDamage: state => {
       return state.player.damage
     },

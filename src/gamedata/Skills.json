@@ -41,7 +41,7 @@
     "type": "Melee",
     "counter": 2.5,
     "description": "Make the basic attack x 2.5",
-    "points": 3,
+    "points": 4,
     "image": "storm.jpg",
     "price": "500"
   },
