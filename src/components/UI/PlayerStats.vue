@@ -4,7 +4,7 @@
     <div class="playerStats__lvl">{{ getPlayer.level }}</div>
     <status-bar
       :actual="actualHealth"
-      :total="getPlayerLife"
+      :total="getPlayerBaseLife + getPlayerBuffLife"
     ></status-bar>
     <div class="name">
       {{ getPlayer.name }}
@@ -34,13 +34,14 @@ export default {
     ...mapGetters([
       'getPlayer',
       'getPlayerAttack',
-      'getPlayerLife'
+      'getPlayerBaseLife',
+      'getPlayerBuffLife'
     ]),
     imageHero: function () {
       return require(`@/assets/heroes/portraits/${this.getPlayer.image}`)
     },
     actualHealth: function () {
-      return this.getPlayerLife - this.getPlayer.damage
+      return (this.getPlayerBaseLife + this.getPlayerBuffLife) - this.getPlayer.damage
     }
   },
   methods: {

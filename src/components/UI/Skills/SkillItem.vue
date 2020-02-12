@@ -76,7 +76,9 @@ export default {
       }
     },
     heal: function () {
-      let counterToHeal = Math.ceil(this.$store.getters.getPlayerLife * this.skill.counter)
+      let counterToHeal = Math.ceil(
+        (this.$store.getters.getPlayerBaseLife + this.$store.getters.getPlayerBuffLife) * this.skill.counter
+      )
       this.$store.commit('restoreLife', { counter: counterToHeal })
     },
     attack: function (range=false) {

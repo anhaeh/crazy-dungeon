@@ -30,7 +30,7 @@
           <div class="dungeonUI__statsBarGraph --buff"></div>
           <div class="dungeonUI__statsBarGraph --debuff"></div>
         </div>
-        <div class="dungeonUI__statsTotalValue">{{ $store.getters.getPlayerLife }}</div>
+        <div class="dungeonUI__statsTotalValue">{{ $store.getters.getPlayerBaseLife + $store.getters.getPlayerBuffLife }}</div>
       </div>
       <div class="dungeonUI__statsExp">
         <div class="span-title">Experience</div>

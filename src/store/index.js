@@ -53,9 +53,9 @@ const store = new Vuex.Store({
     getPlayerBaseLife: state => {
       return state.player.initialHealth + (state.player.level * 15)
     },
-    getPlayerLife: state => {
+    getPlayerBuffLife: state => {
       let itemsBuffHealth = state.inventory.items.filter(x => x.type === 'life')
-      let total = state.player.initialHealth + (state.player.level * 15)
+      let total = 0
       itemsBuffHealth.forEach(item => {
         total += item.counter
       })
@@ -145,7 +145,6 @@ const store = new Vuex.Store({
       state.player.vision = cells
       let c = state.mapDiscover.concat(cells).sort()
       state.mapDiscover = c.filter((value, pos) => { return c.indexOf(value) === pos } )
-
     },
     setPlayerDamage(state, damage) {
       state.player.damage += damage
@@ -172,6 +171,12 @@ const store = new Vuex.Store({
       state.inventory.items.push(item)
     },
     deleteItemInventory(state, index) {
+      if (state.inventory.items[index].type === 'life') {
+        state.player.damage -= state.inventory.items[index].counter
+        if (state.player.damage < 0) {
+          state.player.damage = 0
+        }
+      }
       state.inventory.items.splice(index, 1)
     },
     clickInventory(state) {
