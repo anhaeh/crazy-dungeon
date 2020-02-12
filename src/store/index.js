@@ -1,6 +1,5 @@
 import Vue from "vue"
 import Vuex from "vuex"
-import heroes from '@/gamedata/Heroes.json'
 
 Vue.use(Vuex)
 
@@ -50,6 +49,9 @@ const store = new Vuex.Store({
         total += item.counter
       })
       return total
+    },
+    getPlayerBaseLife: state => {
+      return state.player.initialHealth + (state.player.level * 15)
     },
     getPlayerLife: state => {
       let itemsBuffHealth = state.inventory.items.filter(x => x.type === 'life')
@@ -213,11 +215,14 @@ const store = new Vuex.Store({
         defeatMonsters: 0,
         nextLevelMonsters: 5,
         level: 1,
-        isDead: false
+        isDead: false,
+        skills: []
       }
       state.inventory.items = []
+      // deep copy
+      let heroes = JSON.parse(JSON.stringify(require('@/gamedata/Heroes.json')))
       let heroeData = heroes[state.classSelected]
-      Object.assign(state.player, heroeData)
+      Object.assign(state.player, Object.assign({}, heroeData))
     },
     levelUp(state) {
       let newPlayer = Object.assign({}, state.player)

@@ -122,24 +122,31 @@ export default {
     }
   },
   methods: {
-    openMenu: function () {
-      this.showMenu = !this.showMenu
+    closeAll: function() {
       this.showSkills = false
       this.showStats = false
       this.$store.commit('setShowInventory', false)
       this.$store.commit('setDialogShow', false)
     },
+    openMenu: function () {
+      let result = !this.showMenu
+      this.closeAll()
+      this.showMenu = result
+    },
     setShowSkills: function () {
-      this.showSkills = !this.showSkills
-      this.$store.commit('setShowInventory', false)
+      let result = !this.showSkills
+      this.closeAll()
+      this.showSkills = result
     },
     setShowStats: function () {
-      this.showStats = !this.showStats
-      this.$store.commit('setShowInventory', false)
+      let result = !this.showStats
+      this.closeAll()
+      this.showStats = result
     },
     setInventory: function () {
-      this.$store.commit('clickInventory')
-      this.showSkills = false
+      let result = !this.$store.getters.getInventory.show
+      this.closeAll()
+      this.$store.commit('setShowInventory', result)
     },
     move: function (key) {
       let directions = {

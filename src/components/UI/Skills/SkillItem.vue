@@ -28,7 +28,12 @@ export default {
     playerLevel: {
       immediate: true,
       handler() {
-        this.usages = this.skillName ? this.skill.points : 0
+        this.setUsages()
+      }
+    },
+    skillName: {
+      handler() {
+        this.setUsages()
       }
     }
   },
@@ -52,6 +57,9 @@ export default {
     }
   },
   methods: {
+    setUsages: function () {
+      this.usages = this.skillName ? this.skill.points : 0
+    },
     use: function () {
       if (this.usages !== 0 && !this.isDisabled) {
         this.$store.commit('pushLog', 'Player use ' + this.skill.name)

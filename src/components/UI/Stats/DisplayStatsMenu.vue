@@ -2,7 +2,8 @@
   <div class="dungeonUI__statsMenuList">
     <img src="../../../assets/ui/dungeonUI__statsBorder.png" alt="" width="100%" class="dungeonUI__statsBorder">
     <div class="dungeonUI__statsMenuBody">
-      <div class="dungeonUI__statsActiveModifiers">
+      <div class="span-title">Active Modifiers</div>
+      <div class="dungeonUI__statsActiveModifiers" v-show="false">
         <div class="dungeonUI__statsActive --burn"></div>
         <div class="dungeonUI__statsActive --burn"></div>
         <div class="dungeonUI__statsActive --burn"></div>
@@ -10,60 +11,56 @@
         <div class="dungeonUI__statsActive --burn"></div>
       </div>
       <div class="dungeonUI__statsBar">
-        <div class="dungeonUI__statsLabel --att"></div>  
-        <div class="dungeonUI__statsBaseValue">{{ getPlayerAttack }}</div>  
+        <div class="dungeonUI__statsLabel --att"></div>
+        <div class="dungeonUI__statsBaseValue">{{ $store.getters.getPlayer.attack }}</div>
         <div class="dungeonUI__statsBarBorder">
           <div class="dungeonUI__statsBarGraph --att"></div>
           <div class="dungeonUI__statsBarGraph --equip"></div>
           <div class="dungeonUI__statsBarGraph --buff"></div>
           <div class="dungeonUI__statsBarGraph --debuff"></div>
-        </div>  
-        <div class="dungeonUI__statsTotalValue">47</div>  
+        </div>
+        <div class="dungeonUI__statsTotalValue">{{ $store.getters.getPlayerAttack }}</div>
       </div>
       <div class="dungeonUI__statsBar">
-        <div class="dungeonUI__statsLabel --def"></div>  
-        <div class="dungeonUI__statsBaseValue">{{ getPlayerAttack }}</div>  
+        <div class="dungeonUI__statsLabel --def"></div>
+        <div class="dungeonUI__statsBaseValue">{{ $store.getters.getPlayerBaseLife }}</div>
         <div class="dungeonUI__statsBarBorder">
           <div class="dungeonUI__statsBarGraph --def"></div>
           <div class="dungeonUI__statsBarGraph --equip"></div>
           <div class="dungeonUI__statsBarGraph --buff"></div>
           <div class="dungeonUI__statsBarGraph --debuff"></div>
-        </div>  
-        <div class="dungeonUI__statsTotalValue">25</div>  
+        </div>
+        <div class="dungeonUI__statsTotalValue">{{ $store.getters.getPlayerLife }}</div>
       </div>
-      <div class="dungeonUI__statsBar">
-        <div class="dungeonUI__statsLabel --mAtt"></div>  
-        <div class="dungeonUI__statsBaseValue">{{ getPlayerAttack }}</div>  
+      <div class="dungeonUI__statsExp">
+        <div class="span-title">Experience</div>
+        <status-bar
+            :actual="$store.getters.getPlayer.defeatMonsters"
+            :total="$store.getters.getPlayer.nextLevelMonsters"
+            color="green"
+        ></status-bar>
+      </div>
+      <div class="dungeonUI__statsBar" v-show="false">
+        <div class="dungeonUI__statsLabel --mAtt"></div>
+        <div class="dungeonUI__statsBaseValue">12</div>
         <div class="dungeonUI__statsBarBorder">
           <div class="dungeonUI__statsBarGraph --mAtt"></div>
           <div class="dungeonUI__statsBarGraph --equip"></div>
           <div class="dungeonUI__statsBarGraph --buff"></div>
           <div class="dungeonUI__statsBarGraph --debuff"></div>
-        </div>  
-        <div class="dungeonUI__statsTotalValue">92</div>  
+        </div>
+        <div class="dungeonUI__statsTotalValue">92</div>
       </div>
-      <div class="dungeonUI__statsBar">
-        <div class="dungeonUI__statsLabel --mDef"></div>  
-        <div class="dungeonUI__statsBaseValue">{{ getPlayerAttack }}</div>  
+      <div class="dungeonUI__statsBar" v-show="false">
+        <div class="dungeonUI__statsLabel --mDef"></div>
+        <div class="dungeonUI__statsBaseValue">23</div>
         <div class="dungeonUI__statsBarBorder">
           <div class="dungeonUI__statsBarGraph --mDef"></div>
           <div class="dungeonUI__statsBarGraph --equip"></div>
           <div class="dungeonUI__statsBarGraph --buff"></div>
           <div class="dungeonUI__statsBarGraph --debuff"></div>
-        </div>  
-        <div class="dungeonUI__statsTotalValue">81</div>  
-      </div>
-      <div class="dungeonUI__statsHealth">      
-        <status-bar
-          :actual="actualHealth"
-          :total="getPlayerLife"
-        ></status-bar>
-      </div>
-      <div class="dungeonUI__statsExp">      
-        <status-bar
-          :actual="actualHealth"
-          :total="getPlayerLife"
-        ></status-bar>
+        </div>
+        <div class="dungeonUI__statsTotalValue">81</div>
       </div>
 <!--       <status-bar
         :actual="getPlayer.defeatMonsters"
@@ -74,20 +71,13 @@
 </template>
 
 <script>
-import { mapGetters } from 'vuex'
 import statusBar from '../StatusBar'
 
 export default {
   name: "DisplaySkillsMenu",
   components: {
     statusBar
-  },
-  computed: {
-      ...mapGetters([
-        'getPlayerAttack',
-        'getPlayerLife',
-      ]),
-    },
+  }
 };
 </script>
 
@@ -208,12 +198,17 @@ $color-mDef: #911DBA
     ~ .--buff
       background-color: lighten($color-mDef, 20%)
       width: 22px // Stats max value 120pt
-  &.--att, &.--def, &.--mAtt, &.--mDef 
+  &.--att, &.--def, &.--mAtt, &.--mDef
     ~ .--debuff
       background-color: #333
       width: 15px // Stats max value 120pt
+.span-title
+  color: white
+  margin: calc(var(--tile-cell) * .25)
+  text-align: center
 .dungeonUI__statsHealth, .dungeonUI__statsExp
   margin-top: calc(var(--tile-cell) * .5)
+  color: white
   .statusBar
     width: calc(var(--tile-cell) * 6)
     height: calc(var(--tile-cell) * .75)
@@ -221,4 +216,10 @@ $color-mDef: #911DBA
     background-size: 100% 100%
   .statusCurrent
     background-size: 100% 100%
+</style>
+
+<style lang="sass">
+.dungeonUI__statsExp .legend
+  left: calc(45 * var(--pixel-unit))
+  top: calc(4 * var(--pixel-unit))
 </style>

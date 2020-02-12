@@ -1,4 +1,17 @@
 {
+  "necromancer": {
+    "name": "Necromancer",
+    "initialHealth": 50,
+    "attack": 9,
+    "defense": 7,
+    "magicAttack": 15,
+    "magicDefense": 12,
+    "image": "necromancer.png",
+    "skills": [
+      "bones_breaker",
+      "drain_life"
+    ]
+  },
   "paladin": {
     "name": "Paladin",
     "initialHealth": 55,
@@ -17,19 +30,6 @@
     "skills": [
       "explosion",
       "storm"
-    ]
-  },
-  "necromancer": {
-    "name": "Necromancer",
-    "initialHealth": 45,
-    "attack": 9,
-    "defense": 7,
-    "magicAttack": 15,
-    "magicDefense": 12,
-    "image": "necromancer.png",
-    "skills": [
-      "bones_breaker",
-      "drain_life"
     ]
   }
 }
