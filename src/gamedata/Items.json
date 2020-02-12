@@ -1,12 +1,21 @@
 {
-  "sword1": {
-    "name": "Iron Sword",
-    "image": "Item__00.png",
+  "dagger": {
+    "name": "Dagger",
+    "image": "Item__03.png",
     "legend": "+1 Attack",
     "counter": 1,
     "type": "attack",
-    "description": "This old sword give you + 1 attack",
+    "description": "This dagger give you + 1 attack",
     "price": 300
+  },
+  "sword1": {
+    "name": "Iron Sword",
+    "image": "Item__00.png",
+    "legend": "+2 Attack",
+    "counter": 2,
+    "type": "attack",
+    "description": "This old sword give you + 2 attack",
+    "price": 400
   },
   "sword2": {
     "name": "Big Sword",
@@ -15,7 +24,25 @@
     "counter": 3,
     "type": "attack",
     "description": "This big sword give you + 3 attack",
+    "price": 500
+  },
+  "sword3": {
+    "name": "Master Sword",
+    "image": "Item__04.png",
+    "legend": "+4 Attack",
+    "counter": 4,
+    "type": "attack",
+    "description": "This Master Sword give you + 4 attack",
     "price": 600
+  },
+  "powerCane": {
+    "name": "Power Cane",
+    "image": "Item__23.png",
+    "legend": "+5 Attack",
+    "counter": 5,
+    "type": "attack",
+    "description": "This Power Cane give you + 5 attack",
+    "price": 700
   },
   "potion": {
     "name": "Potion",
@@ -36,22 +63,67 @@
     "price": 600
   },
   "armor1": {
-    "name": "Iron Armor",
-    "image": "Item__57.png",
+    "name": "Basic Armor",
+    "image": "Item__56.png",
     "legend": "+10 HP",
     "counter": 10,
     "type": "life",
     "description": "This basic armor give you + 10 health",
-    "price": 350
+    "price": 300
+  },
+  "helmet1": {
+    "name": "Iron Helmet",
+    "image": "Item__44.png",
+    "legend": "+15 HP",
+    "counter": 15,
+    "type": "life",
+    "description": "This iron helmet give you + 15 health",
+    "price": 400
+  },
+  "leatherGlove": {
+    "name": "Leather glove",
+    "image": "Item__61.png",
+    "legend": "+20 HP",
+    "counter": 20,
+    "type": "life",
+    "description": "This leather glove give you + 20 health",
+    "price": 500
+  },
+  "ironGlove": {
+    "name": "Iron glove",
+    "image": "Item__62.png",
+    "legend": "+30 HP",
+    "counter": 30,
+    "type": "life",
+    "description": "This leather glove give you + 30 health",
+    "price": 600
   },
   "armor2": {
-    "name": "Medium Armor",
+    "name": "Iron Armor",
     "image": "Item__58.png",
-    "legend": "+35 HP",
-    "counter": 35,
+    "legend": "+40 HP",
+    "counter": 40,
     "type": "life",
-    "description": "This medium armor give you + 35 health",
+    "description": "This iron armor give you + 40 health",
     "price": 700
+  },
+  "boots1": {
+    "name": "Magic boots",
+    "image": "Item__50.png",
+    "legend": "+55 HP",
+    "counter": 55,
+    "type": "life",
+    "description": "This boots give you + 55 health",
+    "price": 800
+  },
+  "helmet2": {
+    "name": "Magic helmet",
+    "image": "Item__52.png",
+    "legend": "+65 HP",
+    "counter": 65,
+    "type": "life",
+    "description": "This magic helmet give you + 65 health",
+    "price": 900
   },
   "armor3": {
     "name": "Magic Armor",
@@ -63,12 +135,30 @@
     "price": 1000
   },
   "ring1": {
-    "name": "Gold ring",
-    "image": "Item__43.png",
+    "name": "Basic ring",
+    "image": "Item__40.png",
     "legend": "+10% gold",
     "description": "This ring give you + 10% of gold from monsters",
     "counter": 0.1,
     "type": "gold",
     "price": 450
+  },
+  "ring2": {
+    "name": "Diamond ring",
+    "image": "Item__41.png",
+    "legend": "+15% gold",
+    "description": "This ring give you + 15% of gold from monsters",
+    "counter": 0.15,
+    "type": "gold",
+    "price": 550
+  },
+  "ring3": {
+    "name": "Gold ring",
+    "image": "Item__43.png",
+    "legend": "+20% gold",
+    "description": "This ring give you + 20% of gold from monsters",
+    "counter": 0.20,
+    "type": "gold",
+    "price": 750
   }
 }

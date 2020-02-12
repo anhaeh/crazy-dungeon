@@ -214,7 +214,7 @@ export default {
         json.entities.merchant.items = ['potion', 'bigPotion']
         json.entities.merchant.show = false
         let items = Object.keys(itemsData).filter(x => itemsData[x].type !== 'potion')
-        for (let i = 0; i < 3; i++) {
+        for (let i = 0; i < 5; i++) {
           let itemToAdd = this.random(items)
           index = items.indexOf(itemToAdd)
           items.splice(index, 1)
