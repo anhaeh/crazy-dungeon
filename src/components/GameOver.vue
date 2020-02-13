@@ -2,9 +2,9 @@
   <div v-if="isGameOver" class="game-over">
     <p class="text">GAME OVER</p>
     <div class="btn-new-game" @click="goMenu">New Game</div>
-    <h3>Submit your score</h3>
+    <h4>Submit your score</h4>
     Total {{ this.$store.getters.getScore }}
-    <input type="text" v-model="name">
+    <input type="text" v-model="name" placeholder="Enter your name">
     <div class="btn-new-game btn-score" @click="pushScore">Send</div>
 
   </div>
@@ -42,6 +42,9 @@ export default {
 </script>
 
 <style scoped lang="sass">
+  h4
+    margin-top: 60px
+    margin-bottom: 15px
   .game-over
     font-family: 'OpenSansPXBold'
     position: fixed
