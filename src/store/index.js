@@ -114,6 +114,9 @@ const store = new Vuex.Store({
     getDialog: state => {
       return state.dialog
     },
+    getScore: state => {
+      return state.player.score
+    }
   },
   mutations: {
     setClassSelected(state, classSelected) {
@@ -163,6 +166,7 @@ const store = new Vuex.Store({
       let gold = Math.ceil(amountGold * multiplier)
       state.player.gold += gold
       state.questLog.push(`Monster drop ${gold} gold`)
+      state.player.score += amountGold
     },
     setPlayerDead(state) {
       state.player.isDead = true
@@ -229,7 +233,8 @@ const store = new Vuex.Store({
         nextLevelMonsters: 5,
         level: 1,
         isDead: false,
-        skills: []
+        skills: [],
+        score: 0
       }
       state.inventory.items = []
       // deep copy

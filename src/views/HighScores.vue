@@ -1,6 +1,6 @@
 <template>
   <div class="container">
-    <h2>High Scores</h2>
+    <h1>High Scores</h1>
     <div v-if="!results" class="loader">Loading...</div>
     <div v-else class="table-score">
       <table>
@@ -18,7 +18,7 @@
         </tr>
       </table>
     </div>
-    <div class="new style">
+    <div class="back-btn">
       <button @click="$router.push({ name: 'main-menu'})">Back</button>
     </div>
   </div>
@@ -47,6 +47,7 @@ export default {
 
 <style scoped lang="sass">
 .container
+  width: 100%
   color: white
   font-family: 'OpenSansPXBold'
   display: flex
@@ -66,8 +67,13 @@ td
   text-align: center
   padding: 0 10px
 .table-score
+  width: 85%
   height: 60%
   overflow: scroll
+  table
+    width: 100%
+.back-btn
+  margin-top: 30px
 </style>
 
 <style scoped>

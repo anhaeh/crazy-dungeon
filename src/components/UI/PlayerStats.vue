@@ -6,6 +6,9 @@
       :actual="actualHealth"
       :total="getPlayerBaseLife + getPlayerBuffLife"
     ></status-bar>
+    <div class="score">
+      Score: {{ getScore }}
+    </div>
     <div class="name">
       {{ getPlayer.name }}
     </div>
@@ -35,7 +38,8 @@ export default {
       'getPlayer',
       'getPlayerAttack',
       'getPlayerBaseLife',
-      'getPlayerBuffLife'
+      'getPlayerBuffLife',
+      'getScore'
     ]),
     imageHero: function () {
       return require(`@/assets/heroes/portraits/${this.getPlayer.image}`)
@@ -77,6 +81,10 @@ export default {
 .statusBar
   left: calc(1.5 * var(--tile-cell))
   top: calc(1 * var(--tile-cell))
+.score
+  position: absolute
+  left: 45%
+  padding-top: 7px
 .name
   position: absolute
   top: calc(1.5 * var(--tile-cell))

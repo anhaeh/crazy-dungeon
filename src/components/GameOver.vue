@@ -1,16 +1,36 @@
 <template>
   <div v-if="isGameOver" class="game-over">
     <p class="text">GAME OVER</p>
-    <div class="btn-new-game" @click="reload">New Game</div>
+    <div class="btn-new-game" @click="goMenu">New Game</div>
+    <h3>Submit your score</h3>
+    Total {{ this.$store.getters.getScore }}
+    <input type="text" v-model="name">
+    <div class="btn-new-game btn-score" @click="pushScore">Send</div>
+
   </div>
 </template>
 
 <script>
+import axios from 'axios'
+
 export default {
   name: "GameOver",
+  data () {
+    return {
+      name: ''
+    }
+  },
   methods: {
-    reload: function () {
+    goMenu: function () {
       this.$router.push({name: 'main-menu'})
+    },
+    pushScore: function () {
+      axios.post('https://anhaeh.pythonanywhere.com/api/v1/dungeon/high-score/', {
+        "score": this.$store.getters.getScore,
+        "name": this.name,
+        "player_level": this.$store.getters.getPlayer.level
+      })
+      this.goMenu()
     }
   },
   computed: {
@@ -46,4 +66,16 @@ export default {
     background-color: #672806
     border: #533a18 solid 1px
     color: white
+  .btn-score
+    margin-top: 10px
+    cursor: pointer
+    position: relative
+    display: flex
+    justify-content: center
+    align-items: center
+    width: 100px
+    height: 50px
+    border: #533a18 solid 1px
+    color: white
+    background-color: #673352 !important
 </style>
