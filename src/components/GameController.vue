@@ -235,8 +235,7 @@ export default {
         }
         let position = this.random(free)
         /* remove the free */
-        let index = free.indexOf(position)
-        free.splice(index, 1)
+        free.splice(free.indexOf(position), 1)
         json.entities.monsters.push({
           cellId: position,
           name: this.random(monstersList),
@@ -255,6 +254,7 @@ export default {
         let item = this.random(itemsToDrop)
         let position = this.random(free)
         json.entities.items[position] = item
+        free.splice(free.indexOf(position), 1)
       }
       this.$store.dispatch('setDungeon', json)
     }
