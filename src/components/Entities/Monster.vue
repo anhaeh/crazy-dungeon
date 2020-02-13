@@ -6,8 +6,10 @@
     <img :src="image" alt="">
     <div v-if="isLive">
       <div class="level">{{ getMonster.level }}</div>
-      <div class="life" :style="life"></div>
-      <div class="life-background"></div>
+      <template v-if="this.getMonster.damage">
+        <div class="life" :style="life"></div>
+        <div class="life-background"></div>
+      </template>
     </div>
   </div>
 </template>

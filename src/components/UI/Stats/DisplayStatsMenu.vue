@@ -226,4 +226,6 @@ $color-mDef: #911DBA
 .dungeonUI__statsExp .legend
   left: calc(45 * var(--pixel-unit))
   top: calc(4 * var(--pixel-unit))
+.dungeonUI__statsExp .statusCurrent
+  margin: 0 5px
 </style>
