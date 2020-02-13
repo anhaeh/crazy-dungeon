@@ -3,6 +3,7 @@ import VueRouter from 'vue-router'
 import MainMenu from '../views/MainMenu'
 import ClassSelection from '../views/ClassSelection'
 import Dungeon from '../views/Dungeon'
+import HighScores from '../views/HighScores'
 
 Vue.use(VueRouter)
 
@@ -21,7 +22,12 @@ const routes = [
     path: '/dungeon/:class',
     name: 'dungeon',
     component: Dungeon
-  }
+  },
+  {
+    path: '/high-scores',
+    name: 'high-scores',
+    component: HighScores
+  },
 ]
 
 const router = new VueRouter({

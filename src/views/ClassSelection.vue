@@ -12,6 +12,9 @@
     <div class="new style">
       <button @click="begin" :disabled="!selected">Start Game</button>
     </div>
+    <div class="new style">
+      <button @click="$router.push({ name: 'main-menu'})">Back</button>
+    </div>
   </div>
 </template>
 
