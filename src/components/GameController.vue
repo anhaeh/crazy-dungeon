@@ -249,6 +249,13 @@ export default {
           json.entities.items[position] = this.$store.getters.getPlayer.level < 4 ? 'potion' : 'bigPotion'
         }
       }
+
+      if(Math.random() > 0.85) {
+        let itemsToDrop = ['potion', 'armor1', 'dagger', 'helmet1', 'sword1']
+        let item = this.random(itemsToDrop)
+        let position = this.random(free)
+        json.entities.items[position] = item
+      }
       this.$store.dispatch('setDungeon', json)
     }
   },

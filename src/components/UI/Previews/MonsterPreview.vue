@@ -10,10 +10,6 @@
     >
     </status-bar>
     <div class="name">{{ entity.monster.name }}</div>
-<!--     <img class="attack-image" :src="imageAttack">
-    <div class="damage">
-      {{ entity.monster.damage }}
-    </div> -->
   </div>
 </template>
 
@@ -28,9 +24,6 @@ export default {
   computed: {
     image: function () {
       return require('@/assets/monsters/portraits/' + this.entity.image + '.png')
-    },
-    imageAttack: function () {
-      return require('@/assets/ui/dungeonUI__controlsTalk.png')
     }
   }
 }

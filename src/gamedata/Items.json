@@ -63,12 +63,12 @@
     "price": 600
   },
   "armor1": {
-    "name": "Basic Armor",
+    "name": "Old Armor",
     "image": "Item__56.png",
     "legend": "+10 HP",
     "counter": 10,
     "type": "life",
-    "description": "This basic armor give you + 10 health",
+    "description": "This old armor give you + 10 health",
     "price": 300
   },
   "helmet1": {
