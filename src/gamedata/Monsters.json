@@ -4,27 +4,27 @@
     "image": "Gorgon",
     "health": 40,
     "attack": 5,
-    "gold": 50
+    "gold": 60
   },
   "golem": {
     "name": "Golem",
     "image": "Golem",
     "health": 30,
     "attack": 4,
-    "gold": 40
+    "gold": 50
   },
   "imp": {
     "name": "Imp",
     "image": "Imp",
     "health": 25,
     "attack": 3,
-    "gold": 30
+    "gold": 40
   },
   "goblin": {
     "name": "Goblin",
     "image": "Goblin",
     "health": 25,
     "attack": 2,
-    "gold": 20
+    "gold": 35
   }
 }

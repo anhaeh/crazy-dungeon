@@ -158,7 +158,7 @@ const store = new Vuex.Store({
       itemsBuffGold.forEach(item => {
         multiplier += item.counter
       })
-      let amountGold = state.monsterSelected.monster.gold + (state.monsterSelected.level * 10)
+      let amountGold = state.monsterSelected.monster.gold
       state.player.defeatMonsters += 1
       let gold = Math.ceil(amountGold * multiplier)
       state.player.gold += gold
