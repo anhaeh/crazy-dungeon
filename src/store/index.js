@@ -247,7 +247,7 @@ const store = new Vuex.Store({
       newPlayer.level += 1
       newPlayer.defeatMonsters = 0
       newPlayer.damage = 0
-      newPlayer.attack += newPlayer.level
+      newPlayer.attack += 2
       newPlayer.nextLevelMonsters = 5 * newPlayer.level
       state.player = newPlayer
     }
