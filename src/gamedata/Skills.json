@@ -4,7 +4,7 @@
     "type": "Healing",
     "counter": 0.2,
     "description": "Heal 20% points of life",
-    "points": 5,
+    "points": 2,
     "image": "health.jpg",
     "price": "700"
   },

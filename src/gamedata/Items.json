@@ -51,7 +51,7 @@
     "type": "potion",
     "counter": 30,
     "description": "This potion restore 30 points of life",
-    "price": 300
+    "price": 250
   },
   "bigPotion": {
     "name": "Big Potion",
