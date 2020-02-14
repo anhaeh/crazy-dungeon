@@ -1,16 +1,18 @@
 <template>
   <div class="container">
-    <h1>High Scores</h1>
+    <h1 class="title">High Scores</h1>
     <div v-if="!results" class="loader">Loading...</div>
     <div v-else class="table-score">
       <table>
         <tr>
+          <th>#</th>
           <th>NAME</th>
           <th>LVL</th>
           <th>SCORE</th>
           <th>DATE</th>
         </tr>
-        <tr v-for="item in results" :key="item.id">
+        <tr v-for="(item, index) in results" :key="item.id">
+          <td>{{ index + 1 }}</td>
           <td>{{ item.name }}</td>
           <td>{{ item.player_level }}</td>
           <td>{{ item.score }}</td>
@@ -18,7 +20,7 @@
         </tr>
       </table>
     </div>
-    <div class="back-btn">
+    <div class="footer">
       <button @click="$router.push({ name: 'main-menu'})">Back</button>
     </div>
   </div>
@@ -37,7 +39,7 @@ export default {
   methods: {
   },
   created() {
-    axios.get('https://anhaeh.pythonanywhere.com/api/v1/dungeon/high-score/?size=100')
+    axios.get('https://anhaeh.pythonanywhere.com/api/v1/dungeon/high-score/?size=50')
       .then((response) => {
         this.results = response.data.results
       })
@@ -70,10 +72,15 @@ td
   width: 85%
   height: 60%
   overflow: scroll
+  color: #e4e5e6
   table
     width: 100%
-.back-btn
-  margin-top: 30px
+.footer
+  position: fixed
+  bottom: 5%
+.title
+  position: fixed
+  top: 8%
 </style>
 
 <style scoped>

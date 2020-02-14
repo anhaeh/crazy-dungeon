@@ -9,10 +9,8 @@
         {{ heroClass }}
       </option>
     </select>
-    <div class="new style">
-      <button @click="begin" :disabled="!selected">Start Game</button>
-    </div>
-    <div class="new style">
+    <button @click="begin" :disabled="!selected">Start Game</button>
+    <div class="footer">
       <button @click="$router.push({ name: 'main-menu'})">Back</button>
     </div>
   </div>
@@ -53,10 +51,16 @@ button, select
   font-family: 'OpenSansPXBold'
   color: white
   text-transform: capitalize
-  font-size: 1.5rem
+  font-size: 1.75rem
   background-color: #672806
   border-color: #533a18
 button:disabled
   background-color: black
   color: #888888
+.footer
+  position: fixed
+  bottom: 10%
+.footer button
+  font-size: 1.5rem
+  background-color: #671233
 </style>

@@ -84,12 +84,13 @@ export default {
 .score
   position: absolute
   left: 45%
-  padding-top: 7px
+  font-size: 0.85rem
+  padding-top: calc(0.25 * var(--tile-cell))
 .name
   position: absolute
   top: calc(1.5 * var(--tile-cell))
   left: calc(2 * var(--pixel-unit))
   font-size: 20px
   font-weight: bold
-  text-shadow: 1px 2px 0px black
+  text-shadow: 1px 2px 0 black
 </style>

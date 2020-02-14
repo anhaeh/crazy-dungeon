@@ -166,7 +166,7 @@ const store = new Vuex.Store({
       let gold = Math.ceil(amountGold * multiplier)
       state.player.gold += gold
       state.questLog.push(`Monster drop ${gold} gold`)
-      state.player.score += amountGold
+      state.player.score += state.monsterSelected.monster.gold + (state.monsterSelected.level * 10)
     },
     setPlayerDead(state) {
       state.player.isDead = true

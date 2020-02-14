@@ -1,12 +1,17 @@
 <template>
   <div v-if="isGameOver" class="game-over">
-    <p class="text">GAME OVER</p>
-    <div class="btn-new-game" @click="goMenu">New Game</div>
-    <h4>Submit your score</h4>
-    Total {{ this.$store.getters.getScore }}
-    <input type="text" v-model="name" placeholder="Enter your name">
-    <div class="btn-new-game btn-score" @click="pushScore">Send</div>
-
+    <h1>GAME OVER</h1>
+    <div class="btn-new-game" @click="goMenu">Main Menu</div>
+    <div class="score">
+      <div class="text">Your score is:</div>
+      <div class="text">
+        {{ this.$store.getters.getScore }}
+      </div>
+      <div class="container-send">
+        <input type="text" v-model="name" placeholder="Enter your name">
+        <div class="btn-new-game btn-score" @click="pushScore" :class="{'--disabled': name === ''}">Send</div>
+      </div>
+    </div>
   </div>
 </template>
 
@@ -42,9 +47,6 @@ export default {
 </script>
 
 <style scoped lang="sass">
-  h4
-    margin-top: 60px
-    margin-bottom: 15px
   .game-over
     font-family: 'OpenSansPXBold'
     position: fixed
@@ -69,16 +71,31 @@ export default {
     background-color: #672806
     border: #533a18 solid 1px
     color: white
-  .btn-score
-    margin-top: 10px
-    cursor: pointer
-    position: relative
+  .score
+    position: fixed
     display: flex
-    justify-content: center
+    flex-direction: column
+    bottom: 30px
     align-items: center
-    width: 100px
-    height: 50px
-    border: #533a18 solid 1px
-    color: white
-    background-color: #673352 !important
+    .container-send
+      display: flex
+      margin-top: 5px
+    input
+      height: 28px
+      padding: 0 4px
+    .btn-score
+      font-size: 1.15rem
+      cursor: pointer
+      position: relative
+      display: flex
+      justify-content: center
+      align-items: center
+      width: 50px
+      height: 30px
+      border: #533a18 solid 1px
+      color: white
+      background-color: #673352
+      &.--disabled
+        pointer-events: none
+        background-color: gray
 </style>
