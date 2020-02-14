@@ -245,7 +245,7 @@ export default {
         })
         /* set drop potions random */
         if(Math.random() > 0.85) {
-          json.entities.items[position] = this.$store.getters.getPlayer.level < 4 ? 'potion' : 'bigPotion'
+          json.entities.items[position] = 'potion'
         }
       }
 
