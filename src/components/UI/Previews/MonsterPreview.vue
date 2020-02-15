@@ -2,13 +2,19 @@
   <div class="monsterPreview">
     <div class="monsterPreview__portrait">
       <img :src="image">
-      <div class="monsterPreview__lvl">{{ entity.monster.level }}</div>
+      <div class="monsterPreview__lvl">{{ entity.level }}</div>
     </div>
-    <status-bar :actual="entity.totalLife - entity.monster.damage"
+    <status-bar :actual="entity.totalLife - entity.damage"
                 :total="entity.totalLife"
                 modifier="--monster"
     >
     </status-bar>
+    <div class="stats">
+      <img :src="attackIcon" alt="">
+      <span class="counter --attack">{{ entity.monster.attack + entity.level }}</span>
+      <img :src="goldIcon" alt="">
+      <span class="counter --gold">{{ entity.monster.gold }}</span>
+    </div>
     <div class="name">{{ entity.monster.name }}</div>
   </div>
 </template>
@@ -23,7 +29,13 @@ export default {
   name: "MonsterPreview",
   computed: {
     image: function () {
-      return require('@/assets/monsters/portraits/' + this.entity.image + '.png')
+      return require('@/assets/monsters/portraits/' + this.entity.monster.image + '.png')
+    },
+    attackIcon: function () {
+      return require('@/assets/ui/attack__icon.png')
+    },
+    goldIcon: function () {
+      return require('@/assets/ui/gold__icon.png')
     }
   }
 }
@@ -69,10 +81,20 @@ export default {
   font-size: 20px
   font-weight: bold
   text-shadow: 1px 2px 0 black
-.attack-image
-  height: 30px
-  width: 30px
-  padding-right: 5px
 .damage
   padding-top: 5px
+.stats
+  height: 18px
+  display: flex
+  position: absolute
+  right: 21%
+  font-size: 0.85rem
+  padding-top: calc(0.6 * var(--tile-cell))
+  img
+    margin-right: 2px
+  .counter
+    display: flex
+    align-items: center
+    &.--attack
+      margin-right: 5px
 </style>

@@ -100,11 +100,13 @@ export default {
     preview: function () {
       let payload = null
       if (this.hasMonster) {
+        let monsterRef = this.$refs[this.getMonster.name + this.id]
         payload = {
           entity: 'monsterPreview',
-          monster: this.getMonster,
-          image: this.$refs[this.getMonster.name + this.id].monster.image,
-          totalLife: this.$refs[this.getMonster.name + this.id].totalLife,
+          monster: monsterRef.monster,
+          totalLife: monsterRef.totalLife,
+          level: this.getMonster.level,
+          damage: this.getMonster.damage,
           cellId: this.id
         }
       } else if (this.hasItem) {
