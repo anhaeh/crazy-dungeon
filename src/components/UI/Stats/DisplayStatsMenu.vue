@@ -79,7 +79,7 @@ export default {
   },
   computed: {
     goldMultiplier: function () {
-      return Math.trunc(this.$store.getters.getPlayerGoldMultiplier * 100)
+      return Math.round(this.$store.getters.getPlayerGoldMultiplier * 100)
     }
   }
 };
