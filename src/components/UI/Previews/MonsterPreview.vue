@@ -2,18 +2,18 @@
   <div class="monsterPreview">
     <div class="monsterPreview__portrait">
       <img :src="image">
-      <div class="monsterPreview__lvl">{{ entity.level }}</div>
+      <div class="monsterPreview__lvl">{{ entity.monster.level }}</div>
     </div>
-    <status-bar :actual="entity.totalLife - entity.damage"
+    <status-bar :actual="entity.totalLife - entity.monster.damage"
                 :total="entity.totalLife"
                 modifier="--monster"
     >
     </status-bar>
     <div class="stats">
       <img :src="attackIcon" alt="">
-      <span class="counter --attack">{{ entity.monster.attack + entity.level }}</span>
+      <span class="counter --attack">{{ entity.refMonster.attack + entity.monster.level }}</span>
       <img :src="goldIcon" alt="">
-      <span class="counter --gold">{{ entity.monster.gold }}</span>
+      <span class="counter --gold">{{ entity.refMonster.gold }}</span>
     </div>
     <div class="name">{{ entity.monster.name }}</div>
   </div>
@@ -29,7 +29,7 @@ export default {
   name: "MonsterPreview",
   computed: {
     image: function () {
-      return require('@/assets/monsters/portraits/' + this.entity.monster.image + '.png')
+      return require('@/assets/monsters/portraits/' + this.entity.refMonster.image + '.png')
     },
     attackIcon: function () {
       return require('@/assets/ui/attack__icon.png')
