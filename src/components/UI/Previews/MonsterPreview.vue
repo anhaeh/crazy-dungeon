@@ -87,7 +87,7 @@ export default {
   height: 18px
   display: flex
   position: absolute
-  right: 21%
+  right: 22%
   font-size: 0.85rem
   padding-top: calc(0.6 * var(--tile-cell))
   img
