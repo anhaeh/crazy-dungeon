@@ -38,7 +38,7 @@
     </div>
     <div v-if="showMenu" class="dungeonUI__menuBottom">
       <div class="dungeonUI__menuBottomLeft">
-        <div class="dungeonUI__retreatBtn" @click="$router.push({name: 'main-menu'})"></div>
+        <div class="dungeonUI__retreatBtn" @click="showModalQuit = true"></div>
         <div class="dungeonUI__settingBtn"></div>
       </div>
       <div class="dungeonUI__menuBottomRight">
@@ -79,6 +79,7 @@
     <merchant-items></merchant-items>
     <display-skills-menu v-show="showSkills"></display-skills-menu>
     <display-stats-menu v-show="showStats"></display-stats-menu>
+    <exit-confirmation v-if="showModalQuit" @close="showModalQuit = false"></exit-confirmation>
   </div>
 </template>
 
@@ -90,6 +91,8 @@ import DisplaySkillsMenu from './Skills/DisplaySkillsMenu'
 import { movePlayer} from "@/modules/player"
 import MerchantItems from './MerchantItems/MerchantList'
 import DisplayStatsMenu from './Stats/DisplayStatsMenu'
+import ExitConfirmation from './Dialogs/ExistConfirmation'
+
 
 export default {
   name: "DungeonUI",
@@ -99,14 +102,16 @@ export default {
     SkillsList,
     DisplaySkillsMenu,
     MerchantItems,
-    DisplayStatsMenu
+    DisplayStatsMenu,
+    ExitConfirmation
   },
   data () {
     return {
       cursorCounter: 0,
       showMenu: false,
       showSkills: false,
-      showStats: false
+      showStats: false,
+      showModalQuit: false
     }
   },
   computed: {

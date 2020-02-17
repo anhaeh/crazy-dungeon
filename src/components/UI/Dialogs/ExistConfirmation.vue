@@ -2,10 +2,15 @@
   <bottom-dialog
     @close="close"
   >
-    <div slot="title">Merchant</div>
+    <div slot="title">Warning</div>
     <div slot="legend"></div>
-    <div slot="text">Hello friend. Do you need something?</div>
+    <div slot="text">Are you sure you want to quit?</div>
     <div slot="actions">
+      <div class="bottomDialog__actionsBtn"
+           @click="quit"
+      >
+        Confirm
+      </div>
     </div>
   </bottom-dialog>
 </template>
@@ -14,13 +19,15 @@
 import BottomDialog from './BottomDialog'
 
 export default {
-  name: 'MerchantDialog',
+  name: 'ExitConfirmation',
   components: {
     BottomDialog
   },
   methods: {
+    quit: function () {
+      this.$router.push({name: 'main-menu'})
+    },
     close: function () {
-      this.$store.commit('setDialogMerchant', false)
       this.$emit('close')
     }
   }
