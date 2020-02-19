@@ -11,7 +11,6 @@
         </div>
         <div class="bottomDialog__itemAttr">
           <slot name="legend">
-            +15 HP
           </slot>
         </div>
         <br>

@@ -13,10 +13,7 @@
       >
       </Monster>
       <Player v-if="hasPlayer"></Player>
-      <Merchant
-        v-if="hasMerchant"
-        :cell-id="id"
-      ></Merchant>
+      <component v-if="hasNpc && !hasFog" :is="hasNpc.type" :cell-id="id"></component>
       <Item
         v-if="!hasMonster && hasItem"
         :name="hasItem"
@@ -33,7 +30,8 @@
 import Terrains from '@/gamedata/Terrains.json'
 import Monster from "../Entities/Monster"
 import Player from "../Entities/Player"
-import Merchant from "../Entities/Merchant"
+import merchant from "../Entities/Npcs/Merchant"
+import zombie from "../Entities/Npcs/Zombie"
 import Item from "../Entities/Item"
 
 export default {
@@ -45,7 +43,8 @@ export default {
     Monster,
     Player,
     Item,
-    Merchant
+    merchant,
+    zombie
   },
   name: "Cell",
   data () {
@@ -76,17 +75,17 @@ export default {
     hasPlayer: function () {
       return this.id === this.$store.getters.getPlayerPosition
     },
-    hasMerchant: function () {
-      return this.$store.getters.getMerchant.cellId === this.id
+    hasNpc: function () {
+      return this.$store.getters.getNpcs.find(x => x.cellId === this.id)
     },
     inPlayerRange: function () {
       return this.$store.getters.getPlayerRange.includes(this.id)
     },
     canMove: function () {
-      return this.inPlayerRange && !this.hasMonster && this.tile.available && !this.hasMerchant
+      return this.inPlayerRange && !this.hasMonster && this.tile.available && !this.hasNpc
     },
     hasFog: function () {
-      return !this.$store.getters.getMapDiscover.includes(this.id) && !this.hasPlayer
+      return this.$store.getters.getEnableFog && !this.$store.getters.getMapDiscover.includes(this.id) && !this.hasPlayer
     }
   },
   methods: {
@@ -113,9 +112,10 @@ export default {
           entity: 'itemPreview',
           item: this.$refs[this.hasItem + this.id].item
         }
-      } else if (this.hasMerchant) {
+      } else if (this.hasNpc) {
         payload = {
-          entity: 'merchantPreview'
+          entity: 'npcPreview',
+          npc: this.hasNpc
         }
       }
       this.$store.commit('setPreview', payload)

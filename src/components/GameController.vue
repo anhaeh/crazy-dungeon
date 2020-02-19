@@ -138,7 +138,7 @@ export default {
         entities: {
           monsters: [],
           items: {},
-          merchant: {}
+          npcs: []
         },
         map: {}
       }
@@ -210,17 +210,30 @@ export default {
         farFromPlayer.splice(index, 1)
         index = free.indexOf(positionMerchant)
         free.splice(index, 1)
-        json.entities.merchant.cellId = positionMerchant
-        json.entities.merchant.items = ['potion', 'bigPotion']
-        json.entities.merchant.show = false
+        let merchant = {
+          type: 'merchant'
+        }
+        merchant.cellId = positionMerchant
+        merchant.items = ['potion', 'bigPotion']
+        merchant.show = false
         let items = Object.keys(itemsData).filter(x => itemsData[x].type !== 'potion')
         for (let i = 0; i < 5; i++) {
           let itemToAdd = this.random(items)
           index = items.indexOf(itemToAdd)
           items.splice(index, 1)
-          json.entities.merchant.items.push(itemToAdd)
+          merchant.items.push(itemToAdd)
         }
+        json.entities.npcs.push(merchant)
       }
+
+      /* Set zombie npc */
+      let positionNpc = this.random(free)
+      free.splice(free.indexOf(positionNpc), 1)
+      json.entities.npcs.push({
+        type: 'zombie',
+        show: false,
+        cellId: positionNpc
+      })
 
       /* Set monsters */
       let monstersList = ['goblin', 'golem', 'gorgon', 'imp']

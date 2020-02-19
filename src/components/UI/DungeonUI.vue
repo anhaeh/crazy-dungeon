@@ -122,7 +122,8 @@ export default {
       return this.$store.getters.getMonsterSelected
     },
     isMerchantInRange: function() {
-      return this.$store.getters.getPlayerRange.includes(this.$store.getters.getMerchant.cellId) &&
+      let merchant = this.$store.getters.getMerchant
+      return this.$store.getters.getPlayerRange.includes(merchant ? merchant.cellId: '') &&
           !this.isMonsterTarget
     }
   },

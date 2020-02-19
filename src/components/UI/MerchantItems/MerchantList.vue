@@ -1,5 +1,5 @@
 <template>
-  <div class="dungeonUI__skillsMenuList" v-if="$store.getters.getMerchant.show">
+  <div class="dungeonUI__skillsMenuList" v-if="show">
     <div class="dungeonUI__skillsMenuTabs" :class="{'--right': !isItems}">
       <div class="dungeonUI__skillsMenuTabOption" @click="isItems = true">
         <span>Items</span>
@@ -59,6 +59,10 @@ export default {
         result = this.$store.getters.getMerchant.items
       }
       return result
+    },
+    show: function () {
+      let merchant = this.$store.getters.getMerchant
+      return merchant && merchant.show
     }
   }
 };

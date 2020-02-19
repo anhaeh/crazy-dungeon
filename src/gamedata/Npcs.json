@@ -1,0 +1,34 @@
+{
+  "zombie": {
+    "types": [
+      {
+        "dialog": "Hello traveler. Search your surroundings well. Many times you will find lost objects from other travelers who passed through here.",
+        "give": null
+      },
+      {
+        "dialog": "Hi. It is said that there is a merchant here. Look for it, it will be very useful for your journey.",
+        "action": null
+      },
+      {
+        "dialog": "Hi, human. I'll give you some advice, choose which battles to fight. Many times it is better to escape from the strongest creatures until you have good equipment.",
+        "action": null
+      },
+      {
+        "dialog": "I've been watching you, and you don't look good. Take these gold coins.",
+        "action": "Gold"
+      },
+      {
+        "dialog": "Again you here. I will give you something that will help you in your adventure.",
+        "action": "Score"
+      },
+      {
+        "dialog" : "Hello again. I have a potion stored here that could be useful.",
+        "action": "Potion"
+      },
+      {
+        "dialog" : "Hello Friend. You look a bit disoriented. I will help you with this fog.",
+        "action": "Fog"
+      }
+    ]
+  }
+}

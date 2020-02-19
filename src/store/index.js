@@ -24,7 +24,8 @@ const store = new Vuex.Store({
       entity: null,
       show: false
     },
-    questLog: []
+    questLog: [],
+    enableFog: true
   },
   getters: {
     getMonsters: state => {
@@ -75,8 +76,14 @@ const store = new Vuex.Store({
     getPlayerPosition: state => {
       return state.player.position
     },
+    getEnableFog: state => {
+      return state.enableFog
+    },
+    getNpcs: state => {
+      return state.entities.npcs
+    },
     getMerchant: state => {
-      return state.entities.merchant
+      return state.entities.npcs.find(x => x.type === 'merchant')
     },
     getPlayerRange: state => {
       return state.player.range
@@ -199,11 +206,21 @@ const store = new Vuex.Store({
     setDialogShow(state, show) {
       state.dialog.show = show
     },
+    setScore(state, score) {
+      state.player.score += score
+    },
+    setEnableFog(state, fog) {
+      state.enableFog = fog
+    },
+    setGold(state, gold) {
+      state.player.gold += gold
+    },
     clickDialog(state) {
       state.dialog.show = !state.dialog.show
     },
     setDialogMerchant(state, show) {
-      state.entities.merchant.show = show
+      let merchant = state.entities.npcs.find(x => x.type === 'merchant')
+      merchant.show = show
     },
     restoreLife(state, data) {
       if (state.player.damage > 0) {
@@ -250,10 +267,15 @@ const store = new Vuex.Store({
       newPlayer.attack += 2
       newPlayer.nextLevelMonsters = 5 * newPlayer.level
       state.player = newPlayer
+    },
+    destroyNpc(state, cellId) {
+      let index = state.entities.npcs.findIndex(x => x.cellId === cellId)
+      state.entities.npcs.splice(index, 1)
     }
   },
   actions: {
     setDungeon({ state }, data) {
+      state.enableFog = true
       state.player.position = data.player_init
       state.map = Object.assign({}, data.map)
       state.entities = data.entities
@@ -284,8 +306,10 @@ const store = new Vuex.Store({
         commit('pushLog', 'Insufficient gold')
         return false
       }
-      let index = state.entities.merchant.items.indexOf(item.name)
-      state.entities.merchant.items.splice(index, 1)
+      let merchant = state.entities.npcs.find(x => x.type === 'merchant')
+
+      let index = merchant.items.indexOf(item.name)
+      merchant.items.splice(index, 1)
       state.player.gold -= item.obj.price
       commit('addItemToInventory', item.obj)
       commit('pushLog', 'Player bought ' + item.obj.name)

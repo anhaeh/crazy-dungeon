@@ -26,7 +26,7 @@ export default {
       'getPlayer',
     ]),
     image: function () {
-      return require('@/assets/npcs/merchant_01.png')
+      return require('@/assets/npcs/merchant.png')
     },
     playerInRange: function () {
       return this.getPlayerRange.indexOf(this.cellId) !== -1

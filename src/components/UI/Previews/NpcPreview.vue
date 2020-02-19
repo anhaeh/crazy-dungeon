@@ -1,7 +1,7 @@
 <template>
   <div class="itemPreview">
     <div class="legend">
-      Merchant
+      {{ entity.npc.type }}
     </div>
     <div class="itemImage">
       <img :src="image">
@@ -12,10 +12,10 @@
 <script>
 export default {
   props: ['entity'],
-  name: "ItemPreview",
+  name: "NpcPreview",
   computed: {
     image: function () {
-      return require('@/assets/npcs/portraits/merchant_01.png')
+      return require(`@/assets/npcs/portraits/${this.entity.npc.type}.png`)
     }
   }
 }
@@ -36,6 +36,7 @@ export default {
       width: 100%
       height: 100%
   .legend
+    text-transform: capitalize
     right: calc(1.5 * var(--tile-cell))
     text-align: end
     padding: 5px
