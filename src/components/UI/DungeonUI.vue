@@ -62,7 +62,7 @@
            class="dungeonUI__controlsActiveSkill"
            @click="attack">
       </div>
-      <div v-if="isMerchantInRange"
+      <div v-if="isNpcInRange"
            class="dungeonUI__controlsActiveSkill talk"
            @click="talk">
       </div>
@@ -121,10 +121,16 @@ export default {
     isMonsterTarget: function() {
       return this.$store.getters.getMonsterSelected
     },
-    isMerchantInRange: function() {
-      let merchant = this.$store.getters.getMerchant
-      return this.$store.getters.getPlayerRange.includes(merchant ? merchant.cellId: '') &&
-          !this.isMonsterTarget
+    isNpcInRange: function() {
+      let npc = null
+      if (!this.isMonsterTarget) {
+        this.$store.getters.getNpcs.forEach(x => {
+          if (this.$store.getters.getPlayerRange.includes(x.cellId)) {
+            npc = x
+          }
+        })
+      }
+      return npc
     }
   },
   methods: {
@@ -170,7 +176,7 @@ export default {
     },
     talk: function() {
       event.preventDefault()
-      document.querySelector('.merchant img').click()
+      document.querySelector(`.${this.isNpcInRange.type} img`).click()
     },
     scrollLog: function (counter) {
       this.cursorCounter += counter

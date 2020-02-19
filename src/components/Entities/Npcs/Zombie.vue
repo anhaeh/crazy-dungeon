@@ -1,5 +1,5 @@
 <template>
-  <div class="npc">
+  <div class="zombie">
     <img :src="image" alt="" @click="click">
     <bottom-dialog
             v-if="show"
@@ -33,6 +33,7 @@ export default {
   methods: {
     click: function() {
       if (this.playerInRange && !this.show) {
+        this.$store.commit('setMonsterSelected', null)
         let data = require("@/gamedata/Npcs.json")
         let zombieData = data['zombie'].types
         this.entity = zombieData[Math.floor(Math.random() * zombieData.length)]
@@ -73,7 +74,10 @@ export default {
       this.$store.commit('pushLog', 'All the fog on the map is dissipated')
     },
     destroy: function () {
+      event.stopPropagation()
+      this.$store.commit('setPreview', null)
       this.$store.commit('destroyNpc', this.cellId)
+      this.show = false
     }
   },
   computed: {
@@ -90,8 +94,6 @@ export default {
   },
   beforeDestroy() {
     if (this.show) {
-      event.stopPropagation()
-      this.$store.commit('setPreview', null)
       this.destroy()
     }
   }
@@ -99,10 +101,10 @@ export default {
 </script>
 
 <style scoped lang="sass">
-  .npc
+  .zombie
     position: relative
     padding: 4px
-  .npc img
+  .zombie img
     width: 100%
     height: 100%
     object-fit: contain
