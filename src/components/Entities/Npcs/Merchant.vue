@@ -22,8 +22,7 @@ export default {
   },
   computed: {
     ...mapGetters([
-      'getPlayerRange',
-      'getPlayer',
+      'getPlayerRange'
     ]),
     image: function () {
       return require('@/assets/npcs/merchant.png')
