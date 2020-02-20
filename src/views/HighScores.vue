@@ -8,15 +8,16 @@
           <th>#</th>
           <th>NAME</th>
           <th>LVL</th>
+          <th>CLASS</th>
           <th>SCORE</th>
-          <th>DATE</th>
         </tr>
         <tr v-for="(item, index) in results" :key="item.id">
           <td>{{ index + 1 }}</td>
           <td>{{ item.name }}</td>
           <td>{{ item.player_level }}</td>
+          <td :class="'--' + item.class_name"></td>
           <td>{{ item.score }}</td>
-          <td>{{ item.created.split('T')[0] }}</td>
+          <!--<td>{{ item.created.split('T')[0] }}</td>-->
         </tr>
       </table>
     </div>
@@ -67,7 +68,17 @@ button
   border-color: #533a18
 td
   text-align: center
-  padding: 0 10px
+  padding: 4px
+  background-repeat: no-repeat
+  background-position-x: center
+  background-position-y: center
+  background-size: initial
+  &.--necromancer
+    background-image: url("../assets/heroes/necromancer.gif")
+  &.--wizard
+    background-image: url("../assets/heroes/wizard.gif")
+  &.--paladin
+    background-image: url("../assets/heroes/paladin.gif")
 .table-score
   width: 85%
   height: 60%
@@ -80,7 +91,7 @@ td
   bottom: 5%
 .title
   position: fixed
-  top: 8%
+  top: 7%
 </style>
 
 <style scoped>

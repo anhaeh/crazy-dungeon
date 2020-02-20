@@ -9,7 +9,12 @@
       </div>
       <div class="container-send">
         <input type="text" v-model="name" placeholder="Enter your name">
-        <div class="btn-new-game btn-score" @click="pushScore" :class="{'--disabled': name === ''}">Send</div>
+        <div class="btn-new-game btn-score"
+             @click="pushScore"
+             :class="{'--disabled': name.trim() === ''}"
+        >
+          Send
+        </div>
       </div>
     </div>
   </div>
@@ -33,7 +38,8 @@ export default {
       axios.post('https://anhaeh.pythonanywhere.com/api/v1/dungeon/high-score/', {
         "score": this.$store.getters.getScore,
         "name": this.name,
-        "player_level": this.$store.getters.getPlayer.level
+        "player_level": this.$store.getters.getPlayer.level,
+        "class_name": this.$store.getters.getPlayer.class
       })
       this.goMenu()
     }
