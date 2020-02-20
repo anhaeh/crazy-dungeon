@@ -53,14 +53,14 @@ export default {
       }
     },
     open: function () {
-      let treasures = ['earnPotion', 'earnScore', 'earnExperience']
+      let treasures = ['earnItem', 'earnScore', 'earnExperience']
       let treasure = treasures[Math.floor(Math.random() * treasures.length)]
-      this[treasure]()
       let indexKey = this.$store.getters.getInventory.items.findIndex(x => x.type === 'key')
       this.$store.commit('deleteItemInventory', indexKey)
+      this[treasure]()
       this.destroy()
     },
-    earnPotion: function () {
+    earnItem: function () {
       let treasureName = this.entity.earnItem[Math.floor(Math.random() * this.entity.earnItem.length)]
       let treasure = require('@/gamedata/Items.json')[treasureName]
       this.$store.commit('pushLog', `Player receive a ${treasure.name}`)
