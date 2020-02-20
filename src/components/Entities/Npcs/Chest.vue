@@ -8,8 +8,8 @@
       <slot name="legend"></slot>
       <div slot="title">Chest</div>
       <div slot="text">
-        <span v-if="hasKey">You find an old chest. It is likely that you can open it with the key you have in your inventory. What do you want to do?</span>
-        <span v-else>You find an old chest. This looks closed. If you got a key maybe you can open it and see what treasure it contains.</span>
+        <span v-if="hasKey">{{ entity.dialogWithKey }}</span>
+        <span v-else>{{ entity.dialog }}</span>
       </div>
       <template slot="actions">
         <div class="bottomDialog__actionsBtn"
@@ -30,6 +30,7 @@
 <script>
 import { mapGetters } from 'vuex'
 import bottomDialog from '@/components/UI/Dialogs/BottomDialog'
+import gameData from '@/gamedata/Npcs.json'
 
 export default {
   name: "Chest",
@@ -41,7 +42,8 @@ export default {
   },
   data () {
     return {
-      show: false
+      show: false,
+      entity: gameData['chest']
     }
   },
   methods: {
@@ -57,25 +59,24 @@ export default {
       let indexKey = this.$store.getters.getInventory.items.findIndex(x => x.type === 'key')
       this.$store.commit('deleteItemInventory', indexKey)
       this.destroy()
-
     },
     earnPotion: function () {
-      this.$store.commit('pushLog', 'Player receive a potion')
+      let treasureName = this.entity.earnItem[Math.floor(Math.random() * this.entity.earnItem.length)]
+      let treasure = require('@/gamedata/Items.json')[treasureName]
+      this.$store.commit('pushLog', `Player receive a ${treasure.name}`)
       if (this.$store.getters.getInventory.maxSize === this.$store.getters.getInventory.items.length) {
         this.$store.commit('pushLog', 'Your inventory is full')
       } else {
-        let potion = require('@/gamedata/Items.json')['potion']
-        this.$store.commit('addItemToInventory', potion)
+        this.$store.commit('addItemToInventory', treasure)
       }
     },
     earnScore: function () {
-      let points = 250
-      this.$store.commit('setScore', points)
-      this.$store.commit('pushLog', `Player receive ${points} points`)
+      this.$store.commit('setScore', this.entity.earnScore)
+      this.$store.commit('pushLog', `Player receive ${this.entity.earnScore} points`)
     },
     earnExperience: function () {
       this.$store.commit('pushLog', 'Player gain more experience')
-      this.$store.commit('setPlayerExperience', 5)
+      this.$store.commit('setPlayerExperience', this.entity.earnExperience)
       if (this.$store.getters.getPlayer.defeatMonsters >= this.$store.getters.getPlayer.nextLevelMonsters) {
         this.$store.commit('levelUp')
       }

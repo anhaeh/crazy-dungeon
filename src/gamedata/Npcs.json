@@ -38,5 +38,12 @@
         "action": "Key"
       }
     ]
+  },
+  "chest": {
+    "dialog": "You find an old chest. This looks closed. If you got a key maybe you can open it and see what treasure it contains.",
+    "dialogWithKey": "You find an old chest. It is likely that you can open it with the key you have in your inventory. What do you want to do?",
+    "earnScore": 250,
+    "earnExperience": 5,
+    "earnItem": ["potion", "dagger", "key"]
   }
 }
