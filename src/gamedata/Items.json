@@ -45,11 +45,11 @@
     "price": 700
   },
   "key": {
-    "name": "Chest Key",
+    "name": "Key",
     "image": "key.png",
     "legend": "Open a chest",
     "type": "key",
-    "description": "This key is used to open a chest",
+    "description": "With this key you can open a chest",
     "price": 150
   },
   "potion": {
