@@ -214,9 +214,9 @@ export default {
           type: 'merchant'
         }
         merchant.cellId = positionMerchant
-        merchant.items = ['potion', 'bigPotion']
+        merchant.items = ['potion', 'bigPotion', 'key']
         merchant.show = false
-        let items = Object.keys(itemsData).filter(x => itemsData[x].type !== 'potion')
+        let items = Object.keys(itemsData).filter(x => itemsData[x].type !== 'potion' && itemsData[x].type !== 'key')
         for (let i = 0; i < 5; i++) {
           let itemToAdd = this.random(items)
           index = items.indexOf(itemToAdd)
@@ -226,13 +226,15 @@ export default {
         json.entities.npcs.push(merchant)
       }
 
-      /* Set zombie npc */
-      let positionNpc = this.random(free)
-      free.splice(free.indexOf(positionNpc), 1)
-      json.entities.npcs.push({
-        type: 'zombie',
-        show: false,
-        cellId: positionNpc
+      /* Set npcs */
+      ['zombie', 'chest'].forEach(npc => {
+        let positionNpc = this.random(free)
+        free.splice(free.indexOf(positionNpc), 1)
+        json.entities.npcs.push({
+          type: npc,
+          show: false,
+          cellId: positionNpc
+        })
       })
 
       /* Set monsters */

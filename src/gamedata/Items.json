@@ -44,6 +44,14 @@
     "description": "This Power Cane give you + 5 attack",
     "price": 700
   },
+  "key": {
+    "name": "Chest Key",
+    "image": "key.png",
+    "legend": "Open a chest",
+    "type": "key",
+    "description": "This key is used to open a chest",
+    "price": 150
+  },
   "potion": {
     "name": "Potion",
     "image": "Item__28.png",

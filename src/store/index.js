@@ -151,6 +151,9 @@ const store = new Vuex.Store({
     setPlayerViewport(state, playerViewport) {
       state.player.viewport = playerViewport
     },
+    setPlayerExperience(state, score) {
+      state.player.defeatMonsters += score
+    },
     setPlayerVision(state, cells) {
       state.player.vision = cells
       let c = state.mapDiscover.concat(cells).sort()
@@ -267,6 +270,7 @@ const store = new Vuex.Store({
       newPlayer.attack += 2
       newPlayer.nextLevelMonsters = 5 * newPlayer.level
       state.player = newPlayer
+      state.questLog.push(`Player level up`)
     },
     destroyNpc(state, cellId) {
       let index = state.entities.npcs.findIndex(x => x.cellId === cellId)
@@ -299,7 +303,7 @@ const store = new Vuex.Store({
     },
     buyItem({state, commit}, item) {
       if (state.inventory.maxSize === state.inventory.items.length) {
-        commit('pushLog', 'Inventory is full')
+        commit('pushLog', 'Your inventory is full')
         return false
       }
       if (state.player.gold < item.obj.price) {
@@ -342,7 +346,6 @@ const store = new Vuex.Store({
         state.monsterSelected = null
         if (state.player.defeatMonsters === state.player.nextLevelMonsters) {
           commit('levelUp')
-          state.questLog.push(`Player level up`)
         }
       } else {
         if (payload.range !== true) {

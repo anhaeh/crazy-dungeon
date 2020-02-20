@@ -1,12 +1,12 @@
 <template>
-  <div class="zombie">
+  <div class="npc zombie">
     <img :src="image" alt="" @click="click">
     <bottom-dialog
             v-if="show"
             @close="destroy"
     >
-      <slot name="legend"></slot>
-      <div slot="title">A wandering zombie tells you</div>
+      <div slot="legend">Receive {{ entity.action ? ' a Gift' : 'an Advice' }}</div>
+      <div slot="title">Wandering zombie</div>
       <div slot="text">{{ entity.dialog }}</div>
     </bottom-dialog>
   </div>
@@ -46,28 +46,35 @@ export default {
             this.earnScore()
             break
           case "Potion":
-            this.earnPotion()
+            this.earnObject('potion')
             break
           case "Fog":
             this.deleteFog()
+            break
+          case "Key":
+            this.earnObject('key')
             break
         }
       }
     },
     earnGold: function () {
-      let gold = Math.round(Math.ceil(Math.random() * 150))
+      let gold = Math.round(Math.ceil(Math.random() * 140)) + 10
       this.$store.commit('setGold', gold)
       this.$store.commit('pushLog', `Player receive ${gold} gold`)
     },
+    earnObject: function (objectName) {
+      this.$store.commit('pushLog', 'Player receive a ' + objectName)
+      if (this.$store.getters.getInventory.maxSize === this.$store.getters.getInventory.items.length) {
+        this.$store.commit('pushLog', 'Your inventory is full')
+      } else {
+        let key = require('@/gamedata/Items.json')[objectName]
+        this.$store.commit('addItemToInventory', key)
+      }
+    },
     earnScore: function () {
-      let points = Math.round(Math.ceil(Math.random() * 200))
+      let points = Math.round(Math.ceil(Math.random() * 150)) + 50
       this.$store.commit('setScore', points)
       this.$store.commit('pushLog', `Player receive ${points} points`)
-    },
-    earnPotion: function () {
-      let potion = require('@/gamedata/Items.json')['potion']
-      this.$store.commit('addItemToInventory', potion)
-      this.$store.commit('pushLog', 'Player receive a potion')
     },
     deleteFog: function () {
       this.$store.commit('setEnableFog', false)
@@ -101,10 +108,10 @@ export default {
 </script>
 
 <style scoped lang="sass">
-  .zombie
+  .npc
     position: relative
     padding: 4px
-  .zombie img
+  .npc img
     width: 100%
     height: 100%
     object-fit: contain

@@ -32,6 +32,7 @@ import Monster from "../Entities/Monster"
 import Player from "../Entities/Player"
 import merchant from "../Entities/Npcs/Merchant"
 import zombie from "../Entities/Npcs/Zombie"
+import chest from "../Entities/Npcs/Chest"
 import Item from "../Entities/Item"
 
 export default {
@@ -44,7 +45,8 @@ export default {
     Player,
     Item,
     merchant,
-    zombie
+    zombie,
+    chest
   },
   name: "Cell",
   data () {
