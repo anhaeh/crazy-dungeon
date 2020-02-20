@@ -11,12 +11,7 @@ const routes = [
   {
     path: '/',
     name: 'main-menu',
-    component: MainMenu,
-    beforeEnter(to, from, next) {
-      if (from.name !== 'dungeon' || (from.name === 'dungeon' && to.params.origin === "button-exit")) {
-        next()
-      }
-    }
+    component: MainMenu
   },
   {
     path: '/class-selection',
@@ -26,6 +21,7 @@ const routes = [
       if (from.name !== 'dungeon') {
         next()
       }
+      next(false)
     }
   },
   {

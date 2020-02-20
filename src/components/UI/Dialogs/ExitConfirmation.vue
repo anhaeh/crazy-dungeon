@@ -25,7 +25,7 @@ export default {
   },
   methods: {
     quit: function () {
-      this.$router.push({name: 'main-menu', params: {origin: 'button-exit'}})
+      this.$router.push({name: 'main-menu'})
     },
     close: function () {
       this.$emit('close')
