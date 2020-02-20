@@ -11,12 +11,22 @@ const routes = [
   {
     path: '/',
     name: 'main-menu',
-    component: MainMenu
+    component: MainMenu,
+    beforeEnter(to, from, next) {
+      if (from.name !== 'dungeon' || (from.name === 'dungeon' && to.params.origin === "button-exit")) {
+        next()
+      }
+    }
   },
   {
     path: '/class-selection',
     name: 'class-selection',
-    component: ClassSelection
+    component: ClassSelection,
+    beforeEnter(to, from, next) {
+      if (from.name !== 'dungeon') {
+        next()
+      }
+    }
   },
   {
     path: '/dungeon/:class',

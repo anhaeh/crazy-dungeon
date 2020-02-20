@@ -91,7 +91,7 @@ import DisplaySkillsMenu from './Skills/DisplaySkillsMenu'
 import { movePlayer} from "@/modules/player"
 import MerchantItems from './MerchantItems/MerchantList'
 import DisplayStatsMenu from './Stats/DisplayStatsMenu'
-import ExitConfirmation from './Dialogs/ExistConfirmation'
+import ExitConfirmation from './Dialogs/ExitConfirmation'
 
 
 export default {
