@@ -44,6 +44,6 @@
     "dialogWithKey": "You find an old chest. It is likely that you can open it with the key you have in your inventory. What do you want to do?",
     "earnScore": 250,
     "earnExperience": 5,
-    "earnItem": ["potion", "dagger", "key"]
+    "earnItem": ["potion", "dagger"]
   }
 }
