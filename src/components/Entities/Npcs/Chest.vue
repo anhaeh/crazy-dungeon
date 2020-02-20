@@ -7,7 +7,10 @@
     >
       <slot name="legend"></slot>
       <div slot="title">Chest</div>
-      <div slot="text">You find a closed chest. It seems to be locked. If I get a key somewhere, I could open it and claim the treasure.</div>
+      <div slot="text">
+        <span v-if="hasKey">You find an old chest. It is likely that you can open it with the key you have in your inventory. What do you want to do?</span>
+        <span v-else>You find an old chest. This looks closed. If you got a key maybe you can open it and see what treasure it contains.</span>
+      </div>
       <template slot="actions">
         <div class="bottomDialog__actionsBtn"
              @click="destroy"
