@@ -9,16 +9,20 @@
       <div class="intro__btn" @click="$router.push({name: 'high-scores'})">High Scores</div>
       <div class="intro__btn --disabled">Library</div>
       <div class="intro__btn --disabled">Settings</div>
+      <span class="version">Version {{ version }}</span>
     </div>
   </div>
 </template>
 
 <script>
+import { version } from '../../package.json'
+
 export default {
   name: "MainMenu",
   data() {
     return {
-      selected: ''
+      selected: '',
+      version: version
     }
   },
   methods: {
@@ -82,11 +86,10 @@ export default {
   position: absolute
   left: calc(.5 * var(--tile-cell))
   top: calc(5 * var(--tile-cell))
-  &:after
-    content: 'version: alpha 0.0.6'
-    position: absolute
-    bottom: calc(-.5 * var(--tile-cell))
-    color: green
+.version
+  position: absolute
+  bottom: -2%
+  color: green
 .intro__btn
   width: calc(4.5 * var(--tile-cell))
   height: calc(0.75 * var(--tile-cell))
