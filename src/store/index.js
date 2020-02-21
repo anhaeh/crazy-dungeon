@@ -145,6 +145,9 @@ const store = new Vuex.Store({
     setPlayerRange(state, playerRange) {
       state.player.range = playerRange
     },
+    setPlayerSkills(state, skills) {
+      state.player.skills = skills
+    },
     setMapDiscover(state, cellId) {
       state.mapDiscover.push(cellId)
     },

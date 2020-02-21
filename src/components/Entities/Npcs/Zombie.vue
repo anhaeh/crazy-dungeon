@@ -8,6 +8,7 @@
       <div slot="legend">Receive {{ entity.action ? ' a Gift' : 'an Advice' }}</div>
       <div slot="title">Wandering zombie</div>
       <div slot="text">{{ entity.dialog }}</div>
+      <span slot="close-text">Accept</span>
     </bottom-dialog>
   </div>
 </template>
@@ -84,7 +85,6 @@ export default {
       event.stopPropagation()
       this.$store.commit('setPreview', null)
       this.$store.commit('destroyNpc', this.cellId)
-      this.show = false
     }
   },
   computed: {

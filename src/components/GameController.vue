@@ -201,7 +201,8 @@ export default {
       json.map[cell[0]][cell[1]] = 'P'
 
       /* Set merchant */
-      if (this.$store.getters.getDungeon % 2) {
+      let dungeonLevel = this.$store.getters.getDungeon + 1
+      if (dungeonLevel % 2 === 0) {
         let positionMerchant = this.random(freeMiddleCells)
         /* remove the free */
         index = freeMiddleCells.indexOf(positionMerchant)
@@ -227,7 +228,14 @@ export default {
       }
 
       /* Set npcs */
-      ['zombie', 'chest'].forEach(npc => {
+      let npcs = ['zombie']
+      if (dungeonLevel % 2 === 0) {
+        npcs.push('chest')
+      }
+      if (dungeonLevel % 3 === 0) {
+        npcs.push('monk')
+      }
+      npcs.forEach(npc => {
         let positionNpc = this.random(free)
         free.splice(free.indexOf(positionNpc), 1)
         json.entities.npcs.push({
@@ -265,7 +273,7 @@ export default {
       }
 
       if(Math.random() > 0.85) {
-        let itemsToDrop = ['potion', 'armor1', 'dagger', 'helmet1', 'sword1']
+        let itemsToDrop = ['potion', 'armor1', 'dagger', 'key']
         let item = this.random(itemsToDrop)
         let position = this.random(free)
         json.entities.items[position] = item

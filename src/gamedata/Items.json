@@ -50,7 +50,7 @@
     "legend": "Open a chest",
     "type": "key",
     "description": "With this key you can open a chest",
-    "price": 150
+    "price": 200
   },
   "potion": {
     "name": "Potion",

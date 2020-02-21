@@ -21,7 +21,11 @@
       </div>
     </div>
     <div class="bottomDialog__actions">
-      <div class="bottomDialog__actionsBtn" @click="close">Close</div>
+      <div class="bottomDialog__actionsBtn" @click="close">
+        <slot name="close-text">
+          Close
+        </slot>
+      </div>
       <slot name="actions">
       </slot>
     </div>

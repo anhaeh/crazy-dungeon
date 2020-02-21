@@ -83,7 +83,7 @@ export default {
   left: calc(.5 * var(--tile-cell))
   top: calc(5 * var(--tile-cell))
   &:after
-    content: 'version: alpha 0.0.5'
+    content: 'version: alpha 0.0.6'
     position: absolute
     bottom: calc(-.5 * var(--tile-cell))
     color: green
