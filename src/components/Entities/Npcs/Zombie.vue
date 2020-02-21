@@ -82,7 +82,9 @@ export default {
       this.$store.commit('pushLog', 'All the fog on the map is dissipated')
     },
     destroy: function () {
+      this.$store.commit('pushLog', 'The zombie has suddenly escaped.')
       event.stopPropagation()
+      this.show = false
       this.$store.commit('setPreview', null)
       this.$store.commit('destroyNpc', this.cellId)
     }

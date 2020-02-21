@@ -8,7 +8,7 @@
         {{ this.$store.getters.getScore }}
       </div>
       <div class="container-send">
-        <input type="text" v-model="name" placeholder="Enter your name">
+        <input type="text" v-model="name" placeholder="Enter your name" maxlength="20">
         <div class="btn-new-game btn-score"
              @click="pushScore"
              :class="{'--disabled': name.trim() === ''}"

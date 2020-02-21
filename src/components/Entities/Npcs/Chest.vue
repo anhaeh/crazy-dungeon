@@ -82,6 +82,8 @@ export default {
       }
     },
     destroy: function () {
+      this.$store.commit('pushLog', 'You hit the chest and explode')
+      this.$store.commit('pushLog', 'into pieces along with its contents.')
       event.stopPropagation()
       this.$store.commit('setPreview', null)
       this.$store.commit('destroyNpc', this.cellId)

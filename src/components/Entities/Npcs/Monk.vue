@@ -66,6 +66,7 @@ export default {
       this.show = false
     },
     destroy: function () {
+      this.$store.commit('pushLog', 'The monk has suddenly escaped.')
       event.stopPropagation()
       this.$store.commit('setPreview', null)
       this.$store.commit('destroyNpc', this.cellId)
