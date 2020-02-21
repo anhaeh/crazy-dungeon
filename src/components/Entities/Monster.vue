@@ -110,10 +110,11 @@ export default {
   .monster
     position: relative
     padding: 4px
-  .monster img
-    width: 100%
-    height: 100%
-    object-fit: contain
+    img
+      width: 100%
+      height: 100%
+      object-fit: contain
+      filter: drop-shadow(0px 0px 2px black)
   .level
     top: 0
     left: 0
@@ -141,12 +142,15 @@ export default {
     bottom: 4px
     left: 0
     height: 3px
-    background: rgba(0,0,0,0.8)
+    background: rgba(0, 0, 0, 0.8)
     z-index: 1
     position: absolute
     width: 100%
   .can-target
     cursor: cell
   .is-target
-    filter: drop-shadow(2px 7px 7px red)
+    img
+      filter: drop-shadow(0px 0px 3px red)
+      -webkit-transition: .2s ease-in-out
+      transition: .2s ease-in-out
 </style>

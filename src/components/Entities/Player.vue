@@ -24,8 +24,9 @@ export default {
   .player
     position: relative
     padding: 2px
-  .player img
-    width: 100%
-    height: auto
-    object-fit: contain
+    img
+      width: 100%
+      height: auto
+      object-fit: contain
+      filter: drop-shadow(0px 0px 2px black)
 </style>

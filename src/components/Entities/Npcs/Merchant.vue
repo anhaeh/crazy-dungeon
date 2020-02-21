@@ -38,8 +38,9 @@ export default {
 .merchant
   position: relative
   padding: 4px
-.merchant img
-  width: 100%
-  height: 100%
-  object-fit: contain
+  img
+    width: 100%
+    height: 100%
+    object-fit: contain
+    filter: drop-shadow(0px 0px 3px black)
 </style>
