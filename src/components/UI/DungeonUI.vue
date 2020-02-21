@@ -22,10 +22,10 @@
             <div class="dungeonUI__logQuestScrollUp" @click="scrollLog(1)"></div>
             <div class="dungeonUI__logQuestScrollDown" @click="scrollLog(-1)"></div>
           </div>
-          <log-quest
+          <quest-log
               :counter="cursorCounter"
           >
-          </log-quest>
+          </quest-log>
         </div>
       </div>
 
@@ -85,7 +85,7 @@
 
 <script>
 import Inventory from './Inventory'
-import LogQuest from './LogQuest'
+import QuestLog from './QuestLog'
 import SkillsList from './Skills/SkillList'
 import DisplaySkillsMenu from './Skills/DisplaySkillsMenu'
 import { movePlayer} from "@/modules/player"
@@ -98,7 +98,7 @@ export default {
   name: "DungeonUI",
   components: {
     Inventory,
-    LogQuest,
+    QuestLog,
     SkillsList,
     DisplaySkillsMenu,
     MerchantItems,

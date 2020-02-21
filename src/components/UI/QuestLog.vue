@@ -13,7 +13,7 @@
 
 <script>
 export default {
-  name: "LogQuest",
+  name: "QuestLog",
   props: ['counter'],
   data() {
     return {

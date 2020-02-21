@@ -28,7 +28,7 @@ export default {
   },
   methods: {
     begin: function () {
-      this.$router.push({ name: 'dungeon', params: { class: this.selected.toLowerCase() }})
+      this.$router.push({ name: 'dungeon', params: { className: this.selected.toLowerCase() }})
     },
     getClasses: function () {
       return Object.keys(classes)

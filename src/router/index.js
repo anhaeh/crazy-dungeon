@@ -25,9 +25,10 @@ const routes = [
     }
   },
   {
-    path: '/dungeon/:class',
+    path: '/dungeon/:className',
     name: 'dungeon',
-    component: Dungeon
+    component: Dungeon,
+    props: true
   },
   {
     path: '/high-scores',

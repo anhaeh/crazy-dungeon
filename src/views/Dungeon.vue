@@ -17,6 +17,12 @@ import TopBar from "@/components/UI/TopBar"
 
 export default {
   name: "Dungeon",
+  props: {
+    className: {
+      required: true,
+      type: String
+    }
+  },
   components: {
     TopBar,
     GameController,
@@ -25,7 +31,7 @@ export default {
     GameOver
   },
   created() {
-    this.$store.commit('setClassSelected', this.$route.params.class)
+    this.$store.commit('setClassSelected', this.className)
   }
 }
 </script>
