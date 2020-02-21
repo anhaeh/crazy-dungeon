@@ -13,7 +13,7 @@
       </div>
       <template slot="actions">
         <div class="bottomDialog__actionsBtn"
-             @click="destroy"
+             @click="callDestroy"
         >
           Destroy
         </div>
@@ -52,6 +52,11 @@ export default {
         this.show = true
       }
     },
+    callDestroy: function () {
+      this.$store.commit('pushLog', 'You hit the chest and explode')
+      this.$store.commit('pushLog', 'into pieces along with its contents.')
+      this.destroy()
+    },
     open: function () {
       let treasures = ['earnItem', 'earnScore', 'earnExperience']
       let treasure = treasures[Math.floor(Math.random() * treasures.length)]
@@ -82,12 +87,9 @@ export default {
       }
     },
     destroy: function () {
-      this.$store.commit('pushLog', 'You hit the chest and explode')
-      this.$store.commit('pushLog', 'into pieces along with its contents.')
       event.stopPropagation()
       this.$store.commit('setPreview', null)
       this.$store.commit('destroyNpc', this.cellId)
-      this.show = false
     }
   },
   computed: {

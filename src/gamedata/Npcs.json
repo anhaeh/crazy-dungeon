@@ -45,5 +45,8 @@
     "earnScore": 250,
     "earnExperience": 5,
     "earnItem": ["potion", "dagger"]
+  },
+  "monk":  {
+    "price": 350
   }
 }

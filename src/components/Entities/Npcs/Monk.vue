@@ -31,6 +31,7 @@
 <script>
 import { mapGetters } from 'vuex'
 import bottomDialog from '@/components/UI/Dialogs/BottomDialog'
+import gameData from '@/gamedata/Npcs.json'
 
 export default {
   name: "Monk",
@@ -43,7 +44,7 @@ export default {
   data () {
     return {
       show: false,
-      goldCost: 350
+      goldCost: gameData['monk'].price
     }
   },
   methods: {
