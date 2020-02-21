@@ -2,7 +2,7 @@
   <div :class="['cell', {'can-move': canMove }, {'has-fog': hasFog }]"
        :id="'cell-' + id"
        @click="click">
-    <img :src="image">
+    <img :src="image()">
     <template v-if="!hasFog">
       <Monster
          v-if="hasMonster"
@@ -58,14 +58,6 @@ export default {
     }
   },
   computed: {
-    image: function () {
-      let imageFile = this.tile.image
-      if (this.imageWall) {
-        imageFile += this.imageWall
-      }
-      let theme = this.tile.theme ? this.$store.getters.getTheme + '/' : ''
-      return require(`@/assets/terrains/${theme}${imageFile}.png`)
-    },
     hasMonster: function () {
       return this.getMonster !== undefined && this.getMonster.isLive
     },
@@ -93,6 +85,14 @@ export default {
     }
   },
   methods: {
+    image: function () {
+      let imageFile = this.tile.image
+      if (this.imageWall) {
+        imageFile += this.imageWall
+      }
+      let theme = this.tile.theme ? this.$store.getters.getTheme + '/' : ''
+      return require(`@/assets/terrains/${theme}${imageFile}.png`)
+    },
     click: function() {
       if (this.canMove) {
         this.$store.commit('setPlayerPosition', this.id)

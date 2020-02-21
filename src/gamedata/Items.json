@@ -139,7 +139,7 @@
     "legend": "+75 HP",
     "counter": 75,
     "type": "life",
-    "description": "This magic armor give you + 35 health",
+    "description": "This magic armor give you + 75 health",
     "price": 1000
   },
   "ring1": {
