@@ -86,7 +86,7 @@ export default {
       'getPlayer',
     ]),
     image: function () {
-      return require('@/assets/npcs/zombie.png')
+      return require('@/assets/npcs/zombie.gif')
     },
     playerInRange: function () {
       return this.getPlayerRange.indexOf(this.cellId) !== -1
@@ -101,11 +101,11 @@ export default {
 </script>
 
 <style scoped lang="sass">
-  .zombie
-    position: relative
-    padding: 4px
-  .zombie img
-    width: 100%
-    height: 100%
-    object-fit: contain
+.zombie
+  position: relative
+  padding: 4px
+.zombie img
+  width: 100%
+  height: 100%
+  object-fit: contain
 </style>

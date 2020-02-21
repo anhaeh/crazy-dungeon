@@ -26,5 +26,12 @@
     "health": 25,
     "attack": 2,
     "gold": 35
+  },
+  "goblinWarrior": {
+    "name": "GoblinWarrior",
+    "image": "GoblinWarrior",
+    "health": 32,
+    "attack": 3,
+    "gold": 40
   }
 }

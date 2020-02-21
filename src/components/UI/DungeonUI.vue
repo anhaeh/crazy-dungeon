@@ -1,6 +1,12 @@
 <template>
   <div class="dungeonUI">
     <div class="dungeonUI__contentTop">
+      <div class="dungeonUI__more">
+        <div class="dungeonUI__moreBack"></div>
+        <div class="dungeonUI__moreMenu" @click="openMenu">
+          Menu
+        </div>
+      </div>
       <div class="dungeonUI__current">
         <div class="dungeonUI__currentBars">
           <div class="dungeonUI__currentGold">
@@ -26,13 +32,6 @@
               :counter="cursorCounter"
           >
           </log-quest>
-        </div>
-      </div>
-
-      <div class="dungeonUI__more">
-        <div class="dungeonUI__moreBack"></div>
-        <div class="dungeonUI__moreMenu" @click="openMenu">
-          Menu
         </div>
       </div>
     </div>

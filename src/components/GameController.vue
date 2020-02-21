@@ -236,7 +236,7 @@ export default {
       })
 
       /* Set monsters */
-      let monstersList = ['goblin', 'golem', 'gorgon', 'imp']
+      let monstersList = ['goblin', 'golem', 'gorgon', 'imp', 'goblinWarrior']
 
       for (let i = 0; i < roomCount * 3; i++) {
         let num = Math.random();

@@ -21,11 +21,12 @@ export default {
 </script>
 
 <style scoped lang="sass">
-  .player
-    position: relative
-    padding: 2px
-  .player img
+.player
+  position: relative
+  padding: 2px
+  img
     width: 100%
     height: auto
     object-fit: contain
+    filter: drop-shadow(0px 0px 3px black)
 </style>

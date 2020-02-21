@@ -31,5 +31,16 @@
       "explosion",
       "storm"
     ]
+  },
+  "god": {
+    "name": "God",
+    "initialHealth": 500,
+    "attack": 80,
+    "image": "god.jpg",
+    "skills": [
+      "explosion",
+      "storm",
+      "chain_lighting"
+    ]
   }
 }

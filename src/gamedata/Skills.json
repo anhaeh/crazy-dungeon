@@ -8,6 +8,15 @@
     "image": "health.jpg",
     "price": "700"
   },
+  "heal": {
+    "name": "Greater Helaing",
+    "type": "Healing",
+    "counter": 0.35,
+    "description": "Heal 35% points of life",
+    "points": 2,
+    "image": "health.jpg",
+    "price": "1200"
+  },
   "fury_attack": {
     "name": "Fury Attack",
     "type": "Melee",
@@ -25,6 +34,15 @@
     "points": 5,
     "image": "bones.jpg",
     "price": "500"
+  },
+  "cursed_spikes": {
+    "name": "Cursed Spikes",
+    "type": "Range",
+    "counter": 2.5,
+    "description": "Make the basic attack x 2.5  and you don't receive attack from monsters",
+    "points": 3,
+    "image": "bones.jpg",
+    "price": "800"
   },
   "drain_life": {
     "name": "Drain Life",
@@ -44,6 +62,15 @@
     "points": 4,
     "image": "storm.jpg",
     "price": "500"
+  },
+  "chain_lighting": {
+    "name": "Chain Lighting",
+    "type": "Range",
+    "counter": 4,
+    "description": "Make the basic attack x 4  and you don't receive attack from monsters",
+    "points": 2,
+    "image": "storm.jpg",
+    "price": "2000"
   },
   "explosion": {
     "name": "Explosion",

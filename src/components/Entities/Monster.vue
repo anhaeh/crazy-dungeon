@@ -109,11 +109,15 @@ export default {
 <style scoped lang="sass">
   .monster
     position: relative
-    padding: 4px
-  .monster img
-    width: 100%
-    height: 100%
-    object-fit: contain
+    padding: 0
+  .monster
+    padding: 3px
+    img
+      width: 100%
+      height: 100%
+      object-fit: contain
+      filter: drop-shadow(0px 0px 3px black)
+      transition: filter 0.1s ease
   .level
     top: 0
     left: 0
@@ -148,5 +152,6 @@ export default {
   .can-target
     cursor: cell
   .is-target
-    filter: drop-shadow(2px 7px 7px red)
+    img
+      filter: drop-shadow(0px 0px 3px red)
 </style>
