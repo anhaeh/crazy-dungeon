@@ -284,10 +284,8 @@ export default {
   },
   created() {
     document.addEventListener('keydown', this.keysListener)
-    if (this.$store.getters.getPlayer.position === null) {
-      this.$store.dispatch('initGame')
-      this.buildMap()
-    }
+    this.$store.dispatch('initGame')
+    this.buildMap()
   },
   beforeDestroy() {
     document.removeEventListener('keydown', this.keysListener)

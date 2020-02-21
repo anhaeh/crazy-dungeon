@@ -29,9 +29,6 @@ export default {
     begin: function () {
       this.$router.push({ name: 'dungeon', params: { class: this.selected.toLowerCase() }})
     }
-  },
-  mounted () {
-    this.$store.commit('setPlayerPosition', null)
   }
 };
 </script>
