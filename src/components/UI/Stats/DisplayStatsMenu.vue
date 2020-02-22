@@ -22,7 +22,7 @@
         <div class="dungeonUI__statsTotalValue">{{ $store.getters.getPlayerAttack }}</div>
       </div>
       <div class="dungeonUI__statsBar">
-        <div class="dungeonUI__statsLabel --def"></div>
+        <div class="dungeonUI__statsLabel --health"></div>
         <div class="dungeonUI__statsBaseValue">{{ $store.getters.getPlayerBaseLife }}</div>
         <div class="dungeonUI__statsBarBorder">
           <div class="dungeonUI__statsBarGraph --def"></div>
@@ -140,6 +140,8 @@ $color-mDef: #911DBA
     background-image: url("../../../assets/ui/dungeonUI__statsLabel--att.png")
   &.--def
     background-image: url("../../../assets/ui/dungeonUI__statsLabel--def.png")
+  &.--health
+    background-image: url("../../../assets/ui/dungeonUI__statsLabel--health.png")
   &.--mAtt
     background-image: url("../../../assets/ui/dungeonUI__statsLabel--mAtt.png")
   &.--mDef
