@@ -339,7 +339,7 @@ const store = new Vuex.Store({
       let playerDamage = Math.ceil(getters.getPlayerAttack * payload.damageSkill)
       let monsterDefender = state.entities.monsters.find(x => x.cellId === state.monsterSelected.cellId)
       monsterDefender.damage += playerDamage
-      state.questLog.push(`Player deals ${playerDamage} to ${state.monsterSelected.monster.name}`)
+      state.questLog.push(`Player deals ${playerDamage} damage to ${state.monsterSelected.monster.name}`)
       if (monsterDefender.damage >= state.monsterSelected.totalLife) {
         /* if kill monster*/
         event.stopPropagation()
