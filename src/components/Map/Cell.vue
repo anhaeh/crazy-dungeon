@@ -128,7 +128,7 @@ export default {
   created () {
     let type = this.type
     if (this.type === undefined) {
-      type = 1
+      type = 1 // wall sprite
     }
     this.tile = Terrains[type]
     let map = this.$store.getters.getMap

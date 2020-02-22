@@ -1,9 +1,9 @@
 <template>
-  <div class="npc zombie">
+  <div class="npc zombie" :class="{'delete': isDelete}">
     <img :src="image" alt="" @click="click">
     <bottom-dialog
             v-if="show"
-            @close="destroy"
+            @close="isDelete = true"
     >
       <div slot="legend">Receive {{ entity.action ? ' a Gift' : 'an Advice' }}</div>
       <div slot="title">Wandering zombie</div>
@@ -28,7 +28,8 @@ export default {
   data () {
     return {
       show: false,
-      entity : null
+      entity : null,
+      isDelete: false
     }
   },
   methods: {
@@ -82,9 +83,9 @@ export default {
       this.$store.commit('pushLog', 'All the fog on the map is dissipated')
     },
     destroy: function () {
-      this.$store.commit('pushLog', 'The zombie has suddenly escaped.')
-      event.stopPropagation()
       this.show = false
+      event.stopPropagation()
+      this.$store.commit('pushLog', 'The zombie has suddenly escaped.')
       this.$store.commit('setPreview', null)
       this.$store.commit('destroyNpc', this.cellId)
     }
@@ -104,17 +105,27 @@ export default {
     if (this.show) {
       this.destroy()
     }
+  },
+  mounted() {
+    document.querySelector('.zombie').addEventListener("transitionend", this.destroy, true)
   }
 }
 </script>
 
 <style scoped lang="sass">
-  .npc
-    position: relative
-    padding: 4px
-    img
-      width: 100%
-      height: 100%
-      object-fit: contain
-      filter: drop-shadow(0px 0px 2px black)
+.npc
+  position: relative
+  padding: 4px
+  img
+    width: 100%
+    height: 100%
+    object-fit: contain
+    filter: drop-shadow(0px 0px 2px black)
+.delete
+  -webkit-transition: opacity 750ms ease-in-out
+  -moz-transition: opacity 750ms ease-in-out
+  -ms-transition: opacity 750ms ease-in-out
+  -o-transition: opacity 750ms ease-in-out
+  transition: opacity 750ms ease-in-out
+  opacity: 0
 </style>

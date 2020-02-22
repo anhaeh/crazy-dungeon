@@ -353,7 +353,7 @@ const store = new Vuex.Store({
       } else {
         if (payload.range !== true) {
           let monsterAttack = state.monsterSelected.monster.attack + monsterDefender.level
-          state.questLog.push(`${state.monsterSelected.monster.name} deals ${monsterAttack} damage`)
+          state.questLog.push(`${state.monsterSelected.monster.name} strikes back and deals ${monsterAttack} damage`)
           commit('setPlayerDamage', monsterAttack)
         }
       }

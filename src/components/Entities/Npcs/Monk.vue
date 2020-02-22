@@ -1,9 +1,9 @@
 <template>
-  <div class="npc monk">
+  <div class="npc monk" :class="{'delete': isDelete}">
     <img :src="image" alt="" @click="click">
     <bottom-dialog
             v-if="show"
-            @close="destroy"
+            @close="isDelete = true"
     >
       <div slot="legend">Restore skills</div>
       <div slot="title">Monk</div>
@@ -44,7 +44,8 @@ export default {
   data () {
     return {
       show: false,
-      goldCost: gameData['monk'].price
+      goldCost: gameData['monk'].price,
+      isDelete: false
     }
   },
   methods: {
@@ -61,14 +62,14 @@ export default {
         this.$store.commit('setPlayerSkills', skills)
       })
       this.$store.commit('pushLog', 'Your skills have been restored.')
-      this.destroy()
+      this.isDelete = true
     },
     close: function () {
       this.show = false
     },
     destroy: function () {
-      this.$store.commit('pushLog', 'The monk has suddenly escaped.')
       event.stopPropagation()
+      this.$store.commit('pushLog', 'The monk has suddenly escaped.')
       this.$store.commit('setPreview', null)
       this.$store.commit('destroyNpc', this.cellId)
     }
@@ -86,17 +87,27 @@ export default {
     hasGold: function () {
       return this.$store.getters.getPlayer.gold >= this.goldCost
     }
+  },
+  mounted () {
+    document.querySelector('.monk').addEventListener("transitionend", this.destroy, true)
   }
 }
 </script>
 
 <style scoped lang="sass">
-  .npc
-    position: relative
-    padding: 4px
-    img
-      width: 100%
-      height: 100%
-      object-fit: contain
-      filter: drop-shadow(0px 0px 2px black)
+.npc
+  position: relative
+  padding: 4px
+  img
+    width: 100%
+    height: 100%
+    object-fit: contain
+    filter: drop-shadow(0px 0px 2px black)
+.delete
+  -webkit-transition: opacity 750ms ease-in-out
+  -moz-transition: opacity 750ms ease-in-out
+  -ms-transition: opacity 750ms ease-in-out
+  -o-transition: opacity 750ms ease-in-out
+  transition: opacity 750ms ease-in-out
+  opacity: 0
 </style>
