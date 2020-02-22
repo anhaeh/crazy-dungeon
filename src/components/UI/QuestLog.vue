@@ -1,7 +1,7 @@
 <template>
   <div id="quest-log" class="questLog">
     <div class="feed">
-      <span v-for="(log, index) in messages"
+      <span v-for="(log, index) in questLog"
             :key="'log' + index"
             class="message"
       >
@@ -14,7 +14,6 @@
 <script>
 export default {
   name: "QuestLog",
-  props: ['counter'],
   data() {
     return {
       cursor: 0
@@ -23,52 +22,39 @@ export default {
   watch: {
     questLog: {
       handler() {
-        this.cursor = 0
-      }
-    },
-    counter: {
-      handler(newVal, oldVal) {
-        if (newVal > oldVal) {
-          this.increaseCursor()
-        } else {
-          this.decreaseCursor()
-        }
+        let scrollingElement = document.querySelector('#quest-log')
+        scrollingElement.scrollTop = scrollingElement.scrollHeight
       }
     }
   },
   computed: {
-    messages: function () {
-      return this.cursor === 0 ? this.questLog.slice(-4) : this.questLog.slice(-(4 + this.cursor), -(this.cursor))
-    },
-    maxCursor: function () {
-      let index = this.cursor === 0 ? 4 : 4 + (this.cursor)
-      return this.questLog[index] === undefined
-    },
     questLog: function () {
       return this.$store.getters.getQuestLog
     }
-  },
-  methods: {
-    increaseCursor: function () {
-      if (!this.maxCursor) {
-        this.cursor += 1
-      }
-    },
-    decreaseCursor: function () {
-      if (this.cursor !== 0) {
-        this.cursor -= 1
-      }
-    }
   }
-};
+}
 </script>
 
 <style scoped lang="sass">
 .questLog
   background-image: url("../../assets/ui/questLog.png")
-  background-size: 100%
   image-rendering: pixelated
-  background-repeat: no-repeat
+  overflow: auto
+  background-repeat: round
+  height: calc(1 * var(--tile-cell))
+  background-size: contain
+  width: calc(5.5 * var(--tile-cell))
+  &::-webkit-scrollbar
+    background-image: url("../../assets/ui/bottomDialog__scrollbar.png")
+    width: calc(.5 * var(--tile-cell))
+    background-size: 100% 100%
+    image-rendering: pixelated
+  &::-webkit-scrollbar
+    -webkit-appearance: none
+  &::-webkit-scrollbar-thumb
+    background-image: url("../../assets/ui/bottomDialog__scrollbarThumb.png")
+    background-size: 100% 100%
+    image-rendering: pixelated
 .feed
   color: white
   opacity: 0.5
@@ -76,22 +62,8 @@ export default {
   line-height: calc(3.2 * var(--pixel-unit))
   padding: var(--pixel-unit) calc(4 * var(--pixel-unit))
   box-sizing: border-box
-  width: calc(4.5 * var(--tile-cell))
-  height: var(--tile-cell)
 .message
   display: flex
-.scroll-up
-  width: calc(13 * var(--pixel-unit))
-  position: absolute
-  height: calc(10 * var(--pixel-unit))
-  right: 10px
-  top: calc(3 * var(--pixel-unit))
-.scroll-down
-  width: calc(13 * var(--pixel-unit))
-  position: absolute
-  height: calc(10 * var(--pixel-unit))
-  right: 10px
-  top: calc(17 * var(--pixel-unit))
 
 @media screen and (min-width: 800px)
   .questLog

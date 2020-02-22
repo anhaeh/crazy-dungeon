@@ -18,12 +18,7 @@
           </div>
         </div>
         <div class="dungeonCurrentLog">
-          <div class="dungeonUI__logQuestScroll">
-            <div class="dungeonUI__logQuestScrollUp" @click="scrollLog(1)"></div>
-            <div class="dungeonUI__logQuestScrollDown" @click="scrollLog(-1)"></div>
-          </div>
           <quest-log
-              :counter="cursorCounter"
           >
           </quest-log>
         </div>
@@ -107,7 +102,6 @@ export default {
   },
   data () {
     return {
-      cursorCounter: 0,
       showMenu: false,
       showSkills: false,
       showStats: false,
@@ -177,9 +171,6 @@ export default {
     talk: function() {
       event.preventDefault()
       document.querySelector(`.${this.isNpcInRange.type} img`).click()
-    },
-    scrollLog: function (counter) {
-      this.cursorCounter += counter
     }
   }
 };
@@ -253,21 +244,12 @@ export default {
     text-shadow: 0 2px 0 black
 .dungeonCurrentLog
   display: flex
-  width: calc(5.5 * var(--tile-cell))
 .dungeonUI__logQuestScroll
   height: var(--tile-cell)
   width: var(--tile-cell)
   *:active, *:focus
     opacity: 0.5
     transform: translateY(2px)
-.dungeonUI__logQuestScrollUp, .dungeonUI__logQuestScrollDown
-  height: calc(.5 * var(--tile-cell))
-  width: var(--tile-cell)
-  background-image: url("../../assets/ui/dungeonUI__logQuestScrollUp.png")
-  background-size: 100% 100%
-  image-rendering: pixelated
-.dungeonUI__logQuestScrollDown
-  background-image: url("../../assets/ui/dungeonUI__logQuestScrollDown.png")
 .dungeonUI__controls
   opacity: 1
   position: absolute
