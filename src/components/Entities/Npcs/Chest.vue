@@ -53,8 +53,7 @@ export default {
       }
     },
     callDestroy: function () {
-      this.$store.commit('pushLog', 'You hit the chest and explode')
-      this.$store.commit('pushLog', 'into pieces along with its contents.')
+      this.$store.commit('pushLog', 'You hit the chest and explode into pieces along with its contents.')
       this.destroy()
     },
     open: function () {

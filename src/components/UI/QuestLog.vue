@@ -1,12 +1,14 @@
 <template>
   <div id="quest-log" class="questLog">
-    <div class="feed">
+    <div class="questLog__message">
+      <div class="feed">
       <span v-for="(log, index) in questLog"
             :key="'log' + index"
             class="message"
       >
         {{ log }}
       </span>
+      </div>
     </div>
   </div>
 </template>
@@ -22,8 +24,10 @@ export default {
   watch: {
     questLog: {
       handler() {
-        let scrollingElement = document.querySelector('#quest-log')
-        scrollingElement.scrollTop = scrollingElement.scrollHeight
+        this.$nextTick(() => {
+          let scrollingElement = document.querySelector('.feed')
+          scrollingElement.scrollTop = scrollingElement.scrollHeight
+        })
       }
     }
   },
@@ -37,13 +41,34 @@ export default {
 
 <style scoped lang="sass">
 .questLog
-  background-image: url("../../assets/ui/questLog.png")
   image-rendering: pixelated
   overflow: auto
-  background-repeat: round
-  height: calc(1 * var(--tile-cell))
-  background-size: contain
+  flex-direction: column
+  background-color: #000000
+  display: flex
   width: calc(5.5 * var(--tile-cell))
+  top: -3px
+  position: relative
+.questLog__message
+  height: calc(1 * var(--tile-cell))
+  width: 100%
+  image-rendering: pixelated
+  background-size: 100% 100%
+  background-image: url("../../assets/ui/bottomDialog__message.png")
+  opacity: 0.7
+  box-sizing: border-box
+  padding: calc(1 * var(--pixel-unit)) 0
+.feed
+  height: 100%
+  width: 100%
+  overflow-y: auto
+  overflow-x: hidden
+  box-sizing: border-box
+  font-size: calc(4 * var(--pixel-unit))
+  padding: 5px calc(5 * var(--pixel-unit))
+  line-height: calc(3.2*var(--pixel-unit))
+  color: white
+  opacity: 0.5
   &::-webkit-scrollbar
     background-image: url("../../assets/ui/bottomDialog__scrollbar.png")
     width: calc(.5 * var(--tile-cell))
@@ -55,13 +80,8 @@ export default {
     background-image: url("../../assets/ui/bottomDialog__scrollbarThumb.png")
     background-size: 100% 100%
     image-rendering: pixelated
-.feed
-  color: white
-  opacity: 0.5
-  font-size: calc(4 * var(--pixel-unit))
-  line-height: calc(3.2 * var(--pixel-unit))
-  padding: var(--pixel-unit) calc(4 * var(--pixel-unit))
-  box-sizing: border-box
+  &::-webkit-scrollbar-track
+    border-radius: 10px
 .message
   display: flex
 
