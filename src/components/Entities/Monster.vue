@@ -150,7 +150,7 @@ export default {
     cursor: cell
   .is-target
     img
-      filter: drop-shadow(0px 0px 3px red)
+      filter: drop-shadow(0px 0px 3px rgba(150,0,0,0.9))
       -webkit-transition: .2s ease-in-out
       transition: .2s ease-in-out
 </style>

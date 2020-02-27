@@ -20,11 +20,53 @@
     "attack": 3,
     "gold": 40
   },
+  "slime": {
+    "name": "Slime",
+    "image": "Slime",
+    "health": 15,
+    "attack": 1,
+    "gold": 15
+  },
+  "snake": {
+    "name": "Snake",
+    "image": "Snake",
+    "health": 18,
+    "attack": 2,
+    "gold": 20
+  },
   "goblin": {
     "name": "Goblin",
     "image": "Goblin",
     "health": 25,
     "attack": 2,
     "gold": 35
+  },
+  "goblinMarauder": {
+    "name": "Goblin Marauder",
+    "image": "GoblinMarauder",
+    "health": 32,
+    "attack": 4,
+    "gold": 45
+  },
+  "goblinShaman": {
+    "name": "Goblin Shaman",
+    "image": "GoblinShaman",
+    "health": 30,
+    "attack": 3,
+    "gold": 40
+  },
+  "goblinKnight": {
+    "name": "Goblin Knight",
+    "image": "GoblinKnight",
+    "health": 45,
+    "attack": 5,
+    "gold": 60
+  },
+  "goblinBomber": {
+    "name": "Goblin Bomber",
+    "image": "GoblinBomber",
+    "health": 20,
+    "attack": 9,
+    "gold": 50
   }
 }

@@ -49,7 +49,7 @@ export default {
   display: flex
   align-items: flex-start
   justify-content: flex-start
-  z-index: 9
+  z-index: 25
 @media screen and (min-width: 800px)
   .topBar
     width: 336px

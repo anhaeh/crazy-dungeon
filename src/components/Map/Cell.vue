@@ -161,14 +161,21 @@ export default {
 </script>
 
 <style scoped lang="sass">
-  .cell
-    width: var(--tile-cell)
-    height: var(--tile-cell)
-    position: relative
-    img
-      position: absolute
-      width: 100%
-      height: 100%
-  .has-fog
-    filter: opacity(0)
+.cell
+  width: var(--tile-cell)
+  height: var(--tile-cell)
+  position: relative
+  img
+    position: absolute
+    width: 100%
+    height: 100%
+.has-fog:after
+  content: ''
+  display: block
+  position: absolute
+  z-index: 10
+  width: 100%
+  height: 100%
+  background-image: url("../../assets/terrains/fog.png")
+  background-size: cover
 </style>

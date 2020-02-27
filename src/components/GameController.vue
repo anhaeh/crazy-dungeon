@@ -128,8 +128,8 @@ export default {
     },
     buildMap: function () {
       /* Set theme */
-      // let theme = this.random(['default', 'forest', 'industrial', 'snakepit'])
-      let theme = 'cave'
+      let theme = this.random(['default', 'forestMaze', 'crypt', 'cave'])
+      // let theme = 'forestMaze'
 
       /* TODO pasar a un js encargado de generar mapas */
       let free = []
@@ -246,8 +246,14 @@ export default {
       })
 
       /* Set monsters */
-      let monstersList = ['goblin', 'golem', 'gorgon', 'imp']
-
+      let monstersList = [
+        'goblin', 
+        'goblinMarauder', 
+        'goblinShaman', 
+        'goblinKnight', 
+        'slime', 
+        'snake'
+        ]
       for (let i = 0; i < roomCount * 3; i++) {
         let num = Math.random();
         let level = this.getPlayer.level + 2
