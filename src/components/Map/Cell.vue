@@ -13,7 +13,7 @@
       >
       </Monster>
       <Player v-if="hasPlayer"></Player>
-      <component v-if="hasNpc && !hasFog" :is="hasNpc.type" :cell-id="id"></component>
+      <component v-if="hasNpc" :is="hasNpc.type" :cell-id="id"></component>
       <Item
         v-if="!hasMonster && hasItem"
         :name="hasItem"
