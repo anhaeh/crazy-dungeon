@@ -102,7 +102,7 @@ export default {
     }
   },
   beforeDestroy() {
-    if (this.show || this.isDelete) {
+    if (this.show) {
       this.destroy()
     }
   },
