@@ -129,7 +129,7 @@ export default {
     buildMap: function () {
       /* Set theme */
       // let theme = this.random(['default', 'forest', 'industrial', 'snakepit'])
-      let theme = 'cave'
+      let theme = this.random(['cave', 'crypt'])
 
       /* TODO pasar a un js encargado de generar mapas */
       let free = []
@@ -266,8 +266,8 @@ export default {
           level: level,
           damage: 0
         })
-        /* set drop potions random */
-        if(Math.random() > 0.85) {
+        /* set drop potions random when player is less than level 5 */
+        if(Math.random() > 0.85 && this.$store.getters.getPlayer.level < 5) {
           json.entities.items[position] = 'potion'
         }
       }

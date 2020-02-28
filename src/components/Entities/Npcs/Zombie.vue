@@ -102,7 +102,7 @@ export default {
     }
   },
   beforeDestroy() {
-    if (this.show) {
+    if (this.show || this.isDelete) {
       this.destroy()
     }
   },
@@ -122,10 +122,10 @@ export default {
     object-fit: contain
     filter: drop-shadow(0px 0px 2px black)
 .delete
-  -webkit-transition: opacity 750ms ease-in-out
-  -moz-transition: opacity 750ms ease-in-out
-  -ms-transition: opacity 750ms ease-in-out
-  -o-transition: opacity 750ms ease-in-out
-  transition: opacity 750ms ease-in-out
+  -webkit-transition: opacity 300ms ease-in-out
+  -moz-transition: opacity 300ms ease-in-out
+  -ms-transition: opacity 300ms ease-in-out
+  -o-transition: opacity 300ms ease-in-out
+  transition: opacity 300ms ease-in-out
   opacity: 0
 </style>
