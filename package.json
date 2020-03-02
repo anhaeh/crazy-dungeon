@@ -1,7 +1,7 @@
 {
   "name": "crazy_dungeons",
   "author": "anhaeh@gmail.com",
-  "version": "0.0.9",
+  "version": "0.0.10",
   "private": true,
   "scripts": {
     "serve": "vue-cli-service serve",
