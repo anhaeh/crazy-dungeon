@@ -1,5 +1,5 @@
 <template>
-  <div class="dungeonUI__skillSlot" @click="use">
+  <div class="dungeonUI__skillSlot" :id="'skill-' + skillId" @click="use">
     <template v-if="skill">
       <span class="skillPoints">{{ usages }}/{{ skill.points }}</span>
       <img :src="image">
@@ -17,6 +17,9 @@ export default {
     skillName: {
       required: false,
       default: null
+    },
+    skillId: {
+      required: true
     }
   },
   data() {

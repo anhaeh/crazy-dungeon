@@ -3,6 +3,7 @@
     <skill-item
         v-for="(skill, index) in skills"
         :skill-name="skill"
+        :skill-id="index + 1"
         :key="'skill' + index"
     ></skill-item>
   </div>
