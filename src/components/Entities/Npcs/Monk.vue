@@ -1,9 +1,9 @@
 <template>
-  <div class="npc monk" :class="{'delete': isDelete}">
+  <div class="npc monk">
     <img :src="image" alt="" @click="click">
     <bottom-dialog
             v-if="show"
-            @close="isDelete = true"
+            @close="destroy"
     >
       <div slot="legend">Restore skills</div>
       <div slot="title">Monk</div>
@@ -43,8 +43,7 @@ export default {
   data () {
     return {
       show: false,
-      goldCost: gameData['monk'].price * this.$store.getters.getPlayer.level,
-      isDelete: false
+      goldCost: gameData['monk'].price * this.$store.getters.getPlayer.level
     }
   },
   methods: {
@@ -61,7 +60,7 @@ export default {
         this.$store.commit('setPlayerSkills', skills)
       })
       this.$store.commit('pushLog', 'Your skills have been restored.')
-      this.isDelete = true
+      this.destroy()
     },
     close: function () {
       this.show = false
@@ -83,9 +82,6 @@ export default {
     hasGold: function () {
       return this.$store.getters.getPlayer.gold >= this.goldCost
     }
-  },
-  mounted () {
-    document.querySelector('.monk').addEventListener("transitionend", this.destroy, true)
   }
 }
 </script>
