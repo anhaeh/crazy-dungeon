@@ -29,7 +29,6 @@
 </template>
 
 <script>
-import { mapGetters } from 'vuex'
 import bottomDialog from '@/components/UI/Dialogs/BottomDialog'
 import gameData from '@/gamedata/Npcs.json'
 
@@ -75,14 +74,11 @@ export default {
     }
   },
   computed: {
-    ...mapGetters([
-      'getPlayerRange'
-    ]),
     image: function () {
       return require('@/assets/npcs/monk.png')
     },
     playerInRange: function () {
-      return this.getPlayerRange.indexOf(this.cellId) !== -1
+      return this.$store.getters.getPlayerRange.indexOf(this.cellId) !== -1
     },
     hasGold: function () {
       return this.$store.getters.getPlayer.gold >= this.goldCost
@@ -95,19 +91,5 @@ export default {
 </script>
 
 <style scoped lang="sass">
-.npc
-  position: relative
-  padding: 4px
-  img
-    width: 100%
-    height: 100%
-    object-fit: contain
-    filter: drop-shadow(0px 0px 2px black)
-.delete
-  -webkit-transition: opacity 300ms ease-in-out
-  -moz-transition: opacity 300ms ease-in-out
-  -ms-transition: opacity 300ms ease-in-out
-  -o-transition: opacity 300ms ease-in-out
-  transition: opacity 300ms ease-in-out
-  opacity: 0
+  @import "./npc"
 </style>

@@ -3,17 +3,17 @@
 </template>
 
 <script>
-import { mapGetters } from 'vuex'
 import { movePlayer } from "@/modules/player"
 import itemsData from '@/gamedata/Items.json'
 import Dungeon from 'dungeon-generator'
 
 export default {
   name: "GameController",
+  inject: ['isMobile'],
   watch: {
     getPlayerPosition: {
       handler: function () {
-        if (this.getPlayerPosition === this.getPortalPosition) {
+        if (this.getPlayerPosition === this.$store.getters.getPortalPosition) {
           this.buildMap()
           //this.nextRoom()
         } else {
@@ -53,11 +53,9 @@ export default {
     }
   },
   computed: {
-    ...mapGetters([
-        'getPlayerPosition',
-        'getPortalPosition',
-        'getPlayer'
-    ])
+    getPlayerPosition: function () {
+      return this.$store.getters.getPlayerPosition
+    }
   },
   data() {
     return {
@@ -247,14 +245,15 @@ export default {
 
       /* Set monsters */
       let monstersList = ['goblin', 'golem', 'gorgon', 'imp']
+      let playerLevel = this.$store.getters.getPlayer.level
 
       for (let i = 0; i < roomCount * 3; i++) {
-        let num = Math.random();
-        let level = this.getPlayer.level + 2
+        let num = Math.random()
+        let level = playerLevel + 2
         if(num < 0.5){
-          level = this.getPlayer.level
+          level = playerLevel
         } else if (num < 0.85) {
-          level = this.getPlayer.level + 1
+          level = playerLevel + 1
         }
         let position = this.random(free)
         /* remove the free */
@@ -267,7 +266,7 @@ export default {
           damage: 0
         })
         /* set drop potions random when player is less than level 5 */
-        if(Math.random() > 0.85 && this.$store.getters.getPlayer.level < 5) {
+        if(Math.random() > 0.85 && playerLevel < 5) {
           json.entities.items[position] = 'potion'
         }
       }
@@ -283,7 +282,9 @@ export default {
     }
   },
   created() {
-    document.addEventListener('keydown', this.keysListener)
+    if (!this.isMobile() || process.NODE_ENV !== 'development') {
+      document.addEventListener('keydown', this.keysListener)
+    }
     this.$store.dispatch('initGame')
     this.buildMap()
   },

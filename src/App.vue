@@ -6,7 +6,10 @@
 
 <script>
 export default {
-  name: "App"
+  name: "App",
+  provide: {
+    isMobile: () => window.screen.width < 800
+  }
 };
 </script>
 
