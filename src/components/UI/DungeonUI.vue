@@ -117,9 +117,10 @@ export default {
     },
     isNpcInRange: function() {
       let npc = null
+      let playerInRange = this.$store.getters.getPlayerRange
       if (!this.isMonsterTarget) {
         this.$store.getters.getNpcs.forEach(x => {
-          if (this.$store.getters.getPlayerRange.includes(x.cellId)) {
+          if (playerInRange.includes(x.cellId)) {
             npc = x
           }
         })
