@@ -1,5 +1,5 @@
 <template>
-  <div class="merchant">
+  <div class="npc merchant">
     <img :src="image" alt="" @click="click">
   </div>
 </template>
