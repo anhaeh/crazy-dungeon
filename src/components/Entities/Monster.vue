@@ -15,7 +15,6 @@
 </template>
 
 <script>
-import { mapGetters } from 'vuex'
 import MonstersData from '@/gamedata/Monsters.json'
 
 export default {
@@ -70,21 +69,19 @@ export default {
     }
   },
   computed: {
-    ...mapGetters([
-      'getMonsters',
-      'getMonsterSelected',
-      'getPlayerRange',
-      'getDungeon',
-    ]),
+    getDungeon: function () {
+      return this.$store.getters.getDungeon
+    },
     image: function () {
       let imageExtension = this.isLive ? '.gif' :'_death.gif'
       return require('@/assets/monsters/' + this.monster.image + imageExtension)
     },
     canTarget: function () {
-      return this.getPlayerRange.indexOf(this.cellId) !== -1
+      return this.$store.getters.getPlayerRange.indexOf(this.cellId) !== -1
     },
     isTarget: function () {
-      return this.getMonsterSelected && this.getMonsterSelected.cellId === this.cellId
+      let monsterTarget = this.$store.getters.getMonsterSelected
+      return monsterTarget && monsterTarget.cellId === this.cellId
     },
     totalLife: function () {
       return this.monster.health + (10 * + this.getMonster.level)
@@ -97,7 +94,7 @@ export default {
       return `width: ${percent}%`
     },
     getMonster: function () {
-      return this.getMonsters.find(x => x.cellId === this.cellId)
+      return this.$store.getters.getMonsters.find(x => x.cellId === this.cellId)
     },
     isLive: function () {
       return this.totalLife > this.getMonster.damage

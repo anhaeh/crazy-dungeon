@@ -5,7 +5,6 @@
 </template>
 
 <script>
-import { mapGetters } from 'vuex'
 import ItemsData from '@/gamedata/Items.json'
 
 export default {
@@ -38,11 +37,9 @@ export default {
     }
   },
   computed: {
-    ...mapGetters([
-      'getInventory'
-    ]),
     inventoryIsFull: function() {
-      return this.getInventory.maxSize === this.getInventory.items.length
+      let inventory = this.$store.getters.getInventory
+      return inventory.maxSize === inventory.items.length
     },
     image: function () {
       return require('@/assets/items/' + this.item.image)

@@ -282,7 +282,7 @@ export default {
     }
   },
   created() {
-    if (!this.isMobile() || process.NODE_ENV === 'development') {
+    if (!this.isMobile() || process.env.NODE_ENV === 'development') {
       document.addEventListener('keydown', this.keysListener)
     }
     this.$store.dispatch('initGame')

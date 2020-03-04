@@ -11,7 +11,6 @@
 </template>
 
 <script>
-import { mapGetters } from 'vuex'
 import monsterPreview from './Previews/MonsterPreview'
 import itemPreview from './Previews/ItemPreview'
 import npcPreview from './Previews/NpcPreview'
@@ -27,9 +26,11 @@ export default {
     npcPreview
   },
   computed: {
-    ...mapGetters(["getPreview"]),
     componentToPreview: function () {
       return this.getPreview ? this.getPreview.entity : null
+    },
+    getPreview: function () {
+      return this.$store.getters.getPreview
     }
   }
 };

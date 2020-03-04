@@ -5,8 +5,6 @@
 </template>
 
 <script>
-import { mapGetters } from 'vuex'
-
 export default {
   name: "Merchant",
   props: {
@@ -21,14 +19,11 @@ export default {
     }
   },
   computed: {
-    ...mapGetters([
-      'getPlayerRange'
-    ]),
     image: function () {
       return require('@/assets/npcs/merchant.png')
     },
     playerInRange: function () {
-      return this.getPlayerRange.indexOf(this.cellId) !== -1
+      return this.$store.getters.getPlayerRange.indexOf(this.cellId) !== -1
     }
   }
 }

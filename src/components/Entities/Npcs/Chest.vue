@@ -28,7 +28,6 @@
 </template>
 
 <script>
-import { mapGetters } from 'vuex'
 import bottomDialog from '@/components/UI/Dialogs/BottomDialog'
 import gameData from '@/gamedata/Npcs.json'
 
@@ -81,7 +80,8 @@ export default {
     earnExperience: function () {
       this.$store.commit('pushLog', 'Player gain more experience')
       this.$store.commit('setPlayerExperience', this.entity.earnExperience)
-      if (this.$store.getters.getPlayer.defeatMonsters >= this.$store.getters.getPlayer.nextLevelMonsters) {
+      let player = this.$store.getters.getPlayer
+      if (player.defeatMonsters >= player.nextLevelMonsters) {
         this.$store.commit('levelUp')
       }
     },
@@ -92,15 +92,11 @@ export default {
     }
   },
   computed: {
-    ...mapGetters([
-      'getPlayerRange',
-      'getPlayer',
-    ]),
     image: function () {
       return require('@/assets/npcs/chest.png')
     },
     playerInRange: function () {
-      return this.getPlayerRange.indexOf(this.cellId) !== -1
+      return this.$store.getters.getPlayerRange.indexOf(this.cellId) !== -1
     },
     hasKey: function () {
       return this.$store.getters.getInventory.items.find(x => x.type === 'key')

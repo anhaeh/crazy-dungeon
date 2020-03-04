@@ -16,7 +16,6 @@
 </template>
 
 <script>
-import { mapGetters } from 'vuex'
 import ItemDialog from './Dialogs/ItemDialog'
 
 export default {
@@ -40,9 +39,9 @@ export default {
     }
   },
   computed: {
-    ...mapGetters([
-        'getInventory'
-    ]),
+    getInventory: function () {
+      return this.$store.getters.getInventory
+    },
     show: function () {
       return this.getInventory.show
     },

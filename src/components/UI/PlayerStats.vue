@@ -4,7 +4,7 @@
     <div class="playerStats__lvl">{{ getPlayer.level }}</div>
     <status-bar
       :actual="actualHealth"
-      :total="getPlayerBaseLife + getPlayerBuffLife"
+      :total="totalLife"
     ></status-bar>
     <div class="score">
       Score: {{ getScore }}
@@ -16,7 +16,6 @@
 </template>
 
 <script>
-import { mapGetters } from 'vuex'
 import statusBar from './StatusBar'
 
 export default {
@@ -34,18 +33,20 @@ export default {
   },
   name: "PlayerStats",
   computed: {
-    ...mapGetters([
-      'getPlayer',
-      'getPlayerAttack',
-      'getPlayerBaseLife',
-      'getPlayerBuffLife',
-      'getScore'
-    ]),
+    getPlayer: function () {
+      return this.$store.getters.getPlayer
+    },
+    getScore: function () {
+      return this.$store.getters.getScore
+    },
     imageHero: function () {
       return require(`@/assets/heroes/portraits/${this.getPlayer.image}`)
     },
     actualHealth: function () {
-      return (this.getPlayerBaseLife + this.getPlayerBuffLife) - this.getPlayer.damage
+      return this.totalLife - this.getPlayer.damage
+    },
+    totalLife: function () {
+      return this.$store.getters.getPlayerBaseLife + this.$store.getters.getPlayerBuffLife
     }
   },
   methods: {
