@@ -37,6 +37,8 @@ body
   justify-content: center
   height: 100%
   background: black
+  /* Disables pull-to-refresh but allows overscroll glow effects. */
+  overscroll-behavior-y: contain
 #app
   font-family: 'OpenSansPXBold', sans-serif
   display: flex

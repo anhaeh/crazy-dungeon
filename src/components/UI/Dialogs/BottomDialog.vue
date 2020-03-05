@@ -37,8 +37,9 @@ export default {
   name: "Dialog",
   methods: {
     close: function () {
-      this.$store.commit('setDialogShow', false)
-      this.$emit('close')
+      this.$nextTick(() => {
+        this.$emit('close')
+      })
     }
   }
 }

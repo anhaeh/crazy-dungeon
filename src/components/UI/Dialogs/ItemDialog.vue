@@ -1,16 +1,15 @@
 <template>
   <bottom-dialog
       class="item-dialog"
-      v-if="show"
       @close="$emit('close')"
   >
     <img slot="image" :src="image" class="bottomDialog__itemImg">
-    <div slot="title">{{ current.item.name }}</div>
-    <div slot="legend">{{ current.item.legend }}</div>
-    <div slot="text">{{ current.item.description }}</div>
+    <div slot="title">{{ obj.item.name }}</div>
+    <div slot="legend">{{ obj.item.legend }}</div>
+    <div slot="text">{{ obj.item.description }}</div>
     <template slot="actions">
       <div class="bottomDialog__actionsBtn"
-           v-if="current.item.type === 'potion'"
+           v-if="obj.item.type === 'potion'"
            @click="consume"
       >
         Consume
@@ -29,37 +28,29 @@ import BottomDialog from './BottomDialog'
 
 export default {
   name: 'ItemDialog',
+  props: {
+    obj: {
+      required: true
+    }
+  },
   components: {
     BottomDialog
   },
   computed: {
-    current: function () {
-      return this.$store.getters.getDialog.entity
-    },
     image: function () {
-      return require('@/assets/items/' + this.current.item.image)
-    },
-    show: function () {
-      return this.$store.getters.getDialog.show &&
-          this.$store.getters.getDialog.entity &&
-          this.$store.getters.getDialog.entity.type === 'item'
-    },
+      return require('@/assets/items/' + this.obj.item.image)
+    }
   },
   methods: {
     discard: function () {
-      this.$store.commit('deleteItemInventory', this.current.index)
+      this.$store.commit('deleteItemInventory', this.obj.index)
       this.$emit('discard')
-      this.$store.commit('clickDialog')
-      this.$store.commit('pushLog', `Player discarded ${this.current.item.name}`)
+      this.$store.commit('pushLog', `Player discarded ${this.obj.item.name}`)
     },
     consume: function () {
-      this.$store.commit('restoreLife', { counter: this.current.item.counter, itemId: this.current.index })
+      this.$store.commit('restoreLife', { counter: this.obj.item.counter, itemId: this.obj.index })
       this.$emit('close')
-      this.$store.commit('clickDialog')
     }
-  },
-  beforeDestroy() {
-    this.$store.commit('setDialogShow', false)
   }
 }
 </script>

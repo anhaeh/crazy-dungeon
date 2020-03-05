@@ -1,10 +1,10 @@
 <template>
   <div class="dungeonUI__skillsMenuList" v-if="show">
     <div class="dungeonUI__skillsMenuTabs" :class="{'--right': !isItems}">
-      <div class="dungeonUI__skillsMenuTabOption" @click="isItems = true">
+      <div class="dungeonUI__skillsMenuTabOption" @click="changeTab(true)">
         <span>Items</span>
       </div>
-      <div class="dungeonUI__skillsMenuTabOption" @click="isItems = false">
+      <div class="dungeonUI__skillsMenuTabOption" @click="changeTab(false)">
         <span>Skills</span>
       </div>
     </div>
@@ -43,6 +43,16 @@ export default {
   data () {
     return {
       isItems: true
+    }
+  },
+  methods: {
+    changeTab: function (isItems) {
+      this.isItems = isItems
+      // scroll top
+      this.$nextTick(() => {
+        let scrollingElement = document.querySelector('.dungeonUI__skillsMenuBody')
+        scrollingElement.scrollTop = 0
+      })
     }
   },
   computed: {

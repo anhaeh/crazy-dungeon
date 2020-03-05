@@ -2,68 +2,28 @@
   <div class="dungeonUI__statsMenuList">
     <img src="../../../assets/ui/dungeonUI__statsBorder.png" alt="" width="100%" class="dungeonUI__statsBorder">
     <div class="dungeonUI__statsMenuBody">
-      <div class="span-title">Active Modifiers</div>
-      <div class="dungeonUI__statsActiveModifiers" v-show="false">
-        <div class="dungeonUI__statsActive --burn"></div>
-        <div class="dungeonUI__statsActive --burn"></div>
-        <div class="dungeonUI__statsActive --burn"></div>
-        <div class="dungeonUI__statsActive --burn"></div>
-        <div class="dungeonUI__statsActive --burn"></div>
+      <div class="dungeonUI__statsExp">
+        <div class="span-title">Experience</div>
+        <status-bar
+                :actual="$store.getters.getPlayer.defeatMonsters"
+                :total="$store.getters.getPlayer.nextLevelMonsters"
+                color="green"
+        ></status-bar>
       </div>
+      <div class="span-title">Active Modifiers</div>
       <div class="dungeonUI__statsBar">
         <div class="dungeonUI__statsLabel --att"></div>
         <div class="dungeonUI__statsBaseValue">{{ $store.getters.getPlayer.attack }}</div>
-        <div class="dungeonUI__statsBarBorder">
-          <div class="dungeonUI__statsBarGraph --att"></div>
-          <div class="dungeonUI__statsBarGraph --equip"></div>
-          <div class="dungeonUI__statsBarGraph --buff"></div>
-          <div class="dungeonUI__statsBarGraph --debuff"></div>
-        </div>
         <div class="dungeonUI__statsTotalValue">{{ $store.getters.getPlayerAttack }}</div>
       </div>
       <div class="dungeonUI__statsBar">
         <div class="dungeonUI__statsLabel --health"></div>
         <div class="dungeonUI__statsBaseValue">{{ $store.getters.getPlayerBaseLife }}</div>
-        <div class="dungeonUI__statsBarBorder">
-          <div class="dungeonUI__statsBarGraph --def"></div>
-          <div class="dungeonUI__statsBarGraph --equip"></div>
-          <div class="dungeonUI__statsBarGraph --buff"></div>
-          <div class="dungeonUI__statsBarGraph --debuff"></div>
-        </div>
         <div class="dungeonUI__statsTotalValue">{{ $store.getters.getPlayerBaseLife + $store.getters.getPlayerBuffLife }}</div>
       </div>
-      <div class="dungeonUI__statsExp">
-        <div class="span-title">Experience</div>
-        <status-bar
-            :actual="$store.getters.getPlayer.defeatMonsters"
-            :total="$store.getters.getPlayer.nextLevelMonsters"
-            color="green"
-        ></status-bar>
-      </div>
-      <div class="dungeonUI__statsExp">
-        <div class="span-title">Gold Multiplier: {{ goldMultiplier }}%</div>
-      </div>
-      <div class="dungeonUI__statsBar" v-show="false">
-        <div class="dungeonUI__statsLabel --mAtt"></div>
-        <div class="dungeonUI__statsBaseValue">12</div>
-        <div class="dungeonUI__statsBarBorder">
-          <div class="dungeonUI__statsBarGraph --mAtt"></div>
-          <div class="dungeonUI__statsBarGraph --equip"></div>
-          <div class="dungeonUI__statsBarGraph --buff"></div>
-          <div class="dungeonUI__statsBarGraph --debuff"></div>
-        </div>
-        <div class="dungeonUI__statsTotalValue">92</div>
-      </div>
-      <div class="dungeonUI__statsBar" v-show="false">
-        <div class="dungeonUI__statsLabel --mDef"></div>
-        <div class="dungeonUI__statsBaseValue">23</div>
-        <div class="dungeonUI__statsBarBorder">
-          <div class="dungeonUI__statsBarGraph --mDef"></div>
-          <div class="dungeonUI__statsBarGraph --equip"></div>
-          <div class="dungeonUI__statsBarGraph --buff"></div>
-          <div class="dungeonUI__statsBarGraph --debuff"></div>
-        </div>
-        <div class="dungeonUI__statsTotalValue">81</div>
+      <div class="dungeonUI__statsBar">
+        <div class="dungeonUI__statsBaseValue stat-title">Gold Multiplier</div>
+        <div class="dungeonUI__statsTotalValue stat-title --counter">{{ goldMultiplier }}%</div>
       </div>
     </div>
   </div>
@@ -115,7 +75,7 @@ $color-mDef: #911DBA
   overflow-y: scroll
 .dungeonUI__statsActiveModifiers
   border-bottom: 3px solid #3a3a3a
-  box-shadow: 0 4px 0px 0px #151515
+  box-shadow: 0 4px 0 0 #151515
   width: calc(100% - 50px)
   padding: 0 1rem
   margin: 0 auto
@@ -131,6 +91,12 @@ $color-mDef: #911DBA
   height: var(--tile-cell)
   width: calc(var(--tile-cell) * 6)
   margin: calc(var(--tile-cell) * .25) auto
+  justify-content: center
+.stat-title
+    font-size: 1rem !important
+    width: 35% !important
+    &.--counter
+      width: 15% !important
 .dungeonUI__statsLabel, .dungeonUI__statsBaseValue, .dungeonUI__statsTotalValue
   height: var(--tile-cell)
   width: var(--tile-cell)
@@ -156,58 +122,6 @@ $color-mDef: #911DBA
 .dungeonUI__statsTotalValue
   color: white
   background-image: url("../../../assets/ui/dungeonUI__statsTotalValue.png")
-.dungeonUI__statsBarBorder
-  height: var(--tile-cell)
-  width: calc(var(--tile-cell) * 3)
-  background-image: url("../../../assets/ui/dungeonUI__statsBarBorder.png")
-  background-size: 100% 100%
-  display: flex
-  align-items: center
-  padding: calc(4 * var(--pixel-unit)) calc(3 * var(--pixel-unit))
-  box-sizing: border-box
-.dungeonUI__statsBarGraph
-  width: 0
-  height: 100%
-  &.--att
-    background-color: $color-att
-    width: 30px // Stats max value 120pt
-    ~ .--equip
-      background-color: darken($color-att, 20%)
-      width: 30px // Stats max value 120pt
-    ~ .--buff
-      background-color: lighten($color-att, 20%)
-      width: 15px // Stats max value 120pt
-  &.--def
-    background-color: $color-def
-    width: 20px // Stats max value 120pt
-    ~ .--equip
-      background-color: darken($color-def, 20%)
-      width: 10px // Stats max value 120pt
-    ~ .--buff
-      background-color: lighten($color-def, 20%)
-      width: 5px // Stats max value 120pt
-  &.--mAtt
-    background-color: $color-mAtt
-    width: 50px // Stats max value 120pt
-    ~ .--equip
-      background-color: darken($color-mAtt, 20%)
-      width: 40px // Stats max value 120pt
-    ~ .--buff
-      background-color: lighten($color-mAtt, 20%)
-      width: 25px // Stats max value 120pt
-  &.--mDef
-    background-color: $color-mDef
-    width: 40px // Stats max value 120pt
-    ~ .--equip
-      background-color: darken($color-mDef, 20%)
-      width: 30px // Stats max value 120pt
-    ~ .--buff
-      background-color: lighten($color-mDef, 20%)
-      width: 22px // Stats max value 120pt
-  &.--att, &.--def, &.--mAtt, &.--mDef
-    ~ .--debuff
-      background-color: #333
-      width: 15px // Stats max value 120pt
 .span-title
   color: white
   margin: calc(var(--tile-cell) * .25)

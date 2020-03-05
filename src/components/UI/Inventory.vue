@@ -9,6 +9,8 @@
       <img v-if="item !== undefined" :src="image(item)" @click="click(item, index)">
     </div>
     <item-dialog
+        v-if="selected"
+        :obj="selected"
         @discard="selected = null"
         @close="close"
     ></item-dialog>
@@ -57,14 +59,11 @@ export default {
     click: function (item, index) {
       if (this.selected === index) {
         this.selected = null
-        this.$store.commit('setDialogShow', false)
       } else {
-        this.selected = index
-        this.$store.commit('setDialog', {
-          type: 'item',
+        this.selected = {
           item: item,
           index: index
-        })
+        }
       }
     },
     image: function (item) {

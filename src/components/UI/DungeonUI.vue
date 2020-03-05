@@ -133,7 +133,6 @@ export default {
       this.showSkills = false
       this.showStats = false
       this.$store.commit('setShowInventory', false)
-      this.$store.commit('setDialogShow', false)
     },
     openMenu: function () {
       let result = !this.showMenu

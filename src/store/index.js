@@ -20,10 +20,6 @@ const store = new Vuex.Store({
       items: [],
       maxSize: 6
     },
-    dialog: {
-      entity: null,
-      show: false
-    },
     questLog: [],
     enableFog: true
   },
@@ -118,9 +114,6 @@ const store = new Vuex.Store({
     getQuestLog: state => {
       return state.questLog
     },
-    getDialog: state => {
-      return state.dialog
-    },
     getScore: state => {
       return state.player.score
     }
@@ -205,13 +198,6 @@ const store = new Vuex.Store({
     pushLog(state, msg) {
       state.questLog.push(msg)
     },
-    setDialog(state, entity) {
-      state.dialog.entity = entity
-      state.dialog.show = true
-    },
-    setDialogShow(state, show) {
-      state.dialog.show = show
-    },
     setScore(state, score) {
       state.player.score += score
     },
@@ -220,9 +206,6 @@ const store = new Vuex.Store({
     },
     setGold(state, gold) {
       state.player.gold += gold
-    },
-    clickDialog(state) {
-      state.dialog.show = !state.dialog.show
     },
     setDialogMerchant(state, show) {
       let merchant = state.entities.npcs.find(x => x.type === 'merchant')
