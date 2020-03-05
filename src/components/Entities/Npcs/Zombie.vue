@@ -3,7 +3,7 @@
     <img :src="image" alt="" @click="click">
     <bottom-dialog
             v-if="show"
-            @close="destroy"
+            @close="destroyNpc"
     >
       <div slot="legend">Receive {{ entity.action ? ' a Gift' : 'an Advice' }}</div>
       <div slot="title">Wandering zombie</div>
@@ -80,7 +80,7 @@ export default {
       this.$store.commit('setEnableFog', false)
       this.$store.commit('pushLog', 'All the fog on the map is dissipated')
     },
-    destroy: function () {
+    destroyNpc: function () {
       this.show = false
       event.stopPropagation()
       this.$store.commit('pushLog', 'The zombie has suddenly escaped.')
@@ -98,7 +98,7 @@ export default {
   },
   beforeDestroy() {
     if (this.show) {
-      this.destroy()
+      this.destroyNpc()
     }
   }
 }
