@@ -3,7 +3,7 @@
     <img :src="image" alt="" @click="click">
     <bottom-dialog
             v-if="show"
-            @close="destroy"
+            @close="destroyNpc"
     >
       <div slot="legend">Restore skills</div>
       <div slot="title">Monk</div>
@@ -60,12 +60,12 @@ export default {
         this.$store.commit('setPlayerSkills', skills)
       })
       this.$store.commit('pushLog', 'Your skills have been restored.')
-      this.destroy()
+      this.destroyNpc()
     },
     close: function () {
       this.show = false
     },
-    destroy: function () {
+    destroyNpc: function () {
       event.stopPropagation()
       this.$store.commit('pushLog', 'The monk has suddenly escaped.')
       this.$store.commit('setPreview', null)
