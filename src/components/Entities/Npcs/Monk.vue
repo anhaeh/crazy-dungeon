@@ -69,5 +69,5 @@ export default AbstractNpc.extend({
 </script>
 
 <style scoped lang="sass">
-  @import "abstractNpc"
+  @import "AbstractNpc"
 </style>
