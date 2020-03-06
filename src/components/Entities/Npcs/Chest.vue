@@ -28,17 +28,11 @@
 </template>
 
 <script>
-import bottomDialog from '@/components/UI/Dialogs/BottomDialog'
+import AbstractNpc from './AbstractNpc'
 import gameData from '@/gamedata/Npcs.json'
 
-export default {
+export default AbstractNpc.extend({
   name: "chest",
-  props: {
-    cellId: { required: true }
-  },
-  components: {
-    bottomDialog
-  },
   data () {
     return {
       show: false,
@@ -53,7 +47,7 @@ export default {
     },
     callDestroy: function () {
       this.$store.commit('pushLog', `You hit the ${this.$options.name} and explode into pieces along with its contents.`)
-      this.destroy()
+      this.destroyChest()
     },
     open: function () {
       let treasures = ['earnItem', 'earnScore', 'earnExperience']
@@ -61,7 +55,7 @@ export default {
       let indexKey = this.$store.getters.getInventory.items.findIndex(x => x.type === 'key')
       this.$store.commit('deleteItemInventory', indexKey)
       this[treasure]()
-      this.destroy()
+      this.destroyChest()
     },
     earnItem: function () {
       let treasureName = this.entity.earnItem[Math.floor(Math.random() * this.entity.earnItem.length)]
@@ -85,26 +79,20 @@ export default {
         this.$store.commit('levelUp')
       }
     },
-    destroy: function () {
+    destroyChest: function () {
       event.stopPropagation()
       this.$store.commit('setPreview', null)
       this.$store.commit('destroyNpc', this.cellId)
     }
   },
   computed: {
-    image: function () {
-      return require(`@/assets/npcs/${this.$options.name}.png`)
-    },
-    playerInRange: function () {
-      return this.$store.getters.getPlayerRange.indexOf(this.cellId) !== -1
-    },
     hasKey: function () {
       return this.$store.getters.getInventory.items.find(x => x.type === 'key')
     }
   }
-}
+})
 </script>
 
 <style scoped lang="sass">
-  @import "./npc"
+  @import "abstractNpc"
 </style>

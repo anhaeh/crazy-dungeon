@@ -33,7 +33,7 @@ export default {
     isLive: {
       handler () {
         this.timeout = setTimeout(() => {
-          this.destroy()
+          this.destroyMonster()
         }, 1000)
       }
     }
@@ -59,12 +59,12 @@ export default {
         }
       } else if (!this.isLive) {
         clearTimeout(this.timeout)
-        this.destroy()
+        this.destroyMonster()
       } else {
         this.$store.commit('setMonsterSelected', null)
       }
     },
-    destroy: function () {
+    destroyMonster: function () {
       this.getMonster.isLive = false
     }
   },

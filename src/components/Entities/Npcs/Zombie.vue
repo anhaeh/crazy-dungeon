@@ -14,16 +14,10 @@
 </template>
 
 <script>
-import bottomDialog from '@/components/UI/Dialogs/BottomDialog'
+import AbstractNpc from './AbstractNpc'
 
-export default {
+export default AbstractNpc.extend({
   name: "zombie",
-  props: {
-    cellId: { required: true }
-  },
-  components: {
-    bottomDialog
-  },
   data () {
     return {
       show: false,
@@ -79,21 +73,6 @@ export default {
     deleteFog: function () {
       this.$store.commit('setEnableFog', false)
       this.$store.commit('pushLog', 'All the fog on the map is dissipated')
-    },
-    destroyNpc: function () {
-      this.show = false
-      event.stopPropagation()
-      this.$store.commit('pushLog', `The ${this.$options.name} has suddenly escaped.`)
-      this.$store.commit('setPreview', null)
-      this.$store.commit('destroyNpc', this.cellId)
-    }
-  },
-  computed: {
-    image: function () {
-      return require(`@/assets/npcs/${this.$options.name}.png`)
-    },
-    playerInRange: function () {
-      return this.$store.getters.getPlayerRange.indexOf(this.cellId) !== -1
     }
   },
   beforeDestroy() {
@@ -101,9 +80,9 @@ export default {
       this.destroyNpc()
     }
   }
-}
+})
 </script>
 
 <style scoped lang="sass">
-@import "./npc"
+@import "abstractNpc"
 </style>

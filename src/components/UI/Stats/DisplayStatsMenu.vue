@@ -22,12 +22,12 @@
         <div class="dungeonUI__statsTotalValue">{{ $store.getters.getPlayerBaseLife + $store.getters.getPlayerBuffLife }}</div>
       </div>
       <div class="dungeonUI__statsBar">
-        <div class="dungeonUI__statsBaseValue stat-title">Gold Multiplier</div>
-        <div class="dungeonUI__statsTotalValue stat-title --counter">{{ goldMultiplier }}%</div>
-      </div>
-      <div class="dungeonUI__statsBar">
         <div class="dungeonUI__statsBaseValue stat-title">Critical chance</div>
         <div class="dungeonUI__statsTotalValue stat-title --counter">{{ criticalChance }}%</div>
+      </div>
+      <div class="dungeonUI__statsBar">
+        <div class="dungeonUI__statsBaseValue stat-title">Gold Multiplier</div>
+        <div class="dungeonUI__statsTotalValue stat-title --counter">{{ goldMultiplier }}%</div>
       </div>
     </div>
   </div>
@@ -46,7 +46,7 @@ export default {
       return Math.round(this.$store.getters.getPlayerGoldMultiplier * 100)
     },
     criticalChance: function () {
-      return this.$store.getters.getPlayerCritical
+      return this.$store.getters.getPlayerCritical * 100
     }
 
   }

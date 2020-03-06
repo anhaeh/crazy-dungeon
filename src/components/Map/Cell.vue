@@ -13,7 +13,7 @@
       >
       </Monster>
       <Player v-if="hasPlayer"></Player>
-      <component v-if="hasNpc" :is="hasNpc.type" :cell-id="id"></component>
+      <npc v-if="hasNpc" :npc="hasNpc" :cell-id="id"></npc>
       <Item
         v-if="!hasMonster && hasItem"
         :name="hasItem"
@@ -30,12 +30,8 @@
 import Terrains from '@/gamedata/Terrains.json'
 import Monster from "../Entities/Monster"
 import Player from "../Entities/Player"
-import merchant from "../Entities/Npcs/Merchant"
-import zombie from "../Entities/Npcs/Zombie"
-import chest from "../Entities/Npcs/Chest"
-import monk from "../Entities/Npcs/Monk"
-import viking from "../Entities/Npcs/Viking"
 import Item from "../Entities/Item"
+import Npc from "../Entities/Npc"
 
 export default {
   props: {
@@ -43,14 +39,10 @@ export default {
     type: { required: true }
   },
   components: {
+    Npc,
     Monster,
     Player,
-    Item,
-    merchant,
-    zombie,
-    chest,
-    monk,
-    viking
+    Item
   },
   name: "Cell",
   data () {
