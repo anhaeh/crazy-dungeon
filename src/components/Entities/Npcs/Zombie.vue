@@ -1,5 +1,5 @@
 <template>
-  <div class="npc zombie">
+  <div class="npc" :class="$options.name">
     <img :src="image" alt="" @click="click">
     <bottom-dialog
             v-if="show"
@@ -17,7 +17,7 @@
 import bottomDialog from '@/components/UI/Dialogs/BottomDialog'
 
 export default {
-  name: "Zombie",
+  name: "zombie",
   props: {
     cellId: { required: true }
   },
@@ -35,7 +35,7 @@ export default {
       if (this.playerInRange && !this.show) {
         this.$store.commit('setMonsterSelected', null)
         let data = require("@/gamedata/Npcs.json")
-        let zombieData = data['zombie'].types
+        let zombieData = data[this.$options.name].types
         this.entity = zombieData[Math.floor(Math.random() * zombieData.length)]
         this.show = true
         switch (this.entity.action) {
@@ -83,14 +83,14 @@ export default {
     destroyNpc: function () {
       this.show = false
       event.stopPropagation()
-      this.$store.commit('pushLog', 'The zombie has suddenly escaped.')
+      this.$store.commit('pushLog', `The ${this.$options.name} has suddenly escaped.`)
       this.$store.commit('setPreview', null)
       this.$store.commit('destroyNpc', this.cellId)
     }
   },
   computed: {
     image: function () {
-      return require('@/assets/npcs/zombie.png')
+      return require(`@/assets/npcs/${this.$options.name}.png`)
     },
     playerInRange: function () {
       return this.$store.getters.getPlayerRange.indexOf(this.cellId) !== -1

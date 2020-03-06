@@ -4,8 +4,7 @@
     "initialHealth": 50,
     "attack": 9,
     "defense": 7,
-    "magicAttack": 15,
-    "magicDefense": 12,
+    "critical": 0.05,
     "image": "necromancer.png",
     "skills": [
       "bones_breaker",
@@ -16,6 +15,7 @@
     "name": "Paladin",
     "initialHealth": 55,
     "attack": 10,
+    "critical": 0.03,
     "image": "paladin.jpg",
     "skills": [
       "fury_attack",
@@ -26,6 +26,7 @@
     "name": "Wizard",
     "initialHealth": 50,
     "attack": 8,
+    "critical": 0.07,
     "image": "wizard.jpg",
     "skills": [
       "explosion",

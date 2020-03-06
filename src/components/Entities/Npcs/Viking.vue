@@ -5,11 +5,12 @@
             v-if="show"
             @close="destroyNpc"
     >
-      <div slot="legend">Restore skills</div>
+      <div slot="legend">+3% critical chance</div>
       <div slot="title" class="title">{{ $options.name }}</div>
-      <div slot="text">Hello traveler. I am touring these ancient dungeons in search of adventure. I could restore your skills for only {{ goldCost }} gold coins. Are you interested?</div>
+      <div slot="text">
+        Hello adventurer. I have some battle techniques that could help you increase your critical chance. For only {{ goldCost }} gold coins. What do you say?</div>
       <span slot="close-text">
-        Bye
+        No thanks
       </span>
       <template slot="actions">
         <div class="bottomDialog__actionsBtn"
@@ -19,9 +20,9 @@
         </div>
         <div class="bottomDialog__actionsBtn"
              v-if="hasGold"
-             @click="restore"
+             @click="pay"
         >
-          Yes
+          Teach me
         </div>
       </template>
     </bottom-dialog>
@@ -33,7 +34,7 @@ import bottomDialog from '@/components/UI/Dialogs/BottomDialog'
 import gameData from '@/gamedata/Npcs.json'
 
 export default {
-  name: "monk",
+  name: "viking",
   props: {
     cellId: { required: true }
   },
@@ -52,14 +53,10 @@ export default {
         this.show = true
       }
     },
-    restore: function() {
+    pay: function() {
       this.$store.commit('setGold', this.goldCost * -1)
-      let skills = this.$store.getters.getPlayerSkills
-      this.$store.commit('setPlayerSkills', [])
-      this.$nextTick(() => {
-        this.$store.commit('setPlayerSkills', skills)
-      })
-      this.$store.commit('pushLog', 'Your skills have been restored.')
+      this.$store.commit('setPlayerCritical', 0.03)
+      this.$store.commit('pushLog', 'Your critical chance has increased.')
       this.destroyNpc()
     },
     close: function () {

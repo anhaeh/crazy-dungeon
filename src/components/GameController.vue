@@ -233,6 +233,9 @@ export default {
       if (dungeonLevel % 3 === 0) {
         npcs.push('monk')
       }
+      if (dungeonLevel % 5 === 0) {
+        npcs.push('viking')
+      }
       npcs.forEach(npc => {
         let positionNpc = this.random(free)
         free.splice(free.indexOf(positionNpc), 1)

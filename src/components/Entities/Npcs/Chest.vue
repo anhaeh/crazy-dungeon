@@ -1,12 +1,12 @@
 <template>
-  <div class="npc chest">
+  <div class="npc" :class="$options.name">
     <img :src="image" alt="" @click="click">
     <bottom-dialog
             v-if="show"
             @close="show = false"
     >
       <slot name="legend"></slot>
-      <div slot="title">Chest</div>
+      <div slot="title" class="title">{{ $options.name }}</div>
       <div slot="text">
         <span v-if="hasKey">{{ entity.dialogWithKey }}</span>
         <span v-else>{{ entity.dialog }}</span>
@@ -32,7 +32,7 @@ import bottomDialog from '@/components/UI/Dialogs/BottomDialog'
 import gameData from '@/gamedata/Npcs.json'
 
 export default {
-  name: "Chest",
+  name: "chest",
   props: {
     cellId: { required: true }
   },
@@ -42,7 +42,7 @@ export default {
   data () {
     return {
       show: false,
-      entity: gameData['chest']
+      entity: gameData[this.$options.name]
     }
   },
   methods: {
@@ -52,7 +52,7 @@ export default {
       }
     },
     callDestroy: function () {
-      this.$store.commit('pushLog', 'You hit the chest and explode into pieces along with its contents.')
+      this.$store.commit('pushLog', `You hit the ${this.$options.name} and explode into pieces along with its contents.`)
       this.destroy()
     },
     open: function () {
@@ -93,7 +93,7 @@ export default {
   },
   computed: {
     image: function () {
-      return require('@/assets/npcs/chest.png')
+      return require(`@/assets/npcs/${this.$options.name}.png`)
     },
     playerInRange: function () {
       return this.$store.getters.getPlayerRange.indexOf(this.cellId) !== -1

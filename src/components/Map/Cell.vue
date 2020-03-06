@@ -34,6 +34,7 @@ import merchant from "../Entities/Npcs/Merchant"
 import zombie from "../Entities/Npcs/Zombie"
 import chest from "../Entities/Npcs/Chest"
 import monk from "../Entities/Npcs/Monk"
+import viking from "../Entities/Npcs/Viking"
 import Item from "../Entities/Item"
 
 export default {
@@ -48,7 +49,8 @@ export default {
     merchant,
     zombie,
     chest,
-    monk
+    monk,
+    viking
   },
   name: "Cell",
   data () {

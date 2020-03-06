@@ -116,6 +116,9 @@ const store = new Vuex.Store({
     },
     getScore: state => {
       return state.player.score
+    },
+    getPlayerCritical: state => {
+      return state.player.critical
     }
   },
   mutations: {
@@ -149,6 +152,9 @@ const store = new Vuex.Store({
     },
     setPlayerExperience(state, score) {
       state.player.defeatMonsters += score
+    },
+    setPlayerCritical(state, critical) {
+      state.player.critical += critical
     },
     setPlayerVision(state, cells) {
       state.player.vision = cells
@@ -231,6 +237,7 @@ const store = new Vuex.Store({
         position: null,
         gold: 0,
         damage: 0,
+        critical: 0,
         attack: 0,
         range: [],
         viewport: [],
@@ -320,9 +327,15 @@ const store = new Vuex.Store({
     },
     attack({state, commit, getters}, payload = { damageSkill: 1 }) {
       let playerDamage = Math.ceil(getters.getPlayerAttack * payload.damageSkill)
+      // critical
+      let critical = false
+      if (Math.random() <= state.player.critical) {
+        playerDamage *= 2
+        critical = true
+      }
       let monsterDefender = state.entities.monsters.find(x => x.cellId === state.monsterSelected.cellId)
       monsterDefender.damage += playerDamage
-      state.questLog.push(`Player deals ${playerDamage} damage to ${state.monsterSelected.monster.name}`)
+      state.questLog.push(`Player deal ${playerDamage} damage ${critical? 'CRITICAL ' : ''}to ${state.monsterSelected.monster.name}`)
       if (monsterDefender.damage >= state.monsterSelected.totalLife) {
         /* if kill monster*/
         event.stopPropagation()

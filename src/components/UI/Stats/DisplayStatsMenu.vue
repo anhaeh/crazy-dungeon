@@ -25,6 +25,10 @@
         <div class="dungeonUI__statsBaseValue stat-title">Gold Multiplier</div>
         <div class="dungeonUI__statsTotalValue stat-title --counter">{{ goldMultiplier }}%</div>
       </div>
+      <div class="dungeonUI__statsBar">
+        <div class="dungeonUI__statsBaseValue stat-title">Critical chance</div>
+        <div class="dungeonUI__statsTotalValue stat-title --counter">{{ criticalChance }}%</div>
+      </div>
     </div>
   </div>
 </template>
@@ -40,7 +44,11 @@ export default {
   computed: {
     goldMultiplier: function () {
       return Math.round(this.$store.getters.getPlayerGoldMultiplier * 100)
+    },
+    criticalChance: function () {
+      return this.$store.getters.getPlayerCritical
     }
+
   }
 };
 </script>

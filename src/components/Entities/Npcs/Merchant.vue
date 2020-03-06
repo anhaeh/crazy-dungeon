@@ -1,12 +1,12 @@
 <template>
-  <div class="npc merchant">
+  <div class="npc" :class="$options.name">
     <img :src="image" alt="" @click="click">
   </div>
 </template>
 
 <script>
 export default {
-  name: "Merchant",
+  name: "merchant",
   props: {
     cellId: { required: true }
   },
@@ -20,7 +20,7 @@ export default {
   },
   computed: {
     image: function () {
-      return require('@/assets/npcs/merchant.png')
+      return require(`@/assets/npcs/${this.$options.name}.png`)
     },
     playerInRange: function () {
       return this.$store.getters.getPlayerRange.indexOf(this.cellId) !== -1
