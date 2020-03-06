@@ -11,6 +11,7 @@ export default Vue.extend({
   methods: {
     destroyNpc: function () {
       event.stopPropagation()
+      this.show = false
       this.$store.commit('pushLog', `The ${this.$options.name} has suddenly escaped.`)
       this.$store.commit('setPreview', null)
       this.$store.commit('destroyNpc', this.cellId)
