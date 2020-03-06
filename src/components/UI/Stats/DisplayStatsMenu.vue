@@ -46,7 +46,7 @@ export default {
       return Math.round(this.$store.getters.getPlayerGoldMultiplier * 100)
     },
     criticalChance: function () {
-      return this.$store.getters.getPlayerCritical * 100
+      return Math.trunc(this.$store.getters.getPlayerCritical * 100)
     }
 
   }
