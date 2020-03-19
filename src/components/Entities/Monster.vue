@@ -3,10 +3,11 @@
        @click="click"
        :class="[{ 'can-target': canTarget }, { 'is-target': isTarget && isLive}]"
   >
-    <img :src="image" alt="">
+    <img :src="image">
     <div v-if="isLive">
       <div class="level">{{ getMonster.level }}</div>
-      <template v-if="getMonster.damage">
+      <template v-if="damage">
+        <span class="damage" v-if="counterDamage">-{{ counterDamage }}</span>
         <div class="life" :style="life"></div>
         <div class="life-background"></div>
       </template>
@@ -36,12 +37,25 @@ export default {
           this.destroyMonster()
         }, 1000)
       }
+    },
+    damage: function(newVal, oldVal) {
+      this.counterDamage = 0
+      clearTimeout(this.timeoutDamage)
+      this.$nextTick(()=> {
+        this.counterDamage = Math.abs(oldVal - newVal)
+        this.timeoutDamage = setTimeout(() => {
+          this.counterDamage = 0
+          clearTimeout(this.timeoutDamage)
+        }, 500)
+      })
     }
   },
   data () {
     return {
       monster: null,
-      timeout: null
+      timeout: null,
+      timeoutDamage: null,
+      counterDamage: 0
     }
   },
   methods: {
@@ -98,6 +112,9 @@ export default {
     },
     isLive: function () {
       return this.totalLife > this.getMonster.damage
+    },
+    damage: function () {
+      return this.getMonster.damage
     }
   }
 }
@@ -150,4 +167,12 @@ export default {
       filter: drop-shadow(0px 0px 3px red)
       -webkit-transition: .2s ease-in-out
       transition: .2s ease-in-out
+  .damage
+    color: red
+    position: absolute
+    z-index: 5
+    top: -2px
+    text-shadow: 0 2px 0 black
+    -webkit-animation: counterAnimation 0.5s ease-out
+    animation: counterAnimation 0.5s ease-out
 </style>

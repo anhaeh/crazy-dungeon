@@ -64,3 +64,10 @@ body
   \:root
     --tile-cell: 50px
 </style>
+
+<style>
+  @keyframes counterAnimation {
+    from { transform: translateY(30px); }
+    to { transform: translateY(0); }
+  }
+</style>
