@@ -88,9 +88,8 @@ import MerchantItems from './MerchantItems/MerchantList'
 import DisplayStatsMenu from './Stats/DisplayStatsMenu'
 import ExitConfirmation from './Dialogs/ExitConfirmation'
 
-
 export default {
-  name: "DungeonUI",
+  name: "MobileUI",
   components: {
     Inventory,
     QuestLog,
@@ -335,8 +334,8 @@ export default {
     color: white
     margin-top: -6px
     font-size: 17px
-    text-shadow: 0 2px 0px black
-@media screen and (min-width: 800px)
+    text-shadow: 0 2px 0 black
+@media screen and (min-width: 900px)
   .dungeonUI
     right: 0
     flex-direction: column

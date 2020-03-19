@@ -1,5 +1,5 @@
 <template>
-  <div :class="['cell', {'can-move': canMove }, {'has-fog': hasFog }]"
+  <div :class="['cell', {'can-move': canMove && !isMobile }, {'has-fog': hasFog }]"
        :id="'cell-' + id"
        @click="click">
     <img :src="image()">
@@ -38,6 +38,7 @@ export default {
     id: { required: true, type: String },
     type: { required: true }
   },
+  inject: ['isMobile'],
   components: {
     Npc,
     Monster,
@@ -165,4 +166,6 @@ export default {
       height: 100%
   .has-fog
     filter: opacity(0)
+  .can-move
+    cursor: pointer
 </style>

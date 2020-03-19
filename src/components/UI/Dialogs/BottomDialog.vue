@@ -116,5 +116,19 @@ export default {
   font-size: 22px
 .bottomDialog__itemAttr
   color: green
+@media screen and (min-width: 900px)
+  .bottomDialog
+    width: 500px !important
+    height: 160px
+    left: calc(50% - 250px)
+    top: calc(50% - 80px)
+    position: fixed !important
+  .bottomDialog__message
+    height: 122px
+  .bottomDialog__messageContent
+    padding: 10px 20px
+    z-index: 10
+  .bottomDialog__actionsBtn
+    cursor: pointer
 </style>
 

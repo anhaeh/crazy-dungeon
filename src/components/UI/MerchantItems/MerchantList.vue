@@ -116,4 +116,10 @@ export default {
   flex: 1
   &:last-child
     opacity: 0.35
+@media screen and (min-width: 900px)
+  .dungeonUI__skillsMenuList
+    width: 500px
+    height: calc(50% - 130px)
+    right: calc(50% - 250px)
+    top: 50px
 </style>

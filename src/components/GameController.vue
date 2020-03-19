@@ -116,6 +116,9 @@ export default {
       }
       if (event.code === 'Space' && this.$store.getters.getMonsterSelected) {
         this.$store.dispatch('attack')
+      } else if (event.code.substring(0,5) === 'Digit') {
+        // number for skills
+        document.querySelector('#skill-' + event.code.charAt(5)).click()
       } else {
         const key = event.key.toLowerCase()
         // we are only interested in alphanumeric keys
@@ -285,7 +288,7 @@ export default {
     }
   },
   created() {
-    if (!this.isMobile() || process.env.NODE_ENV === 'development') {
+    if (!this.isMobile || process.env.NODE_ENV === 'development') {
       document.addEventListener('keydown', this.keysListener)
     }
     this.$store.dispatch('initGame')

@@ -85,10 +85,19 @@ export default {
 .message
   display: flex
 
-@media screen and (min-width: 800px)
+@media screen and (min-width: 900px)
   .questLog
-    height: 340px
+    position: absolute
+    left: 0
+    bottom: 0
+    top: auto
+    margin: 0
+    height: 110px
+    width: 400px
     background-size: 100% 100%
+  .questLog__message
+    height: calc(2.2 * var(--tile-cell))
+    padding: calc(0.7 * var(--pixel-unit)) 0
   .feed
     height: 100%
     padding: 5px 15px

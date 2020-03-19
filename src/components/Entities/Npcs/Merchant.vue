@@ -1,6 +1,6 @@
 <template>
-  <div class="npc" :class="$options.name">
-    <img :src="image" alt="" @click="click">
+  <div class="npc" :class="[$options.name, {'in-range': playerInRange}]">
+    <img :src="image" @click="click">
   </div>
 </template>
 

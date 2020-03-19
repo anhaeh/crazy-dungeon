@@ -9,6 +9,10 @@
     <div class="score">
       Score: {{ getScore }}
     </div>
+    <div class="current-gold" v-if="!isMobile">
+      <img :src="goldIcon" alt="">
+      {{ $store.getters.getPlayer.gold }}
+    </div>
     <div class="name">
       {{ getPlayer.name }}
     </div>
@@ -22,6 +26,7 @@ export default {
   components: {
     statusBar
   },
+  inject: ['isMobile'],
   watch: {
     actualHealth: {
       handler() {
@@ -47,11 +52,16 @@ export default {
     },
     totalLife: function () {
       return this.$store.getters.getPlayerBaseLife + this.$store.getters.getPlayerBuffLife
+    },
+    goldIcon: function () {
+      return require('@/assets/ui/gold__icon.png')
     }
   },
   methods: {
     showInventory: function () {
-      this.$store.commit('clickInventory')
+      if (this.isMobile) {
+        this.$store.commit('clickInventory')
+      }
     }
   }
 }
@@ -87,6 +97,15 @@ export default {
   left: 45%
   font-size: 0.85rem
   padding-top: calc(0.25 * var(--tile-cell))
+.current-gold
+  position: absolute
+  left: 45%
+  font-size: 0.85rem
+  top: 15px
+  display: flex
+  align-items: center
+  img
+    padding-right: 5px
 .name
   position: absolute
   top: calc(1.5 * var(--tile-cell))
@@ -94,4 +113,10 @@ export default {
   font-size: 20px
   font-weight: bold
   text-shadow: 1px 2px 0 black
+@media (min-width: 900px)
+  .playerStats
+    left: 25px
+    top: 12px
+    position: fixed
+    transform: scale(1.3)
 </style>

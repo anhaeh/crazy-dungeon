@@ -72,4 +72,12 @@ export default {
   text-shadow: 1px 2px 0 black
   text-align: center
   z-index: 3
+@media (min-width: 900px)
+  .legend
+    top: 5px
+    left: calc(1.2 * var(--pixel-unit))
+    color: white
+  .statusBar.--monster .legend
+    text-align: right
+    right: calc(1.2 * var(--pixel-unit))
 </style>

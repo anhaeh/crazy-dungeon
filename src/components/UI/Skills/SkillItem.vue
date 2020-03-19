@@ -130,4 +130,9 @@ export default {
   left: 0
   filter: opacity(0.5)
   z-index: 1
+@media screen and (min-width: 900px)
+  .dungeonUI__skillSlot
+    padding: 6px
+  img
+    cursor: pointer
 </style>

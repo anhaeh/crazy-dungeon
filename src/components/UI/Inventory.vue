@@ -1,10 +1,10 @@
 <template>
-  <div v-if="show" class="inventory">
+  <div v-if="show" class="inventory" :class="{ '--isMobile': isMobile }">
     <div v-for="(item, index) in getItems"
          :key="'item' + index"
          :id="'item' + index"
          class="inventory__slot"
-         :class="{'--selected': index === selected}"
+         :class="{ '--selected': selected && index === selected.index }"
     >
       <img v-if="item !== undefined" :src="image(item)" @click="click(item, index)">
     </div>
@@ -25,6 +25,7 @@ export default {
   components: {
     ItemDialog
   },
+  inject: ["isMobile"],
   watch: {
     show: {
       handler(newVal) {
@@ -87,12 +88,13 @@ export default {
   height: calc(4px * var(--tile-cell))
   width: 100%
   image-rendering: pixelated
-  background-image: url("../../assets/ui/dungeonUI__background.png")
   background-size: 100% 100%
   background-position: bottom left
   top: 0
   padding: calc(2 * var(--tile-cell)) calc(.5 * var(--tile-cell)) calc(.5 * var(--tile-cell))
   box-sizing: border-box
+  &.--isMobile
+    background-image: url("../../assets/ui/dungeonUI__background.png")
 .inventory__slot
   height: var(--tile-cell)
   width: var(--tile-cell)
@@ -105,13 +107,17 @@ export default {
     width: 100%
     height: 100%
     object-fit: contain
-  // .item-preview
-  //   width: calc(1.5 * var(--tile-cell))
-  //   height: calc(1.5 * var(--tile-cell))
-  //   background: url("../../assets/ui/portraitFrame.png")
-  //   padding: calc(2.5 * var(--pixel-unit))
-  //   image-rendering: pixelated
-  //   background-size: contain
-  //   box-sizing: border-box
-
+@media screen and (min-width: 900px)
+  .inventory
+    position: absolute
+    left: 410px
+    bottom: 0
+    top: auto
+    padding: 0
+    width: auto
+    z-index: 10
+    .inventory__slot.--selected
+      box-shadow: inset 0 0 0 2px #c89c01
+    img
+      cursor: pointer
 </style>

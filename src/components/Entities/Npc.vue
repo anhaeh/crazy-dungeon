@@ -22,6 +22,7 @@ export default {
 }
 </script>
 
-<style scoped>
-
+<style lang="sass">
+.npc.in-range
+  cursor: cell
 </style>

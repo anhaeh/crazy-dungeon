@@ -1,11 +1,13 @@
 <template>
-  <div class="dungeonUI__skills">
-    <skill-item
-        v-for="(skill, index) in skills"
-        :skill-name="skill"
-        :skill-id="index + 1"
-        :key="'skill' + index"
-    ></skill-item>
+  <div>
+    <div class="dungeonUI__skills">
+      <skill-item
+              v-for="(skill, index) in skills"
+              :skill-name="skill"
+              :skill-id="index + 1"
+              :key="'skill' + index"
+      ></skill-item>
+    </div>
   </div>
 </template>
 
@@ -14,6 +16,7 @@ import SkillItem from './SkillItem'
 
 export default {
   name: "SkillList",
+  inject: ['isMobile'],
   components: {
     SkillItem
   },
@@ -33,7 +36,7 @@ export default {
 </script>
 
 <style scoped lang="sass">
-.dungeonUI__skills
+.dungeonUI__contentBottom .dungeonUI__skills
   height: calc(2.5 * var(--tile-cell))
   width: calc(4 * var(--tile-cell))
   display: flex
@@ -42,5 +45,10 @@ export default {
   box-sizing: border-box
   align-items: space-between
   justify-content: space-between
-
+@media screen and (min-width: 900px)
+  .dungeon .dungeonUI__skills
+    display: flex
+    left: 410px
+    position: absolute
+    bottom: 60px
 </style>

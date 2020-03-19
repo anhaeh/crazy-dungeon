@@ -60,12 +60,13 @@ export default {
     color: white
     width: 100%
     height: 100%
-    z-index: 10
+    z-index: 1000
     display: flex
     flex-direction: column
     align-items: center
     justify-content: center
     font-size: 30px
+    left: 0
   .btn-new-game
     cursor: pointer
     position: relative

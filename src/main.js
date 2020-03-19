@@ -5,7 +5,7 @@ import './registerServiceWorker'
 import router from './router'
 import axios from 'axios'
 
-/** user dungeon */
+/** token from user dungeon */
 axios.defaults.headers.common['Authorization'] = 'Token 43d2e7f540939ac5e34eeee07b7fb96e74344002'
 
 Vue.config.productionTip = false

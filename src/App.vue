@@ -8,7 +8,7 @@
 export default {
   name: "App",
   provide: {
-    isMobile: () => window.screen.width < 800
+    isMobile: window.screen.width <= 900
   }
 };
 </script>

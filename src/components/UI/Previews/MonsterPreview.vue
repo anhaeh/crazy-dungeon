@@ -97,4 +97,14 @@ export default {
     align-items: center
     &.--attack
       margin-right: 5px
+@media (min-width: 900px)
+  .monsterPreview
+    transform: scale(1.3)
+    right: 0
+    top: 0
+    position: fixed
+  .monsterPreview__portrait
+    padding: 10px
+  .stats
+    right: 80px
 </style>

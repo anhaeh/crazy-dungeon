@@ -1,5 +1,5 @@
 <template>
-  <div class="topBar">
+  <div class="topBar" :class="{'--mobile': isMobile}">
     <player-stats></player-stats>
     <div class="preview">
       <component v-if="getPreview"
@@ -19,6 +19,7 @@ import playerStats from './PlayerStats'
 
 export default {
   name: "TopBar",
+  inject: ['isMobile'],
   components: {
     monsterPreview,
     itemPreview,
@@ -39,7 +40,6 @@ export default {
 <style scoped lang="sass">
 .topBar
   image-rendering: pixelated
-  background-image: url("../../assets/ui/dungeonUI__background.png")
   background-size: cover
   background-position: top left
   width: 100%
@@ -51,7 +51,9 @@ export default {
   align-items: flex-start
   justify-content: flex-start
   z-index: 9
-@media screen and (min-width: 800px)
+.--mobile
+  background-image: url("../../assets/ui/dungeonUI__background.png")
+@media screen and (min-width: 900px)
   .topBar
     width: 336px
     left: initial

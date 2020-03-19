@@ -22,22 +22,32 @@ export default {
 </script>
 
 <style scoped lang="sass">
+.itemImage
+  width: calc(1.5 * var(--tile-cell))
+  height: calc(1.5 * var(--tile-cell))
+  background: url("../../../assets/ui/portraitFrame.png")
+  padding: calc(2.5 * var(--pixel-unit))
+  image-rendering: pixelated
+  background-size: contain
+  box-sizing: border-box
+  position: absolute
+  right: 0
+  img
+    width: 100%
+    height: 100%
+.legend
+  right: calc(1.5 * var(--tile-cell))
+  text-align: end
+  padding: 5px
+  position: absolute
+@media (min-width: 900px)
   .itemImage
-    width: calc(1.5 * var(--tile-cell))
-    height: calc(1.5 * var(--tile-cell))
-    background: url("../../../assets/ui/portraitFrame.png")
-    padding: calc(2.5 * var(--pixel-unit))
-    image-rendering: pixelated
-    background-size: contain
-    box-sizing: border-box
-    position: absolute
-    right: 0
-    img
-      width: 100%
-      height: 100%
+    transform: scale(1.3)
+    right: 10px
+    top: 10px
+    position: fixed
+    padding: 10px
   .legend
-    right: calc(1.5 * var(--tile-cell))
-    text-align: end
-    padding: 5px
-    position: absolute
+    right: 95px
+    font-size: 1.2rem
 </style>

@@ -1,10 +1,11 @@
 <template>
-  <div>
+  <div class="dungeon">
     <GameOver></GameOver>
     <GameController></GameController>
     <Map></Map>
     <TopBar></TopBar>
-    <DungeonUI></DungeonUI>
+    <MobileUI v-if="isMobile"></MobileUI>
+    <DesktopUI v-else></DesktopUI>
   </div>
 </template>
 
@@ -12,11 +13,13 @@
 import GameController from "@/components/GameController"
 import GameOver from "@/components/GameOver"
 import Map from "@/components/Map/Map"
-import DungeonUI from "@/components/UI/DungeonUI"
+import MobileUI from "@/components/UI/MobileUI"
 import TopBar from "@/components/UI/TopBar"
+import DesktopUI from "@/components/UI/DesktopUI"
 
 export default {
   name: "Dungeon",
+  inject: ['isMobile'],
   props: {
     className: {
       required: true,
@@ -27,8 +30,9 @@ export default {
     TopBar,
     GameController,
     Map,
-    DungeonUI,
-    GameOver
+    MobileUI,
+    GameOver,
+    DesktopUI
   },
   created() {
     this.$store.commit('setClassSelected', this.className)

@@ -1,5 +1,5 @@
 <template>
-  <div class="npc" :class="$options.name">
+  <div class="npc" :class="[$options.name, {'in-range': playerInRange}]">
     <img :src="image" alt="" @click="click">
     <bottom-dialog
             v-if="show"

@@ -58,4 +58,7 @@ export default {
 <style lang="sass">
 .item-dialog
   position: relative !important
+@media screen and (min-width: 900px)
+  .item-dialog
+    position: fixed !important
 </style>

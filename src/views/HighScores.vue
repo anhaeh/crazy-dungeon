@@ -82,7 +82,7 @@ td
 .table-score
   width: 85%
   height: 60%
-  overflow: scroll
+  overflow-y: auto
   color: #e4e5e6
   table
     width: 100%
