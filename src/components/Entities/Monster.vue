@@ -4,10 +4,10 @@
        :class="[{ 'can-target': canTarget }, { 'is-target': isTarget && isLive}]"
   >
     <img :src="image">
+    <span class="damage" v-if="counterDamage">-{{ counterDamage }}</span>
     <div v-if="isLive">
       <div class="level">{{ getMonster.level }}</div>
       <template v-if="damage">
-        <span class="damage" v-if="counterDamage">-{{ counterDamage }}</span>
         <div class="life" :style="life"></div>
         <div class="life-background"></div>
       </template>
@@ -172,6 +172,7 @@ export default {
     position: absolute
     z-index: 5
     top: -2px
+    left: 0
     text-shadow: 0 2px 0 black
     -webkit-animation: counterAnimation 0.5s ease-out
     animation: counterAnimation 0.5s ease-out
