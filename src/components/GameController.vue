@@ -118,7 +118,8 @@ export default {
         this.$store.dispatch('attack')
       } else if (event.code.substring(0,5) === 'Digit') {
         // number for skills
-        document.querySelector('#skill-' + event.code.charAt(5)).click()
+        let skill = document.querySelector('#skill-' + event.code.charAt(5))
+        if (skill) { skill.click() }
       } else {
         const key = event.key.toLowerCase()
         // we are only interested in alphanumeric keys
