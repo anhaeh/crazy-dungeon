@@ -91,4 +91,5 @@ export default {
   background-color: #672806
   border-color: #533a18
   color: white
+  cursor: pointer
 </style>

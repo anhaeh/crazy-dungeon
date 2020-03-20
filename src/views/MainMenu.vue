@@ -116,4 +116,7 @@ export default {
   // button:disabled
   //   background-color: black
   //   color: #888888
+@media screen and (min-width: 900px)
+  .view__intro
+    width: 375px
 </style>

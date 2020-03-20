@@ -1,5 +1,6 @@
 <template>
   <div class="dungeonUI__skillSlot" :id="'skill-' + skillId" @click="use">
+    <span class="skill-id">{{ skillId }}</span>
     <template v-if="skill">
       <span class="skillPoints">{{ usages }}/{{ skill.points }}</span>
       <img :src="image">
@@ -130,9 +131,17 @@ export default {
   left: 0
   filter: opacity(0.5)
   z-index: 1
+.skill-id
+  display: none
 @media screen and (min-width: 900px)
   .dungeonUI__skillSlot
     padding: 6px
   img
     cursor: pointer
+  .skill-id
+    display: block
+    position: absolute
+    top: 2px
+    color: #dadada
+    z-index: 2
 </style>
