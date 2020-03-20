@@ -92,6 +92,9 @@ td
 .title
   position: fixed
   top: 7%
+@media screen and (min-width: 900px)
+  .container
+    width: 50%
 </style>
 
 <style scoped>
