@@ -1,17 +1,18 @@
 <template>
   <div class="dungeonUI__statsMenuList">
     <div class="dungeonUI__statsMenuBody">
-      <div class="span-title">Active modifiers</div>
-      <div class="dungeonUI__statsBar">
+      <div class="dungeonUI__statsBar" title="Attack">
         <div class="dungeonUI__statsLabel --att"></div>
         <div class="dungeonUI__statsBaseValue">{{ $store.getters.getPlayer.attack }}</div>
         <div class="dungeonUI__statsTotalValue">{{ $store.getters.getPlayerAttack }}</div>
       </div>
-      <div class="dungeonUI__statsBar">
+      <div class="dungeonUI__statsBar" title="Health">
         <div class="dungeonUI__statsLabel --health"></div>
         <div class="dungeonUI__statsBaseValue">{{ $store.getters.getPlayerBaseLife }}</div>
         <div class="dungeonUI__statsTotalValue">{{ $store.getters.getPlayerBaseLife + $store.getters.getPlayerBuffLife }}</div>
       </div>
+    </div>
+    <div class="dungeonUI__statsMenuBody">
       <div class="dungeonUI__statsBar">
         <div class="dungeonUI__statsBaseValue stat-title">Critical chance</div>
         <div class="dungeonUI__statsTotalValue stat-title --counter">{{ criticalChance }}%</div>
@@ -20,24 +21,14 @@
         <div class="dungeonUI__statsBaseValue stat-title">Gold Multiplier</div>
         <div class="dungeonUI__statsTotalValue stat-title --counter">{{ goldMultiplier }}%</div>
       </div>
-      <div class="span-title">Experience</div>
-      <status-bar
-              :actual="$store.getters.getPlayer.defeatMonsters"
-              :total="$store.getters.getPlayer.nextLevelMonsters"
-              color="green"
-      ></status-bar>
     </div>
   </div>
 </template>
 
 <script>
-import statusBar from '../StatusBar'
 
 export default {
   name: "DesktopSkillsMenu",
-  components: {
-    statusBar
-  },
   computed: {
     goldMultiplier: function () {
       return Math.round(this.$store.getters.getPlayerGoldMultiplier * 100)
@@ -58,8 +49,10 @@ $color-mDef: #911DBA
 
 .dungeonUI__statsMenuList
   position: fixed
-  bottom: 0
+  display: flex
+  bottom: 5px
   right: 0
+  z-index: 3
 .dungeonUI__statsBar
   display: flex
   height: var(--tile-cell)

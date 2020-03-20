@@ -63,6 +63,8 @@ body
 @media (min-width: 900px)
   \:root
     --tile-cell: 50px
+  body
+    overflow: hidden
 </style>
 
 <style>

@@ -1,5 +1,9 @@
 <template>
-  <div class="dungeonUI__skillSlot" :id="'skill-' + skillId" @click="use">
+  <div class="dungeonUI__skillSlot"
+       :id="'skill-' + skillId"
+       @click="use"
+       :title="skill ? `${skill.name} - ${skill.description}`: ''"
+  >
     <span class="skill-id">{{ skillId }}</span>
     <template v-if="skill">
       <span class="skillPoints">{{ usages }}/{{ skill.points }}</span>

@@ -1,5 +1,7 @@
 <template>
   <div class="desktopUI">
+    <div class="background">
+    </div>
     <div class="title">
       <h2>Dungeon {{ dungeon }}</h2>
     </div>
@@ -59,6 +61,13 @@ export default {
 <style scoped lang="sass">
 .dungeonUI
   right: 0
+.background
+  background-color: black
+  width: 200%
+  height: 115px
+  position: fixed
+  bottom: 0
+  filter: opacity(0.6)
 .title
   width: 300px
   text-align: center

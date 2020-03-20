@@ -109,8 +109,8 @@ export default {
     object-fit: contain
 @media screen and (min-width: 900px)
   .inventory
-    position: absolute
-    left: 410px
+    position: fixed
+    left: calc(50% - 150px)
     bottom: 0
     top: auto
     padding: 0

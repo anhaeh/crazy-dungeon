@@ -48,7 +48,8 @@ export default {
 @media screen and (min-width: 900px)
   .dungeon .dungeonUI__skills
     display: flex
-    left: 410px
-    position: absolute
+    left: calc(50% - 150px)
+    position: fixed
     bottom: 60px
+    z-index: 3
 </style>

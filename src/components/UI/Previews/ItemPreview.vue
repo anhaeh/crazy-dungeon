@@ -47,6 +47,12 @@ export default {
     top: 10px
     position: fixed
     padding: 10px
+    img
+      position: relative
+      top: -2px
+      left: -2px
+      background: black
+      padding: 2px
   .legend
     right: 95px
     font-size: 1.2rem

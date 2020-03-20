@@ -28,8 +28,12 @@ export default {
           })
           this.$store.commit('setPlayerRange', cells)
           let cellsViewport = []
-          for (let i = -3; i < 5; i++) {
-            for (let j = -3; j < 4; j++) {
+          let rowsStart = this.isMobile ? -3 : -5
+          let rowsEnd = this.isMobile ? 5 : 7
+          let columnsStart = this.isMobile ? -3 : -10
+          let columnsEnd = this.isMobile ? 4 : 11
+          for (let i = rowsStart; i < rowsEnd; i++) {
+            for (let j = columnsStart; j < columnsEnd; j++) {
               let row = parseInt(player[0]) + i
               let column = parseInt(player[1]) + j
               cellsViewport.push(`${row}_${column}`)

@@ -1,21 +1,22 @@
 <template>
   <div class="monsterPreview">
     <div class="monsterPreview__portrait">
-      <img :src="image">
+      <img :src="image" :title="`${entity.refMonster.name} Lv ${entity.monster.level}`">
       <div class="monsterPreview__lvl">{{ entity.monster.level }}</div>
     </div>
     <status-bar :actual="entity.totalLife - entity.monster.damage"
                 :total="entity.totalLife"
                 modifier="--monster"
+                title="Health"
     >
     </status-bar>
     <div class="stats">
-      <img :src="attackIcon" alt="">
+      <img :src="attackIcon" title="Monster attack">
       <span class="counter --attack">{{ entity.refMonster.attack + entity.monster.level }}</span>
-      <img :src="goldIcon" alt="">
+      <img :src="goldIcon" title="Drop gold">
       <span class="counter --gold">{{ entity.refMonster.gold }}</span>
     </div>
-    <div class="name">{{ entity.monster.name }}</div>
+    <div class="name">{{ entity.refMonster.name }}</div>
   </div>
 </template>
 
@@ -107,4 +108,6 @@ export default {
     padding: 10px
   .stats
     right: 80px
+  .name
+    right: 5px
 </style>

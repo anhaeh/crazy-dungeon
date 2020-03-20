@@ -118,8 +118,17 @@ export default {
     opacity: 0.35
 @media screen and (min-width: 900px)
   .dungeonUI__skillsMenuList
-    width: 500px
-    height: calc(50% - 130px)
+    width: 492px
+    height: 336px
     right: calc(50% - 250px)
-    top: 50px
+    top: 100px
+    border: solid 4px #3f2c11
+  ::-webkit-scrollbar
+    width: 10px
+  ::-webkit-scrollbar-track
+    background: #000000
+  ::-webkit-scrollbar-thumb
+    background: #32220f
+  ::-webkit-scrollbar-thumb:hover
+    background: #555
 </style>

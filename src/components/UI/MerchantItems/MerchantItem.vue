@@ -92,4 +92,7 @@ export default {
   border-color: #533a18
   color: white
   cursor: pointer
+@media screen and (min-width: 900px)
+  .dungeonUI__skillsMenuImg
+    box-shadow: inset 0 0 0 3px #2c261f
 </style>

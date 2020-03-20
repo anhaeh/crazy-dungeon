@@ -130,5 +130,7 @@ export default {
     z-index: 10
   .bottomDialog__actionsBtn
     cursor: pointer
+  .dungeonUI__skillsMenuList .bottomDialog
+    top: calc(50% + 50px)
 </style>
 

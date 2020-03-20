@@ -75,9 +75,9 @@ export default {
 @media (min-width: 900px)
   .legend
     top: 5px
-    left: calc(1.2 * var(--pixel-unit))
+    left: 10px
     color: white
   .statusBar.--monster .legend
     text-align: right
-    right: calc(1.2 * var(--pixel-unit))
+    right: 10px
 </style>

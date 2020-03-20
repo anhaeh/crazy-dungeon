@@ -1,21 +1,34 @@
 <template>
   <div class="playerStats">
-    <img class="player-image" :src="imageHero" @click="showInventory">
-    <div class="playerStats__lvl">{{ getPlayer.level }}</div>
+    <div :title="`${getPlayer.name} Lvl ${getPlayer.level}`">
+      <img class="player-image" :src="imageHero" @click="showInventory">
+      <div class="playerStats__lvl">{{ getPlayer.level }}</div>
+    </div>
     <status-bar
+      title="Health"
       :actual="actualHealth"
       :total="totalLife"
     ></status-bar>
     <div class="score">
       Score: {{ getScore }}
     </div>
-    <div class="current-gold" v-if="!isMobile">
-      <img :src="goldIcon" alt="">
-      {{ $store.getters.getPlayer.gold }}
-    </div>
     <div class="name">
       {{ getPlayer.name }}
     </div>
+    <template v-if="!isMobile">
+      <div class="experience">
+        <status-bar
+                title="Experience"
+                :actual="$store.getters.getPlayer.defeatMonsters"
+                :total="$store.getters.getPlayer.nextLevelMonsters"
+                color="green"
+        ></status-bar>
+      </div>
+      <div class="current-gold" >
+        <img :src="goldIcon" alt="">
+        {{ $store.getters.getPlayer.gold }}
+      </div>
+    </template>
   </div>
 </template>
 
@@ -97,15 +110,6 @@ export default {
   left: 45%
   font-size: 0.85rem
   padding-top: calc(0.25 * var(--tile-cell))
-.current-gold
-  position: absolute
-  left: 45%
-  font-size: 0.85rem
-  top: 15px
-  display: flex
-  align-items: center
-  img
-    padding-right: 5px
 .name
   position: absolute
   top: calc(1.5 * var(--tile-cell))
@@ -119,4 +123,20 @@ export default {
     top: 12px
     position: fixed
     transform: scale(1.3)
+  .experience
+    position: relative
+    bottom: 54px
+  .current-gold
+    position: absolute
+    left: 5px
+    font-size: 1rem
+    top: 98px
+    display: flex
+    align-items: center
+    img
+      padding-right: 5px
+  .score
+    top: -8px
+  .name
+    left: 5px
 </style>

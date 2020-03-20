@@ -87,13 +87,14 @@ export default {
 
 @media screen and (min-width: 900px)
   .questLog
-    position: absolute
+    position: fixed
     left: 0
     bottom: 0
     top: auto
     margin: 0
     height: 110px
     width: 400px
+    z-index: 3
     background-size: 100% 100%
   .questLog__message
     height: calc(2.2 * var(--tile-cell))

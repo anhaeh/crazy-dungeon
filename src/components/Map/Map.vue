@@ -69,7 +69,7 @@ export default {
   display: flex
 @media screen and (min-width: 900px)
   .map
-    margin-top: var(--tile-cell)
+    margin-top: 0
     overflow: hidden
     --tile-cell: 9vh
     --pixel-unit: 5px
