@@ -47,7 +47,7 @@
     "earnItem": ["potion", "dagger"]
   },
   "monk":  {
-    "price": 175
+    "price": 150
   },
   "viking":  {
     "price": 100
