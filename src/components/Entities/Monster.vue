@@ -172,8 +172,8 @@ export default {
     position: absolute
     z-index: 5
     top: -2px
-    left: 0
-    text-shadow: 0 2px 0 black
-    -webkit-animation: counterAnimation 0.5s ease-out
+    font-size: 1.5rem
+    right: 0
+    filter: drop-shadow(-1px -1px 0 #000) drop-shadow(1px -1px 0 #000) drop-shadow(-1px 1px 0 #000) drop-shadow(1px 1px 0 #000)
     animation: counterAnimation 0.5s ease-out
 </style>

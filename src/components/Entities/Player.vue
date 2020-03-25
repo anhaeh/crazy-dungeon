@@ -7,6 +7,10 @@
         {{ counterDamage }}
       </span>
     <img :src="image" alt="">
+    <template v-if="isMonsterTarget">
+      <div class="life" :style="life"></div>
+      <div class="life-background"></div>
+    </template>
   </div>
 </template>
 
@@ -45,6 +49,19 @@
       },
       damage: function () {
         return this.$store.getters.getPlayerDamage
+      },
+      life: function() {
+        let percent = ((this.totalLife - this.damage) * 100) / this.totalLife
+        if (percent < 0) {
+          percent = 0
+        }
+        return `width: ${percent}%`
+      },
+      totalLife: function () {
+        return this.$store.getters.getPlayerBaseLife + this.$store.getters.getPlayerBuffLife
+      },
+      isMonsterTarget: function () {
+        return this.$store.getters.getMonsterSelected
       }
     },
     created () {
@@ -67,10 +84,28 @@
       color: red
       position: absolute
       z-index: 5
+      font-size: 1.5rem
       top: -2px
-      text-shadow: 0 2px 0 black
+      right: 0
+      filter: drop-shadow(-1px -1px 0 #000) drop-shadow(1px -1px 0 #000) drop-shadow(-1px 1px 0 #000) drop-shadow(1px 1px 0 #000)
       -webkit-animation: counterAnimation 0.5s ease-out
       animation: counterAnimation 0.5s ease-out
       &.--heal
         color: #1bd31e
+    .life
+      bottom: 4px
+      left: 0
+      height: 3px
+      background: rgb(150, 0, 0)
+      z-index: 2
+      position: absolute
+      width: 100%
+    .life-background
+      bottom: 4px
+      left: 0
+      height: 3px
+      background: rgba(0, 0, 0, 0.8)
+      z-index: 1
+      position: absolute
+      width: 100%
 </style>
