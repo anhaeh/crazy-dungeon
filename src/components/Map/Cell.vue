@@ -3,6 +3,16 @@
        :id="'cell-' + id"
        @click="click">
     <img :src="image()">
+    <img v-if="diagonalClass.includes('e')"
+         :src="imageDiagonal('e')"
+         class="diagonal --east">
+    <img v-if="diagonalClass.includes('w')"
+         :src="imageDiagonal('w')"
+         class="diagonal --west">
+    <img v-if="dotClass"
+         :src="imageDot()"
+         class="dot"
+         :class="{'--east': dotClass.includes('e')}">
     <template v-if="!hasFog">
       <Monster
          v-if="hasMonster"
@@ -49,7 +59,9 @@ export default {
   data () {
     return {
       tile: null,
-      imageWall : null
+      imageWall : null,
+      diagonalClass: '',
+      dotClass: ''
     }
   },
   computed: {
@@ -87,6 +99,18 @@ export default {
       }
       let theme = this.tile.theme ? this.$store.getters.getTheme + '/' : ''
       return require(`@/assets/terrains/${theme}${imageFile}.png`)
+    },
+    imageDot: function () {
+      let theme = this.$store.getters.getTheme + '/'
+      return require(`@/assets/terrains/${theme}solid_dot_n.png`)
+    },
+    imageDiagonal: function (direction) {
+      let filename = direction
+      if (this.diagonalClass.includes('n')) {
+        filename = 'n' + direction
+      }
+      let theme = this.$store.getters.getTheme + '/'
+      return require(`@/assets/terrains/${theme}solid_diagonal_${filename}.png`)
     },
     click: function() {
       if (this.canMove) {
@@ -147,6 +171,36 @@ export default {
       if (w) {
         directions += 'w'
       }
+
+      if ((directions.length <= 1 || directions.includes('n')) && !directions.includes('s')) {
+        // check south diagonals
+        if (map[row + 1] !== undefined) {
+          let se = map[row + 1][col + 1] === undefined ? false : map[row + 1][col + 1] !== 1
+          let sw = map[row + 1][col - 1] === undefined ? false : map[row + 1][col - 1] !== 1
+          if (directions.includes('n')) {
+            this.diagonalClass = 'n'
+          }
+          if (se && !directions.includes('e')) {
+            this.diagonalClass += 'e'
+          }
+          if (sw && !directions.includes('w')) {
+            this.diagonalClass += 'w'
+          }
+        }
+      }
+
+      // check north doths
+      if (map[row - 1] !== undefined) {
+        let ne = map[row - 1][col + 1] === undefined ? false : map[row - 1][col + 1] !== 1
+        let nw = map[row - 1][col - 1] === undefined ? false : map[row - 1][col - 1] !== 1
+        if (ne && !directions.includes('e')) {
+          this.dotClass += 'e'
+        }
+        if (nw && !directions.includes('w')) {
+          this.dotClass += 'w'
+        }
+      }
+
       if (directions !== '') {
         this.imageWall = '_' + directions
       }
@@ -164,6 +218,13 @@ export default {
       position: absolute
       width: 100%
       height: 100%
+    .diagonal
+      width: initial
+    .dot
+      height: 8px
+      width: 10px
+    .--east
+      right: 0
   .has-fog
     filter: opacity(0)
   .can-move

@@ -66,6 +66,7 @@ export default {
   position: fixed
   top: 0
   left: calc(50% - 150px)
+  z-index: 99
 .current-gold
   position: absolute
   bottom: 0
