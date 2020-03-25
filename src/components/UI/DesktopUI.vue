@@ -60,12 +60,12 @@ export default {
 .dungeonUI
   right: 0
 .title
-  width: 300px
+  width: 150px
   text-align: center
   color: white
   position: fixed
   top: 0
-  left: calc(50% - 150px)
+  left: calc(50% - 75px)
   z-index: 99
 .current-gold
   position: absolute
