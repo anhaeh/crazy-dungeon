@@ -47,9 +47,12 @@ export default {
   justify-content: space-between
 @media screen and (min-width: 900px)
   .dungeon .dungeonUI__skills
+    width: calc(6 * var(--tile-cell))
     display: flex
-    left: calc(50% - 150px)
+    left: 0
+    right: 0
+    margin: auto
     position: fixed
-    bottom: 60px
+    bottom: var(--tile-cell)
     z-index: 3
 </style>

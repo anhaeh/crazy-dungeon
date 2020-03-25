@@ -167,5 +167,16 @@ export default {
   .has-fog
     filter: opacity(0)
   .can-move
-    cursor: pointer
+    cursor: url('../../assets/ui/cursor__move.png'), auto
+    &:hover:after
+      content: ''
+      position: absolute
+      left: 0
+      top: 0
+      width: 100%
+      height: 100%
+      z-index: 1000
+      background-image: url('../../assets/ui/cursor__moveDown.png')
+      background-size: cover
+      image-rendering: pixelated
 </style>

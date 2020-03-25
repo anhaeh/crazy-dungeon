@@ -67,8 +67,10 @@
       color: red
       position: absolute
       z-index: 5
+      font-size: 1.5rem
       top: -2px
-      text-shadow: 0 2px 0 black
+      right: 0
+      filter: drop-shadow(-1px -1px 0 #000) drop-shadow(1px -1px 0 #000) drop-shadow(-1px 1px 0 #000) drop-shadow(1px 1px 0 #000)
       -webkit-animation: counterAnimation 0.5s ease-out
       animation: counterAnimation 0.5s ease-out
       &.--heal
