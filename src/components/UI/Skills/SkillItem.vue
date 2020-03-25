@@ -141,7 +141,7 @@ export default {
   .dungeonUI__skillSlot
     padding: 6px
   img
-    cursor: pointer
+    cursor: url('../../../assets/ui/cursor__move.png'), auto
   .skill-id
     display: block
     position: absolute

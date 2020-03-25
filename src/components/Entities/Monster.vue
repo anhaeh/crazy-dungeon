@@ -161,12 +161,14 @@ export default {
     position: absolute
     width: 100%
   .can-target
-    cursor: cell
+    cursor: url('../../assets/ui/cursor__move.png'), auto
   .is-target
+    cursor: url('../../assets/ui/cursor__attack.png'), auto
     img
       filter: drop-shadow(0px 0px 3px red)
       -webkit-transition: .2s ease-in-out
       transition: .2s ease-in-out
+
   .damage
     color: red
     position: absolute

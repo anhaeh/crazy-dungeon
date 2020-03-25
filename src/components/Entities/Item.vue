@@ -55,6 +55,7 @@ export default {
   .item
     position: relative
     padding: 4px
+    z-index: 2
     img
       width: 100%
       height: 100%

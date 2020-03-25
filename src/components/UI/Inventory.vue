@@ -119,5 +119,5 @@ export default {
     .inventory__slot.--selected
       box-shadow: inset 0 0 0 2px #c89c01
     img
-      cursor: pointer
+      cursor: url('../../assets/ui/cursor__move.png'), auto
 </style>

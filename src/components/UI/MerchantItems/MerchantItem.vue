@@ -91,7 +91,7 @@ export default {
   background-color: #672806
   border-color: #533a18
   color: white
-  cursor: pointer
+  cursor: url('../../../assets/ui/cursor__pick.png'), auto
 @media screen and (min-width: 900px)
   .dungeonUI__skillsMenuImg
     box-shadow: inset 0 0 0 3px #2c261f

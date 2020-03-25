@@ -80,5 +80,5 @@ export default {
   height: 50px
   width: 100px
   background-size: 100% 100%
-  cursor: pointer
+  cursor: url('../../assets/ui/cursor__move.png'), auto
 </style>

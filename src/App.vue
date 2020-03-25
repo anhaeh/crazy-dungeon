@@ -63,8 +63,14 @@ body
 @media (min-width: 900px)
   \:root
     --tile-cell: 50px
-  body
+    // Thin Scrollbar
+    scrollbar-color: #3f2c11 #32220f !important
+    scrollbar-width: thin !important
     overflow: hidden
+    body
+      cursor: url('assets/ui/cursor.png'), auto
+    button, select
+      cursor: url('assets/ui/cursor__attack.png'), auto
 </style>
 
 <style>

@@ -24,5 +24,6 @@ export default {
 
 <style lang="sass">
 .npc.in-range
-  cursor: cell
+  img
+    cursor: url('../../assets/ui/cursor__talk.png'), auto
 </style>

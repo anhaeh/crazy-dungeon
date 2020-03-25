@@ -1,7 +1,7 @@
 <template>
   <div v-if="isGameOver" class="game-over">
     <h1>GAME OVER</h1>
-    <div class="btn-new-game" @click="goMenu">Main Menu</div>
+    <div class="btn btn-new-game" @click="goMenu">Main Menu</div>
     <div class="score">
       <div class="text">Your score is:</div>
       <div class="text">
@@ -9,7 +9,7 @@
       </div>
       <div class="container-send">
         <input type="text" v-model="name" placeholder="Enter your name" maxlength="20">
-        <div class="btn-new-game btn-score"
+        <div class="btn btn-new-game btn-score"
              @click="pushScore"
              :class="{'--disabled': name.trim() === ''}"
         >
@@ -53,6 +53,8 @@ export default {
 </script>
 
 <style scoped lang="sass">
+  .btn
+    cursor: url('../assets/ui/cursor__attack.png'), auto
   .game-over
     font-family: 'OpenSansPXBold'
     position: fixed
@@ -68,7 +70,6 @@ export default {
     font-size: 30px
     left: 0
   .btn-new-game
-    cursor: pointer
     position: relative
     display: flex
     justify-content: center
@@ -92,7 +93,6 @@ export default {
       padding: 0 4px
     .btn-score
       font-size: 1.15rem
-      cursor: pointer
       position: relative
       display: flex
       justify-content: center

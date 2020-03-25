@@ -1,5 +1,5 @@
 <template>
-  <div :class="['cell', {'can-move': canMove && !isMobile }, {'has-fog': hasFog }]"
+  <div :class="['cell', {'can-move': canMove && !isMobile }, {'has-fog': hasFog }, {'has-item': hasItem}]"
        :id="'cell-' + id"
        @click="click">
     <img :src="image()">
@@ -190,7 +190,7 @@ export default {
       }
 
       // check north doths
-      if (map[row - 1] !== undefined) {
+      if (map[row - 1] !== undefined && !directions.includes('n')) {
         let ne = map[row - 1][col + 1] === undefined ? false : map[row - 1][col + 1] !== 1
         let nw = map[row - 1][col - 1] === undefined ? false : map[row - 1][col - 1] !== 1
         if (ne && !directions.includes('e')) {
@@ -236,8 +236,11 @@ export default {
       top: 0
       width: 100%
       height: 100%
-      z-index: 1000
-      background-image: url('../../assets/ui/cursor__moveDown.png')
+      z-index: 0
+      background-image: url('../../assets/ui/cell__move.png')
       background-size: cover
       image-rendering: pixelated
+      filter: opacity(0.6)
+    &.has-item
+      cursor: url('../../assets/ui/cursor__pick.png'), auto
 </style>

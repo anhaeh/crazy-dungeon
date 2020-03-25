@@ -131,4 +131,6 @@ export default {
     background: #32220f
   ::-webkit-scrollbar-thumb:hover
     background: #555
+  .dungeonUI__skillsMenuTabOption
+    cursor: url('../../../assets/ui/cursor__move.png'), auto
 </style>

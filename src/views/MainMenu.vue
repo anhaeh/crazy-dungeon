@@ -91,6 +91,7 @@ export default {
   bottom: -2%
   color: green
 .intro__btn
+  cursor: url('../assets/ui/cursor__attack.png'), auto
   width: calc(4.5 * var(--tile-cell))
   height: calc(0.75 * var(--tile-cell))
   background-image: url("../assets/ui/intro__btn.png")

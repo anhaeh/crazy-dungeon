@@ -129,8 +129,8 @@ export default {
     padding: 10px 20px
     z-index: 10
   .bottomDialog__actionsBtn
-    cursor: pointer
+    cursor: url('../../../assets/ui/cursor__move.png'), auto
   .dungeonUI__skillsMenuList .bottomDialog
-    top: calc(50% + 50px)
+    top: 440px
 </style>
 
