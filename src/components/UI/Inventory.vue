@@ -116,8 +116,12 @@ export default {
     padding: 0
     width: auto
     z-index: 10
-    .inventory__slot.--selected
-      box-shadow: inset 0 0 0 2px #c89c01
-    img
-      cursor: url('../../assets/ui/cursor__move.png'), auto
+    .inventory__slot
+      box-sizing: border-box
+      padding: 4px
+      &.--selected
+        box-shadow: inset 0 0 0 2px #c89c01
+      img
+        cursor: url('../../assets/ui/cursor__move.png'), auto
+
 </style>

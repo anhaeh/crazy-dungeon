@@ -128,10 +128,11 @@ export default {
       width: 100%
       height: 100%
       object-fit: contain
-      filter: drop-shadow(0px 0px 2px black)
+      // filter: drop-shadow(-2px -2px 0 rgba(0,0,0,.5)) drop-shadow(2px -2px 0 rgba(0,0,0,.5)) drop-shadow(-2px 2px 0 rgba(0,0,0,.5)) drop-shadow(2px 2px 0 rgba(0,0,0,.5))
+      filter: drop-shadow(-2px -2px 0 rgba(11,11,11,2)) drop-shadow(2px -2px 0 rgba(11,11,11,2)) drop-shadow(-2px 2px 0 rgba(11,11,11,2)) drop-shadow(2px 2px 0 rgba(11,11,11,1))
   .level
     top: 0
-    left: 0
+    left: calc(-2 * var(--pixel-unit))
     height: calc(4 * var(--pixel-unit))
     width: calc(5 * var(--pixel-unit))
     background: #000000eb
@@ -165,7 +166,7 @@ export default {
   .is-target
     cursor: url('../../assets/ui/cursor__attack.png'), auto
     img
-      filter: drop-shadow(0px 0px 3px red)
+      filter: drop-shadow(-2px -2px 0 #990000) drop-shadow(2px -2px 0 #990000) drop-shadow(-2px 2px 0 #630000) drop-shadow(2px 2px 0 #630000)
       -webkit-transition: .2s ease-in-out
       transition: .2s ease-in-out
 

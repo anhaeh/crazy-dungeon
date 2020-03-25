@@ -61,4 +61,7 @@ export default {
       height: 100%
       object-fit: contain
       filter: drop-shadow(0px 0px 3px black)
+  @media screen and (min-width: 900px)
+    .item
+      padding: 10px
 </style>

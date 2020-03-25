@@ -32,5 +32,16 @@
       "explosion",
       "storm"
     ]
+  },
+  "archer": {
+    "name": "Archer",
+    "initialHealth": 50,
+    "attack": 8,
+    "critical": 0.15,
+    "image": "wizard.jpg",
+    "skills": [
+      "explosion",
+      "storm"
+    ]
   }
 }

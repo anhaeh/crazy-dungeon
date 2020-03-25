@@ -2,12 +2,12 @@
   <div id="quest-log" class="questLog">
     <div class="questLog__message">
       <div class="feed">
-      <span v-for="(log, index) in questLog"
-            :key="'log' + index"
-            class="message"
-      >
-        {{ log }}
-      </span>
+        <span v-for="(log, index) in questLog"
+              :key="'log' + index"
+              class="message"
+        >
+          {{ log }}
+        </span>
       </div>
     </div>
   </div>
@@ -44,7 +44,6 @@ export default {
   image-rendering: pixelated
   overflow: auto
   flex-direction: column
-  background-color: #000000
   display: flex
   width: calc(5.5 * var(--tile-cell))
   top: -3px
@@ -55,7 +54,7 @@ export default {
   image-rendering: pixelated
   background-size: 100% 100%
   background-image: url("../../assets/ui/bottomDialog__message.png")
-  opacity: 0.7
+  opacity: 1
   box-sizing: border-box
   padding: calc(1 * var(--pixel-unit)) 0
 .feed
@@ -90,15 +89,14 @@ export default {
     position: fixed
     left: 0
     bottom: 0
-    top: auto
-    margin: 0
-    height: 110px
-    width: 400px
+    top: initial
+    height: calc(2 * var(--tile-cell))
+    width: calc(7 * var(--tile-cell))
     z-index: 3
     background-size: 100% 100%
   .questLog__message
-    height: calc(2.2 * var(--tile-cell))
-    padding: calc(0.7 * var(--pixel-unit)) 0
+    height: 100%
+    padding: calc(0.5 * var(--pixel-unit)) 0
   .feed
     height: 100%
     padding: 5px 15px

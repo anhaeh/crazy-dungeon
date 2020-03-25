@@ -139,7 +139,7 @@ export default {
   display: none
 @media screen and (min-width: 900px)
   .dungeonUI__skillSlot
-    padding: 6px
+    padding: 0px
   img
     cursor: url('../../../assets/ui/cursor__move.png'), auto
   .skill-id

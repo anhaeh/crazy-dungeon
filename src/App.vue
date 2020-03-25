@@ -17,6 +17,7 @@ export default {
 \:root
   --tile-cell: 14.2857vw // based on 7 tiles in viewport width
   --pixel-unit: 0.8928vw // based on 16 pixels inside 1 tile-cell
+  cursor: url('assets/ui/cursor.png')
 
 $tile: 14.2857vw // based on 7 tiles in viewport width
 $pixel: 0.8928vw // based on 16 pixels inside 1 tile-cell
@@ -37,6 +38,7 @@ body
   justify-content: center
   height: 100%
   background: black
+  cursor: url('assets/ui/cursor.png'), auto
   /* Disables pull-to-refresh but allows overscroll glow effects. */
   overscroll-behavior-y: contain
 #app
@@ -63,9 +65,10 @@ body
 @media (min-width: 900px)
   \:root
     --tile-cell: 50px
-    // Thin Scrollbar
     scrollbar-color: #3f2c11 #32220f !important
     scrollbar-width: thin !important
+    --pixel-unit: 1.56px
+  body
     overflow: hidden
     body
       cursor: url('assets/ui/cursor.png'), auto

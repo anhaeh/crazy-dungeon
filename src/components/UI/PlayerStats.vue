@@ -1,8 +1,8 @@
 <template>
   <div class="playerStats">
-    <div :title="`${getPlayer.name} Lvl ${getPlayer.level}`">
-      <img class="player-image" :src="imageHero" @click="showInventory">
-      <div class="playerStats__lvl">{{ getPlayer.level }}</div>
+    <div class="playerStats__portraitFrame" :title="`${getPlayer.name} Lvl ${getPlayer.level}`">
+      <img class="playerStats__portrait" :src="imageHero" @click="showInventory">
+      <div class="playerStats__lvl"><span>{{ getPlayer.level }}</span></div>
     </div>
     <status-bar
       title="Health"
@@ -84,19 +84,17 @@ export default {
 .playerStats
   position: relative
   height: calc(1.5 * var(--tile-cell))
-  .player-image
-    position: absolute
-    height: calc(1.5 * var(--tile-cell))
-    width: calc(1.5 * var(--tile-cell))
-    display: block
+.playerStats__portrait
+  position: absolute
+  height: calc(1.5 * var(--tile-cell))
+  width: calc(1.5 * var(--tile-cell))
+  display: block
 .playerStats__lvl
   position: absolute
   bottom: 0
   left: 0
   height: calc(0.5 * var(--tile-cell))
   width: calc(0.5 * var(--tile-cell))
-  box-shadow: inset 0 0 0 calc(1 * var(--pixel-unit)) #0e0c05
-  background: #1f1913
   display: flex
   align-items: center
   justify-content: center
@@ -119,10 +117,39 @@ export default {
   text-shadow: 1px 2px 0 black
 @media (min-width: 900px)
   .playerStats
-    left: 25px
-    top: 12px
+    left: 0
+    top: 0
     position: fixed
-    transform: scale(1.3)
+    height: calc(2 * var(--tile-cell))
+    width: calc(7 * var(--tile-cell))    
+  .playerStats__portraitFrame
+    height: calc(2 * var(--tile-cell))
+    width: calc(2 * var(--tile-cell))
+    background-image: url("../../assets/ui/portrait_hero.png")
+    background-size: 100% 100%
+    position: relative
+  .playerStats__portrait
+    height: 100%
+    width: 100%
+    position: absolute
+    left: 0
+    top: 0
+    z-index: -1
+  .playerStats__lvl
+    height: calc(var(--pixel-unit) * 21)
+    width: calc(var(--pixel-unit) * 21)
+    z-index: -1
+    background-color: rgba(0,0,0,0.5)
+  .statusBar
+    background-size: 100% 100%
+    background-color: rgba(0,0,0,0.5)
+    &[title="Health"]
+      height: calc(var(--tile-cell) * 0.75)
+      width: calc(6 * var(--tile-cell))
+      left: calc(2 * var(--tile-cell))
+      top: 0
+      position: fixed
+      box-sizing: border-box
   .experience
     position: relative
     bottom: 54px
@@ -138,5 +165,6 @@ export default {
   .score
     top: -8px
   .name
+    top: calc(2 * var(--tile-cell))
     left: 5px
 </style>

@@ -57,6 +57,9 @@ export default {
 </script>
 
 <style scoped lang="sass">
+.desktopUI
+  display: block
+  position: relative
 .dungeonUI
   right: 0
 .title

@@ -80,4 +80,7 @@ export default {
   .statusBar.--monster .legend
     text-align: right
     right: 10px
+  .statusCurrent
+    background-size: calc(6 * var(--tile-cell)) calc(0.75 * var(--tile-cell))
+    background-position: left top
 </style>
