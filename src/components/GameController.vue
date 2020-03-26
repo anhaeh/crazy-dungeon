@@ -233,7 +233,7 @@ export default {
       }
 
       /* Set npcs */
-      let npcs = ['zombie']
+      let npcs = ['necromancer']
       if (dungeonLevel % 2 === 0) {
         npcs.push('chest')
       }

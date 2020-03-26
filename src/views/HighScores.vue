@@ -73,8 +73,8 @@ td
   background-position-x: center
   background-position-y: center
   background-size: initial
-  &.--necromancer
-    background-image: url("../assets/heroes/necromancer.gif")
+  &.--archer
+    background-image: url("../assets/heroes/archer.gif")
   &.--wizard
     background-image: url("../assets/heroes/wizard.gif")
   &.--paladin

@@ -6,7 +6,7 @@
             @close="destroyNpc"
     >
       <div slot="legend">Receive {{ entity.action ? ' a Gift' : 'an Advice' }}</div>
-      <div slot="title">Wandering zombie</div>
+      <div slot="title">Necromancer</div>
       <div slot="text">{{ entity.dialog }}</div>
       <span slot="close-text">Accept</span>
     </bottom-dialog>
@@ -17,7 +17,7 @@
 import AbstractNpc from './AbstractNpc'
 
 export default AbstractNpc.extend({
-  name: "zombie",
+  name: "necromancer",
   data () {
     return {
       show: false,
