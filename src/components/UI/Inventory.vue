@@ -6,7 +6,7 @@
          class="inventory__slot"
          :class="{ '--selected': selected && index === selected.index }"
     >
-      <img v-if="item !== undefined" :src="image(item)" @click="click(item, index)">
+      <img v-if="item !== undefined" :src="image(item)" @click="click(item, index)" :title="item.name">
     </div>
     <item-dialog
         v-if="selected"
