@@ -168,7 +168,6 @@ export default {
       filter: drop-shadow(0px 0px 3px red)
       -webkit-transition: .2s ease-in-out
       transition: .2s ease-in-out
-
   .damage
     color: red
     position: absolute

@@ -8,6 +8,8 @@
     filter: drop-shadow(0px 0px 2px black)
   &.selected.in-range
     img
+      -webkit-transition: .2s ease-in-out
+      transition: .2s ease-in-out
       filter: drop-shadow(-2px -2px 0 #003e0b) drop-shadow(2px -2px 0 #003e0b) drop-shadow(-2px 2px 0 #003e0b) drop-shadow(2px 2px 0 #003e0b)
 .title
   text-transform: capitalize
