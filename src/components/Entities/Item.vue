@@ -60,7 +60,7 @@ export default {
       width: 100%
       height: 100%
       object-fit: contain
-      filter: drop-shadow(0px 0px 3px black)
+      filter: drop-shadow(-1px -1px 0 rgba(11,11,11,1)) drop-shadow(1px -1px 0 rgba(11,11,11,1)) drop-shadow(-1px 1px 0 rgba(11,11,11,1)) drop-shadow(1px 1px 0 rgba(11,11,11,1))
   @media screen and (min-width: 900px)
     .item
       padding: 10px

@@ -53,5 +53,23 @@
     "points": 5,
     "image": "explosion.jpg",
     "price": "600"
+  },
+  "double_arrow": {
+    "name": "Double Arrow",
+    "type": "Range",
+    "counter": 1.5,
+    "description": "Make the basic attack x 1.5 and you don't receive attack from monsters",
+    "points": 8,
+    "image": "explosion.jpg",
+    "price": "600"
+  },
+  "fire_bolt": {
+    "name": "Fire Bolt",
+    "type": "Range",
+    "counter": 1.8,
+    "description": "Make the basic attack x 2 and you don't receive attack from monsters",
+    "points": 6,
+    "image": "explosion.jpg",
+    "price": "600"
   }
 }

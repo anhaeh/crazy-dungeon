@@ -1,16 +1,4 @@
 {
-  "necromancer": {
-    "name": "Necromancer",
-    "initialHealth": 50,
-    "attack": 9,
-    "defense": 7,
-    "critical": 0.05,
-    "image": "necromancer.png",
-    "skills": [
-      "bones_breaker",
-      "drain_life"
-    ]
-  },
   "paladin": {
     "name": "Paladin",
     "initialHealth": 55,
@@ -35,13 +23,13 @@
   },
   "archer": {
     "name": "Archer",
-    "initialHealth": 50,
-    "attack": 8,
+    "initialHealth": 45,
+    "attack": 7,
     "critical": 0.15,
-    "image": "wizard.jpg",
+    "image": "archer.png",
     "skills": [
-      "explosion",
-      "storm"
+      "double_arrow",
+      "fire_bolt"
     ]
   }
 }

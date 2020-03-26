@@ -19,7 +19,7 @@ export default Vue.extend({
   },
   computed: {
     image: function () {
-      return require(`@/assets/npcs/${this.$options.name}.png`)
+      return require(`@/assets/npcs/${this.$options.name}.gif`)
     },
     playerInRange: function () {
       return this.$store.getters.getPlayerRange.indexOf(this.cellId) !== -1

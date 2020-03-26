@@ -9,26 +9,24 @@
       :actual="actualHealth"
       :total="totalLife"
     ></status-bar>
+    <template v-if="!isMobile">
+      <status-bar
+              title="Experience"
+              :actual="$store.getters.getPlayer.defeatMonsters"
+              :total="$store.getters.getPlayer.nextLevelMonsters"
+              color="green"
+      ></status-bar>
+      <div class="current-gold" >
+        <img :src="goldIcon" alt="">
+        {{ $store.getters.getPlayer.gold }}
+      </div>
+    </template>
     <div class="score">
       Score: {{ getScore }}
     </div>
     <div class="name">
       {{ getPlayer.name }}
     </div>
-    <template v-if="!isMobile">
-      <div class="experience">
-        <status-bar
-                title="Experience"
-                :actual="$store.getters.getPlayer.defeatMonsters"
-                :total="$store.getters.getPlayer.nextLevelMonsters"
-                color="green"
-        ></status-bar>
-      </div>
-      <div class="current-gold" >
-        <img :src="goldIcon" alt="">
-        {{ $store.getters.getPlayer.gold }}
-      </div>
-    </template>
   </div>
 </template>
 
@@ -104,8 +102,11 @@ export default {
   left: calc(1.5 * var(--tile-cell))
   top: calc(1 * var(--tile-cell))
 .score
-  position: absolute
-  left: 45%
+  position: fixed
+  left: 0
+  right: 0
+  top: 20px
+  text-align: center
   font-size: 0.85rem
   padding-top: calc(0.25 * var(--tile-cell))
 .name
@@ -143,21 +144,11 @@ export default {
   .statusBar
     background-size: 100% 100%
     background-color: rgba(0,0,0,0.5)
-    &[title="Health"]
-      height: calc(var(--tile-cell) * 0.75)
-      width: calc(6 * var(--tile-cell))
-      left: calc(2 * var(--tile-cell))
-      top: 0
-      position: fixed
-      box-sizing: border-box
-  .experience
-    position: relative
-    bottom: 54px
   .current-gold
     position: absolute
-    left: 5px
+    left: calc(2.125 * var(--tile-cell))
     font-size: 1rem
-    top: 98px
+    top: calc(1.125 * var(--tile-cell))
     display: flex
     align-items: center
     img

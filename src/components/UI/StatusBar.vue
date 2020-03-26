@@ -1,7 +1,8 @@
 <template>
   <div class="statusBar" :class="modifier">
     <div class="statusCurrent" :style="style"></div>
-    <div class="legend">{{ actual }}/{{ total }}</div>
+    <div class="legend"><span>{{ actual }}/{{ total }}</span></div>
+    <!-- <div class="legend">{{ actual }}/{{ total }}</div> -->
   </div>
 </template>
 
@@ -47,15 +48,40 @@ export default {
   height: calc(0.5 * var(--tile-cell))
   position: relative
   background-image: url('../../assets/ui/status_bar.png')
-  background-size: contain
+  background-size: 100% 100%
   image-rendering: pixelated
-  &.--monster
+  &[title="Health"].--monster
+    right: calc(2 * var(--tile-cell))
+    left: initial
     .statusCurrent
       margin: auto 0 auto auto
       background-position: right center
     .legend
       text-align: right
-      right: calc(4 * var(--pixel-unit))
+      right: initial
+      left: calc(8 * var(--pixel-unit))
+  &[title="Experience"]
+    top: calc(var(--tile-cell) * 0.75)
+    position: fixed
+    left: calc(2 * var(--tile-cell))
+    width: calc(6 * var(--tile-cell))
+    height: calc(var(--tile-cell) / 4)
+    background-image: url("../../assets/ui/dungeonUI__statsFrameExp.png") !important
+    .statusCurrent
+      background-image: url("../../assets/ui/dungeonUI__statsBarExp.png") !important
+      position: absolute
+      height: 100%
+      background-size: calc(6 * var(--tile-cell)) 100%
+  &[title="Health"]
+    height: calc(var(--tile-cell) * 0.75)
+    width: calc(6 * var(--tile-cell))
+    left: calc(2 * var(--tile-cell))
+    top: 0
+    position: fixed
+    box-sizing: border-box
+    .legend
+      font-size: 2rem
+      text-shadow: 3px 3px 0 black
 .statusCurrent
   left: 0
   top: 0
@@ -67,16 +93,19 @@ export default {
   width: 100%
 .legend
   position: absolute
-  left: calc(4 * var(--pixel-unit))
-  top: calc(2 * var(--pixel-unit))
+  right: calc(8 * var(--pixel-unit))
+  top: 0
+  bottom: 0
+  margin: auto
   text-shadow: 1px 2px 0 black
-  text-align: center
   z-index: 3
+  display: flex
+  align-items: center
+  justify-content: center
+  span
+    color: #443f3f
+
 @media (min-width: 900px)
-  .legend
-    top: 5px
-    left: 10px
-    color: white
   .statusBar.--monster .legend
     text-align: right
     right: 10px
