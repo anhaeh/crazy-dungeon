@@ -24,7 +24,8 @@ export default {
       return this.$store.getters.getPlayerRange.indexOf(this.cellId) !== -1
     },
     selected: function () {
-      return this.$store.getters.getNpcSelected === this.$options.name
+      let npcSelected = this.$store.getters.getNpcSelected
+      return npcSelected && npcSelected.name === this.$options.name
     }
   }
 }

@@ -115,7 +115,15 @@ export default {
       return this.$store.getters.getMonsterSelected
     },
     isNpcSelected: function() {
-      return this.$store.getters.getNpcSelected
+      let result = false
+      let npcSelected = this.$store.getters.getNpcSelected
+      if (npcSelected) {
+        let playerInRange = this.$store.getters.getPlayerRange
+        if (playerInRange.includes(npcSelected.cellId)) {
+          result = true
+        }
+      }
+      return result
     }
   },
   methods: {
@@ -160,7 +168,7 @@ export default {
     },
     talk: function() {
       event.preventDefault()
-      document.querySelector(`.${this.isNpcSelected} img`).click()
+      document.querySelector(`.${this.$store.getters.getNpcSelected.name} img`).click()
     }
   }
 };

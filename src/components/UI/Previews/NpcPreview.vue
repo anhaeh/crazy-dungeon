@@ -13,13 +13,21 @@
 export default {
   props: ['entity'],
   name: "NpcPreview",
+  watch: {
+    entity: {
+      immediate: true,
+      handler () {
+        this.$store.commit('setNpcSelected', {
+          name: this.entity.npc.type,
+          cellId: this.entity.npc.cellId
+        })
+      }
+    }
+  },
   computed: {
     image: function () {
       return require(`@/assets/npcs/portraits/${this.entity.npc.type}.png`)
     }
-  },
-  created () {
-    this.$store.commit('setNpcSelected', this.entity.npc.type)
   },
   beforeDestroy() {
     this.$store.commit('setNpcSelected', null)
