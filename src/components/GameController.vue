@@ -120,6 +120,9 @@ export default {
       }
       if (event.code === 'Space' && this.$store.getters.getMonsterSelected) {
         this.$store.dispatch('attack')
+      }
+      else if (event.code === 'Space' && this.$store.getters.getNpcSelected) {
+        document.querySelector(`.npc.${this.$store.getters.getNpcSelected} img`).click()
       } else if (event.code.substring(0,5) === 'Digit') {
         // number for skills
         let skill = document.querySelector('#skill-' + event.code.charAt(5))

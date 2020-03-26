@@ -15,6 +15,7 @@ const store = new Vuex.Store({
     entities: null,
     preview: null,
     monsterSelected: null,
+    npcSelected: null,
     inventory: {
       show: false,
       items: [],
@@ -29,6 +30,9 @@ const store = new Vuex.Store({
     },
     getMonsterSelected: state => {
       return state.monsterSelected
+    },
+    getNpcSelected: state => {
+      return state.npcSelected
     },
     getItems: state => {
       return state.entities.items
@@ -128,6 +132,13 @@ const store = new Vuex.Store({
     },
     setMonsterSelected(state, monsterSelected) {
       state.monsterSelected = monsterSelected
+    },
+    setNpcSelected(state, npcSelected) {
+      state.npcSelected = npcSelected
+    },
+    movePlayer(state) {
+      state.monsterSelected = null
+      state.preview = null
     },
     setPlayerPosition(state, playerPosition) {
       state.player.position = playerPosition

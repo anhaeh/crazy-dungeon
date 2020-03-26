@@ -17,6 +17,12 @@ export default {
     image: function () {
       return require(`@/assets/npcs/portraits/${this.entity.npc.type}.png`)
     }
+  },
+  created () {
+    this.$store.commit('setNpcSelected', this.entity.npc.type)
+  },
+  beforeDestroy() {
+    this.$store.commit('setNpcSelected', null)
   }
 }
 </script>

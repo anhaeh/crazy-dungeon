@@ -1,5 +1,5 @@
 <template>
-  <div class="npc" :class="[$options.name, {'in-range': playerInRange}]">
+  <div class="npc" :class="[$options.name, {'in-range': playerInRange}, {'selected': selected}]">
     <img :src="image" @click="click">
   </div>
 </template>
@@ -7,8 +7,11 @@
 <script>
 import AbstractNpc from './AbstractNpc'
 
-export default AbstractNpc.extend({
+export default {
   name: "merchant",
+  mixins: [
+    AbstractNpc
+  ],
   methods: {
     click: function() {
       if (this.playerInRange) {
@@ -17,7 +20,7 @@ export default AbstractNpc.extend({
       }
     }
   }
-})
+}
 </script>
 
 <style scoped lang="sass">

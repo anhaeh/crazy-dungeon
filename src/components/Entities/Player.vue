@@ -65,8 +65,7 @@
       }
     },
     created () {
-      this.$store.commit('setMonsterSelected', null)
-      this.$store.commit('setPreview', null)
+      this.$store.commit('movePlayer')
     }
   }
 </script>

@@ -1,7 +1,6 @@
-import Vue from 'vue'
 import bottomDialog from '@/components/UI/Dialogs/BottomDialog'
 
-export default Vue.extend({
+export default {
   props: {
     cellId: { required: true }
   },
@@ -23,6 +22,9 @@ export default Vue.extend({
     },
     playerInRange: function () {
       return this.$store.getters.getPlayerRange.indexOf(this.cellId) !== -1
+    },
+    selected: function () {
+      return this.$store.getters.getNpcSelected === this.$options.name
     }
   }
-})
+}

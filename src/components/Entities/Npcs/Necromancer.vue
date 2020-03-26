@@ -1,5 +1,5 @@
 <template>
-  <div class="npc" :class="[$options.name, {'in-range': playerInRange}]">
+  <div class="npc" :class="[$options.name, {'in-range': playerInRange}, {'selected': selected}]">
     <img :src="image" alt="" @click="click">
     <bottom-dialog
             v-if="show"
@@ -16,8 +16,11 @@
 <script>
 import AbstractNpc from './AbstractNpc'
 
-export default AbstractNpc.extend({
+export default {
   name: "necromancer",
+  mixins: [
+    AbstractNpc
+  ],
   data () {
     return {
       show: false,
@@ -80,7 +83,7 @@ export default AbstractNpc.extend({
       this.destroyNpc()
     }
   }
-})
+}
 </script>
 
 <style scoped lang="sass">

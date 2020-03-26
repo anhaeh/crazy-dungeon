@@ -57,7 +57,7 @@
            class="dungeonUI__controlsActiveSkill"
            @click="attack">
       </div>
-      <div v-if="isNpcInRange"
+      <div v-if="isNpcSelected"
            class="dungeonUI__controlsActiveSkill talk"
            @click="talk">
       </div>
@@ -114,17 +114,8 @@ export default {
     isMonsterTarget: function() {
       return this.$store.getters.getMonsterSelected
     },
-    isNpcInRange: function() {
-      let npc = null
-      let playerInRange = this.$store.getters.getPlayerRange
-      if (!this.isMonsterTarget) {
-        this.$store.getters.getNpcs.forEach(x => {
-          if (playerInRange.includes(x.cellId)) {
-            npc = x
-          }
-        })
-      }
-      return npc
+    isNpcSelected: function() {
+      return this.$store.getters.getNpcSelected
     }
   },
   methods: {
@@ -169,7 +160,7 @@ export default {
     },
     talk: function() {
       event.preventDefault()
-      document.querySelector(`.${this.isNpcInRange.type} img`).click()
+      document.querySelector(`.${this.isNpcSelected} img`).click()
     }
   }
 };

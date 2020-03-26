@@ -1,5 +1,5 @@
 <template>
-  <div class="npc" :class="[$options.name, {'in-range': playerInRange}]">
+  <div class="npc" :class="[$options.name, {'in-range': playerInRange}, {'selected': selected}]">
     <img :src="image" alt="" @click="click">
     <bottom-dialog
             v-if="show"
@@ -31,8 +31,11 @@
 import AbstractNpc from './AbstractNpc'
 import gameData from '@/gamedata/Npcs.json'
 
-export default AbstractNpc.extend({
+export default {
   name: "chest",
+  mixins: [
+    AbstractNpc
+  ],
   data () {
     return {
       show: false,
@@ -90,7 +93,7 @@ export default AbstractNpc.extend({
       return this.$store.getters.getInventory.items.find(x => x.type === 'key')
     }
   }
-})
+}
 </script>
 
 <style scoped lang="sass">
