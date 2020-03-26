@@ -243,4 +243,9 @@ export default {
       filter: opacity(0.6)
     &.has-item
       cursor: url('../../assets/ui/cursor__pick.png'), auto
+      &:hover:after
+        content: 'Pick item'
+        color: white
+        top: -10px
+        background-image: none
 </style>
