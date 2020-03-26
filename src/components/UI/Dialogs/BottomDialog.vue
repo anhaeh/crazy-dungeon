@@ -77,7 +77,6 @@ export default {
     width: calc(.5 * var(--tile-cell))
     background-size: 100% 100%
     image-rendering: pixelated
-  &::-webkit-scrollbar
     -webkit-appearance: none
   &::-webkit-scrollbar-thumb
     background-image: url("../../../assets/ui/bottomDialog__scrollbarThumb.png")

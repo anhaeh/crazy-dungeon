@@ -79,7 +79,9 @@ export default {
       }
     },
     destroyMonster: function () {
-      this.getMonster.isLive = false
+      if (this.getMonster) {
+        this.getMonster.isLive = false
+      }
     }
   },
   computed: {
