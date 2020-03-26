@@ -57,7 +57,7 @@
            class="dungeonUI__controlsActiveSkill"
            @click="attack">
       </div>
-      <div v-if="isNpcSelected"
+      <div v-if="isNpcTarget"
            class="dungeonUI__controlsActiveSkill talk"
            @click="talk">
       </div>
@@ -114,7 +114,7 @@ export default {
     isMonsterTarget: function() {
       return this.$store.getters.getMonsterSelected
     },
-    isNpcSelected: function() {
+    isNpcTarget: function() {
       let result = false
       let npcSelected = this.$store.getters.getNpcSelected
       if (npcSelected) {
