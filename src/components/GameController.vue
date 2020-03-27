@@ -208,7 +208,7 @@ export default {
       json.player_init = playerPosition
 
       /* Set Zombie*/
-      if (this.dungeonLevel === 1 || this.dungeonLevel % (this.$store.getters.getBossInterval + 1) === 0) {
+      if (this.dungeonLevel === 1 || (this.dungeonLevel - 1) % (this.$store.getters.getBossInterval) === 0) {
         let zombiePosition = playerPosition.split('_')
         zombiePosition = `${zombiePosition[0]}_${parseInt(zombiePosition[1]) + 1}`
         json.entities.npcs.push({

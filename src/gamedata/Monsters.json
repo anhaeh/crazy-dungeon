@@ -54,5 +54,12 @@
     "health": 600,
     "attack": 15,
     "gold": 1000
+  },
+  "boss_5": {
+    "name": "King Imp",
+    "image": "Imp",
+    "health": 800,
+    "attack": 20,
+    "gold": 1500
   }
 }
