@@ -33,6 +33,15 @@ export default {
     },
     isLive: {
       handler () {
+        if (this.$store.getters.getPlayer.level < 5 && Math.random() > 0.85) {
+          /* 15% drop */
+          this.dropPotion()
+        } else if (this.$store.getters.getPlayer.level < 7 && Math.random() > 0.97) {
+          /* 3% drop */
+          this.dropPotion()
+        } else if (Math.random() > 0.99) {
+          this.dropPotion()
+        }
         this.timeout = setTimeout(() => {
           this.destroyMonster()
         }, 1000)
@@ -82,6 +91,11 @@ export default {
       if (this.getMonster) {
         this.getMonster.isLive = false
       }
+    },
+    dropPotion: function () {
+      let items = Object.assign({}, this.$store.getters.getItems)
+      items[this.cellId] = 'potion'
+      this.$store.commit('setItems', items)
     }
   },
   computed: {

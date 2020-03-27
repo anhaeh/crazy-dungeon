@@ -14,7 +14,7 @@ export default {
     getPlayerPosition: {
       handler: function () {
         if (this.getPlayerPosition === this.$store.getters.getPortalPosition) {
-          if (this.dungeonLevel % 6 === 0) {
+          if (this.dungeonLevel % this.bossDungeonLevel === 0) {
             this.buildBoss()
           } else {
             this.buildMap()
@@ -69,7 +69,8 @@ export default {
   },
   data() {
     return {
-      initialPosition: '1_1'
+      initialPosition: '1_1',
+      bossDungeonLevel: 7
     }
   },
   methods: {
@@ -148,7 +149,7 @@ export default {
         entities: {
           monsters: [{
             cellId: '4_2',
-            name: 'boss_' + this.dungeonLevel / 6,
+            name: 'boss_' + this.dungeonLevel / this.bossDungeonLevel,
             isLive: true,
             level: 1,
             damage: 0
@@ -278,10 +279,10 @@ export default {
         npcs.push('chest')
       }
       if (this.dungeonLevel % 3 === 0) {
-        npcs.push('monk')
+        npcs.push('viking')
       }
       if (this.dungeonLevel % 5 === 0) {
-        npcs.push('viking')
+        npcs.push('monk')
       }
       npcs.forEach(npc => {
         let positionNpc = this.random(free)
@@ -315,10 +316,6 @@ export default {
           level: level,
           damage: 0
         })
-        /* set drop potions random when player is less than level 5 */
-        if(Math.random() > 0.85 && playerLevel < 5) {
-          json.entities.items[position] = 'potion'
-        }
       }
 
       if(Math.random() > 0.85) {
