@@ -14,8 +14,11 @@ export default {
     getPlayerPosition: {
       handler: function () {
         if (this.getPlayerPosition === this.$store.getters.getPortalPosition) {
-          this.buildMap()
-          //this.nextRoom()
+          if (this.dungeonLevel % 6 === 0) {
+            this.buildBoss()
+          } else {
+            this.buildMap()
+          }
         } else {
           let player = this.getPlayerPosition.split('_')
           let cells = []
@@ -59,6 +62,9 @@ export default {
   computed: {
     getPlayerPosition: function () {
       return this.$store.getters.getPlayerPosition
+    },
+    dungeonLevel: function () {
+      return this.$store.getters.getDungeon + 1
     }
   },
   data() {
@@ -135,6 +141,38 @@ export default {
         movePlayer(cellToMove)
       }
     },
+    buildBoss: function () {
+      let theme = this.random(['cave', 'crypt', 'plateau'])
+      let json = {
+        theme: theme,
+        entities: {
+          monsters: [{
+            cellId: '4_2',
+            name: 'boss_' + this.dungeonLevel / 6,
+            isLive: true,
+            level: 1,
+            damage: 0
+          }],
+          items: {
+            '1_3': 'bigPotion'
+          },
+          npcs: []
+        },
+        map: {
+          0: [1,1,1,1,1],
+          1: [1,'P',0,0,1],
+          2: [1,0,0,0,1],
+          3: [1,0,0,0,1],
+          4: [1,1,0,1,1],
+          5: [1,0,0,0,1],
+          6: [1,0,0,0,1],
+          7: [1,1,1,1,1],
+        },
+        portal: '1_1',
+        player_init: '6_2'
+      }
+      this.$store.dispatch('setDungeon', json)
+    },
     buildMap: function () {
       /* Set theme */
       let theme = this.random(['cave', 'crypt', 'plateau'])
@@ -209,8 +247,7 @@ export default {
       json.map[cell[0]][cell[1]] = 'P'
 
       /* Set merchant */
-      let dungeonLevel = this.$store.getters.getDungeon + 1
-      if (dungeonLevel % 2 === 0) {
+      if (this.dungeonLevel % 2 === 0) {
         let positionMerchant = this.random(freeMiddleCells)
         /* remove the free */
         index = freeMiddleCells.indexOf(positionMerchant)
@@ -237,13 +274,13 @@ export default {
 
       /* Set npcs */
       let npcs = ['necromancer']
-      if (dungeonLevel % 2 === 0) {
+      if (this.dungeonLevel % 2 === 0) {
         npcs.push('chest')
       }
-      if (dungeonLevel % 3 === 0) {
+      if (this.dungeonLevel % 3 === 0) {
         npcs.push('monk')
       }
-      if (dungeonLevel % 5 === 0) {
+      if (this.dungeonLevel % 5 === 0) {
         npcs.push('viking')
       }
       npcs.forEach(npc => {
