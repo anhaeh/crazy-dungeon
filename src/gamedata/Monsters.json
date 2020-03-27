@@ -28,23 +28,23 @@
     "gold": 35
   },
   "boss_1": {
-    "name": "King Goblin",
-    "image": "Goblin",
-    "health": 150,
+    "name": "Beholder",
+    "image": "Boss_1",
+    "health": 200,
     "attack": 7,
     "gold": 150
   },
   "boss_2": {
     "name": "Queen Gorgon",
     "image": "Gorgon",
-    "health": 250,
+    "health": 350,
     "attack": 10,
     "gold": 250
   },
   "boss_3": {
     "name": "King Golem",
     "image": "Golem",
-    "health": 350,
+    "health": 500,
     "attack": 15,
     "gold": 400
   }
