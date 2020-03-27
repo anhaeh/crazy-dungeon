@@ -14,7 +14,7 @@ export default {
     getPlayerPosition: {
       handler: function () {
         if (this.getPlayerPosition === this.$store.getters.getPortalPosition) {
-          if (this.dungeonLevel % this.bossDungeonLevel === 0) {
+          if (this.dungeonLevel % this.$store.getters.getBossInterval === 0) {
             this.buildBoss()
           } else {
             this.buildMap()
@@ -69,8 +69,7 @@ export default {
   },
   data() {
     return {
-      initialPosition: '1_1',
-      bossDungeonLevel: 7
+      initialPosition: '1_1'
     }
   },
   methods: {
@@ -149,7 +148,7 @@ export default {
         entities: {
           monsters: [{
             cellId: '4_2',
-            name: 'boss_' + this.dungeonLevel / this.bossDungeonLevel,
+            name: 'boss_' + this.dungeonLevel / this.$store.getters.getBossInterval,
             isLive: true,
             level: 1,
             damage: 0
@@ -207,6 +206,18 @@ export default {
       let index = free.indexOf(playerPosition)
       free.splice(index, 1)
       json.player_init = playerPosition
+
+      /* Set Zombie*/
+      if (this.dungeonLevel === 1 || this.dungeonLevel % (this.$store.getters.getBossInterval + 1) === 0) {
+        let zombiePosition = playerPosition.split('_')
+        zombiePosition = `${zombiePosition[0]}_${parseInt(zombiePosition[1]) + 1}`
+        json.entities.npcs.push({
+          type: 'zombie',
+          show: false,
+          cellId: zombiePosition
+        })
+        free.splice(free.indexOf(zombiePosition), 1)
+      }
 
       /* Get cells far from player */
       let playerCell = playerPosition.split('_')

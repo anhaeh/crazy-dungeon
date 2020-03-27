@@ -8,6 +8,7 @@ import necromancer from "../Entities/Npcs/Necromancer"
 import chest from "../Entities/Npcs/Chest"
 import monk from "../Entities/Npcs/Monk"
 import viking from "../Entities/Npcs/Viking"
+import zombie from "../Entities/Npcs/Zombie"
 
 export default {
   name: 'Npc',
@@ -17,7 +18,8 @@ export default {
     necromancer,
     chest,
     monk,
-    viking
+    viking,
+    zombie
   }
 }
 </script>

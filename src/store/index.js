@@ -22,7 +22,8 @@ const store = new Vuex.Store({
       maxSize: 6
     },
     questLog: [],
-    enableFog: true
+    enableFog: true,
+    bossInterval: 7
   },
   getters: {
     getMonsters: state => {
@@ -123,6 +124,9 @@ const store = new Vuex.Store({
     },
     getPlayerCritical: state => {
       return state.player.critical
+    },
+    getBossInterval: state => {
+      return state.bossInterval
     }
   },
   mutations: {
