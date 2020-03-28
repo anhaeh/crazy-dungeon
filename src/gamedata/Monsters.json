@@ -1,10 +1,52 @@
 {
+  "darkPriest": {
+    "name": "Dark Priest",
+    "image": "DarkPriest",
+    "health": 60,
+    "attack": 8,
+    "gold": 100
+  },
+  "fireElemental": {
+    "name": "Fire Elemental",
+    "image": "FireElemental",
+    "health": 50,
+    "attack": 7,
+    "gold": 80
+  },
+  "blackKnight": {
+    "name": "Black Knight",
+    "image": "BlackKnight",
+    "health": 40,
+    "attack": 6,
+    "gold": 70
+  },
+  "bear": {
+    "name": "Bear",
+    "image": "Bear",
+    "health": 40,
+    "attack": 6,
+    "gold": 70
+  },
+  "viper": {
+    "name": "Viper",
+    "image": "Viper",
+    "health": 40,
+    "attack": 5,
+    "gold": 65
+  },
   "gorgon": {
     "name": "Gorgon",
     "image": "Gorgon",
-    "health": 40,
+    "health": 35,
     "attack": 5,
     "gold": 60
+  },
+  "iceGolem": {
+    "name": "Ice Golem",
+    "image": "IceGolem",
+    "health": 32,
+    "attack": 4,
+    "gold": 55
   },
   "golem": {
     "name": "Golem",
@@ -26,5 +68,19 @@
     "health": 25,
     "attack": 2,
     "gold": 35
+  },
+  "bat": {
+    "name": "Bat",
+    "image": "Bat",
+    "health": 20,
+    "attack": 2,
+    "gold": 30
+  },
+  "leech": {
+    "name": "Leech",
+    "image": "Leech",
+    "health": 15,
+    "attack": 2,
+    "gold": 25
   }
 }

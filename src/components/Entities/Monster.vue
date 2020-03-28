@@ -122,8 +122,14 @@ export default {
 
 <style scoped lang="sass">
   .monster
-    position: relative
-    padding: 4px
+    padding: 2px
+    box-sizing: border-box
+    position: absolute
+    width: 100%
+    bottom: 0
+    left: 0
+    right: 0
+    margin: auto
     img
       width: 100%
       height: 100%
@@ -169,7 +175,6 @@ export default {
       filter: drop-shadow(-2px -2px 0 #990000) drop-shadow(2px -2px 0 #990000) drop-shadow(-2px 2px 0 #630000) drop-shadow(2px 2px 0 #630000)
       -webkit-transition: .2s ease-in-out
       transition: .2s ease-in-out
-
   .damage
     color: red
     position: absolute
