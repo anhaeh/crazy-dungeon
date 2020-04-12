@@ -41,12 +41,13 @@ export default {
   data () {
     return {
       show: false,
-      goldCost: gameData[this.$options.name].price * this.$store.getters.getPlayer.level
+      goldCost: 0
     }
   },
   methods: {
     click: function () {
       if (this.playerInRange && !this.show) {
+        this.goldCost = gameData[this.$options.name].price * this.$store.getters.getPlayer.level
         this.show = true
       }
     },
