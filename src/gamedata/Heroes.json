@@ -21,6 +21,17 @@
       "storm"
     ]
   },
+  "pyromancer": {
+    "name": "Pyromancer",
+    "initialHealth": 40,
+    "attack": 13,
+    "critical": 0.04,
+    "image": "pyromancer.jpg",
+    "skills": [
+      "explosion",
+      "storm"
+    ]
+  },
   "archer": {
     "name": "Archer",
     "initialHealth": 45,

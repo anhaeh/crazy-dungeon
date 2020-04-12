@@ -34,6 +34,13 @@
     "attack": 5,
     "gold": 65
   },
+  "phantom": {
+    "name": "Phantom",
+    "image": "Phantom",
+    "health": 37,
+    "attack": 5,
+    "gold": 62
+  },
   "gorgon": {
     "name": "Gorgon",
     "image": "Gorgon",
