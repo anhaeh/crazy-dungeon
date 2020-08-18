@@ -72,18 +72,6 @@ export default {
   overflow-x: hidden
   box-sizing: border-box
   padding: calc(4 * var(--pixel-unit))
-  &::-webkit-scrollbar
-    background-image: url("../../../assets/ui/bottomDialog__scrollbar.png")
-    width: calc(.5 * var(--tile-cell))
-    background-size: 100% 100%
-    image-rendering: pixelated
-    -webkit-appearance: none
-  &::-webkit-scrollbar-thumb
-    background-image: url("../../../assets/ui/bottomDialog__scrollbarThumb.png")
-    background-size: 100% 100%
-    image-rendering: pixelated
-  &::-webkit-scrollbar-track
-    border-radius: 10px
 .bottomDialog__actions
   height: calc(.75 * var(--tile-cell))
   width: 100%
