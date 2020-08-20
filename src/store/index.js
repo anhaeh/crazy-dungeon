@@ -341,6 +341,7 @@ const store = new Vuex.Store({
       }
       state.player.gold -= skill.obj.price
       state.player.skills.push(skill.name)
+      state.entities.npcs.find(x => x.type === 'merchant').skills.pop()
       commit('pushLog', 'Player bought ' + skill.obj.name)
 
     },

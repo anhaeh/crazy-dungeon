@@ -36,10 +36,8 @@ export default {
         if (this.$store.getters.getPlayer.level < 5 && Math.random() > 0.85) {
           /* 15% drop */
           this.dropPotion()
-        } else if (this.$store.getters.getPlayer.level < 7 && Math.random() > 0.97) {
+        } else if (this.$store.getters.getPlayer.level >= 5 && Math.random() > 0.97) {
           /* 3% drop */
-          this.dropPotion()
-        } else if (Math.random() > 0.99) {
           this.dropPotion()
         }
         this.timeout = setTimeout(() => {
@@ -164,7 +162,7 @@ export default {
       height: calc(4 * var(--pixel-unit))
       width: calc(5 * var(--pixel-unit))
       background: #000000eb
-      z-index: 3
+      z-index: 1
       position: absolute
       color: #bfa561
       font-size: 16px
@@ -178,7 +176,7 @@ export default {
       left: 0
       height: 3px
       background: rgb(150, 0, 0)
-      z-index: 2
+      z-index: 3
       position: absolute
       width: 100%
     .life-background
@@ -186,7 +184,7 @@ export default {
       left: 0
       height: 3px
       background: rgba(0, 0, 0, 0.8)
-      z-index: 1
+      z-index: 2
       position: absolute
       width: 100%
     .can-target
