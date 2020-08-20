@@ -86,7 +86,7 @@
   "boss_6": {
     "name": "Queen Gorgon",
     "image": "Gorgon",
-    "health": 1000,
+    "health": 1200,
     "attack": 15,
     "gold": 1500
   }
