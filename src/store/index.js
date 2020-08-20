@@ -23,7 +23,7 @@ const store = new Vuex.Store({
     },
     questLog: [],
     enableFog: true,
-    bossInterval: 7
+    bossInterval: 6
   },
   getters: {
     getMonsters: state => {
@@ -260,6 +260,7 @@ const store = new Vuex.Store({
         defeatMonsters: 0,
         nextLevelMonsters: 5,
         level: 1,
+        area: 1,
         isDead: false,
         skills: [],
         score: 0
@@ -296,6 +297,9 @@ const store = new Vuex.Store({
       state.dungeon += 1
       state.mapDiscover = []
       state.questLog = ['Begin dungeon ' + state.dungeon]
+    },
+    incrementArea({ state }) {
+      state.player.area += 1
     },
     initGame({ commit }) {
       commit('initializePlayer')

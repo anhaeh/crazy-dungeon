@@ -58,29 +58,29 @@
   "boss_2": {
     "name": "King Goblin",
     "image": "Goblin",
-    "health": 400,
-    "attack": 10,
+    "health": 300,
+    "attack": 8,
     "gold": 500
   },
   "boss_3": {
     "name": "Queen Gorgon",
     "image": "Gorgon",
-    "health": 500,
-    "attack": 13,
+    "health": 400,
+    "attack": 10,
     "gold": 750
   },
   "boss_4": {
     "name": "King Golem",
     "image": "Golem",
     "health": 600,
-    "attack": 15,
+    "attack": 11,
     "gold": 1000
   },
   "boss_5": {
     "name": "King Imp",
     "image": "Imp",
     "health": 800,
-    "attack": 20,
+    "attack": 15,
     "gold": 1500
   }
 }

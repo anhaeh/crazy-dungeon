@@ -34,7 +34,7 @@
     "description": "Make the basic attack x 2 and you recover 30% of the damage done",
     "points": 5,
     "image": "drain.jpg",
-    "price": "600"
+    "price": "650"
   },
   "storm": {
     "name": "Storm",
@@ -52,7 +52,7 @@
     "description": "Make the basic attack x 2 and you don't receive attack from monsters",
     "points": 5,
     "image": "explosion.jpg",
-    "price": "600"
+    "price": "650"
   },
   "double_arrow": {
     "name": "Double Arrow",

@@ -27,7 +27,6 @@
 </template>
 
 <script>
-import ItemsData from '@/gamedata/Skills.json'
 import merchantDialog from '../Dialogs/MerchantDialog'
 import item from './MerchantItem'
 import skill from './MerchantSkill'
@@ -59,7 +58,7 @@ export default {
     skills : function () {
       let result = []
       if (!this.isItems) {
-        result = Object.keys(ItemsData).filter(x => !this.$store.getters.getPlayerSkills.includes(x))
+        result = this.$store.getters.getMerchant.skills
       }
       return result
     },

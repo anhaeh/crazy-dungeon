@@ -9,6 +9,13 @@
       <div slot="text">
         Hello adventurer. It is said that {{ this.bossInterval - 1 }} floors down, a powerful monster inhabits, <span class="boss-name">the {{ nextBoss }}</span>. Get all the necessary equipment to defeat this fearsome creature. Be very careful and good luck.
       </div>
+      <template slot="actions">
+        <div class="bottomDialog__actionsBtn"
+             @click="destroyNpc"
+        >
+          Go away
+        </div>
+      </template>
     </bottom-dialog>
   </div>
 </template>

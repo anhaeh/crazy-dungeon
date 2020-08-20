@@ -6,6 +6,8 @@
 import { movePlayer } from "@/modules/player"
 import itemsData from '@/gamedata/Items.json'
 import Dungeon from 'dungeon-generator'
+import skillsData from '@/gamedata/Skills.json'
+
 
 export default {
   name: "GameController",
@@ -171,6 +173,7 @@ export default {
         portal: '1_1',
         player_init: '6_2'
       }
+      this.$store.dispatch('incrementArea')
       this.$store.dispatch('setDungeon', json)
     },
     buildMap: function () {
@@ -281,6 +284,9 @@ export default {
           items.splice(index, 1)
           merchant.items.push(itemToAdd)
         }
+        // set skills
+        let skills = Object.keys(skillsData).filter(x => !this.$store.getters.getPlayerSkills.includes(x))
+        merchant.skills = [this.random(skills)]
         json.entities.npcs.push(merchant)
       }
 
@@ -306,7 +312,15 @@ export default {
       })
 
       /* Set monsters */
-      let monstersList = ['goblin', 'golem', 'gorgon', 'imp', 'bat', 'leech', 'goblin_marauder']
+      let monstersAvailable = ['goblin', 'golem', 'gorgon', 'imp', 'bat', 'leech', 'goblin_marauder']
+      let monstersList = []
+      for (let i = 0; i < 5; i++) {
+        let monsterToAdd = this.random(monstersAvailable)
+        index = monstersAvailable.indexOf(monsterToAdd)
+        monstersAvailable.splice(index, 1)
+        monstersList.push(monsterToAdd)
+      }
+
       let playerLevel = this.$store.getters.getPlayer.level
 
       for (let i = 0; i < roomCount * 3; i++) {
