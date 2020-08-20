@@ -137,61 +137,67 @@ export default {
 </script>
 
 <style scoped lang="sass">
+  .is-target
+    cursor: url('../../assets/ui/cursor__attack.png'), auto
+    img.is-live
+      filter: drop-shadow(0px 0px 3px red) !important
+      -webkit-transition: .2s ease-in-out
+      transition: .2s ease-in-out
   .monster
-    position: relative
     padding: 4px
+    box-sizing: border-box
+    position: absolute
+    width: 100%
+    bottom: 0
+    left: 0
+    right: 0
+    margin: auto
     img
       width: 100%
       height: 100%
       object-fit: contain
       &.is-live
         filter: drop-shadow(-1px -1px 0 #000) drop-shadow(1px -1px 0 #000) drop-shadow(-1px 1px 0 #000) drop-shadow(1px 1px 0 #000)
-  .level
-    top: 0
-    left: 0
-    height: calc(4 * var(--pixel-unit))
-    width: calc(5 * var(--pixel-unit))
-    background: #000000eb
-    z-index: 3
-    position: absolute
-    color: #bfa561
-    font-size: 16px
-    display: flex
-    justify-content: center
-    font-weight: bold
-    align-items: center
-    box-shadow: inset 0 0 0 calc(0.5 * var(--pixel-unit)) #1c140c
-  .life
-    bottom: 4px
-    left: 0
-    height: 3px
-    background: rgb(150, 0, 0)
-    z-index: 2
-    position: absolute
-    width: 100%
-  .life-background
-    bottom: 4px
-    left: 0
-    height: 3px
-    background: rgba(0, 0, 0, 0.8)
-    z-index: 1
-    position: absolute
-    width: 100%
-  .can-target
-    cursor: url('../../assets/ui/cursor__move.png'), auto
-  .is-target
-    cursor: url('../../assets/ui/cursor__attack.png'), auto
-    img.is-live
-      filter: drop-shadow(0px 0px 3px red)
-      -webkit-transition: .2s ease-in-out
-      transition: .2s ease-in-out
-  .damage
-    color: red
-    position: absolute
-    z-index: 5
-    top: -2px
-    font-size: 1.5rem
-    right: 0
-    filter: drop-shadow(-1px -1px 0 #000) drop-shadow(1px -1px 0 #000) drop-shadow(-1px 1px 0 #000) drop-shadow(1px 1px 0 #000)
-    animation: counterAnimation 0.5s ease-out
+    .level
+      top: 0
+      left: calc(-2 * var(--pixel-unit))
+      height: calc(4 * var(--pixel-unit))
+      width: calc(5 * var(--pixel-unit))
+      background: #000000eb
+      z-index: 3
+      position: absolute
+      color: #bfa561
+      font-size: 16px
+      display: flex
+      justify-content: center
+      font-weight: bold
+      align-items: center
+      box-shadow: inset 0 0 0 calc(0.5 * var(--pixel-unit)) #1c140c
+    .life
+      bottom: 0
+      left: 0
+      height: 3px
+      background: rgb(150, 0, 0)
+      z-index: 2
+      position: absolute
+      width: 100%
+    .life-background
+      bottom: 0
+      left: 0
+      height: 3px
+      background: rgba(0, 0, 0, 0.8)
+      z-index: 1
+      position: absolute
+      width: 100%
+    .can-target
+      cursor: url('../../assets/ui/cursor__move.png'), auto
+    .damage
+      color: red
+      position: absolute
+      z-index: 5
+      top: -2px
+      font-size: 1.5rem
+      right: 0
+      filter: drop-shadow(-1px -1px 0 #000) drop-shadow(1px -1px 0 #000) drop-shadow(-1px 1px 0 #000) drop-shadow(1px 1px 0 #000)
+      animation: counterAnimation 0.5s ease-out
 </style>

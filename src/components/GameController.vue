@@ -323,9 +323,17 @@ export default {
 
       let playerLevel = this.$store.getters.getPlayer.level
 
+      let maxLevel = playerLevel
+      if (this.$store.getters.getPlayer.area === 2) {
+        maxLevel = playerLevel + 1
+      }
+      if (this.$store.getters.getPlayer.area > 2) {
+        maxLevel = playerLevel + 2
+      }
+
       for (let i = 0; i < roomCount * 3; i++) {
         let num = Math.random()
-        let level = playerLevel + 2
+        let level = maxLevel
         if(num < 0.5){
           level = playerLevel
         } else if (num < 0.85) {

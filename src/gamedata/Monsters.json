@@ -56,8 +56,8 @@
     "gold": 200
   },
   "boss_2": {
-    "name": "King Goblin",
-    "image": "Goblin",
+    "name": "Ice Golem",
+    "image": "IceGolem",
     "health": 300,
     "attack": 8,
     "gold": 500
