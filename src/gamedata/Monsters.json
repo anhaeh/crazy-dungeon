@@ -58,29 +58,29 @@
   "boss_2": {
     "name": "Ice Golem",
     "image": "IceGolem",
-    "health": 300,
-    "attack": 8,
-    "gold": 500
+    "health": 350,
+    "attack": 7,
+    "gold": 350
   },
   "boss_3": {
     "name": "Queen Gorgon",
     "image": "Gorgon",
-    "health": 400,
-    "attack": 10,
+    "health": 450,
+    "attack": 8,
     "gold": 750
   },
   "boss_4": {
     "name": "King Golem",
     "image": "Golem",
     "health": 600,
-    "attack": 11,
+    "attack": 9,
     "gold": 1000
   },
   "boss_5": {
     "name": "King Imp",
     "image": "Imp",
     "health": 800,
-    "attack": 15,
+    "attack": 10,
     "gold": 1500
   }
 }
