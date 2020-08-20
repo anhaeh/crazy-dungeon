@@ -5,6 +5,8 @@ const movePlayer = (cellToMove) => {
   let isMonsterTarget = store.getters.getMonsterSelected
   try {
     document.querySelector('#cell-' + cellToMove).click()
+    // TODO implementar con vuex para poder checkear si esta habilitado o no la vibracion en opciones
+    // window.navigator.vibrate(15)
     if (!isMonsterTarget || (isMonsterTarget && isMonsterTarget.cellId !== cellToMove)) {
       document.querySelector('#cell-' + cellToMove + ' .monster').click()
     }

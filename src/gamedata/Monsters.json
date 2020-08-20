@@ -27,6 +27,27 @@
     "attack": 2,
     "gold": 35
   },
+  "bat": {
+    "name": "Bat",
+    "image": "Bat",
+    "health": 30,
+    "attack": 2,
+    "gold": 40
+  },
+  "leech": {
+    "name": "Leech",
+    "image": "Leech",
+    "health": 55,
+    "attack": 3,
+    "gold": 50
+  },
+  "goblin_marauder": {
+    "name": "Goblin Marauder",
+    "image": "GoblinMarauder",
+    "health": 35,
+    "attack": 3,
+    "gold": 45
+  },
   "boss_1": {
     "name": "Beholder",
     "image": "Boss_1",

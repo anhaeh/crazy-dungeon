@@ -3,7 +3,7 @@
        @click="click"
        :class="[{ 'can-target': canTarget }, { 'is-target': isTarget && isLive}]"
   >
-    <img :src="image">
+    <img :class="{ 'is-live': isLive }" :src="image">
     <span class="damage" v-if="counterDamage">-{{ counterDamage }}</span>
     <div v-if="isLive">
       <div class="level">{{ getMonster.level }}</div>
@@ -144,7 +144,8 @@ export default {
       width: 100%
       height: 100%
       object-fit: contain
-      filter: drop-shadow(0px 0px 2px black)
+      &.is-live
+        filter: drop-shadow(-1px -1px 0 #000) drop-shadow(1px -1px 0 #000) drop-shadow(-1px 1px 0 #000) drop-shadow(1px 1px 0 #000)
   .level
     top: 0
     left: 0
@@ -180,7 +181,7 @@ export default {
     cursor: url('../../assets/ui/cursor__move.png'), auto
   .is-target
     cursor: url('../../assets/ui/cursor__attack.png'), auto
-    img
+    img.is-live
       filter: drop-shadow(0px 0px 3px red)
       -webkit-transition: .2s ease-in-out
       transition: .2s ease-in-out

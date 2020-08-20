@@ -306,7 +306,7 @@ export default {
       })
 
       /* Set monsters */
-      let monstersList = ['goblin', 'golem', 'gorgon', 'imp']
+      let monstersList = ['goblin', 'golem', 'gorgon', 'imp', 'bat', 'leech', 'goblin_marauder']
       let playerLevel = this.$store.getters.getPlayer.level
 
       for (let i = 0; i < roomCount * 3; i++) {

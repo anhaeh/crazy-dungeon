@@ -78,7 +78,7 @@
       width: 100%
       height: auto
       object-fit: contain
-      filter: drop-shadow(0px 0px 2px black)
+      filter: drop-shadow(-1px -1px 0 #000) drop-shadow(1px -1px 0 #000) drop-shadow(-1px 1px 0 #000) drop-shadow(1px 1px 0 #000)
     .damage
       color: red
       position: absolute
