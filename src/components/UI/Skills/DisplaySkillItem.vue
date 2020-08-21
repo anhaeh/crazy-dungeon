@@ -26,7 +26,7 @@ export default {
       required: true
     }
   },
-  name: "DisplaySkillsItem",
+  name: "DisplaySkillItem",
   data () {
     return {
       skill: null

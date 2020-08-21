@@ -1,39 +1,44 @@
 <template>
-  <div :class="['cell', {'can-move': canMove && !isMobile }, {'has-fog': hasFog }, {'has-item': hasItem}]"
-       :id="'cell-' + id"
-       @click="click">
-    <img :src="image()">
-    <img v-if="diagonalClass.includes('e')"
-         :src="imageDiagonal('e')"
-         class="diagonal --east">
-    <img v-if="diagonalClass.includes('w')"
-         :src="imageDiagonal('w')"
-         class="diagonal --west">
-    <img v-if="dotClass"
-         :src="imageDot()"
-         class="dot"
-         :class="{'--east': dotClass.includes('e')}">
-    <template v-if="!hasFog">
-      <Monster
-         v-if="hasMonster"
-         :name="getMonster.name"
-         :key="'monster-' + id"
-         :ref="getMonster.name + id"
-         :cell-id="id"
-      >
-      </Monster>
-      <Player v-if="hasPlayer"></Player>
-      <npc v-if="hasNpc" :npc="hasNpc" :cell-id="id"></npc>
-      <Item
-        v-if="!hasMonster && hasItem"
-        :name="hasItem"
-        :key="'item' + '-' + id"
-        :ref="hasItem + id"
-        :cell-id="id"
-      >
-      </Item>
-    </template>
-  </div>
+  <span>
+    <div :class="['cell', {'can-move': canMove && !isMobile }, {'has-fog': hasFog }, {'has-item': hasItem}]"
+         :id="'cell-' + id"
+         @click="click">
+      <img :src="image()">
+      <img v-if="diagonalClass.includes('e')"
+           :src="imageDiagonal('e')"
+           class="diagonal --east">
+      <img v-if="diagonalClass.includes('w')"
+           :src="imageDiagonal('w')"
+           class="diagonal --west">
+      <img v-if="dotClass"
+           :src="imageDot()"
+           class="dot"
+           :class="{'--east': dotClass.includes('e')}">
+      <template v-if="!hasFog">
+        <Monster
+           v-if="hasMonster"
+           :name="getMonster.name"
+           :key="'monster-' + id"
+           :ref="getMonster.name + id"
+           :cell-id="id"
+        >
+        </Monster>
+        <Player v-if="hasPlayer"></Player>
+        <npc v-if="hasNpc" :npc="hasNpc" :cell-id="id"></npc>
+        <Item
+          v-if="!hasMonster && hasItem"
+          :name="hasItem"
+          :key="'item' + '-' + id"
+          :ref="hasItem + id"
+          :cell-id="id"
+        >
+        </Item>
+      </template>
+    </div>
+    <span class="show-skill-passive" v-if="hasFog">
+      {{ passiveSkill() }}
+    </span>
+  </span>
 </template>
 
 <script>
@@ -89,9 +94,20 @@ export default {
     },
     hasFog: function () {
       return this.$store.getters.getEnableFog && !this.$store.getters.getMapDiscover.includes(this.id) && !this.hasPlayer
-    }
+    },
   },
   methods: {
+    passiveSkill: function () {
+      let passive = this.$store.getters.getPlayer.passiveSkills[0]
+      let result = ''
+      if (passive.mapLetter === 'M' && this.hasMonster
+              || passive.mapLetter === 'N' && this.hasNpc
+              || passive.mapLetter === 'E' && this.type === 'P'
+      ) {
+        result = passive.mapLetter
+      }
+      return result
+    },
     image: function () {
       let imageFile = this.tile.image
       if (this.imageWall) {
@@ -227,6 +243,14 @@ export default {
     right: 0
 .has-fog
   filter: opacity(0)
+.show-skill-passive
+  color: #bfa561
+  display: flex
+  justify-content: center
+  top: calc(var(--tile-cell) * -0.75)
+  position: relative
+  max-height: 0
+  font-size: 1.5rem
 @media (min-width: 900px)
   .can-move
     cursor: url('../../assets/ui/cursor__move.png'), auto

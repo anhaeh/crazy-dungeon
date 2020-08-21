@@ -8,6 +8,14 @@
     "skills": [
       "fury_attack",
       "heal"
+    ],
+    "passiveSkills": [
+      {
+        "name": "Slippery",
+        "description": "Know where the exit from the dungeon is",
+        "mapLetter": "E",
+        "image": "blackFire.png"
+      }
     ]
   },
   "wizard": {
@@ -19,17 +27,33 @@
     "skills": [
       "explosion",
       "storm"
+    ],
+    "passiveSkills": [
+      {
+        "name": "Bounty hunter",
+        "description": "Find the NPCs in the fog",
+        "mapLetter": "N",
+        "image": "poison.jpg"
+      }
     ]
   },
   "archer": {
     "name": "Archer",
     "initialHealth": 45,
     "attack": 7,
-    "critical": 0.15,
+    "critical": 0.20,
     "image": "archer.png",
     "skills": [
       "double_arrow",
       "bones_breaker"
+    ],
+    "passiveSkills": [
+      {
+        "name": "Tracking",
+        "description": "Track monsters through the fog",
+        "mapLetter": "M",
+        "image": "fire_bolt.png"
+      }
     ]
   }
 }

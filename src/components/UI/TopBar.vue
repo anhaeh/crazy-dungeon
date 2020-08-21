@@ -1,9 +1,9 @@
 <template>
-  <div class="topBar" :class="{'--mobile': isMobile}">
+  <div class="topBar" :class="{ '--mobile': isMobile }">
     <player-stats></player-stats>
     <div class="preview">
       <component v-if="getPreview"
-                 :is="componentToPreview"
+                 :is="getPreview.entity"
                  :entity="getPreview"
       ></component>
     </div>
@@ -27,9 +27,6 @@ export default {
     npcPreview
   },
   computed: {
-    componentToPreview: function () {
-      return this.getPreview ? this.getPreview.entity : null
-    },
     getPreview: function () {
       return this.$store.getters.getPreview
     }

@@ -150,7 +150,7 @@ export default {
         entities: {
           monsters: [{
             cellId: '4_2',
-            name: 'boss_' + this.dungeonLevel / this.$store.getters.getBossInterval,
+            name: 'boss_' + this.$store.getters.getPlayer.area,
             isLive: true,
             level: 1,
             damage: 0

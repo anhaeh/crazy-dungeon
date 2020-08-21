@@ -47,8 +47,7 @@ export default {
     }
   },
   created() {
-    let nextBossId = this.$store.getters.getDungeon === 1 ? 1:
-      ((this.$store.getters.getDungeon - 1) / this.bossInterval) + 1
+    let nextBossId = this.$store.getters.getPlayer.area
     this.nextBoss = monsters['boss_' + nextBossId].name
   }
 }
