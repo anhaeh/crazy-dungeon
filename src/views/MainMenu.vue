@@ -7,7 +7,7 @@
     <div class="intro__menu">
       <div class="intro__btn" @click="$router.push({name: 'class-selection'})">New Game</div>
       <div class="intro__btn" @click="$router.push({name: 'high-scores'})">High Scores</div>
-      <div class="intro__btn --disabled">Library</div>
+      <div class="intro__btn" @click="$router.push({name: 'library'})">Library</div>
       <div class="intro__btn --disabled">Settings</div>
       <span class="version">Version {{ version }}</span>
     </div>

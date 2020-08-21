@@ -4,6 +4,7 @@ import MainMenu from '../views/MainMenu'
 import ClassSelection from '../views/ClassSelection'
 import Dungeon from '../views/Dungeon'
 import HighScores from '../views/HighScores'
+import Library from '../views/Library'
 
 Vue.use(VueRouter)
 
@@ -34,6 +35,11 @@ const routes = [
     path: '/high-scores',
     name: 'high-scores',
     component: HighScores
+  },
+  {
+    path: '/library',
+    name: 'library',
+    component: Library
   },
 ]
 

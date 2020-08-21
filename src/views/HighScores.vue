@@ -31,7 +31,7 @@
 import axios from 'axios'
 
 export default {
-  name: "ClassSelection",
+  name: "HighScores",
   data() {
     return {
       results: null
