@@ -41,7 +41,7 @@
     "name": "Archer",
     "initialHealth": 45,
     "attack": 7,
-    "critical": 0.20,
+    "critical": 0.18,
     "image": "archer.png",
     "skills": [
       "double_arrow",
