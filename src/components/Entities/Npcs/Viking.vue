@@ -47,7 +47,9 @@ export default {
   methods: {
     click: function () {
       if (this.playerInRange && !this.show) {
-        this.goldCost = gameData[this.$options.name].price * this.$store.getters.getPlayer.level
+        let playerLevel = this.$store.getters.getPlayer.level
+        let counter = playerLevel < 5 ? playerLevel : 5
+        this.goldCost = gameData[this.$options.name].price * counter
         this.show = true
       }
     },

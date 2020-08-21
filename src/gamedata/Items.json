@@ -88,6 +88,15 @@
     "description": "This iron helmet give you + 15 health",
     "price": 400
   },
+  "helmet2": {
+    "name": "Gladiator Helmet",
+    "image": "Item__46.png",
+    "legend": "+20 HP",
+    "counter": 20,
+    "type": "life",
+    "description": "This gladiator helmet give you + 20 health",
+    "price": 450
+  },
   "leatherGlove": {
     "name": "Leather glove",
     "image": "Item__61.png",
@@ -124,7 +133,7 @@
     "description": "This boots give you + 55 health",
     "price": 800
   },
-  "helmet2": {
+  "helmet3": {
     "name": "Magic helmet",
     "image": "Item__52.png",
     "legend": "+65 HP",
@@ -141,6 +150,24 @@
     "type": "life",
     "description": "This magic armor give you + 75 health",
     "price": 1000
+  },
+  "bow1": {
+    "name": "Wooden Bow",
+    "image": "Item__16.png",
+    "legend": "+3% critical",
+    "counter": 0.03,
+    "type": "critical",
+    "description": "This wooden bow give you + 3% critical",
+    "price": 450
+  },
+  "bow2": {
+    "name": "Hunting Bow",
+    "image": "Item__17.png",
+    "legend": "+5% critical",
+    "counter": 0.05,
+    "type": "critical",
+    "description": "This hunting bow give you + 5% critical",
+    "price": 650
   },
   "ring1": {
     "name": "Basic ring",

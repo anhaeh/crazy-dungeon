@@ -123,7 +123,12 @@ const store = new Vuex.Store({
       return state.player.score
     },
     getPlayerCritical: state => {
-      return state.player.critical
+      let itemsBuffCritical = state.inventory.items.filter(x => x.type === 'critical')
+      let total = state.player.critical
+      itemsBuffCritical.forEach(item => {
+        total += item.counter
+      })
+      return total
     },
     getBossInterval: state => {
       return state.bossInterval
@@ -349,7 +354,7 @@ const store = new Vuex.Store({
       let playerDamage = Math.ceil(getters.getPlayerAttack * payload.damageSkill)
       // critical
       let critical = false
-      if (Math.random() <= state.player.critical) {
+      if (Math.random() <= getters.getPlayerCritical) {
         playerDamage *= 2
         critical = true
       }
