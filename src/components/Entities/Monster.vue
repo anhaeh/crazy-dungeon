@@ -137,10 +137,11 @@ export default {
 <style scoped lang="sass">
   .is-target
     cursor: url('../../assets/ui/cursor__attack.png'), auto
-    img.is-live
-      filter: drop-shadow(0px 0px 3px red) !important
-      -webkit-transition: .2s ease-in-out
-      transition: .2s ease-in-out
+    img
+      &.is-live
+        filter: drop-shadow(-2px -2px 0 #990000) drop-shadow(2px -2px 0 #990000) drop-shadow(-2px 2px 0 #630000) drop-shadow(2px 2px 0 #630000)!important
+        -webkit-transition: .2s ease-in-out
+        transition: .2s ease-in-out
   .monster
     padding: 4px
     box-sizing: border-box

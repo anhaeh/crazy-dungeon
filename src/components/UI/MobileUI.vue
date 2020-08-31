@@ -235,7 +235,7 @@ export default {
   min-width: calc(2.5 * var(--tile-cell))
   background-image: url("../../assets/ui/dungeonUI__currentUn.png")
   .text
-    padding-left: calc(0.75 * var(--tile-cell) - 23px)
+    padding-left: calc(0.75 * var(--tile-cell) - 20px)
   .title
     margin-left: 15px
     color: #c0a23b
