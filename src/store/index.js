@@ -282,15 +282,18 @@ const store = new Vuex.Store({
     },
     levelUp(state) {
       let newPlayer = Object.assign({}, state.player)
+      let attack = heroes[newPlayer.class].incrementalStats.attack
+      let critical = heroes[newPlayer.class].incrementalStats.critical
+      let health = heroes[newPlayer.class].incrementalStats.health
       newPlayer.level += 1
       newPlayer.defeatMonsters = 0
       newPlayer.damage = 0
-      newPlayer.attack += heroes[newPlayer.class].incrementalStats.attack
-      newPlayer.health += heroes[newPlayer.class].incrementalStats.health
-      newPlayer.critical += heroes[newPlayer.class].incrementalStats.critical
+      newPlayer.attack += attack
+      newPlayer.health += health
+      newPlayer.critical += critical
       newPlayer.nextLevelMonsters = 5 * newPlayer.level
       state.player = newPlayer
-      state.questLog.push(`Player level up`)
+      state.questLog.push(`Player level up. +${attack} ATK/+${health} HP/+${critical * 100}% critical`)
     },
     destroyNpc(state, cellId) {
       let index = state.entities.npcs.findIndex(x => x.cellId === cellId)
