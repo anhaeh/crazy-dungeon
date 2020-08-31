@@ -1,5 +1,6 @@
 import Vue from "vue"
 import Vuex from "vuex"
+import heroes from '@/gamedata/Heroes.json'
 
 Vue.use(Vuex)
 
@@ -53,7 +54,7 @@ const store = new Vuex.Store({
       return total
     },
     getPlayerBaseLife: state => {
-      return state.player.initialHealth + (state.player.level * 15)
+      return state.player.health
     },
     getPlayerBuffLife: state => {
       let itemsBuffHealth = state.inventory.items.filter(x => x.type === 'life')
@@ -252,13 +253,19 @@ const store = new Vuex.Store({
       }
     },
     initializePlayer(state) {
+      // deep copy
+      let heroesCopy = JSON.parse(JSON.stringify(heroes))
+      let heroeData = heroesCopy[state.classSelected]
       state.player = {
         class: state.classSelected,
         position: null,
         gold: 0,
         damage: 0,
-        critical: 0,
-        attack: 0,
+        image: heroeData.image,
+        name: heroeData.name,
+        health: heroeData.initialStats.health,
+        critical: heroeData.initialStats.critical,
+        attack: heroeData.initialStats.attack,
         range: [],
         viewport: [],
         vision: [],
@@ -267,21 +274,20 @@ const store = new Vuex.Store({
         level: 1,
         area: 1,
         isDead: false,
-        skills: [],
+        skills: heroeData.skills,
+        passiveSkills: heroeData.passiveSkills,
         score: 0
       }
       state.inventory.items = []
-      // deep copy
-      let heroes = JSON.parse(JSON.stringify(require('@/gamedata/Heroes.json')))
-      let heroeData = heroes[state.classSelected]
-      Object.assign(state.player, Object.assign({}, heroeData))
     },
     levelUp(state) {
       let newPlayer = Object.assign({}, state.player)
       newPlayer.level += 1
       newPlayer.defeatMonsters = 0
       newPlayer.damage = 0
-      newPlayer.attack += 2
+      newPlayer.attack += heroes[newPlayer.class].incrementalStats.attack
+      newPlayer.health += heroes[newPlayer.class].incrementalStats.health
+      newPlayer.critical += heroes[newPlayer.class].incrementalStats.critical
       newPlayer.nextLevelMonsters = 5 * newPlayer.level
       state.player = newPlayer
       state.questLog.push(`Player level up`)
@@ -308,15 +314,6 @@ const store = new Vuex.Store({
     },
     initGame({ commit }) {
       commit('initializePlayer')
-    },
-    levelUp({ state }) {
-      let newPlayer = Object.assign({}, state.player)
-      newPlayer.level += 1
-      newPlayer.defeatMonsters = 0
-      newPlayer.damage = 0
-      newPlayer.attack += newPlayer.level
-      newPlayer.nextLevelMonsters = 5 * newPlayer.level
-      state.player = newPlayer
     },
     buyItem({state, commit}, item) {
       if (state.inventory.maxSize === state.inventory.items.length) {

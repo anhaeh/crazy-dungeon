@@ -11,7 +11,6 @@
         <input type="text" v-model="name" placeholder="Enter your name" maxlength="20">
         <div class="btn btn-new-game btn-score"
              @click="pushScore"
-             :class="{'--disabled': name.trim() === ''}"
         >
           Send
         </div>
@@ -35,12 +34,14 @@ export default {
       this.$router.push({name: 'main-menu'})
     },
     pushScore: function () {
-      axios.post('https://anhaeh.pythonanywhere.com/api/v1/dungeon/high-score/', {
-        "score": this.$store.getters.getScore,
-        "name": this.name,
-        "player_level": this.$store.getters.getPlayer.level,
-        "class_name": this.$store.getters.getPlayer.class
-      })
+      if (this.name.trim()) {
+        axios.post('https://anhaeh.pythonanywhere.com/api/v1/dungeon/high-score/', {
+          "score": this.$store.getters.getScore,
+          "name": this.name,
+          "player_level": this.$store.getters.getPlayer.level,
+          "class_name": this.$store.getters.getPlayer.class
+        })
+      }
       this.goMenu()
     }
   },
@@ -102,7 +103,4 @@ export default {
       border: #533a18 solid 1px
       color: white
       background-color: #673352
-      &.--disabled
-        pointer-events: none
-        background-color: gray
 </style>

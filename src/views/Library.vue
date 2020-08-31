@@ -1,7 +1,7 @@
 <template>
   <div class="container">
     <h1 class="title">Library</h1>
-    <h2>Bosses</h2>
+    <h2 class="subtitle">Bosses</h2>
     <div class="monster__container">
         <div v-for="boss in bosses"
              :key="boss"
@@ -10,6 +10,7 @@
             <img class="monster__portrait" :src="image(boss)" alt="">
             <div class="monster__attributes">
               <span class="monster__name">{{ getMonster(boss).name }}</span>
+              <status-bar :total="getMonster(boss).health" :actual="getMonster(boss).health"></status-bar>
               <div class="monster__numbers">
                 <img :src="attackIcon" title="Monster attack">
                 <span class="counter --attack">{{ getMonster(boss).attack + 1 }}</span>
@@ -28,9 +29,13 @@
 
 <script>
 import monsters from '../gamedata/Monsters.json'
+import statusBar from '../components/UI/StatusBar'
 
 export default {
   name: "Library",
+  components: {
+    statusBar
+  },
   data() {
     return {
       bosses: []
@@ -79,10 +84,13 @@ button
   border-color: #533a18
 .footer
   position: fixed
-  bottom: 5%
+  bottom: 3%
 .title
   position: fixed
-  top: 7%
+  top: 5%
+.subtitle
+  position: fixed
+  top: 10%
 .monster__container
   overflow: auto
   height: 60%
@@ -99,6 +107,7 @@ button
     .monster__name
       font-size: 2rem
     .monster__numbers
+      padding-top: 5px
       display: flex
       align-items: center
 @media screen and (min-width: 900px)

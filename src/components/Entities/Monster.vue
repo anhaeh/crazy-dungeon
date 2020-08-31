@@ -36,8 +36,8 @@ export default {
         if (this.$store.getters.getPlayer.level < 5 && Math.random() > 0.85) {
           /* 15% drop */
           this.dropPotion()
-        } else if (this.$store.getters.getPlayer.level >= 5 && Math.random() > 0.97) {
-          /* 3% drop */
+        } else if (this.$store.getters.getPlayer.level >= 5 && Math.random() > 0.95) {
+          /* 5% drop */
           this.dropPotion()
         }
         this.timeout = setTimeout(() => {

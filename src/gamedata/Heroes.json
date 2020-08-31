@@ -1,10 +1,17 @@
 {
   "paladin": {
     "name": "Paladin",
-    "initialHealth": 55,
-    "attack": 10,
-    "critical": 0.03,
     "image": "paladin.jpg",
+    "initialStats": {
+      "health": 70,
+      "attack": 10,
+      "critical": 0.03
+    },
+    "incrementalStats": {
+      "health": 20,
+      "attack": 2,
+      "critical": 0
+    },
     "skills": [
       "fury_attack",
       "heal"
@@ -20,10 +27,17 @@
   },
   "wizard": {
     "name": "Wizard",
-    "initialHealth": 50,
-    "attack": 8,
-    "critical": 0.07,
     "image": "wizard.jpg",
+    "initialStats": {
+      "health": 65,
+      "attack": 8,
+      "critical": 0.07
+    },
+    "incrementalStats": {
+      "health": 17,
+      "attack": 2,
+      "critical": 0
+    },
     "skills": [
       "explosion",
       "storm"
@@ -39,10 +53,17 @@
   },
   "archer": {
     "name": "Archer",
-    "initialHealth": 45,
-    "attack": 7,
-    "critical": 0.18,
     "image": "archer.png",
+    "initialStats": {
+      "health": 60,
+      "attack": 7,
+      "critical": 0.17
+    },
+    "incrementalStats": {
+      "health": 15,
+      "attack": 2,
+      "critical": 0.01
+    },
     "skills": [
       "double_arrow",
       "bones_breaker"
