@@ -8,7 +8,7 @@
       <div slot="legend">+3% critical chance</div>
       <div slot="title" class="title">{{ $options.name }}</div>
       <div slot="text">
-        Hello adventurer. I have some battle techniques that could help you increase your critical chance. For only {{ goldCost }} gold coins. What do you say?</div>
+        Hello adventurer. I have some battle techniques that could help you increase your critical chance +3%. For only {{ goldCost }} gold coins. What do you say?</div>
       <span slot="close-text">
         No thanks
       </span>

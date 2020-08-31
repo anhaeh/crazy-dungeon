@@ -36,7 +36,7 @@
     "incrementalStats": {
       "health": 17,
       "attack": 2,
-      "critical": 0
+      "critical": 0.005
     },
     "skills": [
       "explosion",
@@ -60,7 +60,7 @@
       "critical": 0.17
     },
     "incrementalStats": {
-      "health": 15,
+      "health": 16,
       "attack": 2,
       "critical": 0.01
     },
