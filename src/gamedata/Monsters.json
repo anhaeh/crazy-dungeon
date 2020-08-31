@@ -59,7 +59,7 @@
     "name": "Beholder",
     "image": "Boss_1",
     "health": 250,
-    "attack": 7,
+    "attack": 6,
     "gold": 200
   },
   "boss_2": {
@@ -73,7 +73,7 @@
     "name": "Fire Elemental",
     "image": "FireElemental",
     "health": 500,
-    "attack": 8,
+    "attack": 7,
     "gold": 500
   },
   "boss_4": {
