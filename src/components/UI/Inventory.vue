@@ -110,7 +110,7 @@ export default {
 @media screen and (min-width: 900px)
   .inventory
     position: fixed
-    left: calc(50% - 150px)
+    left: calc(50% - 250px)
     bottom: 0
     top: auto
     padding: 0

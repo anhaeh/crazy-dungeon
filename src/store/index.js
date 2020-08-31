@@ -20,7 +20,7 @@ const store = new Vuex.Store({
     inventory: {
       show: false,
       items: [],
-      maxSize: 6
+      maxSize: 10
     },
     questLog: [],
     enableFog: true,
