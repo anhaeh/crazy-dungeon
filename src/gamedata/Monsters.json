@@ -55,6 +55,13 @@
     "attack": 3,
     "gold": 40
   },
+  "black_knight": {
+    "name": "Black Knight",
+    "image": "BlackKnight",
+    "health": 35,
+    "attack": 3,
+    "gold": 40
+  },
   "boss_1": {
     "name": "Beholder",
     "image": "Boss_1",
