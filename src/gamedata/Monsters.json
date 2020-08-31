@@ -44,7 +44,7 @@
   "viper": {
     "name": "Viper",
     "image": "Viper",
-    "health": 45,
+    "health": 40,
     "attack": 3,
     "gold": 45
   },
@@ -53,7 +53,7 @@
     "image": "GoblinMarauder",
     "health": 35,
     "attack": 3,
-    "gold": 45
+    "gold": 40
   },
   "boss_1": {
     "name": "Beholder",
