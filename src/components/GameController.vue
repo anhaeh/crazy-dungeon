@@ -312,7 +312,7 @@ export default {
       })
 
       /* Set monsters */
-      let monstersAvailable = ['goblin', 'golem', 'gorgon', 'imp', 'bat', 'leech', 'goblin_marauder']
+      let monstersAvailable = ['goblin', 'golem', 'gorgon', 'imp', 'bat', 'leech', 'goblin_marauder', 'viper']
       let monstersList = []
       for (let i = 0; i < 5; i++) {
         let monsterToAdd = this.random(monstersAvailable)

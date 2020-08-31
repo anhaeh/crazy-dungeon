@@ -41,6 +41,13 @@
     "attack": 3,
     "gold": 50
   },
+  "viper": {
+    "name": "Viper",
+    "image": "Viper",
+    "health": 45,
+    "attack": 3,
+    "gold": 45
+  },
   "goblin_marauder": {
     "name": "Goblin Marauder",
     "image": "GoblinMarauder",
