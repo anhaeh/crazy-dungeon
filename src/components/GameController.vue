@@ -278,7 +278,7 @@ export default {
         merchant.items = ['potion', 'bigPotion', 'key']
         merchant.show = false
         let items = Object.keys(itemsData).filter(x => itemsData[x].type !== 'potion' && itemsData[x].type !== 'key')
-        for (let i = 0; i < 5; i++) {
+        for (let i = 0; i < 6; i++) {
           let itemToAdd = this.random(items)
           index = items.indexOf(itemToAdd)
           items.splice(index, 1)
