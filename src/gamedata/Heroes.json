@@ -53,7 +53,7 @@
   },
   "pyromancer": {
     "name": "Piromancer",
-    "image": "wizard.jpg",
+    "image": "wizard_alt.jpg",
     "initialStats": {
       "health": 60,
       "attack": 9,
