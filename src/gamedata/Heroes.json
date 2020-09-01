@@ -57,12 +57,12 @@
     "initialStats": {
       "health": 60,
       "attack": 9,
-      "critical": 0.05
+      "critical": 0.04
     },
     "incrementalStats": {
       "health": 20,
       "attack": 2,
-      "critical": 0.005
+      "critical": 0.01
     },
     "skills": [
       "drain_life",
@@ -70,10 +70,10 @@
     ],
     "passiveSkills": [
       {
-        "name": "Bounty hunter",
-        "description": "Find the NPCs in the fog",
-        "mapLetter": "N",
-        "image": "poison.jpg"
+        "name": "Enemy knowledge",
+        "description": "Track monsters through the fog",
+        "mapLetter": "M",
+        "image": "death.jpg"
       }
     ]
   },
@@ -99,7 +99,7 @@
         "name": "Tracking",
         "description": "Track monsters through the fog",
         "mapLetter": "M",
-        "image": "fire_bolt.png"
+        "image": "death.jpg"
       }
     ]
   }
