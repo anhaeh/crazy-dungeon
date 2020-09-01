@@ -79,8 +79,8 @@ td
     background-image: url("../assets/heroes/wizard.gif")
   &.--paladin
     background-image: url("../assets/heroes/paladin.gif")
-  &.--pyromancer
-    background-image: url("../assets/heroes/pyromancer.gif")
+  &.--priest
+    background-image: url("../assets/heroes/priest.gif")
 .table-score
   width: 85%
   height: 60%

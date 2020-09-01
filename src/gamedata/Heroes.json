@@ -51,8 +51,8 @@
       }
     ]
   },
-  "pyromancer": {
-    "name": "Piromancer",
+  "priest": {
+    "name": "Priest",
     "image": "wizard_alt.jpg",
     "initialStats": {
       "health": 60,
