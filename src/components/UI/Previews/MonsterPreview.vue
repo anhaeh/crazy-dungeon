@@ -90,8 +90,9 @@ export default {
   position: absolute
   right: 22%
   font-size: 0.85rem
-  padding-top: calc(0.6 * var(--tile-cell))
+  padding-top: calc(0.58 * var(--tile-cell))
   img
+    height: calc(0.35 * var(--tile-cell))
     margin-right: 2px
   .counter
     display: flex

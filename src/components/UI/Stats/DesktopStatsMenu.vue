@@ -13,13 +13,15 @@
       </div>
     </div>
     <div class="dungeonUI__statsMenuBody">
-      <div class="dungeonUI__statsBar">
-        <div class="dungeonUI__statsBaseValue stat-title">Critical chance</div>
-        <div class="dungeonUI__statsTotalValue stat-title --counter">{{ criticalChance }}%</div>
+      <div class="dungeonUI__statsBar" title="Critical percent">
+        <div class="dungeonUI__statsLabel --critical"></div>
+        <div class="dungeonUI__statsBaseValue">{{ baseCriticalChance }}%</div>
+        <div class="dungeonUI__statsTotalValue">{{ criticalChance }}%</div>
       </div>
-      <div class="dungeonUI__statsBar">
-        <div class="dungeonUI__statsBaseValue stat-title">Gold Multiplier</div>
-        <div class="dungeonUI__statsTotalValue stat-title --counter">{{ goldMultiplier }}%</div>
+      <div class="dungeonUI__statsBar" title="Gold multiplier">
+        <div class="dungeonUI__statsLabel --gold"></div>
+        <div class="dungeonUI__statsBaseValue">x1</div>
+        <div class="dungeonUI__statsTotalValue">x{{ goldMultiplier }}</div>
       </div>
     </div>
   </div>
@@ -31,12 +33,14 @@ export default {
   name: "DesktopSkillsMenu",
   computed: {
     goldMultiplier: function () {
-      return Math.round(this.$store.getters.getPlayerGoldMultiplier * 100)
+      return Math.round(this.$store.getters.getPlayerGoldMultiplier)
     },
     criticalChance: function () {
       return Math.trunc(this.$store.getters.getPlayerCritical * 100)
+    },
+    baseCriticalChance: function () {
+      return Math.trunc(this.$store.getters.getPlayerBaseCritical * 100)
     }
-
   }
 };
 </script>
@@ -69,11 +73,15 @@ $color-mDef: #911DBA
   background-size: 100% 100%
 .dungeonUI__statsLabel
   &.--att
-    background-image: url("../../../assets/ui/dungeonUI__statsLabel--att.png")
+    background-image: url("../../../assets/ui/attack__icon.png")
   &.--def
     background-image: url("../../../assets/ui/dungeonUI__statsLabel--def.png")
   &.--health
-    background-image: url("../../../assets/ui/dungeonUI__statsLabel--health.png")
+    background-image: url("../../../assets/ui/health__icon.png")
+  &.--critical
+    background-image: url("../../../assets/ui/critical__icon.png")
+  &.--gold
+    background-image: url("../../../assets/ui/gold__icon.png")
   &.--mAtt
     background-image: url("../../../assets/ui/dungeonUI__statsLabel--mAtt.png")
   &.--mDef

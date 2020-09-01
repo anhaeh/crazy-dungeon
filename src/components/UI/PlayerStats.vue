@@ -134,6 +134,7 @@ export default {
     display: flex
     align-items: center
     img
+      height: 2rem
       padding-right: 5px
   .score
     top: -8px

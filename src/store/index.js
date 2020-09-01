@@ -123,6 +123,9 @@ const store = new Vuex.Store({
     getScore: state => {
       return state.player.score
     },
+    getPlayerBaseCritical: state => {
+      return state.player.critical
+    },
     getPlayerCritical: state => {
       let itemsBuffCritical = state.inventory.items.filter(x => x.type === 'critical')
       let total = state.player.critical
