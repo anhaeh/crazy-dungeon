@@ -97,6 +97,7 @@ button
   width: 90vw
 .monster__data
   display: flex
+  margin-bottom: 10px
   .monster__portrait
     width: calc(1.5 * var(--tile-cell))
     height: calc(1.5 * var(--tile-cell))
@@ -107,9 +108,12 @@ button
     .monster__name
       font-size: 2rem
     .monster__numbers
+      float: right
       padding-top: 5px
       display: flex
       align-items: center
+      img
+        height: calc(0.5 * var(--tile-cell))
 @media screen and (min-width: 900px)
   .container
     width: 50%
