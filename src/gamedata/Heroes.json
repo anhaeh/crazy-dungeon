@@ -5,7 +5,7 @@
     "initialStats": {
       "health": 70,
       "attack": 10,
-      "critical": 0.03
+      "critical": 0.05
     },
     "incrementalStats": {
       "health": 20,
@@ -81,7 +81,7 @@
     "name": "Archer",
     "image": "archer.png",
     "initialStats": {
-      "health": 60,
+      "health": 65,
       "attack": 7,
       "critical": 0.17
     },
