@@ -3,7 +3,7 @@
     "name": "Paladin",
     "image": "paladin.jpg",
     "initialStats": {
-      "health": 70,
+      "health": 75,
       "attack": 10,
       "critical": 0.05
     },
@@ -60,7 +60,7 @@
       "critical": 0.04
     },
     "incrementalStats": {
-      "health": 20,
+      "health": 18,
       "attack": 2,
       "critical": 0.01
     },
