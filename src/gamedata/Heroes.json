@@ -51,6 +51,32 @@
       }
     ]
   },
+  "pyromancer": {
+    "name": "Piromancer",
+    "image": "wizard.jpg",
+    "initialStats": {
+      "health": 60,
+      "attack": 9,
+      "critical": 0.05
+    },
+    "incrementalStats": {
+      "health": 20,
+      "attack": 2,
+      "critical": 0.005
+    },
+    "skills": [
+      "drain_life",
+      "heal"
+    ],
+    "passiveSkills": [
+      {
+        "name": "Bounty hunter",
+        "description": "Find the NPCs in the fog",
+        "mapLetter": "N",
+        "image": "poison.jpg"
+      }
+    ]
+  },
   "archer": {
     "name": "Archer",
     "image": "archer.png",
