@@ -33,8 +33,8 @@ export default {
           })
           this.$store.commit('setPlayerRange', cells)
           let cellsViewport = []
-          let rowsStart = this.isMobile ? -3 : -5
-          let rowsEnd = this.isMobile ? 9 : 11
+          let rowsStart = this.isMobile ? -5 : -5
+          let rowsEnd = this.isMobile ? 7 : 11
           let columnsStart = this.isMobile ? -3 : -10
           let columnsEnd = this.isMobile ? 4 : 11
           for (let i = rowsStart; i < rowsEnd; i++) {
@@ -351,6 +351,7 @@ export default {
         })
       }
 
+      // Random item in map
       if(Math.random() > 0.85) {
         let itemsToDrop = ['potion', 'armor1', 'dagger', 'key']
         let item = this.random(itemsToDrop)

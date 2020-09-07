@@ -68,6 +68,7 @@ body
   justify-content: center
   height: 100%
   background: black
+  overflow: hidden
   /* Disables pull-to-refresh but allows overscroll glow effects. */
   overscroll-behavior-y: contain
 #app
