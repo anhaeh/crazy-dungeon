@@ -80,10 +80,10 @@ export default {
 <style lang="sass" scoped>
 .dungeonUI__skillsMenuList
   position: fixed
-  top: calc(1.5 * var(--tile-cell))
+  top: 0
   background-image: url("../../../assets/ui/dungeonUI__skillsMenuBg.png")
   background-size: auto 100%
-  height: calc(100% - (var(--tile-cell) * 5.5))
+  height: calc(125% - (var(--tile-cell) * 5.5))
   z-index: 10
   width: 100%
 .dungeonUI__skillsMenuTabs

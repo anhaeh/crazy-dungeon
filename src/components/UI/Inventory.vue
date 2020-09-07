@@ -91,7 +91,7 @@ export default {
   background-size: 100% 100%
   background-position: bottom left
   top: 0
-  padding: calc(2 * var(--tile-cell)) calc(.5 * var(--tile-cell)) calc(.5 * var(--tile-cell))
+  padding: calc(1.5 * var(--tile-cell)) calc(1 * var(--tile-cell)) calc(.5 * var(--tile-cell))
   box-sizing: border-box
   &.--isMobile
     background-image: url("../../assets/ui/dungeonUI__background.png")
