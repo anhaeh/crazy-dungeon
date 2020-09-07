@@ -15,7 +15,7 @@
           <img :src="getImage(item.name.toLowerCase())" alt="">
         </div>
       </div>
-      <div class="classselection__bottomcontainer" v-if="selected.image">
+      <div class="classselection__bottomcontainer">
         <div class="classselection__statContainer">
           <div class="classselection__stat --border1">
             <img :src="require('../assets/ui/attack.png')" alt="">
@@ -30,7 +30,7 @@
             <span v-if="selected.name">{{ Math.round(selected.initialStats.critical * 100) }}%</span>
           </div>
         </div>
-        <div class="classselection__herodetails">
+        <div class="classselection__herodetails" v-if="selected.image">
           <img class="classselection__heroportrait --border3" :src="getImagePortrait(selected.image)" alt="">
           <div class="classselection__slotscontiner">
             <div class="classselection__slot"></div>
@@ -117,7 +117,7 @@ export default {
     font-size: var(--font-size-sm)
 .classselection__sprites
   width: 100%
-  height: calc(100% - (var(--tile-cell) * 4))
+  // height: calc(100% - (var(--tile-cell) * 4))
   display: flex
   flex-wrap: wrap
   align-items: flex-start
