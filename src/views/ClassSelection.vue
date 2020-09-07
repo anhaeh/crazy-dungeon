@@ -15,7 +15,7 @@
           <img :src="getImage(item.name.toLowerCase())" alt="">
         </div>
       </div>
-      <div class="classselection__bottomcontainer">
+      <div class="classselection__bottomcontainer" v-if="selected.image">
         <div class="classselection__statContainer">
           <div class="classselection__stat --border1">
             <img :src="require('../assets/ui/attack.png')" alt="">
@@ -31,7 +31,7 @@
           </div>
         </div>
         <div class="classselection__herodetails">
-          <div class="classselection__heroportrait --border3"></div>
+          <img class="classselection__heroportrait --border3" :src="getImagePortrait(selected.image)" alt="">
           <div class="classselection__slotscontiner">
             <div class="classselection__slot"></div>
             <div class="classselection__slot"></div>
@@ -68,6 +68,9 @@ export default {
     },
     getImage: function (image) {
       return require(`@/assets/heroes/${image}.gif`)
+    },
+    getImagePortrait: function (image) {
+      return require(`@/assets/heroes/portraits/${image}`)
     }
   }
 }

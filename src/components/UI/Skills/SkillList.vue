@@ -26,9 +26,6 @@ export default {
       this.$store.getters.getPlayerSkills.forEach(skill => {
         skillList.push(skill)
       })
-      for (let i = skillList.length; i < 6 ; i++ ) {
-        skillList.push(null)
-      }
       return skillList
     }
   }
