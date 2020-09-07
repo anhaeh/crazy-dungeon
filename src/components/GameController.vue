@@ -34,7 +34,7 @@ export default {
           this.$store.commit('setPlayerRange', cells)
           let cellsViewport = []
           let rowsStart = this.isMobile ? -3 : -5
-          let rowsEnd = this.isMobile ? 5 : 7
+          let rowsEnd = this.isMobile ? 9 : 11
           let columnsStart = this.isMobile ? -3 : -10
           let columnsEnd = this.isMobile ? 4 : 11
           for (let i = rowsStart; i < rowsEnd; i++) {

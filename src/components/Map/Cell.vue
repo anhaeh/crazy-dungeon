@@ -3,6 +3,9 @@
     <div :class="['cell', {'can-move': canMove && !isMobile }, {'has-fog': hasFog }, {'has-item': hasItem}]"
          :id="'cell-' + id"
          @click="click">
+      <span class="cell__fog" v-if="hasFog">
+        <img :src="require('../../assets/ui/dungeon__mist.gif')">
+      </span>
       <img :src="image()">
       <img v-if="diagonalClass.includes('e')"
            :src="imageDiagonal('e')"
@@ -241,8 +244,17 @@ export default {
     width: 10px
   .--east
     right: 0
-.has-fog
-  filter: opacity(0)
+// .has-fog
+  // filter: opacity(0)
+.cell__fog
+  background-color: #000
+  width: 100%
+  height: 100%
+  display: block
+  img
+    opacity: .35
+    width: 100%
+    height: 100%
 .show-skill-passive
   color: #bfa561
   display: flex
@@ -251,6 +263,13 @@ export default {
   position: relative
   max-height: 0
   font-size: 1.5rem
+  position: relative
+  img
+    position: absolute
+    top: 0
+    left: 0
+    width: 100%
+    height: 100%
 @media (min-width: 900px)
   .can-move
     cursor: url('../../assets/ui/cursor__move.png'), auto

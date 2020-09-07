@@ -1,6 +1,6 @@
 <template>
   <div>
-    <div class="dungeonUI__skills">
+    <div class="dungeonUI__skillsBar">
       <skill-item
               v-for="(skill, index) in skills"
               :skill-name="skill"
@@ -36,15 +36,17 @@ export default {
 </script>
 
 <style scoped lang="sass">
-.dungeonUI__contentBottom .dungeonUI__skills
-  height: calc(2.5 * var(--tile-cell))
-  width: calc(4 * var(--tile-cell))
+.dungeonUI__skillsBar
+  height: var(--tile-600)
+  width: var(--tile)
   display: flex
   flex-wrap: wrap
-  padding: calc(3 * var(--pixel-unit)) calc(5 * var(--pixel-unit))
   box-sizing: border-box
-  align-items: space-between
-  justify-content: space-between
+  flex-direction: column-reverse
+  right: 0
+  bottom: 0
+  z-index: 100
+  position: fixed
 @media screen and (min-width: 900px)
   .dungeon .dungeonUI__skills
     display: flex

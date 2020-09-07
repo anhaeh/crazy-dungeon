@@ -1,6 +1,6 @@
 <template>
   <div id="quest-log" class="questLog">
-    <div class="questLog__message">
+    <div class="questLog__message --border3">
       <div class="feed">
       <span v-for="(log, index) in questLog"
             :key="'log' + index"
@@ -50,7 +50,7 @@ export default {
   top: -3px
   position: relative
 .questLog__message
-  height: calc(1 * var(--tile-cell))
+  height: var(--tile-125)
   width: 100%
   image-rendering: pixelated
   background-size: 100% 100%

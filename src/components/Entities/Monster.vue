@@ -156,7 +156,7 @@ export default {
       height: 100%
       object-fit: contain
       &.is-live
-        filter: drop-shadow(-1px -1px 0 #000) drop-shadow(1px -1px 0 #000) drop-shadow(-1px 1px 0 #000) drop-shadow(1px 1px 0 #000)
+        filter: drop-shadow(-2px -2px 0 rgba(11,11,11,2)) drop-shadow(2px -2px 0 rgba(11,11,11,2)) drop-shadow(-2px 2px 0 rgba(11,11,11,2)) drop-shadow(2px 2px 0 rgba(11,11,11,1))
     .level
       top: 0
       left: calc(-2 * var(--pixel-unit))

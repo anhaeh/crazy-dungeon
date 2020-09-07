@@ -63,8 +63,6 @@ export default {
 </script>
 
 <style scoped lang="sass">
-.map
-  margin-top: calc(1.5 * var(--tile-cell))
 .row
   display: flex
 @media screen and (min-width: 900px)

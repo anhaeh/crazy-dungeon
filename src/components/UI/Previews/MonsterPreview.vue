@@ -1,21 +1,23 @@
 <template>
   <div class="monsterPreview">
-    <div class="monsterPreview__portrait">
+    <div class="monsterPreview__attack --border3">
+      <span>{{ entity.refMonster.attack + entity.monster.level }}</span>
+      <img :src="attackIcon" alt="">
+    </div>
+    <div class="monsterPreview__lvl --border3">{{ entity.monster.level }}</div>
+    <div class="monsterPreview__portrait --border3">
       <img :src="image" :title="`${entity.refMonster.name} Lv ${entity.monster.level}`">
-      <div class="monsterPreview__lvl">{{ entity.monster.level }}</div>
     </div>
     <status-bar :actual="entity.totalLife - entity.monster.damage"
                 :total="entity.totalLife"
-                modifier="--monster"
+                modifier="--monster --vertical"
                 title="Health"
     >
     </status-bar>
-    <div class="stats">
-      <img :src="attackIcon" title="Monster attack">
-      <span class="counter --attack">{{ entity.refMonster.attack + entity.monster.level }}</span>
+<!--     <div class="stats">
       <img :src="goldIcon" title="Drop gold">
       <span class="counter --gold">{{ entity.refMonster.gold }}</span>
-    </div>
+    </div> -->
     <div class="name">{{ entity.refMonster.name }}</div>
   </div>
 </template>
@@ -44,61 +46,62 @@ export default {
 
 <style scoped lang="sass">
 .monsterPreview
-  text-align: right
-.monsterPreview__portrait
-  width: calc(1.5 * var(--tile-cell))
-  height: calc(1.5 * var(--tile-cell))
-  background: url("../../../assets/ui/portraitFrame.png")
-  padding: calc(2.5 * var(--pixel-unit))
-  image-rendering: pixelated
-  background-size: contain
-  box-sizing: border-box
-  position: absolute
+  display: flex
+  justify-content: flex-end
+  position: fixed
   right: 0
-  .monsterPreview__lvl
-    position: absolute
-    bottom: 0
-    right: 0
-    height: calc(0.5 * var(--tile-cell))
-    width: calc(0.5 * var(--tile-cell))
-    box-shadow: inset 0 0 0 calc(1 * var(--pixel-unit)) #0e0c05
-    background: #1f1913
-    display: flex
-    align-items: center
-    justify-content: center
-    font-size: 18px
-    color: #805a29
+  top: 0
+.monsterPreview__portrait
+  height: var(--tile-125)
+  width: var(--tile-125)
   img
     width: 100%
     height: 100%
-.statusBar
-  position: absolute
-  right: calc(1.5 * var(--tile-cell))
-  top: 0
+.monsterPreview__lvl
+  height: var(--tile-75)
+  width: var(--tile-75)
+  background: #1f1913
+  display: flex
+  justify-content: center
+  font-size: var(--font-size-sm)
+  color: #805a29
 .name
-  position: absolute
-  top: calc(1.5 * var(--tile-cell))
-  right: calc(2 * var(--pixel-unit))
-  font-size: 20px
-  font-weight: bold
+  position: fixed
+  top: var(--tile)
+  right: 0
+  left: 0
+  text-align: center
+  margin: auto
+  font-size: var(--font-size-xs)
   text-shadow: 1px 2px 0 black
 .damage
   padding-top: 5px
+.monsterPreview__attack
+  height: var( --tile-75)
+  display: flex
+  align-items: center
+  justify-content: space-between
+  max-width: var(--tile-125)
+  width: var(--tile-125)
+  img
+    width: var(--tile-50)
+    min-width: var(--tile-50)
+  span
+    width: 100%
+    text-align: center
 .stats
   height: 18px
   display: flex
   position: absolute
   right: 22%
   font-size: 0.85rem
-  padding-top: calc(0.58 * var(--tile-cell))
+  padding-top: calc(0.58 * var(--tile))
   img
-    height: calc(0.35 * var(--tile-cell))
+    height: calc(0.35 * var(--tile))
     margin-right: 2px
   .counter
     display: flex
     align-items: center
-    &.--attack
-      margin-right: 5px
 @media (min-width: 900px)
   .monsterPreview
     transform: scale(1.3)

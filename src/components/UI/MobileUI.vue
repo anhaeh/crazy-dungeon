@@ -1,6 +1,6 @@
 <template>
   <div class="dungeonUI">
-    <div class="dungeonUI__contentTop">
+<!--     <div class="dungeonUI__contentTop">
       <div class="dungeonUI__current">
         <div class="dungeonUI__currentBars">
           <div class="dungeonUI__currentGold">
@@ -17,56 +17,48 @@
             </div>
           </div>
         </div>
-        <div class="dungeonCurrentLog">
-          <quest-log
-          >
-          </quest-log>
-        </div>
       </div>
-
-      <div class="dungeonUI__more">
-        <div class="dungeonUI__moreBack"></div>
-        <div class="dungeonUI__moreMenu" @click="openMenu">
-          Menu
-        </div>
-      </div>
+    </div> -->
+    <quest-log
+    >
+    </quest-log>
+    <div class="dungeonUI__currentGold --border3">
+      <img :src="require('../../assets/ui/attack.png')" alt="">
+      <span>{{ $store.getters.getPlayer.gold }}</span>
     </div>
-    <div v-if="showMenu" class="dungeonUI__menuBottom">
-      <div class="dungeonUI__menuBottomLeft">
-        <div class="dungeonUI__retreatBtn" @click="showModalQuit = true"></div>
-        <div class="dungeonUI__settingBtn"></div>
-      </div>
-      <div class="dungeonUI__menuBottomRight">
-        <div class="dungeonUI__menuBottomBtn" @click="setShowStats">
-          <span>Stats</span>
-        </div>
-        <div class="dungeonUI__menuBottomBtn"
-             @click="setInventory">
-          <span>Inventory</span>
-        </div>
-        <div class="dungeonUI__menuBottomBtn"><span>Quest</span></div>
-        <div class="dungeonUI__menuBottomBtn"
-             @click="setShowSkills">
-          <span>Skills</span>
-        </div>
-      </div>
+    <div class="dungeonUI__leftmenu">
+      <button type="button" class="btn" @click="showModalQuit = true">
+        <img :src="require('../../assets/ui/menu.png')" alt="">
+      </button>
+      <button type="button" class="btn" @click="setInventory">
+        <img :src="require('../../assets/ui/equip.png')" alt="">
+      </button>
+      <button type="button" class="btn" @click="setShowStats"></button>
+      <button type="button" class="btn" @click="setShowSkills"></button>
+      <button type="button" class="btn" @click="setInventory">
+        <img :src="require('../../assets/ui/items.png')" alt="">
+      </button>
+      <div class="--slot"></div>
     </div>
+    <skills-list></skills-list>
     <div class="dungeonUI__contentBottom">
-      <skills-list></skills-list>
-      <div v-if="isMonsterTarget"
-           class="dungeonUI__controlsActiveSkill"
-           @click="attack">
-      </div>
-      <div v-if="isNpcTarget"
-           class="dungeonUI__controlsActiveSkill talk"
-           @click="talk">
-      </div>
       <div class="dungeonUI__controls">
-        <div v-for="direction in arrows"
-             :key="'arrow' + direction"
-             :class="'dungeonUI__controls-' + direction"
-             @click="move(direction)"
-        >
+        <div class="dungeonUI__controlscontainer">      
+          <div v-if="isMonsterTarget"
+               class="dungeonUI__controlsActiveSkill"
+               @click="attack">
+               <img :src="require('../../assets/ui/attack.png')" alt=""> 
+          </div>
+          <div v-if="isNpcTarget"
+               class="dungeonUI__controlsActiveSkill talk"
+               @click="talk">
+          </div>
+          <div v-for="direction in arrows"
+               :key="'arrow' + direction"
+               :class="'dungeonUI__control --' + direction"
+               @click="move(direction)"
+          >
+          </div>
         </div>
       </div>
     </div>
@@ -176,164 +168,60 @@ export default {
 
 <style scoped lang="sass">
 .dungeonUI
-  position: fixed
-  bottom: 0
-  left: 0
-  width: 100%
-  image-rendering: pixelated
-  background-image: url("../../assets/ui/dungeonUI__background.png")
-  background-size: 100% 100%
-  background-position: bottom left
-  height: calc(4 * var(--tile-cell))
-  min-height: calc(4 * var(--tile-cell))
-  z-index: 5
-  display: flex
-  flex-direction: column
-.dungeonUI__contentTop
-  display: flex
-  flex-direction: row
-  width: 100%
-  height: 100%
-.dungeonUI__more
-  div
-    width: calc(1.5 * var(--tile-cell))
-    height: calc(.75 * var(--tile-cell))
-    background-image: url("../../assets/ui/dungeonUI__more.png")
-    background-size: contain
-    image-rendering: pixelated
-    &.dungeonUI__moreMenu
-      color: white
-      display: flex
-      align-items: center
-      justify-content: center
-      text-shadow: 0 2px 0px black
-      background-image: url("../../assets/ui/dungeonUI__moreDown.png")
-      &:active, &:focus, .--active
-        background-image: url("../../assets/ui/dungeonUI__moreDownActive.png")
-.dungeonUI__current
-  width: calc(5.5 * var(--tile-cell))
-  height: calc(1.5 * var(--tile-cell))
-.dungeonUI__currentBars
-  display: flex
-  width: 100%
-.dungeonUI__currentGold, .dungeonUI__currentExp
-  display: flex
-  align-items: center
-  z-index: 0
-  height: calc(.5 * var(--tile-cell))
-  min-width: calc(3 * var(--tile-cell))
-  background-image: url("../../assets/ui/dungeonUI__currentGold.png")
-  background-size: 100% 100%
-  image-rendering: pixelated
-  background-repeat: no-repeat
-  .text
-    color: #c0a23b
-    padding-left: calc(1.15 * var(--tile-cell))
-    font-size: 1rem
-    line-height: 1rem
-.dungeonUI__currentExp
-  min-width: calc(2.5 * var(--tile-cell))
-  background-image: url("../../assets/ui/dungeonUI__currentUn.png")
-  .text
-    padding-left: calc(0.75 * var(--tile-cell) - 20px)
-  .title
-    margin-left: 15px
-    color: #c0a23b
-    text-shadow: 0 2px 0 black
-.dungeonCurrentLog
-  display: flex
+  // position: fixed
+  // bottom: 0
+  // left: 0
+  // width: 100%
+  // image-rendering: pixelated
+  // background-position: bottom left
+  // height: calc(4 * var(--tile-cell))
+  // min-height: calc(4 * var(--tile-cell))
+  // z-index: 5
+  // display: flex
+  // flex-direction: column
+// .dungeonUI__contentTop
+//   display: flex
+//   flex-direction: row
+//   width: 100%
+//   height: 100%
+// .dungeonUI__current
+//   width: calc(5.5 * var(--tile-cell))
+//   height: calc(1.5 * var(--tile-cell))
+// .dungeonUI__currentBars
+//   display: flex
+//   width: 100%
+// .dungeonUI__currentExp
+//   display: flex
+//   align-items: center
+//   z-index: 0
+//   height: calc(.5 * var(--tile-cell))
+//   min-width: calc(3 * var(--tile-cell))
+//   background-image: url("../../assets/ui/dungeonUI__currentGold.png")
+//   background-size: 100% 100%
+//   image-rendering: pixelated
+//   background-repeat: no-repeat
+//   .text
+//     color: #c0a23b
+//     padding-left: calc(1.15 * var(--tile-cell))
+//     font-size: 1rem
+//     line-height: 1rem
+// .dungeonUI__currentExp
+//   min-width: calc(2.5 * var(--tile-cell))
+//   background-image: url("../../assets/ui/dungeonUI__currentUn.png")
+//   .text
+//     padding-left: calc(0.75 * var(--tile-cell) - 20px)
+//   .title
+//     margin-left: 15px
+//     color: #c0a23b
+//     text-shadow: 0 2px 0 black
+// .dungeonCurrentLog
+//   display: flex
 .dungeonUI__logQuestScroll
   height: var(--tile-cell)
   width: var(--tile-cell)
   *:active, *:focus
     opacity: 0.5
     transform: translateY(2px)
-.dungeonUI__controls
-  opacity: 1
-  position: absolute
-  bottom: 0
-  right: 0
-  height: calc(var(--tile-cell) * 2.5)
-  width: calc(var(--tile-cell) * 3)
-  background-image: url("../../assets/ui/dungeonUI__controls.png")
-  background-size: contain
-  image-rendering: pixelated
-.dungeonUI__controls-bottom
-  position: fixed
-  height: 28px
-  bottom: calc(var(--tile-cell) * 0.1)
-  width: calc(var(--tile-cell) * 1.5)
-  right: calc(var(--tile-cell) / 1.4)
-.dungeonUI__controls-top
-  position: fixed
-  height: 28px
-  bottom: calc(var(--tile-cell) * 1.9)
-  width: calc(var(--tile-cell) * 1.5)
-  right: calc(var(--tile-cell) / 1.4)
-.dungeonUI__controls-right
-  position: fixed
-  height: calc(var(--tile-cell) * 1.5)
-  bottom: calc(var(--tile-cell) / 2.5)
-  width: 28px
-  right: calc(var(--tile-cell) * 0.3)
-.dungeonUI__controls-left
-  position: fixed
-  height: calc(var(--tile-cell) * 1.5)
-  bottom: calc(var(--tile-cell) / 2.5)
-  width: 28px
-  right: calc(var(--tile-cell) * 2.1)
-.dungeonUI__controlsActiveSkill
-  position: fixed
-  background-image: url("../../assets/ui/dungeonUI__controlsAttack.png")
-  background-size: 100% 100%
-  height: var(--tile-cell)
-  width: var(--tile-cell)
-  bottom: calc(var(--tile-cell) * .75)
-  right: var(--tile-cell)
-  z-index: 1
-  &.talk
-    background-image: url("../../assets/ui/dungeonUI__controlsTalk.png")
-.dungeonUI__menuBottom
-  position: fixed
-  display: flex
-  bottom: 0
-  left: 0
-  height: calc(var(--tile-cell) * 2.5)
-  background-image: url("../../assets/ui/dungeonUI__menuBg.png")
-  background-size: 100% 100%
-  width: 100%
-  z-index: 2
-.dungeonUI__menuBottomLeft
-  display: flex
-  height: 100%
-  flex-direction: column
-  width: calc(var(--tile-cell) * 2)
-.dungeonUI__retreatBtn, .dungeonUI__settingBtn
-  width: 100%
-  background-image: url("../../assets/ui/dungeonUI__retreat.png")
-  height: calc(var(--tile-cell) * 1.25)
-  background-size: 100% 100%
-.dungeonUI__settingBtn
-  background-image: url("../../assets/ui/dungeonUI__settings.png")
-.dungeonUI__menuBottomRight
-  display: flex
-  height: 100%
-  width: calc(var(--tile-cell) * 5)
-  flex-wrap: wrap
-.dungeonUI__menuBottomBtn
-  flex-basis: 50%
-  width: 100%
-  background-image: url("../../assets/ui/dungeonUI__menuOption.png")
-  height: calc(var(--tile-cell) * 1.25)
-  background-size: 100% 100%
-  display: flex
-  align-items: center
-  justify-content: center
-  span
-    color: white
-    margin-top: -6px
-    font-size: 17px
-    text-shadow: 0 2px 0 black
 @media screen and (min-width: 900px)
   .dungeonUI
     right: 0
@@ -343,4 +231,115 @@ export default {
     padding-top: 25px
     left: initial
     box-sizing: border-box
+</style>
+<style lang="sass">
+  .dungeonUI
+    .questLog
+      width: var(--tile-500)
+      top: initial
+      left: var(--tile)
+      right: initial
+      position: fixed
+      bottom: 0
+      z-index: 10
+  .dungeonUI__leftmenu
+    display: flex
+    width: var(--tile)
+    flex-direction: column
+    left: 0
+    bottom: 0
+    position: fixed
+    .btn
+      height: var(--tile)
+      max-height: var(--tile)
+      display: flex
+      align-items: center
+      justify-content: center
+    img
+      width: 100%
+  .dungeonUI__currentGold
+    padding: 0 var(--tile-10)
+    position: fixed
+    top: 0
+    left: var(--tile)
+    box-sizing: border-box
+    display: flex
+    align-items: center
+    justify-content: space-around
+    color: #c0a23b
+    img
+      width: var(--tile-50)
+      padding-left: var(--tile-25)
+      transform: scaleX(-1)
+  .dungeonUI__controls
+    position: absolute
+    bottom: var(--tile-150)
+    right: 0
+    left: 0
+    top: initial
+    margin: auto
+    height: var(--tile-250)
+    width: var(--tile-250)
+    overflow: hidden
+    border-radius: 50%
+  .dungeonUI__controlscontainer
+    position: relative
+    height: var(--tile-250)
+    background-image: url("../../assets/ui/dungeonUI__controls.png")
+    background-size: contain
+    width: var(--tile-300)
+    right: var(--tile-25)
+    display: flex
+    align-items: center
+    justify-content: center
+  .dungeonUI__control
+    position: absolute
+    box-sizing: border-box
+    mix-blend-mode: color-dodge
+    &.--bottom, &.--top
+      right: 0
+      height: 0
+      width: var(--tile-300)
+      border-left: var(--tile) solid transparent
+      border-right: var(--tile) solid transparent
+    &.--bottom
+      bottom: 0
+      border-bottom: var(--tile-75) solid transparent
+      &:active, &:focus
+        border-bottom-color: rgba(136, 26, 1, .40)
+    &.--top
+      top: 0
+      border-top: var(--tile-75) solid transparent
+      &:active, &:focus
+        border-top-color: rgba(136, 26, 1, .40)
+    &.--left, &.--right
+      top: 0
+      width: 0
+      height: var(--tile-250)
+      border-top: var(--tile-75) solid transparent
+      border-bottom: var(--tile-75) solid transparent
+      box-sizing: border-box
+    &.--left
+      left: 0
+      border-left: var(--tile) solid transparent
+      &:active, &:focus
+        border-left-color: rgba(136, 26, 1, .40)
+    &.--right
+      right: 0
+      border-right: var(--tile) solid transparent
+      &:active, &:focus
+        border-right-color: rgba(136, 26, 1, .40)
+  .dungeonUI__controlsActiveSkill
+    height: var(--tile)
+    width: var(--tile)
+    margin: auto
+    padding: var(--tile-15)
+    background-image: url("../../assets/ui/slot.png") 
+    background-size: 100% 100%
+    box-sizing: border-box
+    img
+      height: 100%
+      width: 100%
+    &.talk
+      background-image: url("../../assets/ui/dungeonUI__controlsTalk.png")
 </style>

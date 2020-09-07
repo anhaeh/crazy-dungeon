@@ -1,7 +1,13 @@
 <template>
   <div class="statusBar" :class="modifier">
-    <div class="statusCurrent" :style="style"></div>
-    <div class="legend">{{ actual }}/{{ total }}</div>
+    <div class="statusBar__legend --border3">
+      <!-- <img :src="'@../assets/ui/' + icon + '.png'" alt=""> -->
+      <img :src="require('../../assets/ui/health.png')" alt="">
+      <span>{{ actual }}</span>
+    </div>
+    <div class="statusBar__frame --border3">
+      <div class="statusBar__current" :style="style"></div>
+    </div>
   </div>
 </template>
 
@@ -27,6 +33,11 @@ export default {
       default: 'red',
       type: String
     }
+    // icon: {
+    //   required: false,
+    //   default: 'health',
+    //   type: String
+    // }
   },
   computed: {
     style: function() {
@@ -43,40 +54,57 @@ export default {
 
 <style scoped lang="sass">
 .statusBar
-  width: calc(3.5 * var(--tile-cell))
-  height: calc(0.5 * var(--tile-cell))
+  width: var(--tile-400)
+  height: var(--tile-75)
   position: relative
-  background-image: url('../../assets/ui/status_bar.png')
-  background-size: contain
-  image-rendering: pixelated
+  display: flex
+  align-items: center
+  &.--vertical
+    top: var(--tile-525)
+    flex-direction: row-reverse
+    position: fixed
+    .statusBar__legend
+      img, span
+       transform: rotate(270deg)
+      span
+        width: 100%
+        text-align: center
+      img
+        min-width: var(--tile-50)
+    &.--player
+      transform-origin: bottom left
+      top: var(--tile-50)
+      transform: rotate(90deg)
+      left: 0
+      .statusBar__frame
+        transform: scaleX(-1)
+    &.--monster
+      transform: rotate(90deg)
+      transform-origin: right top
+      right: 0
   &.--monster
-    .statusCurrent
+    right: 0
+    .statusBar__current
       margin: auto 0 auto auto
       background-position: right center
-    .legend
-      text-align: right
-      right: calc(4 * var(--pixel-unit))
-.statusCurrent
-  left: 0
-  top: 0
+.statusBar__current
   height: 100%
-  background-size: calc(3.5 * var(--tile-cell)) calc(0.5 * var(--tile-cell))
+  background-size: var(--tile-325) var(--tile-50)
   background-position: left center
-  image-rendering: pixelated
   z-index: 2
   width: 100%
-.legend
-  position: absolute
-  left: calc(4 * var(--pixel-unit))
-  top: calc(2 * var(--pixel-unit))
-  text-shadow: 1px 2px 0 black
-  text-align: center
-  z-index: 3
+.statusBar__legend
+  display: flex
+  align-items: center
+  min-width: var(--tile-125)
+  height: 100%
+  justify-content: space-between
+  img
+    height: 100%
+.statusBar__frame
+  height: 100%
+  width: 100%
 @media (min-width: 900px)
-  .legend
-    top: 5px
-    left: 10px
-    color: white
   .statusBar.--monster .legend
     text-align: right
     right: 10px

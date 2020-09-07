@@ -1,20 +1,25 @@
 <template>
   <div class="playerStats">
-    <div :title="`${getPlayer.name} Lvl ${getPlayer.level}`">
-      <img class="player-image" :src="imageHero" @click="showInventory">
-      <div class="playerStats__lvl">{{ getPlayer.level }}</div>
+    <div :title="`${getPlayer.name} Lvl ${getPlayer.level}`" class="playerStats__portrait --border3">
+      <img :src="imageHero" @click="showInventory">
+    </div>
+    <div class="playerStats__lvl --border3">{{ getPlayer.level }}</div>
+    <div class="playerStats__attack --border3">
+      <img :src="require('../../assets/ui/attack.png')" alt="">
+      <span>{{ getPlayer.attack }}</span>
     </div>
     <status-bar
       title="Health"
       :actual="actualHealth"
       :total="totalLife"
+      :modifier="'--player --vertical'"
     ></status-bar>
-    <div class="score">
+<!--     <div class="score">
       Score: {{ getScore }}
-    </div>
-    <div class="name">
+    </div> -->
+<!--     <div class="name">
       {{ getPlayer.name }}
-    </div>
+    </div> -->
     <template v-if="!isMobile">
       <div class="experience">
         <status-bar
@@ -80,43 +85,43 @@ export default {
 }
 </script>
 
-<style scoped lang="sass">
+<style lang="sass">
 .playerStats
   position: relative
-  height: calc(1.5 * var(--tile-cell))
-  .player-image
+  display: flex
+  .score
     position: absolute
-    height: calc(1.5 * var(--tile-cell))
-    width: calc(1.5 * var(--tile-cell))
-    display: block
+    left: 45%
+    font-size: 0.85rem
+    padding-top: var(--tile-25)
+.playerStats__portrait
+  height: var(--tile-125)
+  width: var(--tile-125)
+  img
+    width: 100%
+    height: 100%
 .playerStats__lvl
-  position: absolute
-  bottom: 0
-  left: 0
-  height: calc(0.5 * var(--tile-cell))
-  width: calc(0.5 * var(--tile-cell))
-  box-shadow: inset 0 0 0 calc(1 * var(--pixel-unit)) #0e0c05
+  height: var(--tile-75)
+  width: var(--tile-75)
   background: #1f1913
   display: flex
-  align-items: center
   justify-content: center
-  font-size: 18px
+  font-size: var(--font-size-sm)
   color: #805a29
-.statusBar
-  left: calc(1.5 * var(--tile-cell))
-  top: calc(1 * var(--tile-cell))
-.score
-  position: absolute
-  left: 45%
-  font-size: 0.85rem
-  padding-top: calc(0.25 * var(--tile-cell))
-.name
-  position: absolute
-  top: calc(1.5 * var(--tile-cell))
-  left: calc(2 * var(--pixel-unit))
-  font-size: 20px
-  font-weight: bold
-  text-shadow: 1px 2px 0 black
+.playerStats__attack
+  height: var( --tile-75)
+  display: flex
+  align-items: center
+  justify-content: space-between
+  max-width: var(--tile-125)
+  width: var(--tile-125)
+  img
+    width: var(--tile-50)
+    min-width: var(--tile-50)
+    transform: scaleX(-1)
+  span
+    width: 100%
+    text-align: center
 @media (min-width: 900px)
   .playerStats
     left: 25px

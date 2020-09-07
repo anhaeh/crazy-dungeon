@@ -36,11 +36,7 @@ export default {
 
 <style scoped lang="sass">
 .topBar
-  image-rendering: pixelated
-  background-size: cover
-  background-position: top left
   width: 100%
-  height: calc(1.5 * var(--tile-cell))
   position: fixed
   top: 0
   color: white
@@ -48,8 +44,6 @@ export default {
   align-items: flex-start
   justify-content: flex-start
   z-index: 9
-.--mobile
-  background-image: url("../../assets/ui/dungeonUI__background.png")
 @media screen and (min-width: 900px)
   .topBar
     width: 336px
