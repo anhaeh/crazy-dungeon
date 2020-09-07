@@ -243,6 +243,7 @@ export default {
       bottom: 0
       z-index: 10
   .dungeonUI__leftmenu
+    z-index: 100
     display: flex
     width: var(--tile)
     flex-direction: column
