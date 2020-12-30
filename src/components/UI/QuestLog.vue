@@ -2,12 +2,12 @@
   <div id="quest-log" class="questLog">
     <div class="questLog__message">
       <div class="feed">
-      <span v-for="(log, index) in questLog"
-            :key="'log' + index"
-            class="message"
-      >
-        {{ log }}
-      </span>
+        <span v-for="(log, index) in questLog"
+              :key="'log' + index"
+              class="message"
+        >
+          {{ log }}
+        </span>
       </div>
     </div>
   </div>

@@ -8,7 +8,6 @@ import itemsData from '@/gamedata/Items.json'
 import Dungeon from 'dungeon-generator'
 import skillsData from '@/gamedata/Skills.json'
 
-
 export default {
   name: "GameController",
   inject: ['isMobile'],
@@ -119,6 +118,76 @@ export default {
       this.initialPosition = `${dungeon.start_pos[1]}_${dungeon.start_pos[0]}`
       return matrix
     },
+    generateWallSprites: function (map) {
+      let sprites = []
+      Object.keys(map).forEach((valRow, row) => {
+        map[row].forEach((val, col) => {
+          if (map[row][col] !== 1) {
+            return
+          }
+          let sprite = {
+            imageWall: '',
+            dotClass: '',
+            diagonalClass: ''
+          }
+          let e = map[row][col + 1] === undefined ? false : map[row][col + 1] !== 1
+          let w = (col - 1) < 0 ? false : map[row][col - 1] !== 1
+          let n = (row - 1) < 0 ? false : map[row - 1][col] !== 1
+          let s = map[row + 1] === undefined ? false : map[row + 1][col] !== 1
+          let directions = ''
+          if (n) {
+            directions += 'n'
+          }
+          if (e) {
+            directions += 'e'
+          }
+          if (s) {
+            directions += 's'
+          }
+          if (w) {
+            directions += 'w'
+          }
+
+          if ((directions.length <= 1 || directions.includes('n')) && !directions.includes('s')) {
+            // check south diagonals
+            if (map[row + 1] !== undefined) {
+              let se = map[row + 1][col + 1] === undefined ? false : map[row + 1][col + 1] !== 1
+              let sw = map[row + 1][col - 1] === undefined ? false : map[row + 1][col - 1] !== 1
+              if (directions.includes('n')) {
+                sprite.diagonalClass = 'n'
+              }
+              if (se && !directions.includes('e')) {
+                sprite.diagonalClass += 'e'
+              }
+              if (sw && !directions.includes('w')) {
+                sprite.diagonalClass += 'w'
+              }
+            }
+          }
+
+          // check north doths
+          if (map[row - 1] !== undefined && !directions.includes('n')) {
+            let ne = map[row - 1][col + 1] === undefined ? false : map[row - 1][col + 1] !== 1
+            let nw = map[row - 1][col - 1] === undefined ? false : map[row - 1][col - 1] !== 1
+            if (ne && !directions.includes('e')) {
+              sprite.dotClass += 'e'
+            }
+            if (nw && !directions.includes('w')) {
+              sprite.dotClass += 'w'
+            }
+          }
+
+          if (directions !== '') {
+            sprite.imageWall = '_' + directions
+          }
+          if (Object.values(sprite).some(x => x !== '')) {
+            sprite.id = `${row}_${col}`
+            sprites.push(sprite)
+          }
+        })
+      })
+      return sprites
+    },
     keysListener: function () {
       let directions = {
         'w': 1,
@@ -194,11 +263,11 @@ export default {
       /** hay tema con valores pares*/
       /* generate map */
       let roomCount = this.random([5, 6, 7, 8])
-      let maze = this.createMaze(roomCount)
-      json.map = maze
-      Object.keys(maze).forEach(row => {
-        maze[row].forEach((cell, indexCell) => {
-          if (maze[row][indexCell] === 0) {
+      json.map = this.createMaze(roomCount)
+      json.wallSprites = this.generateWallSprites(json.map)
+      Object.keys(json.map).forEach(row => {
+        json.map[row].forEach((cell, indexCell) => {
+          if (json.map[row][indexCell] === 0) {
             free.push(`${row}_${indexCell}`)
           }
         })

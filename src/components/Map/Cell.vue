@@ -3,18 +3,18 @@
     <div :class="['cell', {'can-move': canMove && !isMobile }, {'has-fog': hasFog }, {'has-item': hasItem}]"
          :id="'cell-' + id"
          @click="click">
-      <img :src="image()">
-      <img v-if="diagonalClass.includes('e')"
-           :src="imageDiagonal('e')"
-           class="diagonal --east">
-      <img v-if="diagonalClass.includes('w')"
-           :src="imageDiagonal('w')"
-           class="diagonal --west">
-      <img v-if="dotClass"
-           :src="imageDot()"
-           class="dot"
-           :class="{'--east': dotClass.includes('e')}">
       <template v-if="!hasFog">
+        <img :src="image()">
+        <img v-if="diagonalClass.includes('e')"
+             :src="imageDiagonal('e')"
+             class="diagonal --east">
+        <img v-if="diagonalClass.includes('w')"
+             :src="imageDiagonal('w')"
+             class="diagonal --west">
+        <img v-if="dotClass"
+             :src="imageDot()"
+             class="dot"
+             :class="{'--east': dotClass.includes('e')}">
         <Monster
            v-if="hasMonster"
            :name="getMonster.name"
@@ -64,9 +64,9 @@ export default {
   data () {
     return {
       tile: null,
-      imageWall : null,
-      diagonalClass: '',
-      dotClass: ''
+      imageWall: '',
+      dotClass: '',
+      diagonalClass: ''
     }
   },
   computed: {
@@ -94,11 +94,11 @@ export default {
     },
     hasFog: function () {
       return this.$store.getters.getEnableFog && !this.$store.getters.getMapDiscover.includes(this.id) && !this.hasPlayer
-    },
+    }
   },
   methods: {
     passiveSkill: function () {
-      let passive = this.$store.getters.getPlayer.passiveSkills[0]
+      let passive = this.$store.getters.getPlayer.passiveSkills[0] // TODO check all passives skills
       let result = ''
       if (passive.mapLetter === 'M' && this.hasMonster
               || passive.mapLetter === 'N' && this.hasNpc
@@ -166,60 +166,11 @@ export default {
       type = 1 // wall sprite
     }
     this.tile = Terrains[type]
-    let map = this.$store.getters.getMap
-    if (this.type === 1) {
-      let row = parseInt(this.id.split('_')[0])
-      let col = parseInt(this.id.split('_')[1])
-      let e = map[row][col + 1] === undefined ? false : map[row][col + 1] !== 1
-      let w = (col - 1) < 0 ? false : map[row][col - 1] !== 1
-      let n = (row - 1) < 0 ? false : map[row - 1][col] !== 1
-      let s = map[row + 1] === undefined ? false : map[row + 1][col] !== 1
-      let directions = ''
-      if (n) {
-        directions += 'n'
-      }
-      if (e) {
-        directions += 'e'
-      }
-      if (s) {
-        directions += 's'
-      }
-      if (w) {
-        directions += 'w'
-      }
-
-      if ((directions.length <= 1 || directions.includes('n')) && !directions.includes('s')) {
-        // check south diagonals
-        if (map[row + 1] !== undefined) {
-          let se = map[row + 1][col + 1] === undefined ? false : map[row + 1][col + 1] !== 1
-          let sw = map[row + 1][col - 1] === undefined ? false : map[row + 1][col - 1] !== 1
-          if (directions.includes('n')) {
-            this.diagonalClass = 'n'
-          }
-          if (se && !directions.includes('e')) {
-            this.diagonalClass += 'e'
-          }
-          if (sw && !directions.includes('w')) {
-            this.diagonalClass += 'w'
-          }
-        }
-      }
-
-      // check north doths
-      if (map[row - 1] !== undefined && !directions.includes('n')) {
-        let ne = map[row - 1][col + 1] === undefined ? false : map[row - 1][col + 1] !== 1
-        let nw = map[row - 1][col - 1] === undefined ? false : map[row - 1][col - 1] !== 1
-        if (ne && !directions.includes('e')) {
-          this.dotClass += 'e'
-        }
-        if (nw && !directions.includes('w')) {
-          this.dotClass += 'w'
-        }
-      }
-
-      if (directions !== '') {
-        this.imageWall = '_' + directions
-      }
+    let sprite = this.$store.getters.getWallSprites.find(x => this.id === x.id)
+    if (sprite) {
+      this.diagonalClass = sprite.diagonalClass
+      this.imageWall = sprite.imageWall
+      this.dotClass = sprite.dotClass
     }
   }
 }
@@ -242,7 +193,8 @@ export default {
   .--east
     right: 0
 .has-fog
-  filter: opacity(0)
+  background-image: url('../../assets/terrains/Fog.gif')
+  filter: brightness(0.5)
 .show-skill-passive
   color: #bfa561
   display: flex

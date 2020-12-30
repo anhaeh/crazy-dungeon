@@ -24,6 +24,7 @@ const store = new Vuex.Store({
     },
     questLog: [],
     enableFog: true,
+    wallSprites: [],
     bossInterval: 6
   },
   getters: {
@@ -136,6 +137,9 @@ const store = new Vuex.Store({
     },
     getBossInterval: state => {
       return state.bossInterval
+    },
+    getWallSprites: state => {
+      return state.wallSprites
     }
   },
   mutations: {
@@ -181,9 +185,7 @@ const store = new Vuex.Store({
       state.player.critical += critical
     },
     setPlayerVision(state, cells) {
-      state.player.vision = cells
-      let c = state.mapDiscover.concat(cells).sort()
-      state.mapDiscover = c.filter((value, pos) => { return c.indexOf(value) === pos } )
+      state.mapDiscover = Array.from(new Set(state.mapDiscover.concat(cells)))
     },
     setPlayerDamage(state, damage) {
       state.player.damage += damage
@@ -271,7 +273,6 @@ const store = new Vuex.Store({
         attack: heroeData.initialStats.attack,
         range: [],
         viewport: [],
-        vision: [],
         defeatMonsters: 0,
         nextLevelMonsters: 5,
         level: 1,
@@ -307,13 +308,14 @@ const store = new Vuex.Store({
     setDungeon({ state }, data) {
       state.enableFog = true
       state.player.position = data.player_init
-      state.map = Object.assign({}, data.map)
+      state.map = Object.freeze(Object.assign({}, data.map))
       state.entities = data.entities
       state.portalPosition = data.portal
       state.theme = data.theme
       state.dungeon += 1
       state.mapDiscover = []
       state.questLog = ['Begin dungeon ' + state.dungeon]
+      state.wallSprites = Object.freeze(data.wallSprites)
     },
     incrementArea({ state }) {
       state.player.area += 1
