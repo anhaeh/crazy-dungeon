@@ -242,6 +242,7 @@ export default {
         portal: '1_1',
         player_init: '6_2'
       }
+      json.wallSprites = this.generateWallSprites(json.map)
       this.$store.dispatch('incrementArea')
       this.$store.dispatch('setDungeon', json)
     },
