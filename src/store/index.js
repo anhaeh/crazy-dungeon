@@ -25,7 +25,8 @@ const store = new Vuex.Store({
     questLog: [],
     enableFog: true,
     wallSprites: [],
-    bossInterval: 6
+    bossInterval: 6,
+    criticalAttack: false
   },
   getters: {
     getMonsters: state => {
@@ -140,6 +141,9 @@ const store = new Vuex.Store({
     },
     getWallSprites: state => {
       return state.wallSprites
+    },
+    getCriticalAttack: state => {
+      return state.criticalAttack
     }
   },
   mutations: {
@@ -357,15 +361,14 @@ const store = new Vuex.Store({
     },
     attack({state, commit, getters}, payload = { damageSkill: 1 }) {
       let playerDamage = Math.ceil(getters.getPlayerAttack * payload.damageSkill)
-      // critical
-      let critical = false
+      state.criticalAttack = false
       if (Math.random() <= getters.getPlayerCritical) {
         playerDamage *= 2
-        critical = true
+        state.criticalAttack = true
       }
       let monsterDefender = state.entities.monsters.find(x => x.cellId === state.monsterSelected.cellId)
       monsterDefender.damage += playerDamage
-      state.questLog.push(`Player deal ${playerDamage} damage ${critical? 'CRITICAL ' : ''}to ${state.monsterSelected.monster.name}`)
+      state.questLog.push(`Player deal ${playerDamage} damage ${state.criticalAttack ? 'CRITICAL ' : ''}to ${state.monsterSelected.monster.name}`)
       if (monsterDefender.damage >= state.monsterSelected.totalLife) {
         /* if kill monster*/
         event.stopPropagation()

@@ -4,7 +4,7 @@
        :class="[{ 'can-target': canTarget }, { 'is-target': isTarget && isLive}]"
   >
     <img :class="{ 'is-live': isLive }" :src="image">
-    <span class="damage" v-if="counterDamage">-{{ counterDamage }}</span>
+    <span class="damage" v-if="counterDamage">-{{ counterDamage }}{{ isCritical ? '\n CRITICAL' : '' }}</span>
     <div v-if="isLive">
       <div class="level">{{ getMonster.level }}</div>
       <template v-if="damage">
@@ -46,14 +46,10 @@ export default {
       }
     },
     damage: function(newVal, oldVal) {
-      this.counterDamage = 0
-      clearTimeout(this.timeoutDamage)
+      this.clearDamageTimeout()
       this.$nextTick(()=> {
         this.counterDamage = Math.abs(oldVal - newVal)
-        this.timeoutDamage = setTimeout(() => {
-          this.counterDamage = 0
-          clearTimeout(this.timeoutDamage)
-        }, 500)
+        this.timeoutDamage = setTimeout(this.clearDamageTimeout, 500)
       })
     }
   },
@@ -94,6 +90,10 @@ export default {
       let items = Object.assign({}, this.$store.getters.getItems)
       items[this.cellId] = 'potion'
       this.$store.commit('setItems', items)
+    },
+    clearDamageTimeout: function () {
+      this.counterDamage = 0
+      clearTimeout(this.timeoutDamage)
     }
   },
   computed: {
@@ -129,6 +129,9 @@ export default {
     },
     damage: function () {
       return this.getMonster.damage
+    },
+    isCritical: function () {
+      return this.$store.getters.getCriticalAttack
     }
   }
 }

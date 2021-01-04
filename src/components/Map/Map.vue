@@ -48,7 +48,7 @@ export default {
   methods: {
     getCells: function (row) {
       // eslint-disable-next-line no-useless-escape
-      let cells = this.$store.getters.getPlayerViewport.filter((x) => x.split('_')[0] === row)
+      let cells = this.$store.getters.getPlayerViewport.filter(x => x.split('_')[0] === row)
       // eslint-disable-next-line no-useless-escape
       return cells.map(x => x.split('_')[1])
     },
