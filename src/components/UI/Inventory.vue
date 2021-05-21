@@ -94,7 +94,7 @@ export default {
   padding: calc(1.5 * var(--tile-cell)) calc(1 * var(--tile-cell)) calc(.5 * var(--tile-cell))
   box-sizing: border-box
   &.--isMobile
-    background-image: url("../../assets/ui/dungeonUI__background.png")
+    background-image: url("../../assets/ui/dungeonUI__skillsMenuBg.png")
 .inventory__slot
   height: var(--tile-cell)
   width: var(--tile-cell)

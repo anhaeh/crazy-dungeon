@@ -6,7 +6,7 @@
     <div slot="legend"></div>
     <div slot="text">Are you sure you want to quit?</div>
     <div slot="actions">
-      <div class="bottomDialog__actionsBtn"
+      <div class="btn --green"
            @click="quit"
       >
         Confirm

@@ -30,6 +30,7 @@ export default {
   --tile-150: calc(1.5 * var(--tile))
   --tile-175: calc(1.75 * var(--tile))
   --tile-200: calc(2 * var(--tile))
+  --tile-225: calc(2.25 * var(--tile))
   --tile-250: calc(2.5 * var(--tile))
   --tile-275: calc(2.75 * var(--tile))
   --tile-300: calc(3 * var(--tile))
@@ -42,6 +43,7 @@ export default {
   --tile-500: calc(5 * var(--tile))
   --tile-525: calc(5.25 * var(--tile))
   --tile-550: calc(5.5 * var(--tile))
+  --tile-575: calc(5.75 * var(--tile))
   //font/sizes
   --font-size-xs: calc(var(--pixel-unit) * 5)
   --font-size-sm: calc(var(--pixel-unit) * 7)
@@ -129,13 +131,6 @@ body
     border-image-slice: 20%
     background-color: #0e0b0a
     box-sizing: border-box
-  // .--border1-bg  
-  //   background-image: url('assets/ui/border1/border1__tl.png'), url('assets/ui/border1/border1__tr.png'), url('assets/ui/border1/border1__bl.png'), url('assets/ui/border1/border1__br.png'), url('assets/ui/border1/border1__t.png'), url('assets/ui/border1/border1__r.png'), url('assets/ui/border1/border1__b.png'), url('assets/ui/border1/border1__l.png')
-  //   background-position: left top, right top, bottom left, bottom right, top, right, bottom, left
-  //   background-repeat: no-repeat, no-repeat, no-repeat, no-repeat, repeat-x, repeat-y, repeat-x, repeat-y
-  //   background-size: calc(var(--tile-cell) / 2)
-  //   padding: calc(var(--tile-cell) / 4)
-  //   box-sizing: border-box
   .--border2
     border: var(--tile-cell) solid transparent
     border-image: url(assets/ui/border2.png) repeat
@@ -144,9 +139,18 @@ body
     box-sizing: border-box
   .--border3
     border: calc(var(--pixel-unit) * 2.5) solid transparent
-    border-image: url(assets/ui/border-4.png) repeat
+    border-image: url(assets/ui/border4.png) repeat
     border-image-slice: 34%
     background-color: #0e0b0a
+    box-sizing: border-box
+    &.--gold
+      border-image: url(assets/ui/border3.png) repeat
+      border-image-slice: 34%
+  .--border4
+    border: calc(var(--pixel-unit) * 1) solid transparent
+    border-image: url(assets/ui/border5.png) repeat
+    border-image-slice: 33.333333%
+    background-color: #000
     box-sizing: border-box
   .btn
     border: calc(var(--pixel-unit) * 2.5) solid transparent
@@ -158,9 +162,13 @@ body
     color: #FFF
     font-family: 'OpenSansPXBold', sans-serif
     font-size: calc(var(--pixel-unit) * 7)
+    &:focus, &:active
+      opacity: 0.5
+      transform: translateY(3px)
     &.--green
       // border: calc(var(--pixel-unit) * 2.5) solid transparent
       border-image: url(assets/ui/border-5--green.png) repeat
       border-image-slice: 34%
       background-image: url(assets/ui/bg-1--green.png)
+      color: #ffed00
 </style>

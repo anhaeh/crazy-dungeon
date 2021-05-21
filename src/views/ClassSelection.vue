@@ -26,7 +26,7 @@
             <span v-if="selected.name">{{ selected.initialStats.health }}</span>
           </div>
           <div class="classselection__stat --border1">
-            <img :src="require('../assets/ui/attack.png')" alt="">
+            <img :src="require('../assets/ui/critical__icon.png')" alt="">
             <span v-if="selected.name">{{ Math.round(selected.initialStats.critical * 100) }}%</span>
           </div>
         </div>
@@ -40,7 +40,7 @@
             <div class="classselection__slot"></div>
             <div class="classselection__slot"></div>
           </div>
-          <button @click="begin" class="btn" :disabled="!selected.name">Start Game</button>
+          <button @click="begin" class="btn --green" :disabled="!selected.name">Start Game</button>
         </div>
       </div>
     </div>
@@ -83,6 +83,7 @@ export default {
   height: 100vh
   width: 100%
 .classselection__container
+  width: 100%
   color: white
   display: flex
   height: 100vh
@@ -100,7 +101,7 @@ export default {
   display: flex
   align-items: center
   justify-content: center
-  font-size: 1.85rem
+  font-size: var(--font-size-sm)
 .classselection__statContainer
   display: flex
   flex-direction: column
@@ -117,7 +118,8 @@ export default {
     font-size: var(--font-size-sm)
 .classselection__sprites
   width: 100%
-  // height: calc(100% - (var(--tile-cell) * 4))
+  max-height: calc(100% - var(--tile-400))
+  height: 100%
   display: flex
   flex-wrap: wrap
   align-items: flex-start
@@ -171,7 +173,8 @@ export default {
     max-width: 1000px
     width: 100%
   .classselection__sprites
-    max-width: 75%
+    flex: 1
+    max-height: calc(100% - var(--tile-150))
   .classselection__bottomcontainer
     flex-direction: column-reverse
     width: 25%
@@ -185,15 +188,17 @@ export default {
     span
       font-size: var(--font-size-xl)
   .classselection__heroportrait
-    width: var(--tile-200)
-    height: var(--tile-200)
+    width: var(--tile-225)
+    height: var(--tile-225)
   .classselection__classname
-    width: calc(100% - var(--tile-200))
-    height: var(--tile-200)
+    width: calc(100% - var(--tile-150))
+    height: var(--tile-150)
   .classselection__backbutton
-    width: var(--tile-200)
-    height: var(--tile-200)
+    width: var(--tile-150)
+    height: var(--tile-150)
   .classselection__statContainer
     flex-wrap: wrap
     flex-direction: row
+  .classselection__slotscontiner
+    order: 5
 </style>

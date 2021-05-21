@@ -65,7 +65,7 @@ export default {
   overflow-x: hidden
   box-sizing: border-box
   font-size: calc(4 * var(--pixel-unit))
-  padding: 5px calc(5 * var(--pixel-unit))
+  padding: var(--tile-5) var(--tile-15)
   line-height: calc(3.2*var(--pixel-unit))
   color: white
   opacity: 0.5
