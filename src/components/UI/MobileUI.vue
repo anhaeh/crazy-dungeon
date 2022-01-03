@@ -25,7 +25,9 @@
       </div>
 
       <div class="dungeonUI__more">
-        <div class="dungeonUI__moreBack"></div>
+        <div class="dungeonUI__moreMenu" @click="showMap = !showMap">
+          Map
+        </div>
         <div class="dungeonUI__moreMenu" @click="openMenu">
           Menu
         </div>
@@ -37,7 +39,7 @@
         <div class="dungeonUI__settingBtn"></div>
       </div>
       <div class="dungeonUI__menuBottomRight">
-        <div class="dungeonUI__menuBottomBtn" @click="setShowStats">
+        <div class="dungeonUI__menuBottomBtn" @click="showPanel('showStats')">
           <span>Stats</span>
         </div>
         <div class="dungeonUI__menuBottomBtn"
@@ -46,7 +48,7 @@
         </div>
         <div class="dungeonUI__menuBottomBtn"><span>Quest</span></div>
         <div class="dungeonUI__menuBottomBtn"
-             @click="setShowSkills">
+             @click="showPanel('showSkills')">
           <span>Skills</span>
         </div>
       </div>
@@ -72,8 +74,9 @@
     </div>
     <inventory></inventory>
     <merchant-items></merchant-items>
-    <display-skills-menu v-show="showSkills"></display-skills-menu>
-    <display-stats-menu v-show="showStats"></display-stats-menu>
+    <mini-map v-if="showMap"></mini-map>
+    <display-skills-menu v-if="showSkills"></display-skills-menu>
+    <display-stats-menu v-if="showStats"></display-stats-menu>
     <exit-confirmation v-if="showModalQuit" @close="showModalQuit = false"></exit-confirmation>
   </div>
 </template>
@@ -81,6 +84,7 @@
 <script>
 import Inventory from './Inventory'
 import QuestLog from './QuestLog'
+import MiniMap from './MiniMap'
 import SkillsList from './Skills/SkillList'
 import DisplaySkillsMenu from './Skills/DisplaySkillsMenu'
 import { movePlayer} from "@/modules/player"
@@ -97,14 +101,16 @@ export default {
     DisplaySkillsMenu,
     MerchantItems,
     DisplayStatsMenu,
-    ExitConfirmation
+    ExitConfirmation,
+    MiniMap
   },
   data () {
     return {
       showMenu: false,
       showSkills: false,
       showStats: false,
-      showModalQuit: false
+      showModalQuit: false,
+      showMap: false
     }
   },
   computed: {
@@ -137,15 +143,10 @@ export default {
       this.closeAll()
       this.showMenu = result
     },
-    setShowSkills: function () {
-      let result = !this.showSkills
+    showPanel: function (key) {
+      let result = !this[key]
       this.closeAll()
-      this.showSkills = result
-    },
-    setShowStats: function () {
-      let result = !this.showStats
-      this.closeAll()
-      this.showStats = result
+      this[key] = result
     },
     setInventory: function () {
       let result = !this.$store.getters.getInventory.show
