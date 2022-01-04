@@ -23,9 +23,9 @@
     </div>
     <div class="powered">
       <h2>Powered By</h2>
-      <a href class="lib" target="_blank">Vue js</a>
-      <a href class="lib" target="_blank">Saas</a>
-      <a href class="lib" target="_blank">dungeon-generator 0.0.1</a>
+      <a href="https://vuejs.org/" class="lib" target="_blank">Vue js</a>
+      <a href="https://sass-lang.com/" class="lib" target="_blank">Sass</a>
+      <a href="https://www.npmjs.com/package/dungeon-generator" class="lib" target="_blank">Dungeon-generator</a>
     </div>
 
     <div class="footer">
@@ -101,7 +101,7 @@ button
   &__portrait
     width: calc(1.5 * var(--tile-cell))
     height: calc(1.5 * var(--tile-cell))
-    padding: calc(2.5 * var(--pixel-unit))
+    padding: 0.5rem
     image-rendering: pixelated
   &__info
     flex-direction: column
