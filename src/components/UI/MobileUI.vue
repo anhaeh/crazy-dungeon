@@ -36,7 +36,7 @@
     <div v-if="showMenu" class="dungeonUI__menuBottom">
       <div class="dungeonUI__menuBottomLeft">
         <div class="dungeonUI__retreatBtn" @click="showModalQuit = true"></div>
-        <div class="dungeonUI__settingBtn"></div>
+        <div class="dungeonUI__settingBtn --disabled"></div>
       </div>
       <div class="dungeonUI__menuBottomRight">
         <div class="dungeonUI__menuBottomBtn" @click="showPanel('showStats')">
@@ -46,7 +46,7 @@
              @click="setInventory">
           <span>Inventory</span>
         </div>
-        <div class="dungeonUI__menuBottomBtn"><span>Quest</span></div>
+        <div class="dungeonUI__menuBottomBtn --disabled"><span>Quest</span></div>
         <div class="dungeonUI__menuBottomBtn"
              @click="showPanel('showSkills')">
           <span>Skills</span>
@@ -335,6 +335,8 @@ export default {
     margin-top: -6px
     font-size: 17px
     text-shadow: 0 2px 0 black
+.--disabled
+  filter: opacity(0.3)
 @media screen and (min-width: 900px)
   .dungeonUI
     right: 0

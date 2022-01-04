@@ -6,8 +6,9 @@
                'cell',
                cell === 1 ? 'wall' : 'free',
                {
+                 'portal': cell === 'P',
                  '--player': playerPosition === `${idx}_${cellId}`,
-                 '--fog': !discoverCells.includes(`${idx}_${cellId}`)
+                 '--fog': !discoverCells.includes(`${idx}_${cellId}`),
                }
            ]"
            :key="'cell' + idx + cellId"
@@ -36,25 +37,24 @@ export default {
 <style scoped lang="sass">
 .minimap
   position: fixed
-  z-index: 99999999
-  height: calc(100% - (4 * var(--tile-cell)))
-  top: 0
-  width: 100%
+  right: 0
+  top: calc(1.5 * var(--tile-cell))
   display: flex
   flex-direction: column
-  justify-content: center
-  align-items: center
+  align-items: flex-end
   .row
     display: flex
     flex-direction: row
     .cell
-      width: 7px
-      height: 7px
+      width: 5px
+      height: 5px
       opacity: 0.6
     .wall
       background: red
     .free
       background: white
+    .portal
+      background: blue
     .--player
       background: green !important
     .--fog

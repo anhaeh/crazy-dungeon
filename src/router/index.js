@@ -5,6 +5,7 @@ import ClassSelection from '../views/ClassSelection'
 import Dungeon from '../views/Dungeon'
 import HighScores from '../views/HighScores'
 import Library from '../views/Library'
+import Credits from '../views/Credits'
 
 Vue.use(VueRouter)
 
@@ -40,6 +41,11 @@ const routes = [
     path: '/library',
     name: 'library',
     component: Library
+  },
+  {
+    path: '/credits',
+    name: 'credits',
+    component: Credits
   },
 ]
 

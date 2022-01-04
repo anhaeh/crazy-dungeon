@@ -8,7 +8,7 @@
       <div class="intro__btn" @click="$router.push({name: 'class-selection'})">New Game</div>
       <div class="intro__btn" @click="$router.push({name: 'high-scores'})">High Scores</div>
       <div class="intro__btn" @click="$router.push({name: 'library'})">Library</div>
-      <div class="intro__btn --disabled">Settings</div>
+      <div class="intro__btn" @click="$router.push({name: 'credits'})">Credits</div>
       <span class="version">Version {{ version }}</span>
     </div>
   </div>
@@ -62,14 +62,14 @@ export default {
   bottom: 0
   left: 0
   width: 100%
-  height: calc(4 * var(--tile-cell))
+  height: calc(3 * var(--tile-cell))
   z-index: 1
 .intro__hands
   position: absolute
   bottom: 0
   left: 0
   width: 100%
-  height: calc(4 * var(--tile-cell))
+  height: calc(3 * var(--tile-cell))
   z-index: 2
 .intro__menu
   background-image: url("../assets/ui/intro__frame.png")

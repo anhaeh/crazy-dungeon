@@ -10,6 +10,7 @@
     <display-skills-menu v-show="showSkills"></display-skills-menu>
     <display-stats-menu></display-stats-menu>
     <exit-confirmation v-if="showModalQuit" @close="showModalQuit = false"></exit-confirmation>
+    <mini-map></mini-map>
     <div class="dungeonUI__retreatBtn"
          title="Exit"
          @click="showModalQuit = true"
@@ -19,6 +20,7 @@
 
 <script>
 import Inventory from './Inventory'
+import MiniMap from './MiniMap'
 import QuestLog from './QuestLog'
 import SkillList from './Skills/SkillList'
 import MerchantItems from './MerchantItems/MerchantList'
@@ -35,7 +37,8 @@ export default {
     DisplaySkillsMenu,
     MerchantItems,
     DisplayStatsMenu,
-    ExitConfirmation
+    ExitConfirmation,
+    MiniMap
   },
   data () {
     return {
