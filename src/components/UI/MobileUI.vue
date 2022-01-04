@@ -25,11 +25,11 @@
       </div>
 
       <div class="dungeonUI__more">
-        <div class="dungeonUI__moreMenu" @click="showMap = !showMap">
-          Map
+        <div class="dungeonUI__moreMenu" @click="setInventory">
+          Bag
         </div>
         <div class="dungeonUI__moreMenu" @click="openMenu">
-          Menu
+          More
         </div>
       </div>
     </div>
@@ -43,8 +43,8 @@
           <span>Stats</span>
         </div>
         <div class="dungeonUI__menuBottomBtn"
-             @click="setInventory">
-          <span>Inventory</span>
+             @click="showMap = !showMap">
+          <span>Map</span>
         </div>
         <div class="dungeonUI__menuBottomBtn --disabled"><span>Quest</span></div>
         <div class="dungeonUI__menuBottomBtn"

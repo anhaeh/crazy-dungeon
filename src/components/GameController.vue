@@ -263,7 +263,7 @@ export default {
       }
       /** hay tema con valores pares*/
       /* generate map */
-      const roomCount = this.random([7, 9, 10, 12])
+      const roomCount = this.random([7, 9, 11, 13])
       json.map = this.createMaze(roomCount)
       json.wallSprites = this.generateWallSprites(json.map)
       Object.keys(json.map).forEach(row => {
