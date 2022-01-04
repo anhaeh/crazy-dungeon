@@ -75,8 +75,8 @@
     <inventory></inventory>
     <merchant-items></merchant-items>
     <mini-map v-if="showMap"></mini-map>
-    <display-skills-menu v-if="showSkills"></display-skills-menu>
-    <display-stats-menu v-if="showStats"></display-stats-menu>
+    <display-skills-menu v-show="showSkills"></display-skills-menu>
+    <display-stats-menu v-show="showStats"></display-stats-menu>
     <exit-confirmation v-if="showModalQuit" @close="showModalQuit = false"></exit-confirmation>
   </div>
 </template>
