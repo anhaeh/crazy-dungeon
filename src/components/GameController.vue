@@ -202,7 +202,7 @@ export default {
         document.querySelector(`.npc.${this.$store.getters.getNpcSelected.name} img`).click()
       } else if (event.code.substring(0,5) === 'Digit') {
         // number for skills
-        let skill = document.querySelector('#skill-' + event.code.charAt(5))
+        let skill = document.getElementById('skill-' + event.code.charAt(5))
         if (skill) { skill.click() }
       } else {
         const key = event.key.toLowerCase()
