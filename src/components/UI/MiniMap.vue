@@ -8,7 +8,7 @@
                {
                  'portal': cell === 'P',
                  '--player': playerPosition === `${idx}_${cellId}`,
-                 '--fog': !discoverCells.includes(`${idx}_${cellId}`),
+                 '--fog': enableFog && !discoverCells.includes(`${idx}_${cellId}`),
                }
            ]"
            :key="'cell' + idx + cellId"
@@ -29,6 +29,9 @@ export default {
     },
     discoverCells: function () {
       return this.$store.getters.getMapDiscover
+    },
+    enableFog: function () {
+      return this.$store.getters.getEnableFog
     }
   }
 }
