@@ -2,15 +2,14 @@
   <div class="minimap">
     <div class="row" v-for="(row, idx) in map" :key="'row' + idx">
       <div v-for="(cell, cellId) in row"
-           :class="[
-               'cell',
-               cell === 1 ? 'wall' : 'free',
+           :class="disabledFog || discoverCells.includes(`${idx}_${cellId}`) ?
+           [
+               cellClass[cell],
                {
-                 'portal': cell === 'P',
+                 'free': !cellClass[cell],
                  '--player': playerPosition === `${idx}_${cellId}`,
-                 '--fog': enableFog && !discoverCells.includes(`${idx}_${cellId}`),
                }
-           ]"
+           ] : '--fog'"
            :key="'cell' + idx + cellId"
       ></div>
     </div>
@@ -20,6 +19,14 @@
 <script>
 export default {
   name: "MiniMap",
+  data () {
+    return {
+      cellClass: {
+        1: 'wall',
+        'P': 'portal'
+      }
+    }
+  },
   computed: {
     map: function () {
       return this.$store.getters.getMap
@@ -30,8 +37,8 @@ export default {
     discoverCells: function () {
       return this.$store.getters.getMapDiscover
     },
-    enableFog: function () {
-      return this.$store.getters.getEnableFog
+    disabledFog: function () {
+      return !this.$store.getters.getEnableFog
     }
   }
 }
@@ -48,7 +55,7 @@ export default {
   .row
     display: flex
     flex-direction: row
-    .cell
+    div
       width: 5px
       height: 5px
       opacity: 0.6

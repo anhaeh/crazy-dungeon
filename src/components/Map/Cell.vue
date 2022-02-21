@@ -35,7 +35,7 @@
         </Item>
       </template>
     </div>
-    <span class="show-skill-passive" v-if="hasFog">
+    <span class="show-skill-passive" v-if="hasFog && passiveSkill()">
       {{ passiveSkill() }}
     </span>
   </span>
