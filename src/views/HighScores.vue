@@ -40,7 +40,7 @@ export default {
   methods: {
   },
   created() {
-    axios.get('https://anhaeh.pythonanywhere.com/api/v1/dungeon/high-score/?size=50')
+    axios.get('https://highscores.com/api/v2/scores/')
       .then((response) => {
         this.results = response.data.results
       })

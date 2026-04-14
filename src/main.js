@@ -3,9 +3,6 @@ import App from "./App.vue"
 import store from "./store"
 import './registerServiceWorker'
 import router from './router'
-import axios from 'axios'
-
-axios.defaults.headers.common['Authorization'] = 'Token X'
 
 Vue.config.productionTip = false
 
